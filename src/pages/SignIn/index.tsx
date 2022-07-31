@@ -1,8 +1,9 @@
 import { PrimaryColor, PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
+import Input from '@/components/Input';
 import styled from 'styled-components';
 
-const Signup = () => {
+const SignIn = () => {
   return (
     <Wrapper>
       <SignupForm>
@@ -11,10 +12,8 @@ const Signup = () => {
           <p>코드리뷰 사이트: in it()</p>
         </LeftSection>
         <RightSection>
-          <p>이메일</p>
-          <Input type="email" placeholder="이메일을 입력해주세요."></Input>
-          <p>비밀번호</p>
-          <Input type="password" placeholder="비밀번호를 입력해주세요."></Input>
+          <Input label="이메일" type="email" placeholder="이메일을 입력해주세요."></Input>
+          <Input label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요."></Input>
           <Button color={PointColor}>{'로그인'}</Button>
         </RightSection>
       </SignupForm>
@@ -68,17 +67,4 @@ const RightSection = styled.div`
   }
 `;
 
-const Input = styled.input`
-  font-size: 1rem;
-  padding: 0.5em;
-  border: none;
-  border-radius: 0.3em;
-  width: 18em;
-  height: 1.5em;
-  ::placeholder {
-    color: darkgray;
-    font-size: 0.8rem;
-  }
-`;
-
-export default Signup;
+export default SignIn;

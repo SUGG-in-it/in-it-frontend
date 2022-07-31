@@ -1,9 +1,10 @@
 import { PrimaryColor, PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
+import Input from '@/components/Input';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Signup = () => {
+const SignUp = () => {
   const navigate = useNavigate();
   const moveToLogin = () => {
     navigate('/sign-in');
@@ -17,14 +18,10 @@ const Signup = () => {
           <p>코드리뷰 사이트: in it()</p>
         </LeftSection>
         <RightSection>
-          <p>이메일</p>
-          <Input type="email" placeholder="이메일을 입력해주세요."></Input>
-          <p>닉네임</p>
-          <Input type="text" placeholder="닉네임을 입력해주세요."></Input>
-          <p>비밀번호</p>
-          <Input type="password" placeholder="비밀번호를 입력해주세요."></Input>
-          <p>비밀번호 확인</p>
-          <Input type="password" placeholder="비밀번호 확인을 입력해주세요."></Input>
+          <Input label="이메일" type="email" placeholder="이메일을 입력해주세요." />
+          <Input label="닉네임" type="text" placeholder="닉네임을 입력해주세요." />
+          <Input label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요." />
+          <Input label="비밀번호 확인" type="password" placeholder="비밀번호 확인을 입력해주세요." />
           <Button color={PointColor}>{'회원가입'}</Button>
           <LoginContainer>
             <span>이미 계정이 있습니까?</span>
@@ -82,19 +79,6 @@ const RightSection = styled.div`
   }
 `;
 
-const Input = styled.input`
-  font-size: 1rem;
-  padding: 0.5em;
-  border: none;
-  border-radius: 0.3em;
-  width: 18em;
-  height: 1.5em;
-  ::placeholder {
-    color: darkgray;
-    font-size: 0.8rem;
-  }
-`;
-
 const LoginContainer = styled.div`
   width: 100%;
   justify-content: space-between;
@@ -112,4 +96,4 @@ const LoginContainer = styled.div`
   }
 `;
 
-export default Signup;
+export default SignUp;
