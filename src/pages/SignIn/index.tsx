@@ -10,9 +10,13 @@ const SignIn = () => {
     navigate('/sign-up');
   };
 
+  const moveToForgotPassword = () => {
+    navigate('/forgot-password');
+  };
+
   return (
     <Wrapper>
-      <SignupForm>
+      <SignInForm>
         <LeftSection>
           <h1>In it</h1>
           <p>코드리뷰 사이트: in it()</p>
@@ -20,13 +24,15 @@ const SignIn = () => {
         <RightSection>
           <Input label="이메일" type="email" placeholder="이메일을 입력해주세요."></Input>
           <Input label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요."></Input>
-          <Button color={PointColor}>{'로그인'}</Button>
+          <Button color={PointColor} margin={'3em 0em 1em'}>
+            {'로그인'}
+          </Button>
           <SignUpContainer>
-            <span>비밀번호 찾기</span>
+            <u onClick={moveToForgotPassword}>비밀번호 찾기</u>
             <u onClick={moveToSignUp}>회원가입</u>
           </SignUpContainer>
         </RightSection>
-      </SignupForm>
+      </SignInForm>
     </Wrapper>
   );
 };
@@ -41,7 +47,7 @@ const Wrapper = styled.div`
   background: linear-gradient(-70deg, ${PrimaryColor} 55%, #fff 45%);
 `;
 
-const SignupForm = styled.div`
+const SignInForm = styled.div`
   width: 60em;
   height: 40em;
   margin: 0 auto;
@@ -81,10 +87,6 @@ const SignUpContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   display: flex;
-  span {
-    color: white;
-    font-size: 0.9rem;
-  }
   u {
     color: white;
     font-size: 0.9rem;

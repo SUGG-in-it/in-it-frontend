@@ -12,7 +12,7 @@ const SignUp = () => {
 
   return (
     <Wrapper>
-      <SignupForm>
+      <SignUpForm>
         <LeftSection>
           <h1>In it</h1>
           <p>코드리뷰 사이트: in it()</p>
@@ -28,7 +28,7 @@ const SignUp = () => {
             <u onClick={moveToLogin}>로그인하기</u>
           </LoginContainer>
         </RightSection>
-      </SignupForm>
+      </SignUpForm>
     </Wrapper>
   );
 };
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   background: linear-gradient(-70deg, ${PrimaryColor} 55%, #fff 45%);
 `;
 
-const SignupForm = styled.div`
+const SignUpForm = styled.div`
   width: 60em;
   height: 40em;
   margin: 0 auto;

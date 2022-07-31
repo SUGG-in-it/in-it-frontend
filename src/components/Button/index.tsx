@@ -5,6 +5,7 @@ export interface ButtonProps extends React.HTMLAttributes<Element> {
   type?: 'button' | 'submit';
   color: string;
   children: React.ReactNode;
+  margin?: string;
 }
 
 const ButtonWrapper = styled.button<ButtonProps>`
@@ -15,7 +16,7 @@ const ButtonWrapper = styled.button<ButtonProps>`
   height: 3em;
   font-size: 1rem;
   padding: 0.5em;
-  margin: 3em 0em 1em;
+  margin: ${({ margin }) => margin};
   border-radius: 0.3em;
   font-weight: 800;
   &:hover {
