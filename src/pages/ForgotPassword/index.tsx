@@ -1,38 +1,27 @@
 import { PrimaryColor, PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const SignIn = () => {
-  const navigate = useNavigate();
-  const moveToSignUp = () => {
-    navigate('/sign-up');
-  };
-
-  const moveToForgotPassword = () => {
-    navigate('/forgot-password');
-  };
-
+const ForgotPassword = () => {
   return (
     <Wrapper>
-      <SignInForm>
+      <ForgotPasswordForm>
         <LeftSection>
           <h1>In it</h1>
           <p>코드리뷰 사이트: in it()</p>
         </LeftSection>
         <RightSection>
           <Input label="이메일" type="email" placeholder="이메일을 입력해주세요."></Input>
-          <Input label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요."></Input>
-          <Button color={PointColor} margin={'3em 0em 1em'}>
-            {'로그인'}
+          <Button color={PointColor} margin={'1em 0em 2em'}>
+            {'인증번호 전송'}
           </Button>
-          <SignUpContainer>
-            <u onClick={moveToForgotPassword}>비밀번호 찾기</u>
-            <u onClick={moveToSignUp}>회원가입</u>
-          </SignUpContainer>
+          <Input label="인증번호" type="password" placeholder="비밀번호를 입력해주세요."></Input>
+          <Button color={PointColor} margin={'1em 0em 2em'}>
+            {'확인'}
+          </Button>
         </RightSection>
-      </SignInForm>
+      </ForgotPasswordForm>
     </Wrapper>
   );
 };
@@ -47,7 +36,7 @@ const Wrapper = styled.div`
   background: linear-gradient(-70deg, ${PrimaryColor} 55%, #fff 45%);
 `;
 
-const SignInForm = styled.div`
+const ForgotPasswordForm = styled.div`
   width: 60em;
   height: 40em;
   margin: 0 auto;
@@ -96,4 +85,4 @@ const SignUpContainer = styled.div`
   }
 `;
 
-export default SignIn;
+export default ForgotPassword;
