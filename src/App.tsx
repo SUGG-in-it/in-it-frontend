@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import SignUp from './pages/SignUp';
-import SignIn from './pages/SignIn';
-import ForgotPassword from './pages/ForgotPassword';
 import { GlobalStyle } from './styles/globalStyles';
 import NotFoundPage from '@/pages/NotFound';
+
+const SignUp = lazy(() => import('./pages/SignUp'));
+const SignIn = lazy(() => import('./pages/SignIn'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 
 function App() {
   return (
