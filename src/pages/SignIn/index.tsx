@@ -1,4 +1,4 @@
-import { PrimaryColor } from '@/assets/colors';
+import { PrimaryColor, PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ const Signup = () => {
           <Input type="email" placeholder="이메일을 입력해주세요."></Input>
           <p>비밀번호</p>
           <Input type="password" placeholder="비밀번호를 입력해주세요."></Input>
-          <Button text="로그인"></Button>
+          <Button color={PointColor}>{'로그인'}</Button>
         </RightSection>
       </SignupForm>
     </Wrapper>

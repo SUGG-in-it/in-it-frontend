@@ -1,4 +1,4 @@
-import { PrimaryColor } from '@/assets/colors';
+import { PrimaryColor, PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -25,7 +25,7 @@ const Signup = () => {
           <Input type="password" placeholder="비밀번호를 입력해주세요."></Input>
           <p>비밀번호 확인</p>
           <Input type="password" placeholder="비밀번호 확인을 입력해주세요."></Input>
-          <Button text="회원가입"></Button>
+          <Button color={PointColor}>{'회원가입'}</Button>
           <LoginContainer>
             <span>이미 계정이 있습니까?</span>
             <u onClick={moveToLogin}>로그인하기</u>

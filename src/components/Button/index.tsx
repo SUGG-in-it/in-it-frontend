@@ -1,15 +1,14 @@
-import { PointColor } from '@/assets/colors';
 import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
-
-export type ButtonProps = {
+export interface ButtonProps extends React.HTMLAttributes<Element> {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type?: 'button' | 'submit';
-  text: string;
-};
+  color: string;
+  children: React.ReactNode;
+}
 
-const Wrapper = styled.button`
-  background-color: ${PointColor};
+const ButtonWrapper = styled.button<ButtonProps>`
+  background-color: ${({ color }) => color};
   border: none;
   color: white;
   width: 19em;
@@ -22,6 +21,6 @@ const Wrapper = styled.button`
   font-weight: 800;
 `;
 
-const Button = ({ onClick, type = 'button', text }: ButtonProps) => <Wrapper {...{ onClick, type }}>{text}</Wrapper>;
+const Button = ({ children, ...props }: ButtonProps) => <ButtonWrapper {...props}>{children}</ButtonWrapper>;
 
 export default Button;
