@@ -1,5 +1,5 @@
 import { PrimaryColor } from '@/assets/colors';
-import Button from '@/components/Common/Button';
+import Button from '@/components/Button';
 import styled from 'styled-components';
 
 const Signup = () => {
