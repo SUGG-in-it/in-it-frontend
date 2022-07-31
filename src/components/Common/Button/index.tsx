@@ -1,6 +1,6 @@
+import { PointColor } from '@/assets/colors';
 import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
-import { PointColor } from '../../../assets/colors';
 
 export type ButtonProps = {
   onClick?: MouseEventHandler<HTMLButtonElement>;

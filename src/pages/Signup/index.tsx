@@ -1,7 +1,7 @@
+import { PrimaryColor } from '@/assets/colors';
+import Button from '@/components/Common/Button';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { PointColor, PrimaryColor } from '../../assets/colors';
-import Button from '../../components/Common/Button';
 
 const Signup = () => {
   const navigate = useNavigate();
