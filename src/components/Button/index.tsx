@@ -19,6 +19,9 @@ const ButtonWrapper = styled.button<ButtonProps>`
   margin: 3em 0em;
   border-radius: 0.3em;
   font-weight: 800;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Button = ({ children, ...props }: ButtonProps) => <ButtonWrapper {...props}>{children}</ButtonWrapper>;
