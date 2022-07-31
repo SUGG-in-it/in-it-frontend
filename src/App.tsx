@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './styles/globalStyles';
 import NotFoundPage from '@/pages/NotFound';
 import { RecoilRoot } from 'recoil';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Loading from './components/Loading';
 import Error from './components/Error';
@@ -12,13 +13,17 @@ const SignUp = lazy(() => import('./pages/SignUp'));
 const SignIn = lazy(() => import('./pages/SignIn'));
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 
+const queryClient = new QueryClient();
+
 const App = () => {
   return (
     <RecoilRoot>
       <GlobalStyle />
-      <ErrorBoundary FallbackComponent={Error}>
-        <Suspense fallback={<Loading />}>{routes()}</Suspense>
-      </ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <ErrorBoundary FallbackComponent={Error}>
+          <Suspense fallback={<Loading />}>{routes()}</Suspense>
+        </ErrorBoundary>
+      </QueryClientProvider>
     </RecoilRoot>
   );
 };
