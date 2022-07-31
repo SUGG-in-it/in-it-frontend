@@ -15,8 +15,7 @@ const ButtonWrapper = styled.button<ButtonProps>`
   height: 3em;
   font-size: 1rem;
   padding: 0.5em;
-  margin: 3em 0em;
-  margin: 3em 0em;
+  margin: 3em 0em 1em;
   border-radius: 0.3em;
   font-weight: 800;
   &:hover {
