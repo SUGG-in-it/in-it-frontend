@@ -1,8 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { PointColor, PrimaryColor } from '../../assets/colors';
 import Button from '../../components/Common/Button';
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const moveToLogin = () => {
+    navigate('/sign-in');
+  };
+
   return (
     <Wrapper>
       <SignupForm>
@@ -20,6 +26,10 @@ const Signup = () => {
           <p>비밀번호 확인</p>
           <Input type="password" placeholder="비밀번호 확인을 입력해주세요."></Input>
           <Button text="회원가입"></Button>
+          <LoginContainer>
+            <span>이미 계정이 있습니까?</span>
+            <u onClick={moveToLogin}>로그인하기</u>
+          </LoginContainer>
         </RightSection>
       </SignupForm>
     </Wrapper>
@@ -82,6 +92,23 @@ const Input = styled.input`
   ::placeholder {
     color: darkgray;
     font-size: 0.8rem;
+  }
+`;
+
+const LoginContainer = styled.div`
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  span {
+    color: white;
+    font-size: 0.9rem;
+  }
+  u {
+    color: white;
+    font-size: 0.9rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
