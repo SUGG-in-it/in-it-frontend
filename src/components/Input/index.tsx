@@ -21,6 +21,9 @@ const InputWrapper = styled.input<InputProps>`
     color: darkgray;
     font-size: 0.8rem;
   }
+  :focus {
+    outline: none;
+  }
 `;
 
 const Input = ({ label, type, placeholder }: InputProps) => (
