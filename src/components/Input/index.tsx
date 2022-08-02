@@ -7,7 +7,10 @@ export interface InputProps extends React.HTMLAttributes<Element> {
 }
 
 const InputContainer = styled.div`
-  margin: 5px 0px;
+  margin: 10px 0px;
+  p {
+    margin-bottom: 0.5em;
+  }
 `;
 
 const InputWrapper = styled.input<InputProps>`

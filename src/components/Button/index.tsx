@@ -18,7 +18,6 @@ const ButtonWrapper = styled.button<ButtonProps>`
   padding: 0.5em;
   margin: ${({ margin }) => margin};
   border-radius: 0.3em;
-  font-weight: 800;
   &:hover {
     cursor: pointer;
   }
