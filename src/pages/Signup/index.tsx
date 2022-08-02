@@ -1,41 +1,22 @@
-import { PrimaryColor, PointColor } from '@/assets/colors';
-import Button from '@/components/Button';
-import Input from '@/components/Input';
-import { useNavigate } from 'react-router-dom';
+import { PrimaryColor } from '@/assets/colors';
+import SignUpInputPanel from '@/pages/SignUp/SignUpInputSection';
 import styled from 'styled-components';
 
 const SignUp = () => {
-  const navigate = useNavigate();
-  const moveToLogin = () => {
-    navigate('/sign-in');
-  };
-
   return (
-    <Wrapper>
+    <SignUpContainer>
       <SignUpForm>
-        <LeftSection>
+        <LogoSection>
           <h1>In it</h1>
           <p>코드리뷰 사이트: in it()</p>
-        </LeftSection>
-        <RightSection>
-          <Input label="이메일" type="email" placeholder="이메일을 입력해주세요." />
-          <Input label="닉네임" type="text" placeholder="닉네임을 입력해주세요." />
-          <Input label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요." />
-          <Input label="비밀번호 확인" type="password" placeholder="비밀번호 확인을 입력해주세요." />
-          <Button color={PointColor} margin={'3em 0em 1em'}>
-            {'회원가입'}
-          </Button>
-          <LoginContainer>
-            <span>이미 계정이 있습니까?</span>
-            <u onClick={moveToLogin}>로그인하기</u>
-          </LoginContainer>
-        </RightSection>
+        </LogoSection>
+        <SignUpInputPanel />
       </SignUpForm>
-    </Wrapper>
+    </SignUpContainer>
   );
 };
 
-const Wrapper = styled.div`
+const SignUpContainer = styled.div`
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -56,7 +37,7 @@ const SignUpForm = styled.div`
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 `;
 
-const LeftSection = styled.div`
+const LogoSection = styled.div`
   width: 35em;
   h1 {
     font-size: 4rem;
@@ -68,33 +49,6 @@ const LeftSection = styled.div`
     font-size: 0.9rem;
     font-weight: 800;
     color: ${PrimaryColor};
-  }
-`;
-
-const RightSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  p {
-    color: #f5f5f5;
-    font-size: 0.8rem;
-  }
-`;
-
-const LoginContainer = styled.div`
-  width: 100%;
-  justify-content: space-between;
-  display: flex;
-  span {
-    color: white;
-    font-size: 0.9rem;
-  }
-  u {
-    color: white;
-    font-size: 0.9rem;
-    &:hover {
-      cursor: pointer;
-    }
   }
 `;
 
