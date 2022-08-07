@@ -1,23 +1,18 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { handleAPIError } from './Error';
-
+interface RequestType {
+  url: string;
+  method: 'get' | 'post' | 'put' | 'delete' | 'patch';
+  body?: object;
+  params?: object;
+}
 interface ResponseType {
   data: any;
   message?: string;
   statusCode: number;
 }
 
-const request = async ({
-  url,
-  method,
-  body,
-  params,
-}: {
-  url: string;
-  method: 'get' | 'post' | 'put' | 'delete' | 'patch';
-  body?: object;
-  params?: object;
-}): Promise<ResponseType> => {
+const request = async ({ url, method, body, params }: RequestType): Promise<ResponseType> => {
   try {
     const config: AxiosRequestConfig = {
       baseURL: process.env.API_PREFIX,
