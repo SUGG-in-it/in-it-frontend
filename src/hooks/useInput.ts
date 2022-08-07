@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-export type InputType = {
+export interface InputType {
   value: string | number;
   onChange: ({ target }: { target: HTMLInputElement }) => void;
-};
+}
 
 const useInput = (initialValue: string | number): InputType => {
   const [value, setValue] = useState(initialValue);
