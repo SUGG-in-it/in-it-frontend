@@ -3,6 +3,7 @@ import { useState } from 'react';
 export interface InputType {
   value: string | number;
   onChange: ({ target }: { target: HTMLInputElement }) => void;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const useInput = (initialValue: string | number): InputType => {
@@ -11,7 +12,7 @@ const useInput = (initialValue: string | number): InputType => {
     const { value } = target;
     setValue(value);
   };
-  return { value, onChange };
+  return { value, onChange, setValue };
 };
 
 export default useInput;
