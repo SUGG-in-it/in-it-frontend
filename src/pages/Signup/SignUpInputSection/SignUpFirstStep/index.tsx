@@ -1,16 +1,16 @@
 import { sendCode, verifyCode } from '@/api/auth';
 import { PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
-import Input from '@/components/Input';
-import useInput from '@/hooks/useInput';
+import ValidationInput from '@/components/Input/ValidationInput';
+import useValidationInput from '@/hooks/useValidationInput';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SignUpFirstStep = ({ handleNextStep }: { handleNextStep: () => void }) => {
   const navigate = useNavigate();
-  const email = useInput('', 'email');
-  const code = useInput('', 'code');
+  const email = useValidationInput('', 'email');
+  const code = useValidationInput('', 'code');
   const [isSentCode, setIsSentCode] = useState(false);
 
   const moveToLogin = () => {
@@ -31,12 +31,12 @@ const SignUpFirstStep = ({ handleNextStep }: { handleNextStep: () => void }) => 
 
   return (
     <InputSection>
-      <Input input={email} label="이메일" type="email" placeholder="이메일을 입력해주세요." />
+      <ValidationInput input={email} label="이메일" type="email" placeholder="이메일을 입력해주세요." />
       <Button color={PointColor} onClick={() => handleSendCode(email)} margin={'0em 0em 1.5em'}>
         {'인증번호 전송'}
       </Button>
       <InputCode isSentCode={isSentCode}>
-        <Input input={code} label="인증번호" type="text" placeholder="인증번호" />
+        <ValidationInput input={code} label="인증번호" type="text" placeholder="인증번호" />
         <Button color={PointColor} onClick={() => handleVerifyCode(code)} margin={'0em 0em 3em'}>
           {'확인'}
         </Button>
