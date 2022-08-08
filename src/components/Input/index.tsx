@@ -1,6 +1,8 @@
+import { useInputType } from '@/hooks/useInput';
 import styled from 'styled-components';
 
-export interface InputProps extends React.HTMLAttributes<Element> {
+export interface InputProps {
+  input: useInputType;
   label: string;
   type: 'email' | 'text' | 'password';
   placeholder: string;
@@ -8,12 +10,14 @@ export interface InputProps extends React.HTMLAttributes<Element> {
 
 const InputContainer = styled.div`
   margin: 10px 0px;
-  p {
-    margin-bottom: 0.5em;
-  }
 `;
 
-const InputWrapper = styled.input<InputProps>`
+const Label = styled.p`
+  margin-bottom: 0.5em;
+  color: white;
+`;
+
+const InputWrapper = styled.input`
   font-size: 1rem;
   padding: 0.5em;
   border: none;
@@ -29,10 +33,17 @@ const InputWrapper = styled.input<InputProps>`
   }
 `;
 
-const Input = ({ label, type, placeholder }: InputProps) => (
+const Message = styled.p`
+  font-size: 0.8rem;
+  color: red;
+  margin-top: 0.5em;
+`;
+
+const Input = ({ input, label, type, placeholder }: InputProps) => (
   <InputContainer>
-    <p>{label}</p>
-    <InputWrapper type={type} placeholder={placeholder}></InputWrapper>
+    <Label>{label}</Label>
+    <InputWrapper type={type} placeholder={placeholder} value={input.value} onChange={input.onChange}></InputWrapper>
+    <Message isError={input.isError}>{input.msg}</Message>
   </InputContainer>
 );
 
