@@ -8,6 +8,7 @@ const VALIDATION_ERROR_MSG = Object.freeze({
   EMPTY_PASSWORD: '비밀번호를 입력해주세요.',
   INVALID_EMAIL: '올바른 형식의 이메일을 입력해주세요.',
   INVALID_PASSWORD: '최소 8자리 이상 영문, 숫자, 특수문자가 각각 1개 이상을 입력해주세요.',
+  EMPTY_CODE: '인증번호를 입력해주세요.',
 });
 
 interface validationReturnType {
@@ -24,5 +25,10 @@ export const validateEmail = (email: string): validationReturnType => {
 export const validatePassword = (password: string): validationReturnType => {
   if (password.trim() === '') return { isError: true, msg: VALIDATION_ERROR_MSG.EMPTY_PASSWORD };
   if (!REGULAR_EXPRESSION.PASSWORD.test(password)) return { isError: true, msg: VALIDATION_ERROR_MSG.INVALID_PASSWORD };
+  return { isError: false, msg: '' };
+};
+
+export const validateCode = (code: string): validationReturnType => {
+  if (code.trim() === '') return { isError: true, msg: VALIDATION_ERROR_MSG.EMPTY_CODE };
   return { isError: false, msg: '' };
 };

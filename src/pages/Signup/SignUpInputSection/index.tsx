@@ -1,28 +1,28 @@
-import { PointColor } from '@/assets/colors';
-import Button from '@/components/Button';
-import Input from '@/components/Input';
-import { useNavigate } from 'react-router-dom';
+import SignUpFirstStep from '@/pages/SignUp/SignUpInputSection/SignUpFirstStep';
+import SignUpSecondStep from '@/pages/SignUp/SignUpInputSection/SignUpSecondStep';
+import SignUpStep from '@/pages/SignUp/SignUpInputSection/SignUpStep';
+import SignUpThirdStep from '@/pages/SignUp/SignUpInputSection/SignUpThirdStep';
+import { useState } from 'react';
 import styled from 'styled-components';
 
+const getSignUpInput = (step: number, handleNextStep: (step) => void) => {
+  if (step === 1) return <SignUpFirstStep handleNextStep={() => handleNextStep(step)}></SignUpFirstStep>;
+  if (step === 2) return <SignUpSecondStep></SignUpSecondStep>;
+  if (step === 3) return <SignUpThirdStep></SignUpThirdStep>;
+};
+
 const SignUpInputSection = () => {
-  const navigate = useNavigate();
-  const moveToLogin = () => {
-    navigate('/sign-in');
+  const [signUpStep, setSignUpStep] = useState(1);
+  console.log(signUpStep);
+
+  const handleNextStep = (signUpStep) => {
+    setSignUpStep(signUpStep + 1);
   };
 
   return (
     <InputSection>
-      <Input label="이메일" type="email" placeholder="이메일을 입력해주세요." />
-      <Input label="닉네임" type="text" placeholder="닉네임을 입력해주세요." />
-      <Input label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요." />
-      <Input label="비밀번호 확인" type="password" placeholder="비밀번호 확인을 입력해주세요." />
-      <Button color={PointColor} margin={'3em 0em 1em'}>
-        {'회원가입'}
-      </Button>
-      <LoginContainer>
-        <span>이미 계정이 있습니까?</span>
-        <u onClick={moveToLogin}>로그인하기</u>
-      </LoginContainer>
+      <SignUpStep step={signUpStep} />
+      {getSignUpInput(signUpStep, handleNextStep)}
     </InputSection>
   );
 };
@@ -31,27 +31,6 @@ const InputSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  p {
-    color: #f5f5f5;
-    font-size: 0.8rem;
-  }
-`;
-
-const LoginContainer = styled.div`
-  width: 100%;
-  justify-content: space-between;
-  display: flex;
-  span {
-    color: white;
-    font-size: 0.9rem;
-  }
-  u {
-    color: white;
-    font-size: 0.9rem;
-    &:hover {
-      cursor: pointer;
-    }
-  }
 `;
 
 export default SignUpInputSection;

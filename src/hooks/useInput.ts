@@ -1,4 +1,4 @@
-import { validateEmail, validatePassword } from '@/utils/validations';
+import { validateCode, validateEmail, validatePassword } from '@/utils/validations';
 import { useState } from 'react';
 export interface useInputType {
   value: string | number;
@@ -14,12 +14,14 @@ const validationInput = (type: string, value: string) => {
       return validateEmail(value);
     case 'password':
       return validatePassword(value);
+    case 'code':
+      return validateCode(value);
   }
 };
 
 const useInput = (initialValue: string | number, type: string): useInputType => {
   const [value, setValue] = useState(initialValue);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(true);
   const [msg, setMsg] = useState('');
   const onChange = ({ target }: { target: HTMLInputElement }) => {
     const { value } = target;

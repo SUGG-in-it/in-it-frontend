@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export interface InputProps {
   input: useInputType;
   label: string;
-  type: 'email' | 'text' | 'password';
+  type: string;
   placeholder: string;
 }
 
