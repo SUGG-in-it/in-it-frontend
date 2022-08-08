@@ -1,17 +1,18 @@
 import { useState } from 'react';
-
-export type InputType = {
-  value: string | number;
+export interface useInputType {
+  value: string;
   onChange: ({ target }: { target: HTMLInputElement }) => void;
-};
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const useInput = (initialValue: string | number): InputType => {
+const useInput = (initialValue: string): useInputType => {
   const [value, setValue] = useState(initialValue);
   const onChange = ({ target }: { target: HTMLInputElement }) => {
     const { value } = target;
     setValue(value);
   };
-  return { value, onChange };
+
+  return { value, onChange, setValue };
 };
 
 export default useInput;

@@ -1,11 +1,17 @@
+import { login } from '@/api/users';
 import { PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
-import Input from '@/components/Input';
+import ValidationInput from '@/components/Input/ValidationInput';
+import useValidationInput from '@/hooks/useValidationInput';
+
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SignInInputSection = () => {
   const navigate = useNavigate();
+  const email = useValidationInput('', 'email');
+  const password = useValidationInput('', 'password');
+
   const moveToSignUp = () => {
     navigate('/sign-up');
   };
@@ -14,11 +20,24 @@ const SignInInputSection = () => {
     navigate('/forgot-password');
   };
 
+  const handleLogin = async (email, password) => {
+    if (email.isError || password.isError) return;
+    await login({
+      email,
+      password,
+    });
+  };
+
   return (
     <InputSection>
-      <Input label="이메일" type="email" placeholder="이메일을 입력해주세요."></Input>
-      <Input label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요."></Input>
-      <Button color={PointColor} margin={'3em 0em 1em'}>
+      <ValidationInput input={email} label="이메일" type="email" placeholder="이메일을 입력해주세요."></ValidationInput>
+      <ValidationInput
+        input={password}
+        label="비밀번호"
+        type="password"
+        placeholder="비밀번호를 입력해주세요."
+      ></ValidationInput>
+      <Button color={PointColor} margin={'3em 0em 1em'} onClick={() => handleLogin(email, password)}>
         {'로그인'}
       </Button>
       <SignUpContainer>
@@ -33,14 +52,10 @@ const InputSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  p {
-    color: #f5f5f5;
-    font-size: 0.8rem;
-  }
 `;
 
 const SignUpContainer = styled.div`
-  width: 100%;
+  width: 19em;
   justify-content: space-between;
   display: flex;
   u {

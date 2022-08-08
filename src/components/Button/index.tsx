@@ -1,7 +1,7 @@
 import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 export interface ButtonProps extends React.HTMLAttributes<Element> {
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   type?: 'button' | 'submit';
   color: string;
   children: React.ReactNode;
@@ -23,6 +23,10 @@ const ButtonWrapper = styled.button<ButtonProps>`
   }
 `;
 
-const Button = ({ children, ...props }: ButtonProps) => <ButtonWrapper {...props}>{children}</ButtonWrapper>;
+const Button = ({ children, onClick, ...props }: ButtonProps) => (
+  <ButtonWrapper onClick={onClick} {...props}>
+    {children}
+  </ButtonWrapper>
+);
 
 export default Button;

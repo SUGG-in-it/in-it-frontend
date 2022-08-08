@@ -1,8 +1,8 @@
-import { useInputType } from '@/hooks/useInput';
+import { useValidationInputType } from '@/hooks/useValidationInput';
 import styled from 'styled-components';
 
 export interface InputProps {
-  input: useInputType;
+  input: useValidationInputType;
   label: string;
   type: string;
   placeholder: string;
@@ -33,11 +33,18 @@ const InputWrapper = styled.input`
   }
 `;
 
-const Input = ({ input, label, type, placeholder }: InputProps) => (
+const Message = styled.p`
+  font-size: 0.8rem;
+  color: red;
+  margin-top: 0.5em;
+`;
+
+const ValidationInput = ({ input, label, type, placeholder }: InputProps) => (
   <InputContainer>
     <Label>{label}</Label>
     <InputWrapper type={type} placeholder={placeholder} value={input.value} onChange={input.onChange}></InputWrapper>
+    {<Message isError={input.isError}>{input.msg}</Message>}
   </InputContainer>
 );
 
-export default Input;
+export default ValidationInput;
