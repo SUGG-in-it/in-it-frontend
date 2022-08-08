@@ -1,26 +1,16 @@
-import { PrimaryColor, PointColor } from '@/assets/colors';
-import Button from '@/components/Button';
-import Input from '@/components/Input';
+import { PrimaryColor } from '@/assets/colors';
+import ForgotPasswordInputSection from '@/pages/ForgotPassword/ForgotPasswordInputSection';
 import styled from 'styled-components';
 
 const ForgotPassword = () => {
   return (
     <Wrapper>
       <ForgotPasswordForm>
-        <LeftSection>
+        <LogoSection>
           <h1>In it</h1>
           <p>코드리뷰 사이트: in it()</p>
-        </LeftSection>
-        <RightSection>
-          <Input label="이메일" type="email" placeholder="이메일을 입력해주세요."></Input>
-          <Button color={PointColor} margin={'1em 0em 2em'}>
-            {'인증번호 전송'}
-          </Button>
-          <Input label="인증번호" type="password" placeholder="비밀번호를 입력해주세요."></Input>
-          <Button color={PointColor} margin={'1em 0em 2em'}>
-            {'확인'}
-          </Button>
-        </RightSection>
+        </LogoSection>
+        <ForgotPasswordInputSection />
       </ForgotPasswordForm>
     </Wrapper>
   );
@@ -47,7 +37,7 @@ const ForgotPasswordForm = styled.div`
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 `;
 
-const LeftSection = styled.div`
+const LogoSection = styled.div`
   width: 35em;
   h1 {
     font-size: 4rem;
@@ -59,29 +49,6 @@ const LeftSection = styled.div`
     font-size: 0.9rem;
     font-weight: 800;
     color: ${PrimaryColor};
-  }
-`;
-
-const RightSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  p {
-    color: #f5f5f5;
-    font-size: 0.8rem;
-  }
-`;
-
-const SignUpContainer = styled.div`
-  width: 100%;
-  justify-content: space-between;
-  display: flex;
-  u {
-    color: white;
-    font-size: 0.9rem;
-    &:hover {
-      cursor: pointer;
-    }
   }
 `;
 
