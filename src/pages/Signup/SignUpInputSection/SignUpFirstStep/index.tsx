@@ -3,15 +3,18 @@ import { PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import ValidationInput from '@/components/Input/ValidationInput';
 import useValidationInput from '@/hooks/useValidationInput';
+import { signUpState } from '@/store/users';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-const SignUpFirstStep = ({ handleNextStep }: { handleNextStep: () => void }) => {
+const SignUpFirstStep = () => {
   const navigate = useNavigate();
   const email = useValidationInput('', 'email');
   const code = useValidationInput('', 'code');
   const [isSentCode, setIsSentCode] = useState(false);
+  const [signUp, setSignUp] = useRecoilState(signUpState);
 
   const moveToLogin = () => {
     navigate('/sign-in');
@@ -26,7 +29,10 @@ const SignUpFirstStep = ({ handleNextStep }: { handleNextStep: () => void }) => 
   const handleVerifyCode = async (code) => {
     if (code.isError) return;
     await verifyCode(code);
-    handleNextStep();
+    setSignUp({
+      step: 2,
+      email: email.value,
+    });
   };
 
   return (

@@ -1,20 +1,13 @@
 import SignUpFirstStep from '@/pages/SignUp/SignUpInputSection/SignUpFirstStep';
 import SignUpSecondStep from '@/pages/SignUp/SignUpInputSection/SignUpSecondStep';
-import { useState } from 'react';
+import { signUpState } from '@/store/users';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const SignUpInputSection = () => {
-  const [signUpStep, setSignUpStep] = useState(1);
+  const [signUp, setSignUp] = useRecoilState(signUpState);
 
-  const handleNextStep = () => {
-    setSignUpStep(2);
-  };
-
-  return (
-    <InputSection>
-      {signUpStep === 1 ? <SignUpFirstStep handleNextStep={handleNextStep} /> : <SignUpSecondStep />}
-    </InputSection>
-  );
+  return <InputSection>{signUp.step === 1 ? <SignUpFirstStep /> : <SignUpSecondStep />}</InputSection>;
 };
 
 const InputSection = styled.div`

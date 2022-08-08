@@ -5,8 +5,10 @@ import Input from '@/components/Input';
 import ValidationInput from '@/components/Input/ValidationInput';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
+import { signUpState } from '@/store/users';
 import { validateRePassword } from '@/utils/validations';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const SignUpSecondStep = () => {
@@ -16,6 +18,7 @@ const SignUpSecondStep = () => {
   const [rePasswordErrorMsg, setRePasswordErrorMsg] = useState('');
   const [year, setYear] = useState('');
   const workPosition = useValidationInput('', 'workPosition');
+  const [signUp, setSignUp] = useRecoilState(signUpState);
 
   const handleYearSelect = (e) => {
     setYear(e.target.value);
@@ -32,7 +35,7 @@ const SignUpSecondStep = () => {
     console.log(validationCheck());
     if (validationCheck())
       await join({
-        email: '',
+        email: signUp.email,
         password: password.value,
         nickname: nickname.value,
         year,
