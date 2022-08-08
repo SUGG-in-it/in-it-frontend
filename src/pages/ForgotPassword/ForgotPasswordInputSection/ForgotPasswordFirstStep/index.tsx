@@ -3,13 +3,16 @@ import { PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import ValidationInput from '@/components/Input/ValidationInput';
 import useValidationInput from '@/hooks/useValidationInput';
+import { forgotPasswordState } from '@/store/users';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-const ForgotPasswordFirstStep = ({ handleNextStep }: { handleNextStep: () => void }) => {
+const ForgotPasswordFirstStep = () => {
   const email = useValidationInput('', 'email');
   const code = useValidationInput('', 'code');
   const [isSentCode, setIsSentCode] = useState(false);
+  const [forgotPassword, setforgotPassword] = useRecoilState(forgotPasswordState);
 
   const handleSendCode = async (email) => {
     if (email.isError) return;
@@ -20,7 +23,10 @@ const ForgotPasswordFirstStep = ({ handleNextStep }: { handleNextStep: () => voi
   const handleVerifyCode = async (code) => {
     if (code.isError) return;
     await verifyCode(code);
-    handleNextStep();
+    setforgotPassword({
+      email: email.value,
+      step: 2,
+    });
   };
 
   return (

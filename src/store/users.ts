@@ -7,3 +7,11 @@ export const signUpState = atom({
     step: 1,
   },
 });
+
+export const forgotPasswordState = atom({
+  key: 'forgotPassword',
+  default: {
+    email: '',
+    step: 1,
+  },
+});

@@ -5,14 +5,17 @@ import Input from '@/components/Input';
 import ValidationInput from '@/components/Input/ValidationInput';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
+import { forgotPasswordState } from '@/store/users';
 import { validateRePassword } from '@/utils/validations';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const ForgotPasswordSecondStep = () => {
   const password = useValidationInput('', 'password');
   const rePassword = useInput('');
   const [rePasswordErrorMsg, setRePasswordErrorMsg] = useState('');
+  const [forgotPassword, setforgotPassword] = useRecoilState(forgotPasswordState);
 
   const validationCheck = () => {
     const { isError, msg } = validateRePassword(password.value, rePassword.value);
@@ -24,7 +27,7 @@ const ForgotPasswordSecondStep = () => {
   const handleChangePassword = async () => {
     if (validationCheck())
       await resetPassword({
-        email: '',
+        email: forgotPassword.email,
         password: password.value,
       });
   };
