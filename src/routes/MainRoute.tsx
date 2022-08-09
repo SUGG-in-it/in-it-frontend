@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import Nav from '@/pages/Main/Nav';
+import Nav from '@/components/Nav';
 
 const MainPage = lazy(() => import('@/pages/Main'));
 const QuestionWritePage = lazy(() => import('@/pages/QuestionWrite'));
