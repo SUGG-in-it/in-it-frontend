@@ -26,7 +26,7 @@ const Header = () => {
 };
 
 const HeaderContainer = styled.div`
-  height: 30px;
+  height: 40px;
   background-color: white;
   padding: 10px 10%;
   display: flex;
