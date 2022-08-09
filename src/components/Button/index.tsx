@@ -3,9 +3,10 @@ import styled from 'styled-components';
 export interface ButtonProps extends React.HTMLAttributes<Element> {
   onClick: MouseEventHandler<HTMLButtonElement>;
   type?: 'button' | 'submit';
-  color: string;
+  color?: string;
   children: React.ReactNode;
   margin?: string;
+  className?: string;
 }
 
 const ButtonWrapper = styled.button<ButtonProps>`
