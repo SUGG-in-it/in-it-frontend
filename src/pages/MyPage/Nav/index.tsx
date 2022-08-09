@@ -20,7 +20,7 @@ const NavContainer = styled.div`
   display: flex;
   padding-left: 10%;
   padding-right: 10%;
-  height: 80px;
+  height: 60px;
   display: flex;
   align-items: center;
   background-color: white;
