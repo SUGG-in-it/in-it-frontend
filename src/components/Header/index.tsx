@@ -1,14 +1,18 @@
 import { PrimaryColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import SearchBar from '@/components/SearchBar';
+import { loginState } from '@/store/users';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const Header = () => {
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useRecoilState(loginState);
   const goToLogin = () => {
     navigate('/sign-in');
   };
+
   return (
     <HeaderContainer>
       <LeftSection>
@@ -18,9 +22,15 @@ const Header = () => {
         </LogoSection>
         <SearchBar placeholder="" />
       </LeftSection>
-      <Button onClick={goToLogin} className={'login-button'}>
-        {'로그인'}
-      </Button>
+      {isLogin ? (
+        <Button onClick={goToLogin} className={'login-button'}>
+          {'마이페이지'}
+        </Button>
+      ) : (
+        <Button onClick={goToLogin} className={'login-button'}>
+          {'로그인'}
+        </Button>
+      )}
     </HeaderContainer>
   );
 };

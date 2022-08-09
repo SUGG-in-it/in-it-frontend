@@ -8,6 +8,11 @@ export const signUpState = atom({
   },
 });
 
+export const loginState = atom({
+  key: 'isLogin',
+  default: false,
+});
+
 export const forgotPasswordState = atom({
   key: 'forgotPassword',
   default: {

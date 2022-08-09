@@ -8,7 +8,7 @@ import Loading from './components/Loading';
 import Error from './components/Error';
 
 const SignUpPage = lazy(() => import('./pages/SignUp'));
-const SignInPage = lazy(() => import('./pages/SignIn'));
+const LoginPage = lazy(() => import('./pages/Login'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPassword'));
 const MainPage = lazy(() => import('./pages/Main'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
@@ -34,7 +34,7 @@ const routes = () => {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
