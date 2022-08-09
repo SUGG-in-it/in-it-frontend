@@ -11,6 +11,7 @@ const SignUpPage = lazy(() => import('./pages/SignUp'));
 const LoginPage = lazy(() => import('./pages/Login'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPassword'));
 const MainPage = lazy(() => import('./pages/Main'));
+const MyPage = lazy(() => import('./pages/MyPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const routes = () => {
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/my-page" element={<MyPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

@@ -12,6 +12,9 @@ const Header = () => {
   const goToLogin = () => {
     navigate('/sign-in');
   };
+  const goToMyPage = () => {
+    navigate('/my-page');
+  };
 
   return (
     <HeaderContainer>
@@ -23,7 +26,7 @@ const Header = () => {
         <SearchBar placeholder="" />
       </LeftSection>
       {isLogin ? (
-        <Button onClick={goToLogin} className={'login-button'}>
+        <Button onClick={goToMyPage} className={'my-page-button'}>
           {'마이페이지'}
         </Button>
       ) : (
@@ -43,6 +46,13 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   .login-button {
     border: 1px solid ${PrimaryColor};
+    color: ${PrimaryColor};
+    background-color: white;
+    width: 100px;
+    height: 40px;
+  }
+  .my-page-button {
+    border-radius: 0;
     color: ${PrimaryColor};
     background-color: white;
     width: 100px;
