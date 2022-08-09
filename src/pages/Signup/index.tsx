@@ -2,7 +2,7 @@ import { PrimaryColor } from '@/assets/colors';
 import SignUpInputPanel from '@/pages/SignUp/SignUpInputSection';
 import styled from 'styled-components';
 
-const SignUp = () => {
+const SignUpPage = () => {
   return (
     <SignUpContainer>
       <SignUpForm>
@@ -52,4 +52,4 @@ const LogoSection = styled.div`
   }
 `;
 
-export default SignUp;
+export default SignUpPage;

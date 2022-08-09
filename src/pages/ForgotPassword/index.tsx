@@ -2,7 +2,7 @@ import { PrimaryColor } from '@/assets/colors';
 import ForgotPasswordInputSection from '@/pages/ForgotPassword/ForgotPasswordInputSection';
 import styled from 'styled-components';
 
-const ForgotPassword = () => {
+const ForgotPasswordPage = () => {
   return (
     <Wrapper>
       <ForgotPasswordForm>
@@ -52,4 +52,4 @@ const LogoSection = styled.div`
   }
 `;
 
-export default ForgotPassword;
+export default ForgotPasswordPage;

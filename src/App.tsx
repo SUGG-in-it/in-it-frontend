@@ -2,16 +2,16 @@ import React, { lazy, Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './styles/globalStyle';
-import NotFoundPage from '@/pages/NotFound';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
-
 import Loading from './components/Loading';
 import Error from './components/Error';
 
-const SignUp = lazy(() => import('./pages/SignUp'));
-const SignIn = lazy(() => import('./pages/SignIn'));
-const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const SignUpPage = lazy(() => import('./pages/SignUp'));
+const SignInPage = lazy(() => import('./pages/SignIn'));
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPassword'));
+const MainPage = lazy(() => import('./pages/Main'));
+const NotFoundPage = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
 
@@ -32,9 +32,10 @@ const routes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
