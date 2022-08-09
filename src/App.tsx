@@ -12,6 +12,9 @@ const LoginPage = lazy(() => import('./pages/Login'));
 const ForgotPasswordPage = lazy(() => import('./pages/ForgotPassword'));
 const MainPage = lazy(() => import('./pages/Main'));
 const MyPage = lazy(() => import('./pages/MyPage'));
+const QuestionWritePage = lazy(() => import('./pages/QuestionWrite'));
+const QuestionDetailPage = lazy(() => import('./pages/QuestionDetail'));
+const QuestionListPage = lazy(() => import('./pages/QuestionList'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 
 const queryClient = new QueryClient();
@@ -38,6 +41,9 @@ const routes = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/my-page" element={<MyPage />} />
+        <Route path="/question/write" element={<QuestionWritePage />} />
+        <Route path="/question/list" element={<QuestionListPage />} />
+        <Route path="/question/detail/:id" element={<QuestionDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
