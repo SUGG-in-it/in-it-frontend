@@ -1,22 +1,22 @@
 import { PrimaryColor } from '@/assets/colors';
-import SignInInputSection from '@/pages/SignIn/SignInInput';
+import LoginInputSection from '@/pages/Login/LoginInInput';
 import styled from 'styled-components';
 
-const SignIn = () => {
+const LoginPage = () => {
   return (
-    <SignInContainer>
-      <SignInForm>
+    <LoginContainer>
+      <LoginPanel>
         <LogoSection>
           <h1>In it</h1>
           <p>코드리뷰 사이트: in it()</p>
         </LogoSection>
-        <SignInInputSection />
-      </SignInForm>
-    </SignInContainer>
+        <LoginInputSection />
+      </LoginPanel>
+    </LoginContainer>
   );
 };
 
-const SignInContainer = styled.div`
+const LoginContainer = styled.div`
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -26,7 +26,7 @@ const SignInContainer = styled.div`
   background: linear-gradient(-70deg, ${PrimaryColor} 55%, #fff 45%);
 `;
 
-const SignInForm = styled.div`
+const LoginPanel = styled.div`
   width: 60em;
   height: 40em;
   margin: 0 auto;
@@ -52,4 +52,4 @@ const LogoSection = styled.div`
   }
 `;
 
-export default SignIn;
+export default LoginPage;

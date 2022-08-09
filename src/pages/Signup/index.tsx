@@ -2,16 +2,16 @@ import { PrimaryColor } from '@/assets/colors';
 import SignUpInputPanel from '@/pages/SignUp/SignUpInputSection';
 import styled from 'styled-components';
 
-const SignUp = () => {
+const SignUpPage = () => {
   return (
     <SignUpContainer>
-      <SignUpForm>
+      <SignUpPanel>
         <LogoSection>
           <h1>In it</h1>
           <p>코드리뷰 사이트: in it()</p>
         </LogoSection>
         <SignUpInputPanel />
-      </SignUpForm>
+      </SignUpPanel>
     </SignUpContainer>
   );
 };
@@ -26,7 +26,7 @@ const SignUpContainer = styled.div`
   background: linear-gradient(-70deg, ${PrimaryColor} 55%, #fff 45%);
 `;
 
-const SignUpForm = styled.div`
+const SignUpPanel = styled.div`
   width: 60em;
   height: 40em;
   margin: 0 auto;
@@ -52,4 +52,4 @@ const LogoSection = styled.div`
   }
 `;
 
-export default SignUp;
+export default SignUpPage;

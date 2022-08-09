@@ -7,7 +7,7 @@ import useValidationInput from '@/hooks/useValidationInput';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const SignInInputSection = () => {
+const LoginInputSection = () => {
   const navigate = useNavigate();
   const email = useValidationInput('', 'email');
   const password = useValidationInput('', 'password');
@@ -67,4 +67,4 @@ const SignUpContainer = styled.div`
   }
 `;
 
-export default SignInInputSection;
+export default LoginInputSection;

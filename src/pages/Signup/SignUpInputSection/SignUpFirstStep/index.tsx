@@ -17,7 +17,7 @@ const SignUpFirstStep = () => {
   const [signUp, setSignUp] = useRecoilState(signUpState);
 
   const moveToLogin = () => {
-    navigate('/sign-in');
+    navigate('/login');
   };
 
   const handleSendCode = async (email) => {
