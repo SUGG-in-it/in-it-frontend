@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 export interface InputProps {
   input: useValidationInputType;
-  label: string;
+  label?: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
+  className?: string;
 }
 
 const InputContainer = styled.div`
@@ -39,10 +40,16 @@ const Message = styled.p`
   margin-top: 0.5em;
 `;
 
-const ValidationInput = ({ input, label, type, placeholder }: InputProps) => (
+const ValidationInput = ({ input, label, type, className, placeholder = '' }: InputProps) => (
   <InputContainer>
-    <Label>{label}</Label>
-    <InputWrapper type={type} placeholder={placeholder} value={input.value} onChange={input.onChange}></InputWrapper>
+    {label && <Label>{label}</Label>}
+    <InputWrapper
+      className={className}
+      type={type}
+      placeholder={placeholder}
+      value={input.value}
+      onChange={input.onChange}
+    />
     {<Message isError={input.isError}>{input.msg}</Message>}
   </InputContainer>
 );
