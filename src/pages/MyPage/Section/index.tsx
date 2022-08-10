@@ -2,17 +2,19 @@ import QuestionSection from '@/pages/Main/Section/QuestionSection';
 import AnswerSection from '@/pages/MyPage/Section/AnswerSection';
 import CommentSection from '@/pages/MyPage/Section/CommentSection';
 import ProfileSection from '@/pages/MyPage/Section/ProfileSection';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-const createSection = (tabIndex: number) => {
-  if (tabIndex === 0) return <ProfileSection />;
-  if (tabIndex === 1) return <QuestionSection />;
-  if (tabIndex === 2) return <AnswerSection />;
-  if (tabIndex === 3) return <CommentSection />;
+const createSection = (tabIndex?: string) => {
+  if (tabIndex === 'profile') return <ProfileSection />;
+  if (tabIndex === 'question') return <QuestionSection />;
+  if (tabIndex === 'answer') return <AnswerSection />;
+  if (tabIndex === 'comment') return <CommentSection />;
 };
 
-const Section = ({ tabIndex }: { tabIndex: number }) => {
-  console.log(tabIndex);
+const Section = () => {
+  const { tabIndex } = useParams<{ tabIndex?: string }>();
+
   return (
     <SectionWrapper>
       <SectionPanel>{createSection(tabIndex)}</SectionPanel>
@@ -29,9 +31,8 @@ const SectionWrapper = styled.div`
 const SectionPanel = styled.div`
   background-color: white;
   min-height: 50vh;
-  margin-top: 5em;
-  border-radius: 0.3em;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
 `;
 
 export default Section;

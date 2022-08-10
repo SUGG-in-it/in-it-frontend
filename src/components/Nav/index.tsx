@@ -4,7 +4,7 @@ import Button from '@/components/Button';
 import { PointColor } from '@/assets/colors';
 import { useNavigate } from 'react-router-dom';
 
-const MainNav = () => {
+const Nav = () => {
   const navigate = useNavigate();
 
   const handleHomeClick = () => {
@@ -60,4 +60,4 @@ const Tab = styled.button`
   cursor: pointer;
 `;
 
-export default MainNav;
+export default Nav;
