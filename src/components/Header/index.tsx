@@ -10,10 +10,10 @@ const Header = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const goToLogin = () => {
-    navigate('/sign-in');
+    navigate('/login');
   };
   const goToMyPage = () => {
-    navigate('/my-page');
+    navigate('/my-page/profile');
   };
 
   return (
