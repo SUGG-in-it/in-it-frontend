@@ -36,6 +36,9 @@ const QuestionWriteContainer = styled.div`
   margin-left: 20vw;
   margin-right: 20vw;
   margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
   .question-input {
     border: 1px solid #ddd;
     border-radius: 3px;
