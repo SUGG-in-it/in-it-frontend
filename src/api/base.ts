@@ -18,9 +18,6 @@ const request = async ({ url, method, body, params }: RequestType): Promise<Resp
       baseURL: process.env.API_PREFIX,
       withCredentials: true,
       params,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
     };
     const { data } =
       (method === 'get' && (await axios.get(url, config))) ||

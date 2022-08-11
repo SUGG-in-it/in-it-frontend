@@ -7,6 +7,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import Loading from './components/Loading';
 import Error from './components/Error';
 import MainLayout from '@/components/MainLayout';
+import Auth from '@/routes/AuthRoute';
+import UnAuth from '@/routes/UnAtuhRoute';
 
 const SignUpPage = lazy(() => import('@/pages/SignUp'));
 const LoginPage = lazy(() => import('@/pages/Login'));
@@ -38,15 +40,15 @@ const routes = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/question/write" element={<QuestionWritePage />} />
-          <Route path="/question/list" element={<QuestionListPage />} />
-          <Route path="/question/detail/:id" element={<QuestionDetailPage />} />
+          <Route path="/" element={<Auth Component={<MainPage />} />} />
+          <Route path="/question/write" element={<Auth Component={<QuestionWritePage />} />} />
+          <Route path="/question/list" element={<Auth Component={<QuestionListPage />} />} />
+          <Route path="/question/detail/:id" element={<Auth Component={<QuestionDetailPage />} />} />
         </Route>
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/my-page/:tabIndex" element={<MyPage />} />
+        <Route path="/sign-up" element={<UnAuth Component={<SignUpPage />} />} />
+        <Route path="/login" element={<UnAuth Component={<LoginPage />} />} />
+        <Route path="/forgot-password" element={<UnAuth Component={<ForgotPasswordPage />} />} />
+        <Route path="/my-page/:tabIndex" element={<Auth Component={<MyPage />} />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
