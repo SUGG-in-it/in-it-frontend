@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 export interface InputProps {
   input: useInputType;
-  label: string;
+  label?: string;
   type: string;
   placeholder: string;
+  className?: string;
 }
 
 const InputContainer = styled.div`
@@ -33,10 +34,16 @@ const InputWrapper = styled.input`
   }
 `;
 
-const Input = ({ input, label, type, placeholder }: InputProps) => (
+const Input = ({ className, input, label, type, placeholder = '' }: InputProps) => (
   <InputContainer>
-    <Label>{label}</Label>
-    <InputWrapper type={type} placeholder={placeholder} value={input.value} onChange={input.onChange}></InputWrapper>
+    {label && <Label>{label}</Label>}
+    <InputWrapper
+      className={className}
+      type={type}
+      placeholder={placeholder}
+      value={input.value}
+      onChange={input.onChange}
+    />
   </InputContainer>
 );
 

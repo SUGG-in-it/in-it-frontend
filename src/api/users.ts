@@ -18,11 +18,11 @@ export interface resetPasswrodRequestBody {
   password: string;
 }
 
-export const login = async (loginParams: loginRequestBody) => await POST('/users/login', loginParams);
+export const login = async (loginParams: loginRequestBody) => await POST('/user/login', loginParams);
 
-export const join = async (joinParams: joinRequestBody) => await POST('/users/join', joinParams);
+export const join = async (joinParams: joinRequestBody) => await POST('/user/join', joinParams);
 
 export const resetPassword = async (resetPasswrodParams: resetPasswrodRequestBody) =>
-  await PUT('/users/password', resetPasswrodParams);
+  await PUT('/user/password', resetPasswrodParams);
 
-export const duplicateEmail = (email: string) => GET('/users/duplicate-email', { email });
+export const duplicateEmail = (email: string) => GET('/user/duplicate-email', { email });

@@ -15,12 +15,8 @@ interface ResponseType {
 const request = async ({ url, method, body, params }: RequestType): Promise<ResponseType> => {
   try {
     const config: AxiosRequestConfig = {
-      baseURL: process.env.API_PREFIX,
-      withCredentials: true,
+      baseURL: process.env.REACT_APP_API_PREFIX,
       params,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
     };
     const { data } =
       (method === 'get' && (await axios.get(url, config))) ||
