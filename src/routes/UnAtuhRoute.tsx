@@ -4,7 +4,7 @@ import { loginState } from '@/store/users';
 
 function UnAuth({ Component }) {
   const isLogin = useRecoilValue(loginState);
-  return isLogin ? Component : <Navigate to="/" />;
+  return isLogin ? <Navigate to="/" /> : Component;
 }
 
 export default UnAuth;
