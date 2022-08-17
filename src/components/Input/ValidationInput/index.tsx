@@ -6,7 +6,6 @@ export interface InputProps {
   label?: string;
   type: string;
   placeholder?: string;
-  className?: string;
 }
 
 const InputContainer = styled.div`
@@ -23,8 +22,8 @@ const InputWrapper = styled.input`
   padding: 0.5em;
   border: none;
   border-radius: 0.3em;
-  width: 18em;
-  height: 1.5em;
+  width: calc(100% - 1em);
+  height: 30px;
   ::placeholder {
     color: darkgray;
     font-size: 0.8rem;
@@ -40,16 +39,10 @@ const Message = styled.p`
   margin-top: 0.5em;
 `;
 
-const ValidationInput = ({ input, label, type, className, placeholder = '' }: InputProps) => (
+const ValidationInput = ({ input, label, type, placeholder = '' }: InputProps) => (
   <InputContainer>
     {label && <Label>{label}</Label>}
-    <InputWrapper
-      className={className}
-      type={type}
-      placeholder={placeholder}
-      value={input.value}
-      onChange={input.onChange}
-    />
+    <InputWrapper type={type} placeholder={placeholder} value={input.value} onChange={input.onChange} />
     {<Message isError={input.isError}>{input.msg}</Message>}
   </InputContainer>
 );

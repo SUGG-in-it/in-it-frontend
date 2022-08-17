@@ -6,7 +6,6 @@ export interface InputProps {
   label?: string;
   type: string;
   placeholder: string;
-  className?: string;
 }
 
 const InputContainer = styled.div`
@@ -23,8 +22,8 @@ const InputWrapper = styled.input`
   padding: 0.5em;
   border: none;
   border-radius: 0.3em;
-  width: 18em;
-  height: 1.5em;
+  width: calc(100% - 1em);
+  height: 30px;
   ::placeholder {
     color: darkgray;
     font-size: 0.8rem;
@@ -34,16 +33,10 @@ const InputWrapper = styled.input`
   }
 `;
 
-const Input = ({ className, input, label, type, placeholder = '' }: InputProps) => (
+const Input = ({ input, label, type, placeholder = '' }: InputProps) => (
   <InputContainer>
     {label && <Label>{label}</Label>}
-    <InputWrapper
-      className={className}
-      type={type}
-      placeholder={placeholder}
-      value={input.value}
-      onChange={input.onChange}
-    />
+    <InputWrapper type={type} placeholder={placeholder} value={input.value} onChange={input.onChange} />
   </InputContainer>
 );
 
