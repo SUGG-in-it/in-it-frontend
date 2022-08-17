@@ -6,7 +6,7 @@ import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Loading from './components/Loading';
 import Error from './components/Error';
-import MainLayout from '@/components/MainLayout';
+import MainLayout from '@/layouts/MainLayout';
 import Auth from '@/routes/AuthRoute';
 import UnAuth from '@/routes/UnAtuhRoute';
 
