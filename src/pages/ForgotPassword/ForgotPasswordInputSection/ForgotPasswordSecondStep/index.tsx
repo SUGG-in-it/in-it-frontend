@@ -37,9 +37,7 @@ const ForgotPasswordSecondStep = () => {
       <ValidationInput input={password} label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요." />
       <Input input={rePassword} label="비밀번호 확인" type="password" placeholder="비밀번호 확인을 입력해주세요." />
       <ErrorMessage>{rePasswordErrorMsg}</ErrorMessage>
-      <Button color={PointColor} onClick={handleChangePassword} margin={'3em 0em 1em'}>
-        {'비밀번호 변경'}
-      </Button>
+      <Button onClick={handleChangePassword}>{'비밀번호 변경'}</Button>
     </InputSection>
   );
 };

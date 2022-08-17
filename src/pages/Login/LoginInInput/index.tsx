@@ -37,9 +37,7 @@ const LoginInputSection = () => {
         type="password"
         placeholder="비밀번호를 입력해주세요."
       ></ValidationInput>
-      <Button color={PointColor} margin={'3em 0em 1em'} onClick={() => handleLogin(email, password)}>
-        {'로그인'}
-      </Button>
+      <Button onClick={() => handleLogin(email, password)}>{'로그인'}</Button>
       <SignUpContainer>
         <u onClick={moveToForgotPassword}>비밀번호 찾기</u>
         <u onClick={moveToSignUp}>회원가입</u>

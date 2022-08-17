@@ -38,14 +38,10 @@ const SignUpFirstStep = () => {
   return (
     <InputSection>
       <ValidationInput input={email} label="이메일" type="email" placeholder="이메일을 입력해주세요." />
-      <Button color={PointColor} onClick={() => handleSendCode(email)} margin={'0em 0em 1.5em'}>
-        {'인증번호 전송'}
-      </Button>
+      <Button onClick={() => handleSendCode(email)}>{'인증번호 전송'}</Button>
       <InputCode isSentCode={isSentCode}>
         <ValidationInput input={code} label="인증번호" type="text" placeholder="인증번호" />
-        <Button color={PointColor} onClick={() => handleVerifyCode(code)} margin={'0em 0em 3em'}>
-          {'확인'}
-        </Button>
+        <Button onClick={() => handleVerifyCode(code)}>{'확인'}</Button>
       </InputCode>
       <LoginContainer>
         <span>이미 계정이 있습니까?</span>
