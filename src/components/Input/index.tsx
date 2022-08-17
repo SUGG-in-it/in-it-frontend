@@ -5,7 +5,8 @@ export interface InputProps {
   input: useInputType;
   label?: string;
   type: string;
-  placeholder: string;
+  placeholder?: string;
+  className?: string;
 }
 
 const InputContainer = styled.div`
@@ -33,10 +34,16 @@ const InputWrapper = styled.input`
   }
 `;
 
-const Input = ({ input, label, type, placeholder = '' }: InputProps) => (
+const Input = ({ input, label, type, placeholder = '', className }: InputProps) => (
   <InputContainer>
     {label && <Label>{label}</Label>}
-    <InputWrapper type={type} placeholder={placeholder} value={input.value} onChange={input.onChange} />
+    <InputWrapper
+      type={type}
+      placeholder={placeholder}
+      value={input.value}
+      onChange={input.onChange}
+      className={className}
+    />
   </InputContainer>
 );
 

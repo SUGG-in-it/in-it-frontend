@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export interface ButtonProps extends React.HTMLAttributes<Element> {
   onClick: MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
+  className?: string;
 }
 
 const ButtonWrapper = styled.button<ButtonProps>`
@@ -20,8 +21,8 @@ const ButtonWrapper = styled.button<ButtonProps>`
   }
 `;
 
-const Button = ({ children, onClick }: ButtonProps) => (
-  <ButtonWrapper onClick={onClick} type={'button'}>
+const Button = ({ children, onClick, className }: ButtonProps) => (
+  <ButtonWrapper onClick={onClick} type={'button'} className={className}>
     {children}
   </ButtonWrapper>
 );
