@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import GrayLine from '@/components/GrayLine';
 import Button from '@/components/Button';
-import { PointColor } from '@/assets/colors';
 import { useNavigate } from 'react-router-dom';
 
 const Nav = () => {
