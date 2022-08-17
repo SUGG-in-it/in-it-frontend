@@ -1,5 +1,4 @@
 import { sendCode, verifyCode } from '@/api/auth';
-import { PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import ValidationInput from '@/components/Input/ValidationInput';
 import useValidationInput from '@/hooks/useValidationInput';
@@ -36,7 +35,7 @@ const SignUpFirstStep = () => {
   };
 
   return (
-    <InputSection>
+    <>
       <ValidationInput input={email} label="이메일" type="email" placeholder="이메일을 입력해주세요." />
       <Button onClick={() => handleSendCode(email)}>{'인증번호 전송'}</Button>
       <InputCode isSentCode={isSentCode}>
@@ -47,15 +46,9 @@ const SignUpFirstStep = () => {
         <span>이미 계정이 있습니까?</span>
         <u onClick={moveToLogin}>로그인하기</u>
       </LoginContainer>
-    </InputSection>
+    </>
   );
 };
-
-const InputSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
 
 const InputCode = styled.div`
   visibility: ${({ isSentCode }) => (isSentCode ? 'visible' : 'hidden')};
