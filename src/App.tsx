@@ -42,7 +42,7 @@ const mainRoutes = () => {
       <Route path="/" element={<Auth Component={<MainPage />} />} />
       <Route path="/question/write" element={<Auth Component={<QuestionWritePage />} />} />
       <Route path="/question/list" element={<Auth Component={<QuestionListPage />} />} />
-      <Route path="/question/detail/:id" element={<Auth Component={<QuestionDetailPage />} />} />
+      <Route path="/question/:id" element={<Auth Component={<QuestionDetailPage />} />} />
     </>
   );
 };

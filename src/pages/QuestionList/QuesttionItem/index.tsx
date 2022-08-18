@@ -16,7 +16,7 @@ const QuestionItem = ({ id, isCompleted, nickName, date, title, content, tags }:
   const navigate = useNavigate();
 
   const handleQuestionClick = () => {
-    navigate(`/question/detail/${id}`);
+    navigate(`/question/${id}`);
   };
 
   return (
