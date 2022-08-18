@@ -4,6 +4,7 @@ import ValidationInput from '@/components/Input/ValidationInput';
 import ToastEditor from '@/components/ToastEdtior';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
+import { QLable } from '@/styles/commonStyles';
 import styled from 'styled-components';
 
 const QuestionWritePage = () => {
@@ -77,12 +78,6 @@ const ToastEditorWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const QLable = styled.h1`
-  font-size: 3rem;
-  margin-right: 20px;
-  color: ${PrimaryColor};
 `;
 
 const Label = styled.p`
