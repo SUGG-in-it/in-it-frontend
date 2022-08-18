@@ -65,6 +65,7 @@ const TabMenu = styled.ul`
   color: #abb0b5;
   font-size: 1rem;
   cursor: pointer;
+  font-weight: bold;
   .menu {
     color: #abb0b5;
     width: 100px;
