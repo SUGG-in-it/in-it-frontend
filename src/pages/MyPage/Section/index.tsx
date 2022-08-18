@@ -24,8 +24,9 @@ const Section = () => {
 
 const SectionWrapper = styled.div`
   height: calc(100vh - 110px);
-  padding-left: 10%;
-  padding-right: 10%;
+  width: 80vw;
+  max-width: 900px;
+  margin: 0 auto;
 `;
 
 const SectionPanel = styled.div`

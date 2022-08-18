@@ -15,4 +15,7 @@ export const GlobalStyle = createGlobalStyle`
     input{
         font-family: 'Do Hyeon', sans-serif;
     }
+    textarea{
+        font-family: 'Do Hyeon', sans-serif;
+    }
 `;
