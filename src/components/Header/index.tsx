@@ -26,13 +26,9 @@ const Header = () => {
         <SearchBar placeholder="" />
       </LeftSection>
       {isLogin ? (
-        <Button onClick={goToMyPage} className={'my-page-button'}>
-          {'마이페이지'}
-        </Button>
+        <MypPageButton onClick={goToMyPage}>{'마이페이지'}</MypPageButton>
       ) : (
-        <Button onClick={goToLogin} className={'login-button'}>
-          {'로그인'}
-        </Button>
+        <LoginButton onClick={goToLogin}>{'로그인'}</LoginButton>
       )}
     </HeaderContainer>
   );
@@ -44,20 +40,7 @@ const HeaderContainer = styled.div`
   padding: 10px 10%;
   display: flex;
   justify-content: space-between;
-  .login-button {
-    border: 1px solid ${PrimaryColor};
-    color: ${PrimaryColor};
-    background-color: white;
-    width: 100px;
-    height: 40px;
-  }
-  .my-page-button {
-    border-radius: 0;
-    color: ${PrimaryColor};
-    background-color: white;
-    width: 100px;
-    height: 40px;
-  }
+  align-items: center;
 `;
 
 const LeftSection = styled.div`
@@ -78,4 +61,19 @@ const LogoSection = styled.div`
   }
 `;
 
+const MypPageButton = styled(Button)`
+  border-radius: 0;
+  color: ${PrimaryColor};
+  background-color: white;
+  width: 100px;
+  height: 40px;
+`;
+
+const LoginButton = styled(Button)`
+  border: 1px solid ${PrimaryColor};
+  color: ${PrimaryColor};
+  background-color: white;
+  width: 100px;
+  height: 40px;
+`;
 export default Header;

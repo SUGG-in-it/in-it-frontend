@@ -15,18 +15,18 @@ const QuestionWritePage = () => {
     <QuestionWriteContainer>
       <QContainer>
         <QLable>Q.</QLable>
-        <ValidationInput input={question} type="text" className={'question-input'} />
+        <QuestionInput input={question} type="text" />
       </QContainer>
       <ToastEditorWrapper>
         <ToastEditor />
       </ToastEditorWrapper>
       <TagContainer>
         <Label>태그</Label>
-        <Input input={tag} type="text" placeholder="#리액트 #자바" className="tag-input" />
+        <TagInput input={tag} type="text" placeholder="#리액트 #자바" />
       </TagContainer>
       <PowerContainer>
         <Label>내공</Label>
-        <Input input={power} type="number" placeholder="100" className="tag-input" />
+        <TagInput input={power} type="number" placeholder="100" />
       </PowerContainer>
     </QuestionWriteContainer>
   );
@@ -39,19 +39,20 @@ const QuestionWriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: self-start;
-  .question-input {
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    width: 30vw;
-    height: fit-content;
-  }
-  .tag-input {
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    width: 30vw;
-    height: fit-content;
-    margin-left: 20px;
-  }
+`;
+const QuestionInput = styled(ValidationInput)`
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  width: 30vw;
+  height: fit-content;
+`;
+
+const TagInput = styled(Input)`
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  width: 30vw;
+  height: fit-content;
+  margin-left: 20px;
 `;
 
 const QContainer = styled.div`

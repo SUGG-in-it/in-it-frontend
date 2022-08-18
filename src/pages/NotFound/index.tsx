@@ -16,9 +16,7 @@ const NotFoundPage = () => {
         <h2>Page not found 😅</h2>
         <p>페이지를 찾을 수 없습니다.</p>
       </div>
-      <Button color={PointColor} onClick={goToMain} margin={'0em 0em 1.5em'}>
-        {'메인화면으로 돌아가기'}
-      </Button>
+      <Button onClick={goToMain}>{'메인화면으로 돌아가기'}</Button>
     </NotFound>
   );
 };

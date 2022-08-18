@@ -66,7 +66,7 @@ const SignUpSecondStep = () => {
         type="text"
         placeholder="직무를 입력해주세요. ex) 프론트엔드, 백엔드 등"
       />
-      <Button color={PointColor} onClick={handleSignUp} margin={'3em 0em 1em'}>
+      <Button color={PointColor} onClick={handleSignUp}>
         {'회원가입'}
       </Button>
     </InputSection>
@@ -74,9 +74,6 @@ const SignUpSecondStep = () => {
 };
 
 const InputSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   select {
     font-size: 0.8rem;
     padding: 0.5em;
