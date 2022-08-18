@@ -36,8 +36,10 @@ const TabPanel = () => {
 
 const TabContainer = styled.div`
   display: flex;
-  margin: 3em 10%;
+  margin: 3em auto;
   height: 50px;
+  width: 80vw;
+  max-width: 900px;
   align-items: center;
   background-color: white;
   border: 1px solid #e9ecef;
