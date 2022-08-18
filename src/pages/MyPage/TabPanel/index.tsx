@@ -1,36 +1,47 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import GrayLine from '@/components/GrayLine';
 import { useNavigate } from 'react-router-dom';
 
+const TAB_MENU = [{ name: '프로필' }, { name: '나의 질문' }, { name: '나의 답변' }, { name: '나의 댓글' }];
+
 const TabPanel = () => {
+  const [currentTab, setCurrentTab] = useState(0);
   const navigate = useNavigate();
 
-  const handleProfilelick = () => {
-    navigate('/my-page/profile');
-  };
-
-  const handleAnswerClick = () => {
-    navigate('/my-page/answer');
-  };
-
-  const handleQuestionClick = () => {
-    navigate('/my-page/question');
-  };
-
-  const handleCommentClick = () => {
-    navigate('/my-page/comment');
+  const selectMenuHandler = (index) => {
+    setCurrentTab(index);
+    switch (index) {
+      case 0:
+        navigate('/my-page/profile');
+        break;
+      case 1:
+        navigate('/my-page/question');
+        break;
+      case 2:
+        navigate('/my-page/answer');
+        break;
+      case 3:
+        navigate('/my-page/comment');
+        break;
+    }
   };
 
   return (
-    <>
-      <GrayLine />
-      <TabContainer>
-        <Tab onClick={handleProfilelick}>프로필</Tab>
-        <Tab onClick={handleQuestionClick}>나의 질문</Tab>
-        <Tab onClick={handleAnswerClick}>나의 답변</Tab>
-        <Tab onClick={handleCommentClick}>나의 댓글</Tab>
-      </TabContainer>
-    </>
+    <TabContainer>
+      <TabMenu>
+        {TAB_MENU.map((menu, index) => {
+          return (
+            <li
+              key={index}
+              className={currentTab === index ? 'clicked-menu' : 'menu'}
+              onClick={() => selectMenuHandler(index)}
+            >
+              {menu.name}
+            </li>
+          );
+        })}
+      </TabMenu>
+    </TabContainer>
   );
 };
 
@@ -46,13 +57,22 @@ const TabContainer = styled.div`
   border-radius: 8px;
 `;
 
-const Tab = styled.button`
-  margin: 0 1em;
+const TabMenu = styled.ul`
+  display: flex;
+  margin: 0 10%;
   border: none;
   background-color: white;
   color: #abb0b5;
   font-size: 1rem;
   cursor: pointer;
+  .menu {
+    color: #abb0b5;
+    width: 100px;
+  }
+  .clicked-menu {
+    color: black;
+    width: 100px;
+  }
 `;
 
 export default TabPanel;
