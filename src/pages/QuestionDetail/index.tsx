@@ -1,10 +1,14 @@
+import AnswerListSection from '@/pages/QuestionDetail/AnswerListSection';
+import AnswerWriteSection from '@/pages/QuestionDetail/AnswerWriteSection';
 import QuestionSection from '@/pages/QuestionDetail/QuestionSection';
 import styled from 'styled-components';
 
 const QuestionDetailPage = () => {
   return (
     <QuestionWrapper>
-      <QuestionSection></QuestionSection>
+      <QuestionSection />
+      <AnswerListSection />
+      <AnswerWriteSection />
     </QuestionWrapper>
   );
 };
