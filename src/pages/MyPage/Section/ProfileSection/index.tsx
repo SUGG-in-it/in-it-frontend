@@ -1,4 +1,5 @@
 import GrayLine from '@/components/GrayLine';
+import ProfileRow from '@/pages/MyPage/Section/ProfileSection/ProfileRow';
 import styled from 'styled-components';
 
 const dummy = {
@@ -19,86 +20,23 @@ const ProfileSection = () => {
 
   return (
     <ProfileCotainer>
-      <ProfileRow>
-        <Label>{'파워'}</Label>
-        <Info>{power}</Info>
-      </ProfileRow>
-      <ProfileRow>
-        <Label>{'등급'}</Label>
-        <Info>{rank}</Info>
-      </ProfileRow>
-      <ProfileRow>
-        <Label>{'이메일'}</Label>
-        <Info>{email}</Info>
-      </ProfileRow>
-      <ProfileRow>
-        <Label>{'닉네임'}</Label>
-        <Info>{nickname}</Info>
-      </ProfileRow>
-      <ProfileRow>
-        <Label>{'깃허브 계정'}</Label>
-        <Info>{githubAccount}</Info>
-      </ProfileRow>
-      <ProfileRow>
-        <Label>{'자기소개'}</Label>
-        <Introduction cols="30" rows="5" readonly>
-          {introduction}
-        </Introduction>
-      </ProfileRow>
+      <ProfileRow label={'등급'} info={rank} />
+      <ProfileRow label={'파워'} info={power} />
+      <ProfileRow label={'이메일'} info={email} />
+      <ProfileRow label={'닉네임'} info={nickname} />
+      <ProfileRow label={'깃허브 계정'} info={githubAccount} />
+      <ProfileRow label={'자기소개'} info={introduction} />
       <GrayLine />
-      <ProfileRow>
-        <Label>{'경력'}</Label>
-        <Info>{year}</Info>
-      </ProfileRow>
-      <ProfileRow>
-        <Label>{'직무'}</Label>
-        <Info>{workPosition}</Info>
-      </ProfileRow>
-      <ProfileRow>
-        <Label>{'이력'}</Label>
-        <Info>{career}</Info>
-      </ProfileRow>
-      <ProfileRow>
-        <Label>{'소속'}</Label>
-        <Info>{company}</Info>
-      </ProfileRow>
+      <ProfileRow label={'경력'} info={year} />
+      <ProfileRow label={'직무'} info={workPosition} />
+      <ProfileRow label={'이력'} info={career} />
+      <ProfileRow label={'소속'} info={company} />
     </ProfileCotainer>
   );
 };
 
 const ProfileCotainer = styled.div`
   padding: 5% 10%;
-`;
-
-const ProfileRow = styled.div`
-  display: flex;
-  margin-top: 2em;
-  margin-bottom: 2em;
-`;
-
-const PowerRankRow = styled(ProfileRow)`
-  width: 60%;
-`;
-
-const Label = styled.p`
-  font-size: 1rem;
-  width: 30%;
-  color: #595959;
-`;
-
-const Info = styled.p`
-  font-size: 1rem;
-  width: 70%;
-`;
-
-const Introduction = styled.textarea`
-  border: 1px solid #595959;
-  resize: none;
-  border-radius: 3px;
-  font-size: 1rem;
-  :focus {
-    outline: none;
-  }
 `;
 
 export default ProfileSection;
