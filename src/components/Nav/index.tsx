@@ -2,30 +2,47 @@ import styled from 'styled-components';
 import GrayLine from '@/components/GrayLine';
 import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+const TAB_MENU = [{ name: '홈' }, { name: '답변하기' }];
 
 const Nav = () => {
   const navigate = useNavigate();
-
-  const handleHomeClick = () => {
-    navigate('/');
-  };
-
-  const handleAnswerClick = () => {
-    navigate('/question/list');
-  };
+  const [currentTab, setCurrentTab] = useState(0);
 
   const handleQuestionClick = () => {
     navigate('/question/write');
+  };
+
+  const handleMenuClick = (index) => {
+    setCurrentTab(index);
+    switch (index) {
+      case 0:
+        navigate('/');
+        break;
+      case 1:
+        navigate('/question/list');
+        break;
+    }
   };
 
   return (
     <>
       <GrayLine />
       <NavContainer>
-        <div>
-          <Tab onClick={handleHomeClick}>홈</Tab>
-          <Tab onClick={handleAnswerClick}>답변하기</Tab>
-        </div>
+        <TabMenu>
+          {TAB_MENU.map((menu, index) => {
+            return (
+              <li
+                key={index}
+                className={currentTab === index ? 'clicked-menu' : 'menu'}
+                onClick={() => handleMenuClick(index)}
+              >
+                {menu.name}
+              </li>
+            );
+          })}
+        </TabMenu>
         <AnswerButton onClick={handleQuestionClick}>{'질문하기'}</AnswerButton>
       </NavContainer>
       <GrayLine />
@@ -44,12 +61,23 @@ const NavContainer = styled.div`
   background-color: white;
 `;
 
-const Tab = styled.button`
-  margin: 0 1em;
+const TabMenu = styled.ul`
+  display: flex;
+  margin: 0 10%;
   border: none;
   background-color: white;
+  color: #abb0b5;
   font-size: 1rem;
   cursor: pointer;
+  font-weight: bold;
+  .menu {
+    color: #abb0b5;
+    width: 100px;
+  }
+  .clicked-menu {
+    color: black;
+    width: 100px;
+  }
 `;
 
 const AnswerButton = styled(Button)`
