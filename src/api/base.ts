@@ -1,5 +1,5 @@
+import { CustomError } from '@/api/Error';
 import axios, { AxiosRequestConfig } from 'axios';
-import { handleAPIError } from './Error';
 interface RequestType {
   url: string;
   method: 'get' | 'post' | 'put' | 'delete' | 'patch';
@@ -7,7 +7,7 @@ interface RequestType {
   params?: object;
 }
 interface ResponseType {
-  data: any;
+  data?: any;
   message?: string;
   statusCode: number;
 }
@@ -27,7 +27,7 @@ const request = async ({ url, method, body, params }: RequestType): Promise<Resp
       {};
     return data;
   } catch (error: any) {
-    return handleAPIError();
+    return new CustomError(error.response.status, error.response.message);
   }
 };
 

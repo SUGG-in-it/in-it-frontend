@@ -8,6 +8,12 @@ export const enum HttpStatusCode {
   INTERNAL_SERVER_ERROR = 500,
 }
 
-export const handleAPIError = () => {
-  throw Error();
-};
+export class CustomError extends Error {
+  statusCode: HttpStatusCode;
+  message: string;
+
+  constructor(statusCode: HttpStatusCode, message?: string) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
