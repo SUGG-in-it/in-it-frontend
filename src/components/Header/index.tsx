@@ -9,6 +9,7 @@ import styled from 'styled-components';
 const Header = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useRecoilState(loginState);
+
   const goToLogin = () => {
     navigate('/login');
   };
@@ -16,10 +17,14 @@ const Header = () => {
     navigate('/my-page/profile');
   };
 
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
   return (
     <HeaderContainer>
       <LeftSection>
-        <LogoSection>
+        <LogoSection onClick={handleLogoClick}>
           <h1>In it</h1>
           <p>코드리뷰 사이트: in it()</p>
         </LogoSection>
@@ -49,6 +54,7 @@ const LeftSection = styled.div`
 
 const LogoSection = styled.div`
   margin-right: 20px;
+  cursor: pointer;
   h1 {
     font-size: 1.3rem;
     font-weight: 800;
