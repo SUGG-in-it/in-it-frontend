@@ -16,6 +16,7 @@ const ButtonWrapper = styled.button<ButtonProps>`
   margin: 0.5em 0em;
   height: 50px;
   border-radius: 0.3em;
+  font-weight: bold;
   &:hover {
     cursor: pointer;
   }
