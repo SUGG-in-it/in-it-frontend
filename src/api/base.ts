@@ -27,7 +27,8 @@ const request = async ({ url, method, body, params }: RequestType): Promise<Resp
       {};
     return data;
   } catch (error: any) {
-    return new CustomError(error.response.status, error.response.message);
+    console.log('API ERROR', error, error.response.status);
+    throw new CustomError(error.response.status, error.response.message);
   }
 };
 
