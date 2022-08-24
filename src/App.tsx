@@ -1,15 +1,15 @@
 import { lazy, Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './styles/globalStyle';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Loading from './components/Loading';
-import Error from './components/Error';
 import MainLayout from '@/layouts/MainLayout';
 import Auth from '@/routes/AuthRoute';
 import UnAuth from '@/routes/UnAtuhRoute';
 import AccountLayout from '@/layouts/AccountLayout';
+import CriticalErrorBoundary from '@/ErrorrBoundary/CriticalErrorBoundary';
+import RootErrorBoundary from '@/ErrorrBoundary/RootErrorBoundary';
 
 const SignUpPage = lazy(() => import('@/pages/SignUp'));
 const LoginPage = lazy(() => import('@/pages/Login'));
@@ -28,9 +28,11 @@ const App = () => {
     <RecoilRoot>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
-        <ErrorBoundary FallbackComponent={Error}>
-          <Suspense fallback={<Loading />}>{routes()}</Suspense>
-        </ErrorBoundary>
+        <RootErrorBoundary>
+          <CriticalErrorBoundary>
+            <Suspense fallback={<Loading />}>{routes()}</Suspense>
+          </CriticalErrorBoundary>
+        </RootErrorBoundary>
       </QueryClientProvider>
     </RecoilRoot>
   );

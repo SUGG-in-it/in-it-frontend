@@ -1,15 +1,27 @@
-import { login } from '@/api/users';
 import Button from '@/components/Button';
 import ValidationInput from '@/components/Input/ValidationInput';
+import { useLoginMutation } from '@/hooks/queries/useUser';
 import useValidationInput from '@/hooks/useValidationInput';
+import { loginState } from '@/store/users';
 
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const email = useValidationInput('', 'email');
   const password = useValidationInput('', 'password');
+  const setIsLogin = useSetRecoilState(loginState);
+  const mutationLogin = useLoginMutation({
+    onSuccess: () => {
+      navigate('/');
+      setIsLogin(true);
+    },
+    onError: () => {
+      console.log('error');
+    },
+  });
 
   const moveToSignUp = () => {
     navigate('/sign-up');
@@ -19,12 +31,9 @@ const LoginPage = () => {
     navigate('/forgot-password');
   };
 
-  const handleLogin = async (email, password) => {
+  const handleLogin = (email, password) => {
     if (email.isError || password.isError) return;
-    await login({
-      email,
-      password,
-    });
+    mutationLogin.mutate({ email: email.value, password: password.value });
   };
 
   return (
@@ -34,7 +43,7 @@ const LoginPage = () => {
       <Button onClick={() => handleLogin(email, password)}>{'로그인'}</Button>
       <SignUpContainer>
         <u onClick={moveToForgotPassword}>비밀번호 찾기</u>
-        <u onClick={moveToSignUp}>회원가입</u>
+        <u onClick={moveToSignUp}>회원가입</u>{' '}
       </SignUpContainer>
     </LoginContainer>
   );
