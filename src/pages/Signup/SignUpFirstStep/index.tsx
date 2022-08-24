@@ -5,7 +5,7 @@ import useValidationInput from '@/hooks/useValidationInput';
 import { signUpState } from '@/store/users';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const SignUpFirstStep = () => {
@@ -13,7 +13,7 @@ const SignUpFirstStep = () => {
   const email = useValidationInput('', 'email');
   const code = useValidationInput('', 'code');
   const [isSentCode, setIsSentCode] = useState(false);
-  const [signUp, setSignUp] = useRecoilState(signUpState);
+  const setSignUp = useSetRecoilState(signUpState);
 
   const moveToLogin = () => {
     navigate('/login');
@@ -52,6 +52,9 @@ const SignUpFirstStep = () => {
 
 const InputCode = styled.div`
   visibility: ${({ isSentCode }) => (isSentCode ? 'visible' : 'hidden')};
+  button {
+    width: 100%;
+  }
 `;
 
 const LoginContainer = styled.div`

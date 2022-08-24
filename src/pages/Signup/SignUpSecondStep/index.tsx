@@ -103,6 +103,9 @@ const InputSection = styled.div`
   option {
     font-size: 1rem;
   }
+  button {
+    width: 100%;
+  }
 `;
 
 const Label = styled.p`
