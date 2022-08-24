@@ -17,6 +17,9 @@ const request = async ({ url, method, body, params }: RequestType): Promise<Resp
     const config: AxiosRequestConfig = {
       baseURL: process.env.REACT_APP_API_PREFIX,
       params,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     };
     const { data } =
       (method === 'get' && (await axios.get(url, config))) ||
