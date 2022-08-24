@@ -1,17 +1,19 @@
-import { join } from '@/api/users';
 import { PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import ValidationInput from '@/components/Input/ValidationInput';
+import { useJoinMutation } from '@/hooks/queries/useUser';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
 import { signUpState } from '@/store/users';
 import { validateRePassword } from '@/utils/validations';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const SignUpSecondStep = () => {
+  const navigate = useNavigate();
   const nickname = useValidationInput('', 'nickname');
   const password = useValidationInput('', 'password');
   const rePassword = useInput('');
@@ -19,6 +21,18 @@ const SignUpSecondStep = () => {
   const [year, setYear] = useState('');
   const workPosition = useValidationInput('', 'workPosition');
   const [signUp, setSignUp] = useRecoilState(signUpState);
+  const mutationJoin = useJoinMutation({
+    onSuccess: () => {
+      navigate('/login');
+      setSignUp({
+        step: 1,
+        email: '',
+      });
+    },
+    onError: () => {
+      console.log('error');
+    },
+  });
 
   const handleYearSelect = (e) => {
     setYear(e.target.value);
@@ -31,16 +45,16 @@ const SignUpSecondStep = () => {
     return true;
   };
 
-  const handleSignUp = async () => {
-    console.log(validationCheck());
-    if (validationCheck())
-      await join({
+  const handleSignUp = () => {
+    if (validationCheck()) {
+      mutationJoin.mutate({
         email: signUp.email,
         password: password.value,
         nickname: nickname.value,
         year,
         workPosition: workPosition.value,
       });
+    }
   };
 
   return (
