@@ -1,7 +1,7 @@
-import { PointColor, PrimaryColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import PageNotFoundImg from '@/assets/images/404error.png';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();
@@ -10,18 +10,16 @@ const NotFoundPage = () => {
   };
 
   return (
-    <NotFound>
+    <NotFoundContainer>
       <div>
-        <h1>404 Error</h1>
-        <h2>Page not found 😅</h2>
-        <p>페이지를 찾을 수 없습니다.</p>
+        <img src={PageNotFoundImg} />
       </div>
       <Button onClick={goToMain}>{'메인화면으로 돌아가기'}</Button>
-    </NotFound>
+    </NotFoundContainer>
   );
 };
 
-const NotFound = styled.div`
+const NotFoundContainer = styled.div`
   width: 100vw;
   height: 70vh;
   display: flex;
@@ -29,18 +27,8 @@ const NotFound = styled.div`
   align-items: center;
   text-align: center;
   justify-content: center;
-  h1 {
-    font-size: 5rem;
-    color: ${PrimaryColor};
-  }
-  h2 {
-    font-size: 3.5rem;
-    color: ${PrimaryColor};
-  }
-  p {
-    font-size: 1.5rem;
-    margin-top: 3em;
-    margin-bottom: 2em;
+  img {
+    width: 80vw;
   }
 `;
 
