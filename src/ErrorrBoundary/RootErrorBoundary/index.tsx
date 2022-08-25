@@ -27,7 +27,6 @@ const RootErrorBoundary = ({ children }: PropsWithChildren<unknown>) => {
         reset();
       }}
       onError={(error: CustomError) => {
-        console.log('RootErrorBoundary Error', error);
         if (error?.statusCode) {
           throw error;
         }
