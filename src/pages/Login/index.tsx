@@ -18,9 +18,6 @@ const LoginPage = () => {
       navigate('/');
       setIsLogin(true);
     },
-    onError: () => {
-      console.log('error');
-    },
   });
 
   const moveToSignUp = () => {
