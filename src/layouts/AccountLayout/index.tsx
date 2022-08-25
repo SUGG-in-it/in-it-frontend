@@ -1,4 +1,5 @@
 import { PrimaryColor } from '@/assets/colors';
+import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -10,6 +11,7 @@ const AccountLayout = () => {
   return (
     <Wrapper>
       <Panel>
+        <Toaster position="top-right" />
         <LogoSection>
           <h1>In it</h1>
           <p>코드리뷰 사이트: in it()</p>

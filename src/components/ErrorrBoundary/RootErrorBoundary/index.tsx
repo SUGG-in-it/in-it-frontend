@@ -4,19 +4,20 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { CustomError } from '@/api/Error';
 
 /* -------------------------------------------------------------------------------------------------
- * CriticalErrorBoundary ->  500 에러 등 중요한 에러를 처리하기 위한 ErrorBoundar
+ * RootErrorBoundary ->  Runtime Error 등 일반적인 에러를 처리하기 위한 ErrorBoundar
  * -----------------------------------------------------------------------------------------------*/
 
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
-    <div>
-      <h1> 데이터를 불러오는데 실패하였습니다. </h1>
-      <p> 에러가 지속되면 고객센터로 문의하세요. </p>
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
     </div>
   );
 }
 
-const CriticalErrorBoundary = ({ children }: PropsWithChildren<unknown>) => {
+const RootErrorBoundary = ({ children }: PropsWithChildren<unknown>) => {
   const { reset } = useQueryErrorResetBoundary();
 
   return (
@@ -26,8 +27,7 @@ const CriticalErrorBoundary = ({ children }: PropsWithChildren<unknown>) => {
         reset();
       }}
       onError={(error: CustomError) => {
-        console.log('CriticalErrorBoundary Error', error);
-        if (error?.statusCode !== 500) {
+        if (error?.statusCode) {
           throw error;
         }
       }}
@@ -37,4 +37,4 @@ const CriticalErrorBoundary = ({ children }: PropsWithChildren<unknown>) => {
   );
 };
 
-export default CriticalErrorBoundary;
+export default RootErrorBoundary;
