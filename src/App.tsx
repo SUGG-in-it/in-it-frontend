@@ -8,8 +8,7 @@ import MainLayout from '@/layouts/MainLayout';
 import Auth from '@/routes/AuthRoute';
 import UnAuth from '@/routes/UnAtuhRoute';
 import AccountLayout from '@/layouts/AccountLayout';
-import CriticalErrorBoundary from '@/ErrorrBoundary/CriticalErrorBoundary';
-import RootErrorBoundary from '@/ErrorrBoundary/RootErrorBoundary';
+import { CriticalErrorBoundary, RootErrorBoundary } from '@/components/ErrorrBoundary';
 
 const SignUpPage = lazy(() => import('@/pages/SignUp'));
 const LoginPage = lazy(() => import('@/pages/Login'));
