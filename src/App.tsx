@@ -1,14 +1,17 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './styles/globalStyle';
-import { RecoilRoot } from 'recoil';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { useRecoilValue } from 'recoil';
 import Loading from './components/Loading';
 import MainLayout from '@/layouts/MainLayout';
 import Auth from '@/routes/AuthRoute';
 import UnAuth from '@/routes/UnAtuhRoute';
 import AccountLayout from '@/layouts/AccountLayout';
 import { CriticalErrorBoundary, RootErrorBoundary } from '@/components/ErrorrBoundary';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from '@/styles/theme';
+import { darkModeState } from '@/store/theme';
+import DarkModeButton from '@/components/Button/DarkModeButton';
 
 const SignUpPage = lazy(() => import('@/pages/SignUp'));
 const LoginPage = lazy(() => import('@/pages/Login'));
@@ -20,20 +23,17 @@ const QuestionWritePage = lazy(() => import('@/pages/QuestionWrite'));
 const QuestionDetailPage = lazy(() => import('@/pages/QuestionDetail'));
 const QuestionListPage = lazy(() => import('@/pages/QuestionList'));
 
-const queryClient = new QueryClient();
-
 const App = () => {
+  const isDarkMode = useRecoilValue(darkModeState);
   return (
-    <RecoilRoot>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
-      <QueryClientProvider client={queryClient}>
-        <RootErrorBoundary>
-          <CriticalErrorBoundary>
-            <Suspense fallback={<Loading />}>{routes()}</Suspense>
-          </CriticalErrorBoundary>
-        </RootErrorBoundary>
-      </QueryClientProvider>
-    </RecoilRoot>
+      <RootErrorBoundary>
+        <CriticalErrorBoundary>
+          <Suspense fallback={<Loading />}>{routes()}</Suspense>
+        </CriticalErrorBoundary>
+      </RootErrorBoundary>
+    </ThemeProvider>
   );
 };
 
@@ -61,6 +61,7 @@ const acccountRoutes = () => {
 const routes = () => {
   return (
     <BrowserRouter>
+      <DarkModeButton />
       <Routes>
         <Route element={<MainLayout />}>{mainRoutes()}</Route>
         <Route element={<AccountLayout />}>{acccountRoutes()}</Route>

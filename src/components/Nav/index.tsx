@@ -58,14 +58,14 @@ const NavContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
 `;
 
 const TabMenu = styled.ul`
   display: flex;
   margin: 0 10%;
   border: none;
-  background-color: white;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
   color: #abb0b5;
   font-size: 1rem;
   cursor: pointer;
@@ -75,7 +75,7 @@ const TabMenu = styled.ul`
     width: 100px;
   }
   .clicked-menu {
-    color: black;
+    color: ${({ theme }) => theme.textColor};
     width: 100px;
   }
 `;

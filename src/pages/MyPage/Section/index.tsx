@@ -30,9 +30,9 @@ const SectionWrapper = styled.div`
 `;
 
 const SectionPanel = styled.div`
-  background-color: white;
+  background-color: ${({ theme }) => theme.backgrondDarkColor};
   min-height: 50vh;
-  border: 1px solid #e9ecef;
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
   border-radius: 8px;
 `;
 

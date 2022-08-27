@@ -1,4 +1,3 @@
-import { PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import ValidationInput from '@/components/Input/ValidationInput';
@@ -80,9 +79,7 @@ const SignUpSecondStep = () => {
         type="text"
         placeholder="직무를 입력해주세요. ex) 프론트엔드, 백엔드 등"
       />
-      <Button color={PointColor} onClick={handleSignUp}>
-        {'회원가입'}
-      </Button>
+      <Button onClick={handleSignUp}>{'회원가입'}</Button>
     </InputSection>
   );
 };

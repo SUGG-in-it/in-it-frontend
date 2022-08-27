@@ -52,8 +52,8 @@ const TabContainer = styled.div`
   width: 80vw;
   max-width: 900px;
   align-items: center;
-  background-color: white;
-  border: 1px solid #e9ecef;
+  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
   border-radius: 8px;
 `;
 
@@ -61,17 +61,17 @@ const TabMenu = styled.ul`
   display: flex;
   margin: 0 10%;
   border: none;
-  background-color: white;
-  color: #abb0b5;
+  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  color: ${({ theme }) => theme.grayColor};
   font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
   .menu {
-    color: #abb0b5;
+    color: ${({ theme }) => theme.grayColor};
     width: 100px;
   }
   .clicked-menu {
-    color: black;
+    color: ${({ theme }) => theme.textColor};
     width: 100px;
   }
 `;

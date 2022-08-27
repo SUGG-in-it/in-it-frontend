@@ -8,5 +8,5 @@ export default GrayLine;
 
 const GrayLineDiv = styled.div`
   width: 100%;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
 `;

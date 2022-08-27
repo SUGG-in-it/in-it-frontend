@@ -1,14 +1,13 @@
-import { PrimaryColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import SearchBar from '@/components/SearchBar';
 import { loginState } from '@/store/users';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 const Header = () => {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useRecoilState(loginState);
+  const isLogin = useRecoilValue(loginState);
 
   const goToLogin = () => {
     navigate('/login');
@@ -41,7 +40,7 @@ const Header = () => {
 
 const HeaderContainer = styled.div`
   height: 40px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
   padding: 10px 10%;
   display: flex;
   justify-content: space-between;
@@ -58,27 +57,27 @@ const LogoSection = styled.div`
   h1 {
     font-size: 1.3rem;
     font-weight: 800;
-    color: ${PrimaryColor};
+    color: ${({ theme }) => theme.pointColor};
   }
   p {
     font-size: 0.6rem;
     font-weight: 800;
-    color: ${PrimaryColor};
+    color: ${({ theme }) => theme.pointColor};
   }
 `;
 
 const MypPageButton = styled(Button)`
   border-radius: 0;
-  color: ${PrimaryColor};
-  background-color: white;
+  color: ${({ theme }) => theme.pointColor};
+  background-color: ${({ theme }) => theme.backgrondLightColor};
   width: 100px;
   height: 40px;
 `;
 
 const LoginButton = styled(Button)`
-  border: 1px solid ${PrimaryColor};
-  color: ${PrimaryColor};
-  background-color: white;
+  border: 1px solid ${({ theme }) => theme.primaryColor};
+  color: ${({ theme }) => theme.primaryColor};
+  background-color: ${({ theme }) => theme.backgrondLightColor};
   width: 100px;
   height: 40px;
 `;

@@ -37,7 +37,7 @@ const LoginPage = () => {
     <LoginContainer>
       <ValidationInput input={email} label="이메일" type="email" placeholder="이메일을 입력해주세요."></ValidationInput>
       <ValidationInput input={password} label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요." />
-      <Button onClick={() => handleLogin(email, password)}>{'로그인'}</Button>
+      <LoginButton onClick={() => handleLogin(email, password)}>{'로그인'}</LoginButton>
       <SignUpContainer>
         <u onClick={moveToForgotPassword}>비밀번호 찾기</u>
         <u onClick={moveToSignUp}>회원가입</u>{' '}
@@ -63,6 +63,10 @@ const SignUpContainer = styled.div`
       cursor: pointer;
     }
   }
+`;
+
+const LoginButton = styled(Button)`
+  background-color: ${({ theme }) => theme.primaryColor};
 `;
 
 export default LoginPage;

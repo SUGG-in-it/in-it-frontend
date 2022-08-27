@@ -1,4 +1,3 @@
-import { PrimaryColor } from '@/assets/colors';
 import Input from '@/components/Input';
 import ValidationInput from '@/components/Input/ValidationInput';
 import ToastEditor from '@/components/ToastEdtior';
@@ -82,7 +81,7 @@ const ToastEditorWrapper = styled.div`
 
 const Label = styled.p`
   font-size: 1.3rem;
-  color: ${PrimaryColor};
+  color: ${({ theme }) => theme.pointColor};
 `;
 
 export default QuestionWritePage;

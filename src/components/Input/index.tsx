@@ -25,6 +25,8 @@ const InputWrapper = styled.input`
   border-radius: 0.3em;
   width: calc(100% - 1em);
   height: 30px;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+  color: ${({ theme }) => theme.textColor};
   ::placeholder {
     color: darkgray;
     font-size: 0.8rem;
