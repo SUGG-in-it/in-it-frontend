@@ -4,13 +4,11 @@
 
 ###  ✨
 
-- Github Action을 통한 CI/CD
-- 깃허브 로그인 구현
 - 미디어쿼리를 이용한 반응형 구현
 - react custom hook 사용
-- input에 대한 debounce/throttle 훅 적용
 - recoil, react query를 통한 상태관리
 - 라이트/다크 모드 구현
+- ... etc
 
 ## 🛠 tech stack
 ```React``` ```TypeScript``` ```Recoil``` ```React-query```   
