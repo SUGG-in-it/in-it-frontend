@@ -1,4 +1,3 @@
-import { GrayBackgroundColor } from '@/assets/colors';
 import BannerSection from '@/pages/Main/Section/BannerSection';
 import styled from 'styled-components';
 
@@ -11,7 +10,7 @@ const MainPage = () => {
 };
 
 const MainContainer = styled.div`
-  background-color: ${GrayBackgroundColor};
+  background-color: ${({ theme }) => theme.backgrondLightColor}; ;
 `;
 
 export default MainPage;

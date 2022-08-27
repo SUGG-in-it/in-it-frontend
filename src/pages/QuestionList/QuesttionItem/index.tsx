@@ -1,4 +1,3 @@
-import { PointColor } from '@/assets/colors';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -58,17 +57,18 @@ const ProcessLabel = styled.div`
   padding: 0.5em;
   font-size: 0.8rem;
   margin-right: 1em;
-  background-color: ${({ isCompleted }) => (isCompleted ? '#adb5bd' : PointColor)};
+  background-color: ${({ isCompleted }) => (isCompleted ? '#adb5bd' : '#4d7cfe')};
 `;
 
 const Title = styled.p`
   font-size: 1.2rem;
   font-weight: bold;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 const Content = styled.p`
   font-size: 1rem;
-  color: #616568;
+  color: ${({ theme }) => theme.grayColor};
   line-height: 1.3;
 `;
 

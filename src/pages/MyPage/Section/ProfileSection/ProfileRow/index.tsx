@@ -18,12 +18,13 @@ const Container = styled.div`
 const Label = styled.p`
   font-size: 1rem;
   width: 30%;
-  color: #595959;
+  color: ${({ theme }) => theme.grayColor};
 `;
 
 const Info = styled.p`
   font-size: 1rem;
   width: 70%;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 export default ProfileRow;

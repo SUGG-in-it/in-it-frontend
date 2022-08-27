@@ -1,18 +1,17 @@
 import { sendCode, verifyCode } from '@/api/auth';
-import { PointColor } from '@/assets/colors';
 import Button from '@/components/Button';
 import ValidationInput from '@/components/Input/ValidationInput';
 import useValidationInput from '@/hooks/useValidationInput';
 import { forgotPasswordState } from '@/store/users';
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const ForgotPasswordFirstStep = () => {
   const email = useValidationInput('', 'email');
   const code = useValidationInput('', 'code');
   const [isSentCode, setIsSentCode] = useState(false);
-  const [forgotPassword, setforgotPassword] = useRecoilState(forgotPasswordState);
+  const setforgotPassword = useSetRecoilState(forgotPasswordState);
 
   const handleSendCode = async (email) => {
     if (email.isError) return;

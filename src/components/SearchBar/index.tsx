@@ -1,4 +1,3 @@
-import { PrimaryColor } from '@/assets/colors';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import styled from 'styled-components';
 
@@ -12,14 +11,14 @@ const SearchBar = ({ placeholder }: { placeholder: string }) => {
 };
 
 const SearchBarContainer = styled.div`
-  border: 1px solid #004b91;
+  border: 1px solid ${({ theme }) => theme.pointColor};
   border-radius: 3px;
   width: 270px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   svg {
-    color: ${PrimaryColor};
+    color: ${({ theme }) => theme.pointColor};
     margin-right: 5px;
   }
 `;

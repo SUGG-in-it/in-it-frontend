@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         height: 100%;
         font-family: 'Do Hyeon', sans-serif;
+        background-color: ${({ theme }) => theme.backgrondDarkColor};
     }
     button{
         font-family: 'Do Hyeon', sans-serif;

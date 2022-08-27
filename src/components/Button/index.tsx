@@ -1,4 +1,3 @@
-import { PointColor } from '@/assets/colors';
 import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
 export interface ButtonProps extends React.HTMLAttributes<Element> {
@@ -10,7 +9,7 @@ export interface ButtonProps extends React.HTMLAttributes<Element> {
 const ButtonWrapper = styled.button<ButtonProps>`
   border: none;
   color: white;
-  background-color: ${PointColor};
+  background-color: ${({ theme }) => theme.pointColor};
   font-size: 1rem;
   padding: 0.5em;
   margin: 0.5em 0em;

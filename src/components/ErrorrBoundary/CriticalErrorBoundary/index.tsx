@@ -4,7 +4,6 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { CustomError } from '@/api/Error';
 import styled from 'styled-components';
 import ServerErrorImg from '@/assets/images/500error.png';
-import { PointColor } from '@/assets/colors';
 
 /* -------------------------------------------------------------------------------------------------
  * CriticalErrorBoundary ->  500 에러 등 중요한 에러를 처리하기 위한 ErrorBoundar
@@ -52,7 +51,7 @@ const ErrorContainer = styled.div`
   }
   p {
     font-weight: bold;
-    color: ${PointColor};
+    color: ${({ theme }) => theme.pointColor};
   }
 `;
 

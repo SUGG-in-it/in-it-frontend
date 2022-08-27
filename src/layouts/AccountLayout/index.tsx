@@ -1,4 +1,3 @@
-import { PrimaryColor } from '@/assets/colors';
 import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
@@ -31,7 +30,11 @@ const Wrapper = styled.div`
   overflow: hidden;
   display: flex;
   align-items: center;
-  background: linear-gradient(-70deg, ${PrimaryColor} 55%, #fff 45%);
+  background: linear-gradient(
+    -70deg,
+    ${({ theme }) => theme.primary2Color} 55%,
+    ${({ theme }) => theme.backgrondDarkColor} 45%
+  );
 `;
 
 const Panel = styled.div`
@@ -51,11 +54,11 @@ const LogoSection = styled.div`
     font-size: 4rem;
     font-weight: 800;
     margin: 2em 0em 0em 0em;
-    color: ${PrimaryColor};
+    color: ${({ theme }) => theme.pointColor};
   }
   p {
     font-size: 0.9rem;
     font-weight: 800;
-    color: ${PrimaryColor};
+    color: ${({ theme }) => theme.pointColor};
   }
 `;

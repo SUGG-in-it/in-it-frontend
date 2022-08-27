@@ -34,7 +34,7 @@ const QuestionSection = () => {
 
 const QuestionSectionContainer = styled.div`
   padding: 2em 1.2em;
-  background-color: white;
+  background-color: ${({ theme }) => theme.backgrondDarkColor};
 `;
 
 const SectionRow = styled.div`
@@ -47,12 +47,14 @@ const SectionRow = styled.div`
 const Title = styled.div`
   font-weight: bold;
   font-size: 1.3rem;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 const NickName = styled.p`
   font-size: 0.8rem;
   margin-right: 1em;
   margin-left: 0.5em;
+  color: ${({ theme }) => theme.textColor};
 `;
 
 const Date = styled.p`
@@ -62,6 +64,7 @@ const Date = styled.p`
 
 const Content = styled.p`
   line-height: 1.3;
+  color: ${({ theme }) => theme.grayColor};
 `;
 
 export default QuestionSection;

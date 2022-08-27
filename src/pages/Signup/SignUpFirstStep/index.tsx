@@ -37,7 +37,7 @@ const SignUpFirstStep = () => {
   return (
     <>
       <ValidationInput input={email} label="이메일" type="email" placeholder="이메일을 입력해주세요." />
-      <Button onClick={() => handleSendCode(email)}>{'인증번호 전송'}</Button>
+      <SendButton onClick={() => handleSendCode(email)}>{'인증번호 전송'}</SendButton>
       <InputCode isSentCode={isSentCode}>
         <ValidationInput input={code} label="인증번호" type="text" placeholder="인증번호" />
         <Button onClick={() => handleVerifyCode(code)}>{'확인'}</Button>
@@ -74,4 +74,7 @@ const LoginContainer = styled.div`
   }
 `;
 
+const SendButton = styled(Button)`
+  background-color: ${({ theme }) => theme.primaryColor};
+`;
 export default SignUpFirstStep;

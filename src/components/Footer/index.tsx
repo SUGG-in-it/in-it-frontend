@@ -1,4 +1,3 @@
-import { PrimaryColor } from '@/assets/colors';
 import styled from 'styled-components';
 
 const Footer = () => {
@@ -17,9 +16,9 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
   p {
-    color: ${PrimaryColor};
+    color: ${({ theme }) => theme.pointColor};
   }
 `;
 

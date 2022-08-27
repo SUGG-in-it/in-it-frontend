@@ -1,4 +1,3 @@
-import { GrayBackgroundColor } from '@/assets/colors';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import TabPanel from '@/pages/MyPage/TabPanel';
@@ -17,7 +16,7 @@ const MyPage = () => {
 };
 
 const MyPageContainer = styled.div`
-  background-color: ${GrayBackgroundColor};
+  background-color: ${({ theme }) => theme.backgrondLightColor};
 `;
 
 export default MyPage;
