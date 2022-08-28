@@ -1,10 +1,12 @@
-import BannerSection from '@/pages/Main/Section/BannerSection';
+import BannerSection from '@/pages/Main/BannerSection';
+import QuestionSection from '@/pages/Main/QuestionSection';
 import styled from 'styled-components';
 
 const MainPage = () => {
   return (
     <MainContainer>
       <BannerSection />
+      <QuestionSection />
     </MainContainer>
   );
 };
