@@ -1,4 +1,4 @@
-import QuestionSection from '@/pages/Main/Section/QuestionSection';
+import QuestionSection from '@/pages/Main/QuestionSection';
 import AnswerSection from '@/pages/MyPage/Section/AnswerSection';
 import CommentSection from '@/pages/MyPage/Section/CommentSection';
 import ProfileSection from '@/pages/MyPage/Section/ProfileSection';

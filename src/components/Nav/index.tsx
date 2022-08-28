@@ -28,7 +28,6 @@ const Nav = () => {
 
   return (
     <>
-      <GrayLine />
       <NavContainer>
         <TabMenu>
           {TAB_MENU.map((menu, index) => {
