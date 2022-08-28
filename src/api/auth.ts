@@ -8,7 +8,7 @@ export interface verifyCodeRequestBody {
 //TODO: token check 하는 api 추가하기
 export const verifyToken = async () => await POST('', {});
 
-export const sendCode = async (email: string) => await POST('/auths', { email });
+export const sendCode = async (email: string) => await POST('/auth/issue', { email });
 
 export const verifyCode = async (verifyCodeParams: verifyCodeRequestBody) =>
-  await POST('auths/verify', verifyCodeParams);
+  await POST('auth/verify', verifyCodeParams);
