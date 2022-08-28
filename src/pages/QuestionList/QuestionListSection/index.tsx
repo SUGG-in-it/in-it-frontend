@@ -1,6 +1,6 @@
-import BannerSection from '@/pages/QuestionList/BannerSection';
-import QuestionListSection from '@/pages/QuestionList/QuestionListSection';
-import TagListSection from '@/pages/QuestionList/TagListSection';
+import GrayLine from '@/components/GrayLine';
+import QuestionItem from '@/pages/QuestionList/QuestionListSection/QuesttionItem';
+import StatusBar from '@/pages/QuestionList/QuestionListSection/StatusBar';
 import styled from 'styled-components';
 
 const dummy = [
@@ -46,25 +46,29 @@ const dummy = [
   },
 ];
 
-const QuestionListPage = () => {
+const QuestionListSection = () => {
   return (
-    <>
-      <BannerSection />
-      <ContentSection>
-        <QuestionListSection />
-        <TagListSection />
-      </ContentSection>
-    </>
+    <div>
+      <StatusBar />
+      <QuestionListContainer>
+        {dummy.map((question) => {
+          return (
+            <>
+              <QuestionItem key={question.id} {...question} />
+              <GrayLine />
+            </>
+          );
+        })}
+      </QuestionListContainer>
+    </div>
   );
 };
 
-const ContentSection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 1000px;
+const QuestionListContainer = styled.ul`
+  width: 700px;
   margin: 0 auto;
   padding-bottom: 100px;
   padding-top: 50px;
 `;
 
-export default QuestionListPage;
+export default QuestionListSection;
