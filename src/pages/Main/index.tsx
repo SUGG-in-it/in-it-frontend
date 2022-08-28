@@ -12,7 +12,7 @@ const MainPage = () => {
 };
 
 const MainContainer = styled.div`
-  background-color: ${({ theme }) => theme.backgrondLightColor}; ;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
 `;
 
 export default MainPage;
