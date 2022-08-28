@@ -4,6 +4,7 @@
 
 ###  ✨
 
+- error boundary & suspense 사용
 - 미디어쿼리를 이용한 반응형 구현
 - react custom hook 사용
 - recoil, react query를 통한 상태관리
