@@ -4,6 +4,7 @@ import { loginState } from '@/store/users';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import appLogo from '@/assets/images/bigLogo.png';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -24,8 +25,7 @@ const Header = () => {
     <HeaderContainer>
       <LeftSection>
         <LogoSection onClick={handleLogoClick}>
-          <h1>In it</h1>
-          <p>코드리뷰 사이트: in it()</p>
+          <img src={appLogo} />
         </LogoSection>
         <SearchBar placeholder="" />
       </LeftSection>
@@ -52,7 +52,6 @@ const LeftSection = styled.div`
 `;
 
 const LogoSection = styled.div`
-  margin-right: 20px;
   cursor: pointer;
   h1 {
     font-size: 1.3rem;
@@ -63,6 +62,10 @@ const LogoSection = styled.div`
     font-size: 0.6rem;
     font-weight: 800;
     color: ${({ theme }) => theme.pointColor};
+  }
+  img {
+    width: 80px;
+    height: 40px;
   }
 `;
 
