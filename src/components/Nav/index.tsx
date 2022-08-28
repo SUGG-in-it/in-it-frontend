@@ -52,8 +52,8 @@ const Nav = () => {
 
 const NavContainer = styled.div`
   display: flex;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 20%;
+  padding-right: 20%;
   height: 60px;
   display: flex;
   align-items: center;
@@ -63,7 +63,7 @@ const NavContainer = styled.div`
 
 const TabMenu = styled.ul`
   display: flex;
-  margin: 0 10%;
+  margin: 0 1em;
   border: none;
   background-color: ${({ theme }) => theme.backgrondLightColor};
   color: #abb0b5;

@@ -13,7 +13,7 @@ const BannerContainer = styled.ul`
   background-color: ${({ theme }) => theme.pointColor};
   color: white;
   width: 60%;
-  padding: 2em 20%;
+  padding: 2em 21%;
   h1 {
     font-size: 1.4rem;
     font-weight: bold;
