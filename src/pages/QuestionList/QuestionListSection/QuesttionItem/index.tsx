@@ -38,7 +38,7 @@ const QuestionItem = ({ id, isCompleted, nickName, date, title, content, tags }:
   );
 };
 
-const QuestionWrapper = styled.div`
+const QuestionWrapper = styled.li`
   padding: 2em 1.2em;
   &:hover {
     cursor: pointer;
@@ -61,13 +61,13 @@ const ProcessLabel = styled.div`
 `;
 
 const Title = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: ${({ theme }) => theme.textColor};
 `;
 
 const Content = styled.p`
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.grayColor};
   line-height: 1.3;
 `;
