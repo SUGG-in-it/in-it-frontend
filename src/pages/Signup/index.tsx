@@ -1,5 +1,5 @@
-import SignUpFirstStep from '@/pages/SignUp/SignUpFirstStep';
-import SignUpSecondStep from '@/pages/SignUp/SignUpSecondStep';
+import SignUpFirstStep from '@/pages/Signup/SignUpFirstStep';
+import SignUpSecondStep from '@/pages/Signup/SignUpSecondStep';
 import { signUpState } from '@/store/users';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';

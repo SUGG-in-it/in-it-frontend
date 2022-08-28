@@ -13,7 +13,7 @@ import { darkTheme, lightTheme } from '@/styles/theme';
 import { darkModeState } from '@/store/theme';
 import DarkModeButton from '@/components/Button/DarkModeButton';
 
-const SignUpPage = lazy(() => import('@/pages/SignUp'));
+const SignUpPage = lazy(() => import('@/pages/Signup'));
 const LoginPage = lazy(() => import('@/pages/Login'));
 const ForgotPasswordPage = lazy(() => import('@/pages/ForgotPassword'));
 const MyPage = lazy(() => import('@/pages/MyPage'));
