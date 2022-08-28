@@ -38,7 +38,7 @@ const Header = () => {
 
 const HeaderContainer = styled.div`
   height: 70px;
-  background-color: ${({ theme }) => theme.backgrondLightColor};
+  background-color: ${({ theme }) => theme.backgrondDarkColor};
   padding: 10px 10%;
   display: flex;
   justify-content: space-between;
