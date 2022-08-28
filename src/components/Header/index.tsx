@@ -37,7 +37,7 @@ const Header = () => {
 };
 
 const HeaderContainer = styled.div`
-  height: 40px;
+  height: 70px;
   background-color: ${({ theme }) => theme.backgrondLightColor};
   padding: 10px 10%;
   display: flex;
@@ -62,8 +62,8 @@ const LogoSection = styled.div`
     color: ${({ theme }) => theme.pointColor};
   }
   img {
-    width: 80px;
-    height: 40px;
+    width: 110px;
+    height: 55px;
   }
 `;
 
