@@ -1,48 +1,20 @@
-import {
-  validateCode,
-  validateEmail,
-  validateNickName,
-  validatePassword,
-  validateWorkPostion,
-} from '@/utils/validations';
+import { UseInputReturn } from '@/hooks/useInput';
 import { useState } from 'react';
-
-export interface useValidationInputType {
-  value: string;
-  onChange: ({ target }: { target: HTMLInputElement }) => void;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  isError?: boolean;
-  msg: string;
+export interface UseValidationInputReturn extends UseInputReturn {
+  isValid: boolean | null;
 }
 
-const validationInput = (type: string, value: string) => {
-  switch (type) {
-    case 'email':
-      return validateEmail(value);
-    case 'password':
-      return validatePassword(value);
-    case 'code':
-      return validateCode(value);
-    case 'nickname':
-      return validateNickName(value);
-    case 'workPosition':
-      return validateWorkPostion(value);
-  }
-};
-
-const useValidationInput = (initialValue: string, type: string): useValidationInputType => {
+const useValidationInput = (initialValue: string, validate: (value: string) => boolean): UseValidationInputReturn => {
   const [value, setValue] = useState(initialValue);
-  const [isError, setIsError] = useState(true);
-  const [msg, setMsg] = useState('');
+  const [isValid, setIsValid] = useState(true);
+
   const onChange = ({ target }: { target: HTMLInputElement }) => {
     const { value } = target;
-    const { isError, msg } = validationInput(type, value);
-    setIsError(isError);
-    setMsg(msg);
+    setIsValid(validate(value));
     setValue(value);
   };
 
-  return { value, onChange, setValue, isError, msg };
+  return { value, onChange, setValue, isValid };
 };
 
 export default useValidationInput;
