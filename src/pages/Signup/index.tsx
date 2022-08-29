@@ -1,11 +1,11 @@
 import SignUpFirstStep from '@/pages/Signup/SignUpFirstStep';
 import SignUpSecondStep from '@/pages/Signup/SignUpSecondStep';
 import { signUpState } from '@/store/users';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 const SignUpPage = () => {
-  const [signUp, setSignUp] = useRecoilState(signUpState);
+  const signUp = useRecoilValue(signUpState);
 
   return <SignUpWrapper>{signUp.step === 1 ? <SignUpFirstStep /> : <SignUpSecondStep />}</SignUpWrapper>;
 };
