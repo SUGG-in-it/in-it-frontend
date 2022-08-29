@@ -1,21 +1,13 @@
-import { useValidationInputType } from '@/hooks/useValidationInput';
+import { InputProps } from '@/components/Input';
 import styled from 'styled-components';
 
-export interface InputProps {
-  input: useValidationInputType;
-  label?: string;
-  type: string;
-  placeholder?: string;
-  className?: string;
+interface ValidationInputProps extends InputProps {
+  isValid: undefined | boolean;
+  msg: string;
 }
 
 const InputContainer = styled.div`
   margin: 10px 0px;
-`;
-
-const Label = styled.p`
-  margin-bottom: 0.5em;
-  color: white;
 `;
 
 const InputWrapper = styled.input`
@@ -42,18 +34,13 @@ const Message = styled.p`
   margin-top: 0.5em;
 `;
 
-const ValidationInput = ({ input, label, type, placeholder = '', className }: InputProps) => (
-  <InputContainer>
-    {label && <Label>{label}</Label>}
-    <InputWrapper
-      type={type}
-      placeholder={placeholder}
-      value={input.value}
-      onChange={input.onChange}
-      className={className}
-    />
-    {<Message isError={input.isError}>{input.msg}</Message>}
-  </InputContainer>
-);
+const ValidationInput = ({ type, placeholder, className, value, onChange, isValid, msg }: ValidationInputProps) => {
+  return (
+    <InputContainer>
+      <InputWrapper {...{ type, placeholder, className, value, onChange }} />
+      {!isValid && <Message>{msg}</Message>}
+    </InputContainer>
+  );
+};
 
 export default ValidationInput;
