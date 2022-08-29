@@ -6,7 +6,8 @@ const errorToast = (msg: string) =>
     style: {
       backgroundColor: '#ffcdd2',
       color: '#ef5350',
-      fontWeight: 'bold',
+      fontWeight: '400',
+      fontSize: '0.9rem',
     },
     icon: '🚫',
   });
@@ -17,7 +18,8 @@ const warningToast = (msg: string) =>
     style: {
       backgroundColor: '#fff9c4',
       color: '#ffb300',
-      fontWeight: 'bold',
+      fontWeight: '400',
+      fontSize: '0.9rem',
     },
     icon: '⚠️',
   });
@@ -28,7 +30,8 @@ const successToast = (msg: string) =>
     style: {
       backgroundColor: '#c8e6c9',
       color: '#4caf50',
-      fontWeight: 'bold',
+      fontWeight: '400',
+      fontSize: '0.9rem',
     },
     icon: '🥳',
   });
