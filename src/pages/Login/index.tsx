@@ -1,17 +1,19 @@
 import Button from '@/components/Button';
+import LabelInput from '@/components/Input/LabelInput';
 import ValidationInput from '@/components/Input/ValidationInput';
 import { useLoginMutation } from '@/hooks/queries/useUser';
 import useValidationInput from '@/hooks/useValidationInput';
 import { loginState } from '@/store/users';
-
+import { validateLoginEmail, validateLoginPwd, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const email = useValidationInput('', 'email');
-  const password = useValidationInput('', 'password');
+  const email = useValidationInput('', validateLoginEmail);
+  const password = useValidationInput('', validateLoginPwd);
+
   const setIsLogin = useSetRecoilState(loginState);
   const mutationLogin = useLoginMutation({
     onSuccess: () => {
@@ -29,14 +31,30 @@ const LoginPage = () => {
   };
 
   const handleLogin = (email, password) => {
-    if (email.isError || password.isError) return;
-    mutationLogin.mutate({ email: email.value, password: password.value });
+    /* if (email.isError || password.isError) return;
+    mutationLogin.mutate({ email: email.value, password: password.value }); */
   };
 
   return (
     <LoginContainer>
-      <ValidationInput input={email} label="이메일" type="email" placeholder="이메일을 입력해주세요."></ValidationInput>
-      <ValidationInput input={password} label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요." />
+      <LabelInput label="이메일">
+        <ValidationInput
+          type={'email'}
+          value={email.value}
+          onChange={email.onChange}
+          isValid={email.isValid}
+          msg={VALIDATION_ERROR_MSG.EMPTY_EMAIL}
+        />
+      </LabelInput>
+      <LabelInput label="비밀번호">
+        <ValidationInput
+          type={'password'}
+          value={password.value}
+          onChange={password.onChange}
+          isValid={password.isValid}
+          msg={VALIDATION_ERROR_MSG.EMPTY_PASSWORD}
+        />
+      </LabelInput>
       <LoginButton onClick={() => handleLogin(email, password)}>{'로그인'}</LoginButton>
       <SignUpContainer>
         <u onClick={moveToForgotPassword}>비밀번호 찾기</u>

@@ -9,12 +9,19 @@ interface LabelInputProps {
 const LabelInput = ({ label, children }: LabelInputProps) => {
   return (
     <LabelInputContainer>
-      <p>{label}</p>
+      <Label>{label}</Label>
       {children}
     </LabelInputContainer>
   );
 };
 
-const LabelInputContainer = styled.div``;
+const LabelInputContainer = styled.div`
+  margin-bottom: 0.5em;
+`;
+
+const Label = styled.p`
+  font-size: 0.8rem;
+  color: white;
+`;
 
 export default LabelInput;
