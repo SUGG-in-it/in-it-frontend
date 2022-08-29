@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 import LabelInput from '@/components/Input/LabelInput';
 import ValidationInput from '@/components/Input/ValidationInput';
 import { useLoginMutation } from '@/hooks/queries/useUser';
-import useValidationInput from '@/hooks/useValidationInput';
+import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
 import { loginState } from '@/store/users';
 import { validateLoginEmail, validateLoginPwd, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useNavigate } from 'react-router-dom';
@@ -30,9 +30,12 @@ const LoginPage = () => {
     navigate('/forgot-password');
   };
 
-  const handleLogin = (email, password) => {
-    /* if (email.isError || password.isError) return;
-    mutationLogin.mutate({ email: email.value, password: password.value }); */
+  const handleLogin = (email: UseValidationInputReturn, password: UseValidationInputReturn) => {
+    email.checkValidation();
+    password.checkValidation();
+    if (email.isValid && password.isValid) {
+      mutationLogin.mutate({ email: email.value, password: password.value });
+    }
   };
 
   return (

@@ -38,7 +38,7 @@ const ValidationInput = ({ type, placeholder, className, value, onChange, isVali
   return (
     <InputContainer>
       <InputWrapper {...{ type, placeholder, className, value, onChange }} />
-      {!isValid && <Message>{msg}</Message>}
+      {isValid !== null && isValid === false ? <Message>{msg}</Message> : null}
     </InputContainer>
   );
 };
