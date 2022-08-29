@@ -9,7 +9,7 @@ interface RequestType {
 interface ResponseType {
   data?: any;
   message?: string;
-  statusCode: number;
+  status: string;
 }
 
 const request = async ({ url, method, body, params }: RequestType): Promise<ResponseType> => {

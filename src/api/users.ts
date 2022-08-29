@@ -1,4 +1,4 @@
-import { GET, POST, PUT } from '@/api/base';
+import { POST, PUT } from '@/api/base';
 
 export interface loginRequestBody {
   email: string;
@@ -25,4 +25,4 @@ export const join = async (joinParams: joinRequestBody) => await POST('/users/jo
 export const resetPassword = async (resetPasswrodParams: resetPasswrodRequestBody) =>
   await PUT('/users/password', resetPasswrodParams);
 
-export const duplicateEmail = (email: string) => GET('/users/duplicate-email', { email });
+export const duplicateCheckEmail = (email: string) => POST('/users/duplicate-email', { email });
