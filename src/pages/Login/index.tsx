@@ -4,6 +4,7 @@ import ValidationInput from '@/components/Input/ValidationInput';
 import { useLoginMutation } from '@/hooks/queries/useUser';
 import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
 import { loginState } from '@/store/users';
+import { media } from '@/styles/mediaQuery';
 import { validateLoginEmail, validateLoginPwd, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
@@ -72,6 +73,9 @@ const LoginContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 20em;
+  ${media.mobile} {
+    width: 100%;
+  }
 `;
 
 const SignUpContainer = styled.div`
