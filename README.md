@@ -13,7 +13,7 @@
 
 ## 🛠 tech stack
 ```React``` ```TypeScript``` ```Recoil``` ```React-query```   
-```styled-components``` ```Github action``` ```Github oauth```
+```styled-components``` 
 
 ## 🐾 Branch Strategy
 
