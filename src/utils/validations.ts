@@ -16,6 +16,8 @@ export enum VALIDATION_ERROR_MSG {
   INCONSISTENCY_PASSWORD = '비밀번호가 불일치 합니다',
 }
 
+//TODO: 리팩토링 필요
+
 export const validateLoginEmail = (email: string): boolean => {
   return email.trim() !== '';
 };

@@ -5,6 +5,7 @@ export interface UseValidationInputReturn extends UseInputReturn {
   checkValidation: () => void;
 }
 
+//TODO: 리팩토링 필요
 const useValidationInput = (
   initialValue: string,
   validate: (value: string, extraValue?: string) => boolean,
