@@ -12,7 +12,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  backgrondLightColor: '#292a2d',
+  backgrondLightColor: '#2c2d30',
   backgrondDarkColor: '#202020',
   pointColor: '#4d7cfe',
   primaryColor: '#4d7cfe',
