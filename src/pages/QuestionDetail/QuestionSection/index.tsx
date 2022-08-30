@@ -1,5 +1,5 @@
 import GrayLine from '@/components/GrayLine';
-import { QLable } from '@/styles/commonStyles';
+import { QLabel } from '@/styles/commonStyles';
 import styled from 'styled-components';
 
 const QuestionSection = () => {
@@ -16,25 +16,32 @@ const QuestionSection = () => {
 
   return (
     <QuestionSectionContainer>
-      <SectionRow>
-        <QLable>Q.</QLable>
-        <Title>{question.title}</Title>
-      </SectionRow>
-      <SectionRow>
-        <NickName>{question.nickName}</NickName>
-        <Date>{question.date}</Date>
-      </SectionRow>
-      <GrayLine />
-      <SectionRow>
-        <Content>{question.content}</Content>
-      </SectionRow>
+      <QuestionSectionWrapper>
+        <SectionRow>
+          <QLabel>Q.</QLabel>
+          <Title>{question.title}</Title>
+        </SectionRow>
+        <SectionRow>
+          <NickName>{question.nickName}</NickName>
+          <Date>{question.date}</Date>
+        </SectionRow>
+        <GrayLine />
+        <SectionRow>
+          <Content>{question.content}</Content>
+        </SectionRow>
+      </QuestionSectionWrapper>
     </QuestionSectionContainer>
   );
 };
 
 const QuestionSectionContainer = styled.div`
   padding: 2em 1.2em;
-  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+`;
+
+const QuestionSectionWrapper = styled.div`
+  width: 700px;
+  margin: 0 auto;
 `;
 
 const SectionRow = styled.div`

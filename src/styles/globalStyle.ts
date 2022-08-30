@@ -19,4 +19,8 @@ export const GlobalStyle = createGlobalStyle`
     textarea{
         font-family: 'Do Hyeon', sans-serif;
     }
+    .toastui-editor-defaultUI{
+        width: calc(700px - 4em);
+        height: 400px;
+    }
 `;
