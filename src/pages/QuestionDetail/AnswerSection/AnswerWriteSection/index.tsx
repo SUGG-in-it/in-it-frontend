@@ -10,10 +10,6 @@ const AnswerWriteSection = () => {
 
   return (
     <AnswerWriteSectionWrapper>
-      <AnswerWriteHeader>
-        <QLabel>{'A.'}</QLabel>
-        <Label>{'총 0개의 답변이 달렸습니다.'}</Label>
-      </AnswerWriteHeader>
       <ToastEditorWrapper>
         <Notice>{'지롱님, 답변해주세요! 😉'}</Notice>
         <ToastEditor />
@@ -31,11 +27,6 @@ const AnswerWriteSectionWrapper = styled.div`
   margin: 3em auto;
 `;
 
-const AnswerWriteHeader = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 const ToastEditorWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -44,12 +35,6 @@ const ToastEditorWrapper = styled.div`
   background-color: ${({ theme }) => theme.backgrondLightColor};
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   border-radius: 5px;
-`;
-
-const Label = styled.p`
-  font-size: 1rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.grayColor};
 `;
 
 const Notice = styled.p`

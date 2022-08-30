@@ -1,6 +1,5 @@
 import GrayLine from '@/components/GrayLine';
-import AnswerListSection from '@/pages/QuestionDetail/AnswerListSection';
-import AnswerWriteSection from '@/pages/QuestionDetail/AnswerWriteSection';
+import AnswerSection from '@/pages/QuestionDetail/AnswerSection';
 import QuestionSection from '@/pages/QuestionDetail/QuestionSection';
 import styled from 'styled-components';
 
@@ -9,8 +8,7 @@ const QuestionDetailPage = () => {
     <QuestionWrapper>
       <QuestionSection />
       <GrayLine />
-      <AnswerListSection />
-      <AnswerWriteSection />
+      <AnswerSection />
     </QuestionWrapper>
   );
 };
