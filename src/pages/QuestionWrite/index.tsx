@@ -3,7 +3,7 @@ import ValidationInput from '@/components/Input/ValidationInput';
 import ToastEditor from '@/components/ToastEdtior';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
-import { QLable } from '@/styles/commonStyles';
+import { QLabel } from '@/styles/commonStyles';
 import { validateQuestionTitle } from '@/utils/validations';
 import styled from 'styled-components';
 
@@ -15,7 +15,7 @@ const QuestionWritePage = () => {
   return (
     <QuestionWriteContainer>
       <QContainer>
-        <QLable>Q.</QLable>
+        <QLabel>Q.</QLabel>
         <QuestionInput input={question} type="text" />
       </QContainer>
       <ToastEditorWrapper>

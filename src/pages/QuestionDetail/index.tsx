@@ -1,5 +1,5 @@
-import AnswerListSection from '@/pages/QuestionDetail/AnswerListSection';
-import AnswerWriteSection from '@/pages/QuestionDetail/AnswerWriteSection';
+import GrayLine from '@/components/GrayLine';
+import AnswerSection from '@/pages/QuestionDetail/AnswerSection';
 import QuestionSection from '@/pages/QuestionDetail/QuestionSection';
 import styled from 'styled-components';
 
@@ -7,15 +7,15 @@ const QuestionDetailPage = () => {
   return (
     <QuestionWrapper>
       <QuestionSection />
-      <AnswerListSection />
-      <AnswerWriteSection />
+      <GrayLine />
+      <AnswerSection />
     </QuestionWrapper>
   );
 };
 const QuestionWrapper = styled.div`
-  width: 80vw;
-  max-width: 700px;
-  margin: 3em auto;
+  width: 100vw;
+  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  padding-bottom: 3em;
 `;
 
 export default QuestionDetailPage;

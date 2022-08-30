@@ -25,6 +25,7 @@ const BannerContainer = styled.div`
     height: 250px;
     border-radius: 10px;
     margin: 2em 1em;
+    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
   }
 `;
 
