@@ -5,6 +5,7 @@ import ValidationInput from '@/components/Input/ValidationInput';
 import { useEmailCheckMutation } from '@/hooks/queries/useUser';
 import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
 import { signUpState } from '@/store/users';
+import { media } from '@/styles/mediaQuery';
 import { successToast } from '@/utils/toastUtils';
 import { validateCode, validateSingupEmail, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useState } from 'react';
@@ -77,10 +78,10 @@ const SignUpFirstStep = () => {
           </InputCode>
         </>
       )}
-      <ResencContainer>
+      <ResendContainer>
         <span>메일을 받지 못하셨습니까?</span>
         <u onClick={resendCode}>재전송 하기</u>
-      </ResencContainer>
+      </ResendContainer>
     </>
   );
 };
@@ -92,7 +93,7 @@ const InputCode = styled.div`
   }
 `;
 
-const ResencContainer = styled.div`
+const ResendContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   display: flex;
@@ -105,6 +106,14 @@ const ResencContainer = styled.div`
     font-size: 0.9rem;
     &:hover {
       cursor: pointer;
+    }
+  }
+  ${media.tablet} {
+    span {
+      color: ${({ theme }) => theme.pointColor};
+    }
+    u {
+      color: ${({ theme }) => theme.pointColor};
     }
   }
 `;
