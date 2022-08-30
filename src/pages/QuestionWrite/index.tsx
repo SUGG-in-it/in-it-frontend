@@ -4,10 +4,11 @@ import ToastEditor from '@/components/ToastEdtior';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
 import { QLable } from '@/styles/commonStyles';
+import { validateQuestionTitle } from '@/utils/validations';
 import styled from 'styled-components';
 
 const QuestionWritePage = () => {
-  const question = useValidationInput('', 'question');
+  const question = useValidationInput('', validateQuestionTitle);
   const tag = useInput('');
   const power = useInput('');
 
@@ -40,6 +41,7 @@ const QuestionWriteContainer = styled.div`
   flex-direction: column;
   align-items: self-start;
 `;
+
 const QuestionInput = styled(ValidationInput)`
   border: 1px solid #ddd;
   border-radius: 3px;

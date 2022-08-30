@@ -1,48 +1,38 @@
-import {
-  validateCode,
-  validateEmail,
-  validateNickName,
-  validatePassword,
-  validateWorkPostion,
-} from '@/utils/validations';
+import { UseInputReturn } from '@/hooks/useInput';
 import { useState } from 'react';
-
-export interface useValidationInputType {
-  value: string;
-  onChange: ({ target }: { target: HTMLInputElement }) => void;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  isError?: boolean;
-  msg: string;
+export interface UseValidationInputReturn extends UseInputReturn {
+  isValid: boolean | null;
+  checkValidation: () => void;
 }
 
-const validationInput = (type: string, value: string) => {
-  switch (type) {
-    case 'email':
-      return validateEmail(value);
-    case 'password':
-      return validatePassword(value);
-    case 'code':
-      return validateCode(value);
-    case 'nickname':
-      return validateNickName(value);
-    case 'workPosition':
-      return validateWorkPostion(value);
-  }
-};
-
-const useValidationInput = (initialValue: string, type: string): useValidationInputType => {
+//TODO: 리팩토링 필요
+const useValidationInput = (
+  initialValue: string,
+  validate: (value: string, extraValue?: string) => boolean,
+  extraValue?: string
+): UseValidationInputReturn => {
   const [value, setValue] = useState(initialValue);
-  const [isError, setIsError] = useState(true);
-  const [msg, setMsg] = useState('');
+  const [isValid, setIsValid] = useState(null);
+
   const onChange = ({ target }: { target: HTMLInputElement }) => {
     const { value } = target;
-    const { isError, msg } = validationInput(type, value);
-    setIsError(isError);
-    setMsg(msg);
+    if (extraValue) {
+      setIsValid(validate(value, extraValue));
+    } else {
+      setIsValid(validate(value));
+    }
     setValue(value);
   };
 
-  return { value, onChange, setValue, isError, msg };
+  const checkValidation = () => {
+    if (extraValue) {
+      setIsValid(validate(value, extraValue));
+    } else {
+      setIsValid(validate(value));
+    }
+  };
+
+  return { value, onChange, setValue, isValid, checkValidation };
 };
 
 export default useValidationInput;

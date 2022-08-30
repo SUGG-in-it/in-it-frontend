@@ -1,22 +1,12 @@
-import { useInputType } from '@/hooks/useInput';
 import styled from 'styled-components';
 
 export interface InputProps {
-  input: useInputType;
-  label?: string;
   type: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
 }
-
-const InputContainer = styled.div`
-  margin: 10px 0px;
-`;
-
-const Label = styled.p`
-  margin-bottom: 0.5em;
-  color: white;
-`;
 
 const InputWrapper = styled.input`
   font-size: 1rem;
@@ -36,17 +26,8 @@ const InputWrapper = styled.input`
   }
 `;
 
-const Input = ({ input, label, type, placeholder = '', className }: InputProps) => (
-  <InputContainer>
-    {label && <Label>{label}</Label>}
-    <InputWrapper
-      type={type}
-      placeholder={placeholder}
-      value={input.value}
-      onChange={input.onChange}
-      className={className}
-    />
-  </InputContainer>
+const Input = ({ type, placeholder, className, value, onChange }: InputProps) => (
+  <InputWrapper {...{ type, placeholder, className, value, onChange }} />
 );
 
 export default Input;

@@ -1,41 +1,48 @@
 import { resetPassword } from '@/api/users';
 import Button from '@/components/Button';
-import Input from '@/components/Input';
+import LabelInput from '@/components/Input/LabelInput';
 import ValidationInput from '@/components/Input/ValidationInput';
-import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
 import { forgotPasswordState } from '@/store/users';
-import { validateRePassword } from '@/utils/validations';
-import { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { validatePassword, validateRePassword, VALIDATION_ERROR_MSG } from '@/utils/validations';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 const ForgotPasswordSecondStep = () => {
-  const password = useValidationInput('', 'password');
-  const rePassword = useInput('');
-  const [rePasswordErrorMsg, setRePasswordErrorMsg] = useState('');
-  const [forgotPassword, setforgotPassword] = useRecoilState(forgotPasswordState);
+  const password = useValidationInput('', validatePassword);
+  const rePassword = useValidationInput('', validateRePassword);
 
-  const validationCheck = () => {
-    const { isError, msg } = validateRePassword(password.value, rePassword.value);
-    setRePasswordErrorMsg(msg);
-    if (password.isError || isError) return false;
-    return true;
-  };
+  const forgotPassword = useRecoilValue(forgotPasswordState);
 
   const handleChangePassword = async () => {
-    if (validationCheck())
+    if (password.isValid && rePassword.isValid) {
       await resetPassword({
         email: forgotPassword.email,
         password: password.value,
       });
+    }
   };
 
   return (
     <>
-      <ValidationInput input={password} label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요." />
-      <Input input={rePassword} label="비밀번호 확인" type="password" placeholder="비밀번호 확인을 입력해주세요." />
-      <ErrorMessage>{rePasswordErrorMsg}</ErrorMessage>
+      <LabelInput label="비밀번호">
+        <ValidationInput
+          type={'password'}
+          value={password.value}
+          onChange={password.onChange}
+          isValid={password.isValid}
+          msg={VALIDATION_ERROR_MSG.INVALID_PASSWORD}
+        />
+      </LabelInput>
+      <LabelInput label="비밀번호 확인">
+        <ValidationInput
+          type={'password'}
+          value={rePassword.value}
+          onChange={rePassword.onChange}
+          isValid={rePassword.isValid}
+          msg={VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD}
+        />
+      </LabelInput>
       <Button onClick={handleChangePassword}>{'비밀번호 변경'}</Button>
     </>
   );

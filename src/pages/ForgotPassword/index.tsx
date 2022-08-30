@@ -1,11 +1,11 @@
 import ForgotPasswordFirstStep from '@/pages/ForgotPassword/ForgotPasswordFirstStep';
 import ForgotPasswordSecondStep from '@/pages/ForgotPassword/ForgotPasswordSecondStep';
 import { forgotPasswordState } from '@/store/users';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 const ForgotPasswordPage = () => {
-  const [forgotPassword, setforgotPassword] = useRecoilState(forgotPasswordState);
+  const forgotPassword = useRecoilValue(forgotPasswordState);
 
   return (
     <ForgotPasswordWrapper>
