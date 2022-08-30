@@ -16,11 +16,6 @@ export enum VALIDATION_ERROR_MSG {
   INCONSISTENCY_PASSWORD = '비밀번호가 불일치 합니다',
 }
 
-interface validationReturnType {
-  isError: boolean;
-  msg: string;
-}
-
 export const validateLoginEmail = (email: string): boolean => {
   return email.trim() !== '';
 };
@@ -29,36 +24,30 @@ export const validateLoginPwd = (password: string): boolean => {
   return password.trim() !== '';
 };
 
-export const validateEmail = (email: string): validationReturnType => {
-  if (email.trim() === '') return { isError: true, msg: VALIDATION_ERROR_MSG.EMPTY_EMAIL };
-  if (!REGULAR_EXPRESSION.EMAIL.test(email)) return { isError: true, msg: VALIDATION_ERROR_MSG.INVALID_EMAIL };
-  return { isError: false, msg: '' };
+export const validateSingupEmail = (email: string): boolean => {
+  return REGULAR_EXPRESSION.EMAIL.test(email);
 };
 
-export const validatePassword = (password: string): validationReturnType => {
-  if (password.trim() === '') return { isError: true, msg: VALIDATION_ERROR_MSG.EMPTY_PASSWORD };
-  if (!REGULAR_EXPRESSION.PASSWORD.test(password)) return { isError: true, msg: VALIDATION_ERROR_MSG.INVALID_PASSWORD };
-  return { isError: false, msg: '' };
+export const validatePassword = (password: string): boolean => {
+  return REGULAR_EXPRESSION.PASSWORD.test(password);
 };
 
-export const validateCode = (code: string): validationReturnType => {
-  if (code.trim() === '') return { isError: true, msg: VALIDATION_ERROR_MSG.EMPTY_CODE };
-  return { isError: false, msg: '' };
+export const validateCode = (code: string): boolean => {
+  return code.trim() !== '';
 };
 
-export const validateNickName = (nickname: string): validationReturnType => {
-  if (nickname.trim() === '') return { isError: true, msg: VALIDATION_ERROR_MSG.EMPTY_NICKNAME };
-  if (!REGULAR_EXPRESSION.NICKNAME.test(nickname)) return { isError: true, msg: VALIDATION_ERROR_MSG.INVALID_NICKNAME };
-  return { isError: false, msg: '' };
+export const validateNickName = (nickname: string): boolean => {
+  return nickname.trim() !== '';
 };
 
-export const validateRePassword = (password: string, rePassword: string): validationReturnType => {
-  if (rePassword.trim() === '') return { isError: true, msg: VALIDATION_ERROR_MSG.EMPTY_PASSWORD };
-  if (rePassword !== password) return { isError: true, msg: VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD };
-  return { isError: false, msg: '' };
+export const validateRePassword = (password: string, rePassword: string): boolean => {
+  return rePassword === password;
 };
 
-export const validateWorkPostion = (workPoistion: string): validationReturnType => {
-  if (workPoistion.trim() === '') return { isError: true, msg: VALIDATION_ERROR_MSG.EMPTY_WORK_POSITION };
-  return { isError: false, msg: '' };
+export const validateWorkPostion = (workPoistion: string): boolean => {
+  return workPoistion.trim() !== '';
+};
+
+export const validateQuestionTitle = (title: string): boolean => {
+  return title.trim() !== '';
 };

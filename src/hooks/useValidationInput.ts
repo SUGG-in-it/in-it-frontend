@@ -5,18 +5,30 @@ export interface UseValidationInputReturn extends UseInputReturn {
   checkValidation: () => void;
 }
 
-const useValidationInput = (initialValue: string, validate: (value: string) => boolean): UseValidationInputReturn => {
+const useValidationInput = (
+  initialValue: string,
+  validate: (value: string, extraValue?: string) => boolean,
+  extraValue?: string
+): UseValidationInputReturn => {
   const [value, setValue] = useState(initialValue);
   const [isValid, setIsValid] = useState(null);
 
   const onChange = ({ target }: { target: HTMLInputElement }) => {
     const { value } = target;
-    setIsValid(validate(value));
+    if (extraValue) {
+      setIsValid(validate(value, extraValue));
+    } else {
+      setIsValid(validate(value));
+    }
     setValue(value);
   };
 
   const checkValidation = () => {
-    setIsValid(validate(value));
+    if (extraValue) {
+      setIsValid(validate(value, extraValue));
+    } else {
+      setIsValid(validate(value));
+    }
   };
 
   return { value, onChange, setValue, isValid, checkValidation };

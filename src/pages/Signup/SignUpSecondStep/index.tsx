@@ -1,11 +1,16 @@
 import Button from '@/components/Button';
-import Input from '@/components/Input';
+import LabelInput from '@/components/Input/LabelInput';
 import ValidationInput from '@/components/Input/ValidationInput';
 import { useJoinMutation } from '@/hooks/queries/useUser';
-import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
 import { signUpState } from '@/store/users';
-import { validateRePassword } from '@/utils/validations';
+import {
+  validateNickName,
+  validatePassword,
+  validateRePassword,
+  validateWorkPostion,
+  VALIDATION_ERROR_MSG,
+} from '@/utils/validations';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
@@ -13,13 +18,14 @@ import styled from 'styled-components';
 
 const SignUpSecondStep = () => {
   const navigate = useNavigate();
-  const nickname = useValidationInput('', 'nickname');
-  const password = useValidationInput('', 'password');
-  const rePassword = useInput('');
-  const [rePasswordErrorMsg, setRePasswordErrorMsg] = useState('');
+  const nickname = useValidationInput('', validateNickName);
+  const password = useValidationInput('', validatePassword);
+  const workPosition = useValidationInput('', validateWorkPostion);
+  const rePassword = useValidationInput('', validateRePassword, password.value);
+
   const [year, setYear] = useState('');
-  const workPosition = useValidationInput('', 'workPosition');
   const [signUp, setSignUp] = useRecoilState(signUpState);
+
   const mutationJoin = useJoinMutation({
     onSuccess: () => {
       navigate('/login');
@@ -38,13 +44,15 @@ const SignUpSecondStep = () => {
   };
 
   const validationCheck = () => {
-    const { isError, msg } = validateRePassword(password.value, rePassword.value);
-    setRePasswordErrorMsg(msg);
-    if (nickname.isError || password.isError || workPosition.isError || isError) return false;
-    return true;
+    return rePassword.isValid && nickname.isValid && password.isValid && workPosition.isValid;
   };
 
   const handleSignUp = () => {
+    nickname.checkValidation();
+    password.checkValidation();
+    rePassword.checkValidation();
+    workPosition.checkValidation();
+
     if (validationCheck()) {
       mutationJoin.mutate({
         email: signUp.email,
@@ -58,10 +66,33 @@ const SignUpSecondStep = () => {
 
   return (
     <InputSection>
-      <ValidationInput input={nickname} label="닉네임" type="text" placeholder="닉네임을 입력해주세요." />
-      <ValidationInput input={password} label="비밀번호" type="password" placeholder="비밀번호를 입력해주세요." />
-      <Input input={rePassword} label="비밀번호 확인" type="password" placeholder="비밀번호 확인을 입력해주세요." />
-      <ErrorMessage>{rePasswordErrorMsg}</ErrorMessage>
+      <LabelInput label="닉네임">
+        <ValidationInput
+          type={'text'}
+          value={nickname.value}
+          onChange={nickname.onChange}
+          isValid={nickname.isValid}
+          msg={VALIDATION_ERROR_MSG.EMPTY_NICKNAME}
+        />
+      </LabelInput>
+      <LabelInput label="비밀번호">
+        <ValidationInput
+          type={'password'}
+          value={password.value}
+          onChange={password.onChange}
+          isValid={password.isValid}
+          msg={VALIDATION_ERROR_MSG.INVALID_PASSWORD}
+        />
+      </LabelInput>
+      <LabelInput label="비밀번호 확인">
+        <ValidationInput
+          type={'password'}
+          value={rePassword.value}
+          onChange={rePassword.onChange}
+          isValid={rePassword.isValid}
+          msg={VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD}
+        />
+      </LabelInput>
       <Label>{'경력'}</Label>
       <select name="year" value={year} onChange={handleYearSelect}>
         <option value="신입">신입</option>
@@ -73,12 +104,15 @@ const SignUpSecondStep = () => {
         <option value="10년차 이상">10년차 이상</option>
         <option value="20년차 이상">20년차 이상</option>
       </select>
-      <ValidationInput
-        input={workPosition}
-        label="직무"
-        type="text"
-        placeholder="직무를 입력해주세요. ex) 프론트엔드, 백엔드 등"
-      />
+      <LabelInput label="직무">
+        <ValidationInput
+          type={'text'}
+          value={workPosition.value}
+          onChange={workPosition.onChange}
+          isValid={workPosition.isValid}
+          msg={VALIDATION_ERROR_MSG.EMPTY_WORK_POSITION}
+        />
+      </LabelInput>
       <Button onClick={handleSignUp}>{'회원가입'}</Button>
     </InputSection>
   );
@@ -90,9 +124,9 @@ const InputSection = styled.div`
     padding: 0.5em;
     border: none;
     border-radius: 0.3em;
-    height: 3em;
-    margin-bottom: 0.5em;
-    width: 19rem;
+    height: 40px;
+    margin-bottom: 1em;
+    width: 100%;
     :focus {
       outline: none;
     }
@@ -102,18 +136,17 @@ const InputSection = styled.div`
   }
   button {
     width: 100%;
+    background-color: ${({ theme }) => theme.primaryColor};
+  }
+  input {
+    margin-bottom: 0.5em;
   }
 `;
 
 const Label = styled.p`
   margin-bottom: 0.5em;
   color: white;
-`;
-
-const ErrorMessage = styled.p`
   font-size: 0.8rem;
-  color: red;
-  margin-bottom: 1em;
 `;
 
 export default SignUpSecondStep;
