@@ -1,21 +1,13 @@
-import Button from '@/components/Button';
-import CommentSection from '@/pages/QuestionDetail/AnswerSection/AnswerListSection/AnswerItem/CommentSection';
-import CommentList from '@/pages/QuestionDetail/AnswerSection/AnswerListSection/AnswerItem/CommentSection/CommentList';
-import { QLabel } from '@/styles/commonStyles';
-import { useState } from 'react';
 import styled from 'styled-components';
 
-interface AnswerProps {
+interface CommentProps {
   id: number;
-  isCompleted: boolean;
   nickName: string;
   date: string;
-  title: string;
   content: string;
-  tags: string[];
 }
 
-const AnswerItem = ({ id, isCompleted, nickName, date, title, content, tags }: AnswerProps) => {
+const CommentItem = ({ id, nickName, date, content }: CommentProps) => {
   return (
     <AnswerItemWrapper>
       <AnswerHeader>
@@ -23,26 +15,24 @@ const AnswerItem = ({ id, isCompleted, nickName, date, title, content, tags }: A
         <Date>{date}</Date>
       </AnswerHeader>
       <Content>{content}</Content>
-      <CommentSection />
     </AnswerItemWrapper>
   );
 };
 
 const AnswerItemWrapper = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 1.5em 1em;
-  margin-top: 2em;
-  background-color: ${({ theme }) => theme.backgrondLightColor};
-  border: 1px solid ${({ theme }) => theme.greyLineColor};
+  flex-direction: row;
+  padding: 1em;
+  align-items: baseline;
+  background-color: ${({ theme }) => theme.backgrondDarkColor};
   border-radius: 5px;
 `;
 
 const AnswerHeader = styled.div`
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
   padding-bottom: 1em;
+  width: 20%;
 `;
 
 const NickName = styled.p`
@@ -62,6 +52,7 @@ const Content = styled.p`
   color: ${({ theme }) => theme.grayColor};
   line-height: 1.5;
   margin-top: 1em;
+  width: 80%;
 `;
 
-export default AnswerItem;
+export default CommentItem;
