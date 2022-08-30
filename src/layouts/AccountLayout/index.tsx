@@ -53,12 +53,16 @@ const Panel = styled.div`
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
   ${media.tablet} {
     width: fit-content;
-    padding: 1em 2em;
-    background: ${({ theme }) => theme.primary2Color};
+    height: fit-content;
+    padding: 4em 2em;
+    background: ${({ theme }) => theme.backgrondDarkColor};
     flex-direction: column;
   }
   ${media.mobile} {
-    width: 70%;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
   }
 `;
 
@@ -76,18 +80,18 @@ const LogoSection = styled.div`
     color: ${({ theme }) => theme.pointColor};
   }
   ${media.tablet} {
-    width: 100%;
+    width: 300px;
     h1 {
       font-size: 4rem;
       font-weight: 800;
-      margin: 2em 0 0;
-      color: ${({ theme }) => theme.backgrondDarkColor};
+      margin: 1em 0 0;
+      color: ${({ theme }) => theme.pointColor};
     }
     p {
       font-size: 0.9rem;
       margin-bottom: 3em;
       font-weight: 800;
-      color: ${({ theme }) => theme.backgrondDarkColor};
+      color: ${({ theme }) => theme.pointColor};
     }
   }
 `;

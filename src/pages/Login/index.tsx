@@ -74,7 +74,7 @@ const LoginContainer = styled.div`
   justify-content: center;
   width: 20em;
   ${media.mobile} {
-    width: 100%;
+    width: 300px;
   }
 `;
 
@@ -86,6 +86,11 @@ const SignUpContainer = styled.div`
     font-size: 0.9rem;
     &:hover {
       cursor: pointer;
+    }
+  }
+  ${media.mobile} {
+    u {
+      color: ${({ theme }) => theme.pointColor};
     }
   }
 `;
