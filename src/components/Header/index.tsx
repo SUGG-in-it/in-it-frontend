@@ -1,21 +1,11 @@
 import Button from '@/components/Button';
-import { loginState } from '@/store/users';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import appLogo from '@/assets/images/bigLogo.png';
 import GrayLine from '@/components/GrayLine';
 
 const Header = () => {
   const navigate = useNavigate();
-  const isLogin = useRecoilValue(loginState);
-
-  const goToLogin = () => {
-    navigate('/login');
-  };
-  const goToMyPage = () => {
-    navigate('/my-page/profile');
-  };
 
   const handleLogoClick = () => {
     navigate('/');
@@ -29,11 +19,6 @@ const Header = () => {
             <img src={appLogo} />
           </LogoSection>
         </LeftSection>
-        {isLogin ? (
-          <MypPageButton onClick={goToMyPage}>{'마이페이지'}</MypPageButton>
-        ) : (
-          <LoginButton onClick={goToLogin}>{'로그인'}</LoginButton>
-        )}
       </HeaderContainer>
       <GrayLine />
     </>
@@ -73,19 +58,4 @@ const LogoSection = styled.div`
   }
 `;
 
-const MypPageButton = styled(Button)`
-  border-radius: 0;
-  color: ${({ theme }) => theme.pointColor};
-  background-color: ${({ theme }) => theme.backgrondLightColor};
-  width: 100px;
-  height: 40px;
-`;
-
-const LoginButton = styled(Button)`
-  border: 1px solid ${({ theme }) => theme.primaryColor};
-  color: ${({ theme }) => theme.primaryColor};
-  background-color: ${({ theme }) => theme.backgrondLightColor};
-  width: 100px;
-  height: 40px;
-`;
 export default Header;
