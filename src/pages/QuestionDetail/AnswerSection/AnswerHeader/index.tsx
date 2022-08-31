@@ -13,7 +13,8 @@ const AnswerHeader = () => {
 const AnswerWriteHeader = styled.div`
   display: flex;
   align-items: center;
-  width: 700px;
+  max-width: 700px;
+  width: 85vw;
   margin: 3em auto 0;
 `;
 

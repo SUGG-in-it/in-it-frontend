@@ -1,3 +1,4 @@
+import { media } from '@/styles/mediaQuery';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -42,6 +43,9 @@ const QuestionWrapper = styled.li`
   padding: 2em 1.2em;
   &:hover {
     cursor: pointer;
+  }
+  ${media.tablet} {
+    padding: 1em 0em;
   }
 `;
 

@@ -1,9 +1,10 @@
-import QuestionSection from '@/pages/Main/QuestionSection';
+import QuestionSection from '@/pages/MyPage/Section/QuestionSection';
 import AnswerSection from '@/pages/MyPage/Section/AnswerSection';
 import CommentSection from '@/pages/MyPage/Section/CommentSection';
 import ProfileSection from '@/pages/MyPage/Section/ProfileSection';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { media } from '@/styles/mediaQuery';
 
 const createSection = (tabIndex?: string) => {
   if (tabIndex === 'profile') return <ProfileSection />;
@@ -27,6 +28,9 @@ const SectionWrapper = styled.div`
   width: 80vw;
   max-width: 900px;
   margin: 0 auto;
+  ${media.mobile} {
+    width: 90vw;
+  }
 `;
 
 const SectionPanel = styled.div`

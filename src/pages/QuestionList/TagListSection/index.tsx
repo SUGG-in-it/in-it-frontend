@@ -1,3 +1,4 @@
+import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
 
 const dummy = [
@@ -41,6 +42,9 @@ const TagListWrapper = styled.ul`
     font-size: 0.9rem;
     margin-bottom: 1em;
     color: ${({ theme }) => theme.textColor};
+  }
+  ${media.tablet} {
+    display: none;
   }
 `;
 

@@ -1,5 +1,6 @@
 import GrayLine from '@/components/GrayLine';
 import ProfileRow from '@/pages/MyPage/Section/ProfileSection/ProfileRow';
+import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
 
 const dummy = {
@@ -37,6 +38,9 @@ const ProfileSection = () => {
 
 const ProfileCotainer = styled.div`
   padding: 5% 10%;
+  ${media.mobile} {
+    padding: 5%;
+  }
 `;
 
 export default ProfileSection;

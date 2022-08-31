@@ -22,8 +22,8 @@ const Header = () => {
   };
 
   return (
-    <>
-      <HeaderContainer>
+    <HeadeContainer>
+      <HeaderWrapper>
         <LeftSection>
           <LogoSection onClick={handleLogoClick}>
             <img src={appLogo} />
@@ -34,15 +34,18 @@ const Header = () => {
         ) : (
           <LoginButton onClick={goToLogin}>{'로그인'}</LoginButton>
         )}
-      </HeaderContainer>
+      </HeaderWrapper>
       <GrayLine />
-    </>
+    </HeadeContainer>
   );
 };
 
-const HeaderContainer = styled.div`
-  height: 70px;
+const HeadeContainer = styled.div`
   background-color: ${({ theme }) => theme.backgrondDarkColor};
+`;
+
+const HeaderWrapper = styled.div`
+  height: 70px;
   max-width: 1100px;
   padding: 0 2em;
   margin: 0 auto;

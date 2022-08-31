@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { media } from '@/styles/mediaQuery';
 
 const TAB_MENU = [{ name: '프로필' }, { name: '나의 질문' }, { name: '나의 답변' }, { name: '나의 댓글' }];
 
@@ -55,6 +56,9 @@ const TabContainer = styled.div`
   background-color: ${({ theme }) => theme.backgrondDarkColor};
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   border-radius: 8px;
+  ${media.mobile} {
+    width: 90vw;
+  }
 `;
 
 const TabMenu = styled.ul`
@@ -73,6 +77,18 @@ const TabMenu = styled.ul`
   .clicked-menu {
     color: ${({ theme }) => theme.textColor};
     width: 100px;
+  }
+  ${media.mobile} {
+    margin: 0 8%;
+    font-size: 0.9rem;
+    .menu {
+      width: 70px;
+      text-align: center;
+    }
+    .clicked-menu {
+      width: 70px;
+      text-align: center;
+    }
   }
 `;
 
