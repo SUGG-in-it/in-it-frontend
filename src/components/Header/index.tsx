@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import appLogo from '@/assets/images/bigLogo.png';
+import GrayLine from '@/components/GrayLine';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -21,29 +22,33 @@ const Header = () => {
   };
 
   return (
-    <HeaderContainer>
-      <LeftSection>
-        <LogoSection onClick={handleLogoClick}>
-          <img src={appLogo} />
-        </LogoSection>
-      </LeftSection>
-      {isLogin ? (
-        <MypPageButton onClick={goToMyPage}>{'마이페이지'}</MypPageButton>
-      ) : (
-        <LoginButton onClick={goToLogin}>{'로그인'}</LoginButton>
-      )}
-    </HeaderContainer>
+    <>
+      <HeaderContainer>
+        <LeftSection>
+          <LogoSection onClick={handleLogoClick}>
+            <img src={appLogo} />
+          </LogoSection>
+        </LeftSection>
+        {isLogin ? (
+          <MypPageButton onClick={goToMyPage}>{'마이페이지'}</MypPageButton>
+        ) : (
+          <LoginButton onClick={goToLogin}>{'로그인'}</LoginButton>
+        )}
+      </HeaderContainer>
+      <GrayLine />
+    </>
   );
 };
 
 const HeaderContainer = styled.div`
   height: 70px;
   background-color: ${({ theme }) => theme.backgrondDarkColor};
-  padding: 10px 20%;
+  max-width: 1100px;
+  padding: 0 2em;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
 `;
 
 const LeftSection = styled.div`
