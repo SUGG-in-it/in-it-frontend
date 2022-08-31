@@ -44,7 +44,7 @@ const AnswerListSection = () => {
   );
 };
 const AnswerListSectionWrapper = styled.div`
-  width: 80vw;
+  width: 85vw;
   max-width: 700px;
   margin: 0 auto;
 `;

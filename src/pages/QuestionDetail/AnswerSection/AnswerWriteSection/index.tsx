@@ -1,6 +1,7 @@
 import Button from '@/components/Button';
 import ToastEditor from '@/components/ToastEdtior';
 import { QLabel } from '@/styles/commonStyles';
+import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
 
 const AnswerWriteSection = () => {
@@ -22,7 +23,7 @@ const AnswerWriteSection = () => {
 };
 
 const AnswerWriteSectionWrapper = styled.div`
-  width: 80vw;
+  width: 85vw;
   max-width: 700px;
   margin: 3em auto;
 `;
@@ -35,6 +36,11 @@ const ToastEditorWrapper = styled.div`
   background-color: ${({ theme }) => theme.backgrondLightColor};
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   border-radius: 5px;
+  ${media.mobile} {
+    padding: 0;
+    border: none;
+    background-color: ${({ theme }) => theme.backgrondDarkColor};
+  }
 `;
 
 const Notice = styled.p`
