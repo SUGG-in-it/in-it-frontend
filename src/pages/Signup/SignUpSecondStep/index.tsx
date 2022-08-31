@@ -1,5 +1,4 @@
 import Button from '@/components/Button';
-import LabelInput from '@/components/Input/LabelInput';
 import ValidationInput from '@/components/Input/ValidationInput';
 import { useJoinMutation } from '@/hooks/queries/useUser';
 import useValidationInput from '@/hooks/useValidationInput';
@@ -67,34 +66,30 @@ const SignUpSecondStep = () => {
 
   return (
     <InputSection>
-      <LabelInput label="닉네임">
-        <ValidationInput
-          type={'text'}
-          value={nickname.value}
-          onChange={nickname.onChange}
-          isValid={nickname.isValid}
-          msg={VALIDATION_ERROR_MSG.EMPTY_NICKNAME}
-        />
-      </LabelInput>
-      <LabelInput label="비밀번호">
-        <ValidationInput
-          type={'password'}
-          value={password.value}
-          onChange={password.onChange}
-          isValid={password.isValid}
-          msg={VALIDATION_ERROR_MSG.INVALID_PASSWORD}
-        />
-      </LabelInput>
-      <LabelInput label="비밀번호 확인">
-        <ValidationInput
-          type={'password'}
-          value={rePassword.value}
-          onChange={rePassword.onChange}
-          isValid={rePassword.isValid}
-          msg={VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD}
-        />
-      </LabelInput>
-      <Label>{'경력'}</Label>
+      <ValidationInput
+        type={'text'}
+        placeholder={'닉네임을 입력해주세요'}
+        value={nickname.value}
+        onChange={nickname.onChange}
+        isValid={nickname.isValid}
+        msg={VALIDATION_ERROR_MSG.EMPTY_NICKNAME}
+      />
+      <ValidationInput
+        type={'password'}
+        placeholder={'비밀번호를 입력해주세요'}
+        value={password.value}
+        onChange={password.onChange}
+        isValid={password.isValid}
+        msg={VALIDATION_ERROR_MSG.INVALID_PASSWORD}
+      />
+      <ValidationInput
+        type={'password'}
+        placeholder={'비밀번호를 다시 입력해주세요'}
+        value={rePassword.value}
+        onChange={rePassword.onChange}
+        isValid={rePassword.isValid}
+        msg={VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD}
+      />
       <select name="year" value={year} onChange={handleYearSelect}>
         <option value="신입">신입</option>
         <option value="1년차">1년차</option>
@@ -105,21 +100,28 @@ const SignUpSecondStep = () => {
         <option value="10년차 이상">10년차 이상</option>
         <option value="20년차 이상">20년차 이상</option>
       </select>
-      <LabelInput label="직무">
-        <ValidationInput
-          type={'text'}
-          value={workPosition.value}
-          onChange={workPosition.onChange}
-          isValid={workPosition.isValid}
-          msg={VALIDATION_ERROR_MSG.EMPTY_WORK_POSITION}
-        />
-      </LabelInput>
+      <ValidationInput
+        type={'text'}
+        placeholder={'직군을 입력해주세요'}
+        value={workPosition.value}
+        onChange={workPosition.onChange}
+        isValid={workPosition.isValid}
+        msg={VALIDATION_ERROR_MSG.EMPTY_WORK_POSITION}
+      />
       <Button onClick={handleSignUp}>{'회원가입'}</Button>
     </InputSection>
   );
 };
 
 const InputSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20em;
+  ${media.mobile} {
+    width: 300px;
+    margin: 0 auto;
+  }
   select {
     font-size: 0.8rem;
     padding: 0.5em;
