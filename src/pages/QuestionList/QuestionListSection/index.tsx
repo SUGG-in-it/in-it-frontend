@@ -48,9 +48,9 @@ const dummy = [
 
 const QuestionListSection = () => {
   return (
-    <div>
+    <QuestionListContainer>
       <StatusBar />
-      <QuestionListContainer>
+      <QuestionListWrapper>
         {dummy.map((question) => {
           return (
             <>
@@ -59,12 +59,16 @@ const QuestionListSection = () => {
             </>
           );
         })}
-      </QuestionListContainer>
-    </div>
+      </QuestionListWrapper>
+    </QuestionListContainer>
   );
 };
 
-const QuestionListContainer = styled.ul`
+const QuestionListContainer = styled.div`
+  margin: 0 auto;
+`;
+
+const QuestionListWrapper = styled.ul`
   max-width: 700px;
   width: 80vw;
   margin: 0 auto;
