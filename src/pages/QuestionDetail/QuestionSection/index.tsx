@@ -40,7 +40,8 @@ const QuestionSectionContainer = styled.div`
 `;
 
 const QuestionSectionWrapper = styled.div`
-  width: 700px;
+  max-width: 700px;
+  width: 80vw;
   margin: 0 auto;
 `;
 

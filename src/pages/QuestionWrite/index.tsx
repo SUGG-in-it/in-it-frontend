@@ -4,6 +4,7 @@ import ToastEditor from '@/components/ToastEdtior';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
 import { QLabel } from '@/styles/commonStyles';
+import { media } from '@/styles/mediaQuery';
 import { validateQuestionTitle } from '@/utils/validations';
 import styled from 'styled-components';
 
@@ -40,12 +41,19 @@ const QuestionWriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: self-start;
+  ${media.tablet} {
+    margin-left: 13vw;
+  }
+  ${media.mobile} {
+    margin-left: 7vw;
+  }
 `;
 
 const QuestionInput = styled(ValidationInput)`
   border: 1px solid #ddd;
   border-radius: 3px;
-  width: 30vw;
+  width: 60vw;
+  max-width: 550px;
   height: fit-content;
 `;
 
@@ -82,7 +90,8 @@ const ToastEditorWrapper = styled.div`
 `;
 
 const Label = styled.p`
-  font-size: 1.3rem;
+  font-size: 1rem;
+  font-weight: 800;
   color: ${({ theme }) => theme.pointColor};
 `;
 

@@ -1,6 +1,7 @@
 import BannerSection from '@/pages/QuestionList/BannerSection';
 import QuestionListSection from '@/pages/QuestionList/QuestionListSection';
 import TagListSection from '@/pages/QuestionList/TagListSection';
+import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
 
 const dummy = [
@@ -61,10 +62,14 @@ const QuestionListPage = () => {
 const ContentSection = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 1000px;
+  max-width: 1000px;
+  width: 90vw;
   margin: 0 auto;
   padding-bottom: 100px;
   padding-top: 50px;
+  ${media.tablet} {
+    padding-top: 30px;
+  }
 `;
 
 export default QuestionListPage;

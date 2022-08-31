@@ -1,3 +1,4 @@
+import { media } from '@/styles/mediaQuery';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
@@ -25,5 +26,10 @@ export const GlobalStyle = createGlobalStyle`
     .toastui-editor-defaultUI{
         width: calc(700px - 4em);
         height: 400px;
+    }
+    ${media.mobile}{
+        .toastui-editor-defaultUI{
+            width:85vw;
+        }
     }
 `;
