@@ -1,3 +1,4 @@
+import { media } from '@/styles/mediaQuery';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -44,6 +45,12 @@ const TopSection = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 1em;
+  ${media.tablet} {
+    margin-bottom: 0.5em;
+  }
+  ${media.mobile} {
+    margin-bottom: 0.3em;
+  }
 `;
 
 const Ranking = styled.div`
@@ -53,6 +60,9 @@ const Ranking = styled.div`
   margin-right: 1em;
   font-weight: bold;
   color: ${({ isCompleted }) => (isCompleted ? '#adb5bd' : '#4d7cfe')};
+  ${media.tablet} {
+    padding: 0.1em;
+  }
 `;
 
 const Title = styled.p`

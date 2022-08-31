@@ -1,4 +1,5 @@
 import QuestionItem from '@/pages/Main/QuestionSection/QuestionItem';
+import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
 
 const dummy = [
@@ -95,13 +96,20 @@ const QuestionContainer = styled.div`
 `;
 
 const QuestionBox = styled.div`
-  width: 1100px;
+  max-width: 1100px;
+  width: 80vw;
   height: fit-content;
   margin: 0 auto;
   background-color: ${({ theme }) => theme.backgrondLightColor};
   border-radius: 5px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   padding: 2em;
+  ${media.tablet} {
+    width: 80vw;
+  }
+  ${media.mobile} {
+    padding: 1em;
+  }
 `;
 
 const Label = styled.p`
@@ -116,18 +124,38 @@ const QuestionListWrapper = styled.div`
   ul {
     width: 50%;
   }
+  ${media.tablet} {
+    flex-direction: column;
+    ul {
+      width: 100%;
+    }
+  }
 `;
 
 const LeftSection = styled.ul`
   border-right: 1px solid ${({ theme }) => theme.greyLineColor};
   li {
     padding: 1.5em 1em 1.5em 0em;
+    height: 100px;
+  }
+  ${media.tablet} {
+    border-right: none;
+    li {
+      height: 80px;
+    }
   }
 `;
 
 const RightSection = styled.ul`
   li {
     padding: 1.5em 0em 1.5em 1em;
+    height: 100px;
+  }
+  ${media.tablet} {
+    li {
+      padding: 1.5em 1em 1.5em 0em;
+      height: 80px;
+    }
   }
 `;
 
