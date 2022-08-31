@@ -24,16 +24,16 @@ const BannerContainer = styled.div`
   img {
     width: 20vw;
     height: 20vw;
-    max-width: 250px;
-    max-height: 250px;
+    max-width: 270px;
+    max-height: 270px;
     border-radius: 10px;
     margin: 2em 1em;
     box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
   }
   ${media.tablet} {
     img {
-      width: 30vw;
-      height: 30vw;
+      width: 27vw;
+      height: 27vw;
     }
     .banner-img4 {
       display: none;
