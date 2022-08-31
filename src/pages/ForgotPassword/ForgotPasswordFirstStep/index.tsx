@@ -1,6 +1,5 @@
 import { sendCode, verifyCode } from '@/api/auth';
 import Button from '@/components/Button';
-import LabelInput from '@/components/Input/LabelInput';
 import ValidationInput from '@/components/Input/ValidationInput';
 import { useEmailCheckMutation } from '@/hooks/queries/useUser';
 import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
@@ -48,46 +47,49 @@ const ForgotPasswordFirstStep = () => {
   };
 
   return (
-    <>
+    <ForgotPasswordWrapper>
       {!isSentCode ? (
         <>
-          <LabelInput label="이메일">
-            <ValidationInput
-              type={'email'}
-              value={email.value}
-              onChange={email.onChange}
-              isValid={email.isValid}
-              msg={VALIDATION_ERROR_MSG.INVALID_EMAIL}
-            />
-          </LabelInput>
+          <ValidationInput
+            type={'email'}
+            placeholder={'이메일을 입력해주세요'}
+            value={email.value}
+            onChange={email.onChange}
+            isValid={email.isValid}
+            msg={VALIDATION_ERROR_MSG.INVALID_EMAIL}
+          />
           <SendButton onClick={() => handleSendCode(email)}>{'인증번호 전송'}</SendButton>
         </>
       ) : (
         <>
-          <InputCode isSentCode={isSentCode}>
-            <LabelInput label="인증번호">
-              <ValidationInput
-                type={'text'}
-                value={code.value}
-                onChange={code.onChange}
-                isValid={code.isValid}
-                msg={VALIDATION_ERROR_MSG.EMPTY_PASSWORD}
-              />
-            </LabelInput>
-            <VerifyButton onClick={() => handleVerifyCode(code)}>{'확인'}</VerifyButton>
-          </InputCode>
+          <ValidationInput
+            type={'text'}
+            placeholder={'인증번호를 입력해주세요'}
+            value={code.value}
+            onChange={code.onChange}
+            isValid={code.isValid}
+            msg={VALIDATION_ERROR_MSG.EMPTY_PASSWORD}
+          />
+          <VerifyButton onClick={() => handleVerifyCode(code)}>{'확인'}</VerifyButton>
         </>
       )}
       <ResencContainer>
         <span>메일을 받지 못하셨습니까?</span>
         <u onClick={resendCode}>재전송 하기</u>
       </ResencContainer>
-    </>
+    </ForgotPasswordWrapper>
   );
 };
 
-const InputCode = styled.div`
-  visibility: ${({ isSentCode }) => (isSentCode ? 'visible' : 'hidden')};
+const ForgotPasswordWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20em;
+  ${media.mobile} {
+    width: 300px;
+    margin: 0 auto;
+  }
 `;
 
 const ResencContainer = styled.div`

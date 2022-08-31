@@ -135,12 +135,13 @@ const QuestionListWrapper = styled.div`
 const LeftSection = styled.ul`
   border-right: 1px solid ${({ theme }) => theme.greyLineColor};
   li {
-    padding: 1.5em 1em 1.5em 0em;
+    padding: 0.5em 1em 0.5em 0em;
     height: 100px;
   }
   ${media.tablet} {
     border-right: none;
     li {
+      padding: 1.5em 1em 1.5em 0em;
       height: 80px;
     }
   }
@@ -148,7 +149,7 @@ const LeftSection = styled.ul`
 
 const RightSection = styled.ul`
   li {
-    padding: 1.5em 0em 1.5em 1em;
+    padding: 0.5em 0em 0.5em 1em;
     height: 100px;
   }
   ${media.tablet} {
