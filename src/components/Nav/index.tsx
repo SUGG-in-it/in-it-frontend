@@ -3,6 +3,7 @@ import GrayLine from '@/components/GrayLine';
 import Button from '@/components/Button';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { media } from '@/styles/mediaQuery';
 
 const TAB_MENU = [{ name: '홈' }, { name: '답변하기' }];
 
@@ -27,7 +28,7 @@ const Nav = () => {
   };
 
   return (
-    <>
+    <NavWrapper>
       <NavContainer>
         <TabMenu>
           {TAB_MENU.map((menu, index) => {
@@ -45,19 +46,26 @@ const Nav = () => {
         <AnswerButton onClick={handleQuestionClick}>{'질문하기'}</AnswerButton>
       </NavContainer>
       <GrayLine />
-    </>
+    </NavWrapper>
   );
 };
 
+const NavWrapper = styled.div`
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+`;
+
 const NavContainer = styled.div`
   display: flex;
-  padding-left: 20%;
-  padding-right: 20%;
   height: 60px;
   display: flex;
+  max-width: 1100px;
   align-items: center;
   justify-content: space-between;
-  background-color: ${({ theme }) => theme.backgrondLightColor};
+  margin: 0 auto;
+  padding-left: 3em;
+  ${media.mobile} {
+    padding-left: 2em;
+  }
 `;
 
 const TabMenu = styled.ul`
@@ -76,6 +84,14 @@ const TabMenu = styled.ul`
   .clicked-menu {
     color: ${({ theme }) => theme.textColor};
     width: 100px;
+  }
+  ${media.mobile} {
+    .menu {
+      width: 60px;
+    }
+    .clicked-menu {
+      width: 60px;
+    }
   }
 `;
 

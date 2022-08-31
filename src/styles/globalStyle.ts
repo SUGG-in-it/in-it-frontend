@@ -19,6 +19,9 @@ export const GlobalStyle = createGlobalStyle`
     textarea{
         font-family: 'Do Hyeon', sans-serif;
     }
+    p{
+        line-height: 1.3;
+    }
     .toastui-editor-defaultUI{
         width: calc(700px - 4em);
         height: 400px;

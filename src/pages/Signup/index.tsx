@@ -1,6 +1,7 @@
 import SignUpFirstStep from '@/pages/Signup/SignUpFirstStep';
 import SignUpSecondStep from '@/pages/Signup/SignUpSecondStep';
 import { signUpState } from '@/store/users';
+import { media } from '@/styles/mediaQuery';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
@@ -15,6 +16,10 @@ const SignUpWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 20em;
+  ${media.mobile} {
+    width: 300px;
+    margin: 0 auto;
+  }
 `;
 
 export default SignUpPage;

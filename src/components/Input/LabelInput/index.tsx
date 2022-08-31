@@ -1,3 +1,4 @@
+import { media } from '@/styles/mediaQuery';
 import { ReactElement } from 'react';
 import styled from 'styled-components';
 
@@ -22,6 +23,10 @@ const LabelInputContainer = styled.div`
 const Label = styled.p`
   font-size: 0.8rem;
   color: white;
+  font-weight: 800;
+  ${media.tablet} {
+    color: ${({ theme }) => theme.pointColor};
+  }
 `;
 
 export default LabelInput;

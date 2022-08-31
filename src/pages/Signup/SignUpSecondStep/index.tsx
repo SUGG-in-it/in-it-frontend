@@ -4,6 +4,7 @@ import ValidationInput from '@/components/Input/ValidationInput';
 import { useJoinMutation } from '@/hooks/queries/useUser';
 import useValidationInput from '@/hooks/useValidationInput';
 import { signUpState } from '@/store/users';
+import { media } from '@/styles/mediaQuery';
 import {
   validateNickName,
   validatePassword,
@@ -147,6 +148,10 @@ const Label = styled.p`
   margin-bottom: 0.5em;
   color: white;
   font-size: 0.8rem;
+  font-weight: 800;
+  ${media.tablet} {
+    color: ${({ theme }) => theme.pointColor};
+  }
 `;
 
 export default SignUpSecondStep;

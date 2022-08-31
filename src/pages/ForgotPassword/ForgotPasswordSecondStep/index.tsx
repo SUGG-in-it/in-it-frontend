@@ -43,15 +43,14 @@ const ForgotPasswordSecondStep = () => {
           msg={VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD}
         />
       </LabelInput>
-      <Button onClick={handleChangePassword}>{'비밀번호 변경'}</Button>
+      <PostButton onClick={handleChangePassword}>{'비밀번호 변경'}</PostButton>
     </>
   );
 };
 
-const ErrorMessage = styled.p`
-  font-size: 0.8rem;
-  color: red;
-  margin-bottom: 1em;
+const PostButton = styled(Button)`
+  background-color: ${({ theme }) => theme.primaryColor};
+  margin-bottom: 2em;
 `;
 
 export default ForgotPasswordSecondStep;
