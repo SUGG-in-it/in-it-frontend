@@ -5,21 +5,26 @@ import useValidationInput from '@/hooks/useValidationInput';
 import { forgotPasswordState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
 import { validatePassword, validateRePassword, VALIDATION_ERROR_MSG } from '@/utils/validations';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 const ForgotPasswordSecondStep = () => {
+  const navigate = useNavigate();
   const password = useValidationInput('', validatePassword);
-  const rePassword = useValidationInput('', validateRePassword);
+  const rePassword = useValidationInput('', validateRePassword, password.value);
 
   const forgotPassword = useRecoilValue(forgotPasswordState);
 
   const handleChangePassword = async () => {
+    password.checkValidation();
+    rePassword.checkValidation();
     if (password.isValid && rePassword.isValid) {
       await resetPassword({
         email: forgotPassword.email,
         password: password.value,
       });
+      navigate('/login');
     }
   };
 

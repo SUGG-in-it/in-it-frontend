@@ -1,8 +1,7 @@
 import { sendCode, verifyCode } from '@/api/auth';
 import Button from '@/components/common/Button';
 import ValidationInput from '@/components/common/Input/ValidationInput';
-import { useEmailCheckMutation } from '@/hooks/queries/useUser';
-import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
+import useValidationInput from '@/hooks/useValidationInput';
 import { forgotPasswordState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
 import { successToast } from '@/utils/toastUtils';
@@ -17,26 +16,20 @@ const ForgotPasswordFirstStep = () => {
   const [isSentCode, setIsSentCode] = useState(false);
   const setforgotPassword = useSetRecoilState(forgotPasswordState);
 
-  const resendCode = () => {
-    sendCode(email.value);
+  const handleResendCode = async () => {
+    await sendCode(email.value);
     successToast(`${email.value}로 이메일을 전송하였습니다.`);
   };
 
-  const mutationCheckEmail = useEmailCheckMutation({
-    onSuccess: () => {
-      sendCode(email.value);
+  const handleSendCode = async () => {
+    if (email.isValid) {
+      await sendCode(email.value);
       successToast(`${email.value}로 이메일을 전송하였습니다.`);
       setIsSentCode(true);
-    },
-  });
-
-  const handleSendCode = async (email: UseValidationInputReturn) => {
-    if (email.isValid) {
-      mutationCheckEmail.mutate(email.value);
     }
   };
 
-  const handleVerifyCode = async (code: UseValidationInputReturn) => {
+  const handleVerifyCode = async () => {
     if (code.isValid) {
       await verifyCode({ email: email.value, code: code.value });
       setforgotPassword({
@@ -58,7 +51,7 @@ const ForgotPasswordFirstStep = () => {
             isValid={email.isValid}
             msg={VALIDATION_ERROR_MSG.INVALID_EMAIL}
           />
-          <SendButton onClick={() => handleSendCode(email)}>{'인증번호 전송'}</SendButton>
+          <SendButton onClick={handleSendCode}>{'인증번호 전송'}</SendButton>
         </>
       ) : (
         <>
@@ -70,12 +63,12 @@ const ForgotPasswordFirstStep = () => {
             isValid={code.isValid}
             msg={VALIDATION_ERROR_MSG.EMPTY_PASSWORD}
           />
-          <VerifyButton onClick={() => handleVerifyCode(code)}>{'확인'}</VerifyButton>
+          <VerifyButton onClick={handleVerifyCode}>{'확인'}</VerifyButton>
         </>
       )}
       <ResencContainer>
         <span>메일을 받지 못하셨습니까?</span>
-        <u onClick={resendCode}>재전송 하기</u>
+        <u onClick={handleResendCode}>재전송 하기</u>
       </ResencContainer>
     </ForgotPasswordWrapper>
   );
@@ -97,22 +90,14 @@ const ResencContainer = styled.div`
   justify-content: space-between;
   display: flex;
   span {
-    color: white;
+    color: ${({ theme }) => theme.pointColor};
     font-size: 0.9rem;
   }
   u {
-    color: white;
+    color: ${({ theme }) => theme.pointColor};
     font-size: 0.9rem;
     &:hover {
       cursor: pointer;
-    }
-  }
-  ${media.tablet} {
-    span {
-      color: ${({ theme }) => theme.pointColor};
-    }
-    u {
-      color: ${({ theme }) => theme.pointColor};
     }
   }
 `;
