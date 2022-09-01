@@ -1,5 +1,5 @@
-import Button from '@/components/Button';
-import ValidationInput from '@/components/Input/ValidationInput';
+import Button from '@/components/common/Button';
+import ValidationInput from '@/components/common/Input/ValidationInput';
 import { useLoginMutation } from '@/hooks/queries/useUser';
 import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
 import { loginState } from '@/store/users';

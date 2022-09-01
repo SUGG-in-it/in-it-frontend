@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import appLogo from '@/assets/images/bigLogo.png';

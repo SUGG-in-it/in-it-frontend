@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import GrayLine from '@/components/GrayLine';
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { media } from '@/styles/mediaQuery';

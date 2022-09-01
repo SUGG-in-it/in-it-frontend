@@ -1,4 +1,4 @@
-import { InputProps } from '@/components/Input';
+import { InputProps } from '@/components/common/Input';
 import styled from 'styled-components';
 
 interface ValidationInputProps extends InputProps {

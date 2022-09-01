@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import CommentList from '@/pages/QuestionDetail/AnswerSection/AnswerListSection/AnswerItem/CommentSection/CommentList';
 import CommentWrite from '@/pages/QuestionDetail/AnswerSection/AnswerListSection/AnswerItem/CommentSection/CommentWrite';
 import { useState } from 'react';

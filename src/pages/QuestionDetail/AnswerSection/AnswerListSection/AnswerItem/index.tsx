@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import CommentSection from '@/pages/QuestionDetail/AnswerSection/AnswerListSection/AnswerItem/CommentSection';
 import CommentList from '@/pages/QuestionDetail/AnswerSection/AnswerListSection/AnswerItem/CommentSection/CommentList';
 import { QLabel } from '@/styles/commonStyles';

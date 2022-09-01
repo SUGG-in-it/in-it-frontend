@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from '@/components/common/Button';
 import ToastEditor from '@/components/ToastEdtior';
 import { QLabel } from '@/styles/commonStyles';
 import { media } from '@/styles/mediaQuery';

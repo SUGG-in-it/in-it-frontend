@@ -1,6 +1,6 @@
 import { resetPassword } from '@/api/users';
-import Button from '@/components/Button';
-import ValidationInput from '@/components/Input/ValidationInput';
+import Button from '@/components/common/Button';
+import ValidationInput from '@/components/common/Input/ValidationInput';
 import useValidationInput from '@/hooks/useValidationInput';
 import { forgotPasswordState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
