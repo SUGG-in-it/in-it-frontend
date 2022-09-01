@@ -2,7 +2,6 @@ import Aside from '@/components/Aside';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import Nav from '@/components/Nav';
-import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -13,7 +12,6 @@ import styled from 'styled-components';
 const MainLayout = () => {
   return (
     <>
-      <Toaster position="top-right" />
       <Header />
       <Nav />
       <ContentSection>
