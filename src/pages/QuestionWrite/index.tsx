@@ -1,5 +1,6 @@
+import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
-import ValidationInput from '@/components/common/Input/ValidationInput';
+import LabelInput from '@/components/common/Input/LabelInput';
 import ToastEditor from '@/components/ToastEdtior';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
