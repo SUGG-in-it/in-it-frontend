@@ -41,8 +41,8 @@ const App = () => {
 const mainRoutes = () => {
   return (
     <>
-      <Route path="/" element={<Auth Component={<MainPage />} />} />
-      <Route path="/question/list" element={<Auth Component={<QuestionListPage />} />} />
+      <Route path="/" element={<MainPage />} />
+      <Route path="/question/list" element={<QuestionListPage />} />
     </>
   );
 };
@@ -51,7 +51,7 @@ const questionRoutes = () => {
   return (
     <>
       <Route path="/question/write" element={<Auth Component={<QuestionWritePage />} />} />
-      <Route path="/question/:id" element={<Auth Component={<QuestionDetailPage />} />} />
+      <Route path="/question/:id" element={<QuestionDetailPage />} />
     </>
   );
 };
@@ -61,7 +61,7 @@ const acccountRoutes = () => {
     <>
       <Route path="/sign-up" element={<UnAuth Component={<SignUpPage />} />} />
       <Route path="/login" element={<UnAuth Component={<LoginPage />} />} />
-      <Route path="/forgot-password" element={<UnAuth Component={<ForgotPasswordPage />} />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
     </>
   );
 };
@@ -75,7 +75,7 @@ const routes = () => {
         <Route element={<AccountLayout />}>{acccountRoutes()}</Route>
         <Route element={<QuestionLayout />}>{questionRoutes()}</Route>
         <Route path="/my-page/:tabIndex" element={<Auth Component={<MyPage />} />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<UnAuth Component={<NotFoundPage />} />} />
       </Routes>
     </BrowserRouter>
   );
