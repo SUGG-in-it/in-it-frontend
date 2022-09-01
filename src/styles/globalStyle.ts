@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
         line-height: 1.3;
     }
     .toastui-editor-defaultUI{
-        width: 800px;
+        width: 100%;
         height: 400px;
     }
     ${media.tablet}{
