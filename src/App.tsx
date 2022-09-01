@@ -13,6 +13,7 @@ import { darkTheme, lightTheme } from '@/styles/theme';
 import { darkModeState } from '@/store/theme';
 import DarkModeButton from '@/components/common/Button/DarkModeButton';
 import QuestionLayout from '@/layouts/QuestionLayout';
+import { Toaster } from 'react-hot-toast';
 
 const SignUpPage = lazy(() => import('@/pages/Signup'));
 const LoginPage = lazy(() => import('@/pages/Login'));
@@ -70,6 +71,7 @@ const routes = () => {
   return (
     <BrowserRouter>
       <DarkModeButton />
+      <Toaster position="top-right" />
       <Routes>
         <Route element={<MainLayout />}>{mainRoutes()}</Route>
         <Route element={<AccountLayout />}>{acccountRoutes()}</Route>
