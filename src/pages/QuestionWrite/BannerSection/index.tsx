@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const BannerSection = () => {
   return (
     <BannerContainer>
-      <h1>코드 리뷰를 해보세요</h1>
-      <h3>코드 리뷰로 받은 포인트로 등급을 올려봐요! 😎</h3>
+      <h1>질문을 작성해보세요.</h1>
+      <h3>질문을 작성해 코드리뷰를 받아보아요! 😎</h3>
     </BannerContainer>
   );
 };

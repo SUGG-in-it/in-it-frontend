@@ -12,6 +12,7 @@ import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '@/styles/theme';
 import { darkModeState } from '@/store/theme';
 import DarkModeButton from '@/components/Button/DarkModeButton';
+import QuestionLayout from '@/layouts/QuestionLayout';
 
 const SignUpPage = lazy(() => import('@/pages/Signup'));
 const LoginPage = lazy(() => import('@/pages/Login'));
@@ -41,8 +42,15 @@ const mainRoutes = () => {
   return (
     <>
       <Route path="/" element={<Auth Component={<MainPage />} />} />
-      <Route path="/question/write" element={<Auth Component={<QuestionWritePage />} />} />
       <Route path="/question/list" element={<Auth Component={<QuestionListPage />} />} />
+    </>
+  );
+};
+
+const questionRoutes = () => {
+  return (
+    <>
+      <Route path="/question/write" element={<Auth Component={<QuestionWritePage />} />} />
       <Route path="/question/:id" element={<Auth Component={<QuestionDetailPage />} />} />
     </>
   );
@@ -65,6 +73,7 @@ const routes = () => {
       <Routes>
         <Route element={<MainLayout />}>{mainRoutes()}</Route>
         <Route element={<AccountLayout />}>{acccountRoutes()}</Route>
+        <Route element={<QuestionLayout />}>{questionRoutes()}</Route>
         <Route path="/my-page/:tabIndex" element={<Auth Component={<MyPage />} />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

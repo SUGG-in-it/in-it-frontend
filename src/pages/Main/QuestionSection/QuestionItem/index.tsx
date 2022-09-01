@@ -1,6 +1,7 @@
 import { media } from '@/styles/mediaQuery';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { FiCornerDownRight } from 'react-icons/fi';
 
 interface QuestionProps {
   id: number;
@@ -25,32 +26,30 @@ const QuestionItem = ({ id, nickName, date, title, content }: QuestionProps) => 
         <Ranking>{id}</Ranking>
         <Title>{title}</Title>
       </TopSection>
-      <Content>{content}</Content>
-      <BottomSection>
-        <p>{`작성자  ${nickName}`}</p>
-        <p>{date}</p>
-      </BottomSection>
+      <ContentContainer>
+        <Arrow />
+        <Content>{content}</Content>
+      </ContentContainer>
+      <AnswerCount>{`답변수 1`}</AnswerCount>
     </QuestionWrapper>
   );
 };
 
 const QuestionWrapper = styled.li`
-  &:hover {
-    cursor: pointer;
-  }
-  border-top: 1px solid ${({ theme }) => theme.greyLineColor};
+  position: relative;
+  margin-top: 14px;
+  padding: 4px 4px 16px 18px;
+  border-bottom: 1px solid #f2f2f2;
+  background: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: -0.5px;
+  cursor: pointer;
 `;
 
 const TopSection = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 1em;
-  ${media.tablet} {
-    margin-bottom: 0.5em;
-  }
-  ${media.mobile} {
-    margin-bottom: 0.3em;
-  }
 `;
 
 const Ranking = styled.div`
@@ -65,31 +64,42 @@ const Ranking = styled.div`
   }
 `;
 
-const Title = styled.p`
-  font-size: 0.9em;
-  font-weight: bold;
-  color: ${({ theme }) => theme.textColor};
+const Arrow = styled(FiCornerDownRight)`
+  width: 20px;
+  margin-right: 0.5em;
+  color: ${({ theme }) => theme.grayColor};
 `;
 
-const Content = styled.p`
-  font-size: 0.8rem;
-  color: ${({ theme }) => theme.grayColor};
-  line-height: 1.3;
+const ContentContainer = styled.div`
+  display: flex;
+`;
+
+const Title = styled.p`
   display: block;
   overflow: hidden;
+  margin-bottom: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.textColor};
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
-const BottomSection = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 1em;
-  p {
-    color: #3e4042;
-    font-size: 0.8rem;
-    margin-right: 2em;
-  }
+const Content = styled.p`
+  display: block;
+  overflow: hidden;
+  position: relative;
+  color: ${({ theme }) => theme.texColor};
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: calc(100% - 4em);
+`;
+
+const AnswerCount = styled.div`
+  color: ${({ theme }) => theme.grayColor};
+  font-size: 0.7rem;
+  margin-right: 2em;
+  margin-top: 0.5em;
 `;
 
 export default QuestionItem;

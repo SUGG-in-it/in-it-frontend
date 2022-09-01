@@ -20,8 +20,9 @@ const LabelInputContainer = styled.div`
 `;
 
 const Label = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: ${({ theme }) => theme.pointColor};
+  margin-bottom: 0.5em;
   font-weight: 800;
 `;
 
