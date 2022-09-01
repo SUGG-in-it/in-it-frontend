@@ -24,10 +24,10 @@ export const GlobalStyle = createGlobalStyle`
         line-height: 1.3;
     }
     .toastui-editor-defaultUI{
-        width: calc(700px - 4em);
+        width: 100%;
         height: 400px;
     }
-    ${media.mobile}{
+    ${media.tablet}{
         .toastui-editor-defaultUI{
             width:85vw;
         }

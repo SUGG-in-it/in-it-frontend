@@ -64,9 +64,7 @@ const QuestionListSection = () => {
   );
 };
 
-const QuestionListContainer = styled.div`
-  margin: 0 auto;
-`;
+const QuestionListContainer = styled.div``;
 
 const QuestionListWrapper = styled.ul`
   max-width: 700px;

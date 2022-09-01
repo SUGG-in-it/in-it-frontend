@@ -1,9 +1,10 @@
+import Button from '@/components/Button';
 import Input from '@/components/Input';
-import ValidationInput from '@/components/Input/ValidationInput';
+import LabelInput from '@/components/Input/LabelInput';
 import ToastEditor from '@/components/ToastEdtior';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
-import { QLabel } from '@/styles/commonStyles';
+import BannerSection from '@/pages/QuestionWrite/BannerSection';
 import { media } from '@/styles/mediaQuery';
 import { validateQuestionTitle } from '@/utils/validations';
 import styled from 'styled-components';
@@ -14,85 +15,75 @@ const QuestionWritePage = () => {
   const power = useInput('');
 
   return (
-    <QuestionWriteContainer>
-      <QContainer>
-        <QLabel>Q.</QLabel>
-        <QuestionInput input={question} type="text" />
-      </QContainer>
-      <ToastEditorWrapper>
-        <ToastEditor />
-      </ToastEditorWrapper>
-      <TagContainer>
-        <Label>태그</Label>
-        <TagInput input={tag} type="text" placeholder="#리액트 #자바" />
-      </TagContainer>
-      <PowerContainer>
-        <Label>내공</Label>
-        <TagInput input={power} type="number" placeholder="100" />
-      </PowerContainer>
-    </QuestionWriteContainer>
+    <>
+      <BannerSection />
+      <QuestionWriteContainer>
+        <LabelInput label="제목">
+          <CustomInput input={question} type="text" placeholder="제목을 입력해주세요." />
+        </LabelInput>
+        <ToastEditorWrapper>
+          <ToastEditor />
+        </ToastEditorWrapper>
+        <LabelInput label="태그">
+          <CustomInput input={tag} type="text" placeholder="태그를 입력해주세요." />
+        </LabelInput>
+        <LabelInput label="내공">
+          <CustomInput input={power} type="number" placeholder="내공을 입력해주세요." />
+        </LabelInput>
+        <ButtonWrapper>
+          <CancelButton>{'취소'}</CancelButton>
+          <PostButton>{'등록'}</PostButton>
+        </ButtonWrapper>
+      </QuestionWriteContainer>
+    </>
   );
 };
 
 const QuestionWriteContainer = styled.div`
-  margin-left: 20vw;
-  margin-right: 20vw;
-  margin-top: 100px;
+  width: 85vw;
+  max-width: 800px;
   display: flex;
+  margin: 0 auto;
+  margin-top: 3em;
+  padding-bottom: 5em;
   flex-direction: column;
-  align-items: self-start;
   ${media.tablet} {
-    margin-left: 13vw;
-  }
-  ${media.mobile} {
     margin-left: 7vw;
   }
 `;
 
-const QuestionInput = styled(ValidationInput)`
+const CustomInput = styled(Input)`
   border: 1px solid #ddd;
   border-radius: 3px;
-  width: 60vw;
-  max-width: 550px;
+  width: 100%;
   height: fit-content;
-`;
-
-const TagInput = styled(Input)`
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  width: 30vw;
-  height: fit-content;
-  margin-left: 20px;
-`;
-
-const QContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-`;
-
-const TagContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 50px;
-`;
-
-const PowerContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+  margin-bottom: 2em;
+  ${media.mobile} {
+    margin-bottom: 1em;
+  }
 `;
 
 const ToastEditorWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 2em;
 `;
 
-const Label = styled.p`
-  font-size: 1rem;
-  font-weight: 800;
-  color: ${({ theme }) => theme.pointColor};
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const CancelButton = styled(Button)`
+  width: 100px;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+  color: ${({ theme }) => theme.primaryColor};
+  border: 1px solid ${({ theme }) => theme.primaryColor};
+  margin-right: 1em;
+`;
+
+const PostButton = styled(Button)`
+  background-color: ${({ theme }) => theme.primaryColor};
+  width: 100px;
 `;
 
 export default QuestionWritePage;

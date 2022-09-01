@@ -96,13 +96,12 @@ const QuestionContainer = styled.div`
 `;
 
 const QuestionBox = styled.div`
-  max-width: 1100px;
+  max-width: 850px;
   width: 80vw;
   height: fit-content;
   margin: 0 auto;
   background-color: ${({ theme }) => theme.backgrondLightColor};
-  border-radius: 5px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
   padding: 2em;
   ${media.tablet} {
     width: 80vw;
