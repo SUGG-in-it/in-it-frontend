@@ -27,7 +27,7 @@ const Aside = () => {
   };
 
   const handleProfileClick = () => {
-    router.push('/my-page/profile');
+    router.push('/mypage/profile');
   };
 
   const handleLoginClick = () => {

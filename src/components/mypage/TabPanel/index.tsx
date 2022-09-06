@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
@@ -6,23 +6,41 @@ import { useRouter } from 'next/router';
 const TAB_MENU = [{ name: '프로필' }, { name: '나의 질문' }, { name: '나의 답변' }, { name: '나의 댓글' }];
 
 const TabPanel = () => {
-  const [currentTab, setCurrentTab] = useState(0);
   const router = useRouter();
+  const [currentTab, setCurrentTab] = useState(0);
+
+  useEffect(() => {
+    matchUrlTab();
+  }, []);
+
+  const matchUrlTab = () => {
+    if (router.route === '/mypage/profile') {
+      setCurrentTab(0);
+    }
+    if (router.route === '/mypage/question') {
+      setCurrentTab(1);
+    }
+    if (router.route === '/mypage/answer') {
+      setCurrentTab(2);
+    }
+    if (router.route === '/mypage/comment') {
+      setCurrentTab(3);
+    }
+  };
 
   const selectMenuHandler = (index) => {
-    setCurrentTab(index);
     switch (index) {
       case 0:
-        router.push('/my-page/profile');
+        router.push('/mypage/profile');
         break;
       case 1:
-        router.push('/my-page/question');
+        router.push('/mypage/question');
         break;
       case 2:
-        router.push('/my-page/answer');
+        router.push('/mypage/answer');
         break;
       case 3:
-        router.push('/my-page/comment');
+        router.push('/mypage/comment');
         break;
     }
   };
