@@ -12,8 +12,8 @@
 - ... etc
 
 ## 🛠 tech stack
-```React``` ```TypeScript``` ```Recoil``` ```React-query```   
-```styled-components``` 
+```Next.js``` ```React``` ```TypeScript``` 
+```Recoil``` ```React-query``` ```styled-components``` 
 
 ## 🐾 Branch Strategy
 
