@@ -1,5 +1,5 @@
-import GrayLine from '@/components/GrayLine';
-import ProfileRow from '@/pages/MyPage/Section/ProfileSection/ProfileRow';
+import GrayLine from '@/components/common/GrayLine';
+import ProfileRow from '@/pages/mypage/Section/ProfileSection/ProfileRow';
 import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
 

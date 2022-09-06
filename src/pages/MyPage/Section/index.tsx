@@ -1,8 +1,8 @@
-import QuestionSection from '@/pages/MyPage/Section/QuestionSection';
-import AnswerSection from '@/pages/MyPage/Section/AnswerSection';
-import CommentSection from '@/pages/MyPage/Section/CommentSection';
-import ProfileSection from '@/pages/MyPage/Section/ProfileSection';
-import { useParams } from 'react-router-dom';
+import QuestionSection from '@/pages/mypage/Section/QuestionSection';
+import AnswerSection from '@/pages/mypage/Section/AnswerSection';
+import CommentSection from '@/pages/mypage/Section/CommentSection';
+import ProfileSection from '@/pages/mypage/Section/ProfileSection';
+/* import { useParams } from 'react-router-dom'; */
 import styled from 'styled-components';
 import { media } from '@/styles/mediaQuery';
 
@@ -14,11 +14,11 @@ const createSection = (tabIndex?: string) => {
 };
 
 const Section = () => {
-  const { tabIndex } = useParams<{ tabIndex?: string }>();
+  // const { tabIndex } = useParams<{ tabIndex?: string }>();
 
   return (
     <SectionWrapper>
-      <SectionPanel>{createSection(tabIndex)}</SectionPanel>
+      <SectionPanel>{createSection('1')}</SectionPanel>
     </SectionWrapper>
   );
 };

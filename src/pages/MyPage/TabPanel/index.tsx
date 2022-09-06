@@ -1,28 +1,28 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { media } from '@/styles/mediaQuery';
+import { useRouter } from 'next/router';
 
 const TAB_MENU = [{ name: '프로필' }, { name: '나의 질문' }, { name: '나의 답변' }, { name: '나의 댓글' }];
 
 const TabPanel = () => {
   const [currentTab, setCurrentTab] = useState(0);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const selectMenuHandler = (index) => {
     setCurrentTab(index);
     switch (index) {
       case 0:
-        navigate('/my-page/profile');
+        router.push('/my-page/profile');
         break;
       case 1:
-        navigate('/my-page/question');
+        router.push('/my-page/question');
         break;
       case 2:
-        navigate('/my-page/answer');
+        router.push('/my-page/answer');
         break;
       case 3:
-        navigate('/my-page/comment');
+        router.push('/my-page/comment');
         break;
     }
   };

@@ -1,33 +1,34 @@
 import Button from '@/components/common/Button';
 import ValidationInput from '@/components/common/Input/ValidationInput';
+import AccountLayout from '@/components/layouts/AccountLayout';
 import { useLoginMutation } from '@/hooks/queries/useUser';
 import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
 import { loginState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
 import { validateLoginEmail, validateLoginPwd, VALIDATION_ERROR_MSG } from '@/utils/validations';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const email = useValidationInput('', validateLoginEmail);
   const password = useValidationInput('', validateLoginPwd);
 
   const setIsLogin = useSetRecoilState(loginState);
   const mutationLogin = useLoginMutation({
     onSuccess: () => {
-      navigate('/');
+      router.push('/');
       setIsLogin(true);
     },
   });
 
   const moveToSignUp = () => {
-    navigate('/sign-up');
+    router.push('/signup');
   };
 
   const moveToForgotPassword = () => {
-    navigate('/forgot-password');
+    router.push('/password');
   };
 
   const handleLogin = (email: UseValidationInputReturn, password: UseValidationInputReturn) => {
@@ -39,29 +40,31 @@ const LoginPage = () => {
   };
 
   return (
-    <LoginContainer>
-      <ValidationInput
-        type={'email'}
-        placeholder={'이메일을 입력해주세요'}
-        value={email.value}
-        onChange={email.onChange}
-        isValid={email.isValid}
-        msg={VALIDATION_ERROR_MSG.EMPTY_EMAIL}
-      />
-      <ValidationInput
-        type={'password'}
-        placeholder={'비밀번호를 입력해주세요'}
-        value={password.value}
-        onChange={password.onChange}
-        isValid={password.isValid}
-        msg={VALIDATION_ERROR_MSG.EMPTY_PASSWORD}
-      />
-      <LoginButton onClick={() => handleLogin(email, password)}>{'로그인'}</LoginButton>
-      <SignUpContainer>
-        <u onClick={moveToForgotPassword}>비밀번호 찾기</u>
-        <u onClick={moveToSignUp}>회원가입</u>{' '}
-      </SignUpContainer>
-    </LoginContainer>
+    <AccountLayout>
+      <LoginContainer>
+        <ValidationInput
+          type={'email'}
+          placeholder={'이메일을 입력해주세요'}
+          value={email.value}
+          onChange={email.onChange}
+          isValid={email.isValid}
+          msg={VALIDATION_ERROR_MSG.EMPTY_EMAIL}
+        />
+        <ValidationInput
+          type={'password'}
+          placeholder={'비밀번호를 입력해주세요'}
+          value={password.value}
+          onChange={password.onChange}
+          isValid={password.isValid}
+          msg={VALIDATION_ERROR_MSG.EMPTY_PASSWORD}
+        />
+        <LoginButton onClick={() => handleLogin(email, password)}>{'로그인'}</LoginButton>
+        <SignUpContainer>
+          <u onClick={moveToForgotPassword}>비밀번호 찾기</u>
+          <u onClick={moveToSignUp}>회원가입</u>{' '}
+        </SignUpContainer>
+      </LoginContainer>
+    </AccountLayout>
   );
 };
 
