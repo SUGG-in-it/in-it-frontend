@@ -5,6 +5,7 @@ import { CriticalErrorBoundary, RootErrorBoundary } from '@/components/common/Er
 import { ThemeProvider } from 'styled-components';
 import { lightTheme } from '@/styles/theme';
 import { GlobalStyle } from '@/styles/globalStyle';
+import { Toaster } from 'react-hot-toast';
 
 function MyApp({ Component, pageProps }) {
   const queryClient = new QueryClient();
@@ -19,6 +20,7 @@ function MyApp({ Component, pageProps }) {
                 <title>코드리뷰 사이트 : init()</title>
               </Head>
               <Component {...pageProps} />
+              <Toaster position="top-right" />
             </CriticalErrorBoundary>
           </RootErrorBoundary>
         </ThemeProvider>
