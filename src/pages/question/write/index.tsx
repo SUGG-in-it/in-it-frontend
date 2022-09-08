@@ -9,12 +9,16 @@ import { validateQuestionTitle } from '@/utils/validations';
 import styled from 'styled-components';
 import QuestionLayout from '@/components/layouts/QuestionLayout';
 import dynamic from 'next/dynamic';
+import LoginRequestModal from '@/components/common/modal/LoginRequestModal';
+import { useRecoilValue } from 'recoil';
+import { loginState } from '@/store/users';
 const ToastEditor = dynamic(() => import('@/components/common/ToastEditor'), { ssr: false });
 
 const QuestionWritePage = () => {
   const question = useValidationInput('', validateQuestionTitle);
   const tag = useInput('');
   const power = useInput('');
+  const isLogin = useRecoilValue(loginState);
 
   return (
     <QuestionLayout>
@@ -38,6 +42,7 @@ const QuestionWritePage = () => {
             <PostButton>{'등록'}</PostButton>
           </ButtonWrapper>
         </QuestionWriteContainer>
+        {isLogin ? null : <LoginRequestModal />}
       </>
     </QuestionLayout>
   );
