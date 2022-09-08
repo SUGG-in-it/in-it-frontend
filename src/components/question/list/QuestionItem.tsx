@@ -27,9 +27,9 @@ const QuestionItem = ({ id, isCompleted, nickName, date, title, content, tags }:
       </TopSection>
       <Content>{content}</Content>
       <TagsWrapper>
-        {tags.map((tag, index) => {
-          return <Tags key={index}>{`# ${tag}`}</Tags>;
-        })}
+        {tags.map((tag, index) => (
+          <Tags key={index}>{`# ${tag}`}</Tags>
+        ))}
       </TagsWrapper>
       <BottomSection>
         <p>{`작성자  ${nickName}`}</p>

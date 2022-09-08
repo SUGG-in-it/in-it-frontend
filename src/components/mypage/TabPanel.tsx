@@ -48,17 +48,15 @@ const TabPanel = () => {
   return (
     <TabContainer>
       <TabMenu>
-        {TAB_MENU.map((menu, index) => {
-          return (
-            <li
-              key={index}
-              className={currentTab === index ? 'clicked-menu' : 'menu'}
-              onClick={() => selectMenuHandler(index)}
-            >
-              {menu.name}
-            </li>
-          );
-        })}
+        {TAB_MENU.map((menu, index) => (
+          <li
+            key={index}
+            className={currentTab === index ? 'clicked-menu' : 'menu'}
+            onClick={() => selectMenuHandler(index)}
+          >
+            {menu.name}
+          </li>
+        ))}
       </TabMenu>
     </TabContainer>
   );

@@ -37,9 +37,9 @@ const dummy = [
 const AnswerListSection = () => {
   return (
     <AnswerListSectionWrapper>
-      {dummy.map((answer) => {
-        return <AnswerItem key={answer.id} {...answer} />;
-      })}
+      {dummy.map((answer) => (
+        <AnswerItem key={answer.id} {...answer} />
+      ))}
     </AnswerListSectionWrapper>
   );
 };

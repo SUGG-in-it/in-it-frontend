@@ -4,7 +4,7 @@ import ValidationInput from '@/components/common/Input/ValidationInput';
 import useValidationInput from '@/hooks/useValidationInput';
 import { forgotPasswordState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
-import { successToast } from '@/utils/toastUtils';
+import { successToast } from '@/utils/toast';
 import { validateCode, validateLoginEmail, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';

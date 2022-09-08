@@ -5,7 +5,7 @@ import { useEmailCheckMutation } from '@/hooks/queries/useUser';
 import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
 import { signUpState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
-import { successToast } from '@/utils/toastUtils';
+import { successToast } from '@/utils/toast';
 import { validateCode, validateSingupEmail, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';

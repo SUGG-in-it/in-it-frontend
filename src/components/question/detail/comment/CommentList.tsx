@@ -30,9 +30,9 @@ const dummy = [
 const CommentList = () => {
   return (
     <>
-      {dummy.map((comment) => {
-        return <CommentItem key={comment.id} {...comment} />;
-      })}
+      {dummy.map((comment) => (
+        <CommentItem key={comment.id} {...comment} />
+      ))}
     </>
   );
 };
