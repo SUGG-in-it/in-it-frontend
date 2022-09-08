@@ -25,7 +25,6 @@ export const GlobalStyle = createGlobalStyle`
     }
     .toastui-editor-defaultUI{
         width: 100%;
-        height: 400px;
     }
     ${media.tablet}{
         .toastui-editor-defaultUI{

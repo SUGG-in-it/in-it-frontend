@@ -7,6 +7,7 @@ export default function ToastEditor() {
       placeholder="내용을 입력해주세요."
       previewStyle="vertical"
       initialEditType="wysiwyg"
+      height="350px"
       toolbarItems={[
         // 툴바 옵션 설정
         ['heading', 'bold', 'italic', 'strike'],
