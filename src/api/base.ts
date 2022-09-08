@@ -1,3 +1,4 @@
+import { newToken } from '@/api/auth';
 import { CustomError } from '@/api/Error';
 import axios, { AxiosRequestConfig } from 'axios';
 interface RequestType {
@@ -11,6 +12,25 @@ interface ResponseType {
   message?: string;
   status: string;
 }
+
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    const { config, response } = error;
+    // 401 error => refreshToken으로 accessToken 갱신 => 재요청
+    if (response?.status === 401) {
+      const originalRequest = config;
+      const refreshToken = localStorage.getItem('refreshToken');
+      const data = await newToken(refreshToken);
+      const accessToken = data.data.accessToken;
+      localStorage.setItem('accessToken', accessToken);
+      return axios(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);
 
 const request = async ({ url, method, body, params }: RequestType): Promise<ResponseType> => {
   try {
@@ -31,7 +51,7 @@ const request = async ({ url, method, body, params }: RequestType): Promise<Resp
       {};
     return data;
   } catch (error: any) {
-    console.log('API ERROR', error, error.response.status);
+    // console.log('API ERROR', error, error.response.status);
     throw new CustomError(error.response.status, error.response.message);
   }
 };

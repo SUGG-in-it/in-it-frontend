@@ -12,3 +12,5 @@ export const sendCode = async (email: string) => await POST('/auth/issue', { ema
 
 export const verifyCode = async (verifyCodeParams: verifyCodeRequestBody) =>
   await POST('auth/verify', verifyCodeParams);
+
+export const newToken = async (refreshToken: string) => await POST('/token/refresh-token', { refreshToken });
