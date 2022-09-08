@@ -26,8 +26,8 @@ const Aside = () => {
   const handleLogoutClick = () => {
     // 로그아웃이 너무 빠르게 되는거 같아 500ms 뒤에 로그아웃 처리하도록 했습니다.
     setTimeout(() => {
-      localStorage.setItem('accessToken', null);
-      localStorage.setItem('refreshToken', null);
+      localStorage.setItem('accessToken', '');
+      localStorage.setItem('refreshToken', '');
       setIsLogin(false);
       router.push('/login');
       successToast('로그아웃이 완료되었습니다.');
