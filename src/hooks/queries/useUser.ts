@@ -1,4 +1,4 @@
-import { CustomError } from '@/api/Error';
+import { CustomError } from '@/api/error';
 import { duplicateCheckEmail, join, login } from '@/api/users';
 import { errorToast, successToast } from '@/utils/toast';
 import { MutationCallbacks } from '@/utils/types/MuationCallbacks';

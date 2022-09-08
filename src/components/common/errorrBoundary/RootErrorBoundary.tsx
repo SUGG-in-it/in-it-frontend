@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { CustomError } from '@/api/Error';
+import { CustomError } from '@/api/error';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 
 /* -------------------------------------------------------------------------------------------------
