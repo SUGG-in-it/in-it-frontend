@@ -1,5 +1,5 @@
 import { newToken } from '@/api/auth';
-import { CustomError } from '@/api/error';
+import { CustomError } from '@/api/config/error';
 import axios, { AxiosRequestConfig } from 'axios';
 interface RequestType {
   url: string;

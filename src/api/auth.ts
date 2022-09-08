@@ -1,4 +1,4 @@
-import { POST } from '@/api/base';
+import { POST } from '@/api/config/base';
 
 export interface verifyCodeRequestBody {
   email: string;

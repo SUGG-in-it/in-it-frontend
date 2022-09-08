@@ -1,4 +1,4 @@
-import { HttpStatusCode } from '@/api/status';
+import { HttpStatusCode } from '@/api/config/status';
 
 export class CustomError extends Error {
   statusCode: HttpStatusCode;

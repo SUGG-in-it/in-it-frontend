@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { CustomError } from '@/api/error';
+import { CustomError } from '@/api/config/error';
 import styled from 'styled-components';
 import ServerErrorImg from '@/assets/images/500error.png';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';

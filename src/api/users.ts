@@ -1,4 +1,4 @@
-import { POST, PUT } from '@/api/base';
+import { POST, PUT } from '@/api/config/base';
 
 export interface loginRequestBody {
   email: string;
