@@ -13,6 +13,15 @@ interface ResponseType {
   status: string;
 }
 
+axios.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 axios.interceptors.response.use(
   (response) => {
     return response;
@@ -39,7 +48,6 @@ const request = async ({ url, method, body, params }: RequestType): Promise<Resp
       params,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
     const { data } =
