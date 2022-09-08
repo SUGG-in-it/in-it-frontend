@@ -1,4 +1,4 @@
-import { LoaderWrapper } from '@/components/common/loading/loadingWrapper.style';
+import { LoaderWrapper } from '@/components/common/loading/LoadingWrapper.style';
 import MoonLoader from 'react-spinners/MoonLoader';
 
 function MoonLoading() {
