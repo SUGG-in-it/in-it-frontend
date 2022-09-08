@@ -75,14 +75,14 @@ const QuestionSection = () => {
         <Label>인기 Q&A</Label>
         <QuestionListWrapper>
           <LeftSection>
-            {dummy.map((question) => {
-              return <QuestionItem key={question.id} {...question} />;
-            })}
+            {dummy.map((question) => (
+              <QuestionItem key={question.id} {...question} />
+            ))}
           </LeftSection>
           <RightSection>
-            {dummy2.map((question) => {
-              return <QuestionItem key={question.id} {...question} />;
-            })}
+            {dummy2.map((question) => (
+              <QuestionItem key={question.id} {...question} />
+            ))}
           </RightSection>
         </QuestionListWrapper>
       </QuestionBox>

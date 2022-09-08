@@ -51,14 +51,12 @@ const QuestionListSection = () => {
     <QuestionListContainer>
       <StatusBar />
       <QuestionListWrapper>
-        {dummy.map((question) => {
-          return (
-            <>
-              <QuestionItem key={question.id} {...question} />
-              <GrayLine />
-            </>
-          );
-        })}
+        {dummy.map((question) => (
+          <>
+            <QuestionItem key={question.id} {...question} />
+            <GrayLine />
+          </>
+        ))}
       </QuestionListWrapper>
     </QuestionListContainer>
   );

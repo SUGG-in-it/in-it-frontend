@@ -56,13 +56,11 @@ const Aside = () => {
       </MypageWrapper>
       <TagListWrapper>
         <p>인기 태그</p>
-        {dummy.map((tag, index) => {
-          return (
-            <TagWrapper key={index}>
-              <span>{`# ${tag}`}</span>
-            </TagWrapper>
-          );
-        })}
+        {dummy.map((tag, index) => (
+          <TagWrapper key={index}>
+            <span>{`# ${tag}`}</span>
+          </TagWrapper>
+        ))}
       </TagListWrapper>
     </AsideContainer>
   );

@@ -5,9 +5,9 @@ const StatusBar = () => {
 
   return (
     <StatusBarContainer>
-      {menuList.map((menu, index) => {
-        return <Status key={index}>{menu}</Status>;
-      })}
+      {menuList.map((menu, index) => (
+        <Status key={index}>{menu}</Status>
+      ))}
     </StatusBarContainer>
   );
 };

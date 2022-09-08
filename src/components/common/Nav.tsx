@@ -31,17 +31,15 @@ const Nav = () => {
     <NavWrapper>
       <NavContainer>
         <TabMenu>
-          {TAB_MENU.map((menu, index) => {
-            return (
-              <li
-                key={index}
-                className={currentTab === index ? 'clicked-menu' : 'menu'}
-                onClick={() => handleMenuClick(index)}
-              >
-                {menu.name}
-              </li>
-            );
-          })}
+          {TAB_MENU.map((menu, index) => (
+            <li
+              key={index}
+              className={currentTab === index ? 'clicked-menu' : 'menu'}
+              onClick={() => handleMenuClick(index)}
+            >
+              {menu.name}
+            </li>
+          ))}
         </TabMenu>
         <AnswerButton onClick={handleQuestionClick}>{'질문하기'}</AnswerButton>
       </NavContainer>
