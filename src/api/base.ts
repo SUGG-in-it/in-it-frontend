@@ -15,10 +15,11 @@ interface ResponseType {
 const request = async ({ url, method, body, params }: RequestType): Promise<ResponseType> => {
   try {
     const config: AxiosRequestConfig = {
-      baseURL: process.env.REACT_APP_API_PREFIX,
+      baseURL: process.env.NEXT_PUBLIC_API_PREFIX,
       params,
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
     const { data } =

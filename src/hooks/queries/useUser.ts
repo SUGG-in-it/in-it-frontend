@@ -6,8 +6,12 @@ import { useMutation } from '@tanstack/react-query';
 
 export const useLoginMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(login, {
-    onSuccess: () => {
+    onSuccess: (data: any) => {
+      const { accessToken, refreshToken } = data.data;
       onSuccess && onSuccess();
+
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
       successToast('로그인이 되었습니다. 환영합니다!');
     },
     onError: () => {
@@ -15,7 +19,7 @@ export const useLoginMutation = ({ onSuccess, onError }: MutationCallbacks = {})
       // TODO 에러별로 처리 필요
       errorToast('');
     },
-    // useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
+    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
 };
 
