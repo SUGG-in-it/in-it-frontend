@@ -3,7 +3,7 @@ import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { successToast } from '@/utils/toastUtils';
+import { successToast } from '@/utils/toast';
 
 const dummy = [
   'react',

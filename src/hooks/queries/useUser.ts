@@ -1,6 +1,6 @@
 import { CustomError } from '@/api/Error';
 import { duplicateCheckEmail, join, login } from '@/api/users';
-import { errorToast, successToast } from '@/utils/toastUtils';
+import { errorToast, successToast } from '@/utils/toast';
 import { MutationCallbacks } from '@/utils/types/MuationCallbacks';
 import { useMutation } from '@tanstack/react-query';
 
