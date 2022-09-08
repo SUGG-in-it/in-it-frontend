@@ -1,4 +1,4 @@
-import GrayLine from '@/components/common/GrayLine';
+import GrayLine from '@/components/common/GreyLine';
 import MypageLayout from '@/components/layouts/MypageLayout';
 import ProfileRow from '@/pages/mypage/profile/ProfileRow';
 import { media } from '@/styles/mediaQuery';

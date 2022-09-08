@@ -1,4 +1,4 @@
-import Button from '@/components/common/Button';
+import Button from '@/components/common/button/Button';
 import styled from 'styled-components';
 import PageNotFoundImg from '@/assets/images/404error.png';
 import { useRouter } from 'next/router';

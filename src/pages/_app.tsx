@@ -1,11 +1,12 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
-import { CriticalErrorBoundary, RootErrorBoundary } from '@/components/common/ErrorrBoundary';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme } from '@/styles/theme';
 import { GlobalStyle } from '@/styles/globalStyle';
 import { Toaster } from 'react-hot-toast';
+import CriticalErrorBoundary from '@/components/common/errorrBoundary/CriticalErrorBoundary';
+import RootErrorBoundary from '@/components/common/errorrBoundary/RootErrorBoundary';
 
 function MyApp({ Component, pageProps }) {
   const queryClient = new QueryClient();

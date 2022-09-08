@@ -1,5 +1,5 @@
-import Button from '@/components/common/Button';
-import Input from '@/components/common/Input';
+import Button from '@/components/common/button/Button';
+import Input from '@/components/common/Input/Input';
 import LabelInput from '@/components/common/Input/LabelInput';
 import useInput from '@/hooks/useInput';
 import useValidationInput from '@/hooks/useValidationInput';
@@ -9,7 +9,7 @@ import { validateQuestionTitle } from '@/utils/validations';
 import styled from 'styled-components';
 import QuestionLayout from '@/components/layouts/QuestionLayout';
 import dynamic from 'next/dynamic';
-const ToastEditor = dynamic(() => import('@/components/common/ToastEdtior'), { ssr: false });
+const ToastEditor = dynamic(() => import('@/components/common/ToastEditor'), { ssr: false });
 
 const QuestionWritePage = () => {
   const question = useValidationInput('', validateQuestionTitle);
