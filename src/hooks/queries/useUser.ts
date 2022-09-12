@@ -1,4 +1,5 @@
 import { CustomError } from '@/api/config/error';
+import { HttpStatusCode } from '@/api/config/status';
 import { duplicateCheckEmail, join, login } from '@/api/users';
 import { errorToast, successToast } from '@/utils/toast';
 import { MutationCallbacks } from '@/utils/types/MuationCallbacks';
@@ -14,10 +15,11 @@ export const useLoginMutation = ({ onSuccess, onError }: MutationCallbacks = {})
       localStorage.setItem('refreshToken', refreshToken);
       successToast('로그인이 되었습니다. 환영합니다!');
     },
-    onError: () => {
+    onError: (error: CustomError) => {
       onError && onError();
-      // TODO 에러별로 처리 필요
-      errorToast('');
+      if (error.statusCode === HttpStatusCode.UNAUTHORIZED || error.statusCode === HttpStatusCode.NOT_FOUND) {
+        errorToast('아이디 혹은 비밀번호가 일치하지 않습니다.');
+      }
     },
     useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
@@ -41,9 +43,11 @@ export const useEmailCheckMutation = ({ onSuccess, onError }: MutationCallbacks 
     onSuccess: () => {
       onSuccess && onSuccess();
     },
-    onError: () => {
+    onError: (error: CustomError) => {
       onError && onError();
-      errorToast('이미 가입된 메일입니다.');
+      if (error.statusCode === HttpStatusCode.CONFLICT) {
+        errorToast('이미 가입된 메일입니다.');
+      }
     },
   });
 };

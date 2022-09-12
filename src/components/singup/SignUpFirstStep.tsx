@@ -1,6 +1,7 @@
-import { sendCode, verifyCode } from '@/api/auth';
+import { sendCode } from '@/api/auth';
 import Button from '@/components/common/button/Button';
 import ValidationInput from '@/components/common/Input/ValidationInput';
+import { useVerifyMutation } from '@/hooks/queries/useAuth';
 import { useEmailCheckMutation } from '@/hooks/queries/useUser';
 import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
 import { signUpState } from '@/store/users';
@@ -25,6 +26,15 @@ const SignUpFirstStep = () => {
     },
   });
 
+  const mutationVerifyCode = useVerifyMutation({
+    onSuccess: () => {
+      setSignUp({
+        step: 2,
+        email: email.value,
+      });
+    },
+  });
+
   const resendCode = () => {
     sendCode(email.value);
     successToast(`${email.value}로 이메일을 전송하였습니다.`);
@@ -38,11 +48,7 @@ const SignUpFirstStep = () => {
 
   const handleVerifyCode = async (code: UseValidationInputReturn) => {
     if (code.isValid) {
-      await verifyCode({ email: email.value, code: code.value });
-      setSignUp({
-        step: 2,
-        email: email.value,
-      });
+      mutationVerifyCode.mutate({ email: email.value, code: code.value });
     }
   };
 
