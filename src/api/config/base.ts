@@ -11,6 +11,7 @@ interface ResponseType {
   data?: any;
   message?: string;
   status: string;
+  code?: string;
 }
 
 axios.interceptors.request.use(
@@ -22,24 +23,27 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-axios.interceptors.response.use(
+/* axios.interceptors.response.use(
   (response) => {
     return response;
   },
   async (error) => {
     const { config, response } = error;
     // 401 error => refreshToken으로 accessToken 갱신 => 재요청
-    if (response?.status === 401) {
+
+    if (response?.status === 401 && response.data.code !== 'UNAUTHORIZED_PASSWORD') {
       const originalRequest = config;
       const refreshToken = localStorage.getItem('refreshToken');
       const data = await newToken(refreshToken);
       const accessToken = data.data.accessToken;
       localStorage.setItem('accessToken', accessToken);
       return axios(originalRequest);
+    } else {
+      console.log('???', response.data.status, response.data.message, response.data.code);
+      throw new CustomError(response.data?.status, response.data?.message, response.data?.code);
     }
-    return Promise.reject(error);
   }
-);
+); */
 
 const request = async ({ url, method, body, params }: RequestType): Promise<ResponseType> => {
   try {
@@ -59,8 +63,8 @@ const request = async ({ url, method, body, params }: RequestType): Promise<Resp
       {};
     return data;
   } catch (error: any) {
-    // console.log('API ERROR', error, error.response.status);
-    throw new CustomError(error.response.status, error.response.message);
+    console.log('API error', error);
+    throw new CustomError(error.response.data?.status, error.response.data?.message, error.response.data?.code);
   }
 };
 
