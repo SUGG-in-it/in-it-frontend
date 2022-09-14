@@ -1,6 +1,6 @@
 import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
 import QuestionItem from '@/components/home/QuestionItem';
-import { useQuestions } from '@/hooks/queries/useQuestion';
+import { useQuestionsQuery } from '@/hooks/queries/useQuestion';
 import { media } from '@/styles/mediaQuery';
 import { Suspense, useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -21,7 +21,7 @@ const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
 
 const Questions = () => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
-  const { data } = useQuestions({ page: 1, count: 6, type: 'total' });
+  const { data } = useQuestionsQuery({ page: 1, count: 6, type: 'total' });
 
   useEffect(() => {
     setIsEmptyQuestions(data?.questions?.length === 0);
