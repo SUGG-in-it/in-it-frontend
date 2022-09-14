@@ -1,9 +1,11 @@
-import { getQusetions, GetQusetionsParams } from '@/api/questions';
+import { getQusetions } from '@/api/questions';
 import { KEYS } from '@/constants/reactQuery';
+import { QusetionsRequestBody } from '@/types/request/questions';
+import { QuestionsResponseBody } from '@/types/response/questions';
 import { useQuery } from '@tanstack/react-query';
 
-export const useQuestions = (questionListParams: GetQusetionsParams) => {
-  return useQuery([KEYS.QUESTIONS], () => getQusetions(questionListParams), {
+export const useQuestions = (qusetionsRequestBody: QusetionsRequestBody) => {
+  return useQuery<QuestionsResponseBody>([KEYS.QUESTIONS], () => getQusetions(qusetionsRequestBody), {
     suspense: true,
   });
 };
