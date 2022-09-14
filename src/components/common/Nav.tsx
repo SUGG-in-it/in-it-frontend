@@ -19,8 +19,8 @@ const Nav = () => {
 
   const handleQuestionClick = async () => {
     if (isLogin) {
-      await postQuestionId();
-      router.push('/question/write');
+      const { data } = await postQuestionId();
+      router.push({ pathname: '/question/write', query: { id: data.questionId } });
     } else {
       setIsShowLoginRequestModal(true);
     }
