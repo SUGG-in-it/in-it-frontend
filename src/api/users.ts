@@ -1,28 +1,11 @@
 import { POST, PUT } from '@/api/config/base';
+import { JoinRequestBody, LoginRequestBody, ResetPasswrodRequestBody } from '@/types/request/users';
 
-export interface loginRequestBody {
-  email: string;
-  password: string;
-}
+export const login = async (loginParams: LoginRequestBody) => await POST('/users/login', loginParams);
 
-export interface joinRequestBody {
-  email: string;
-  password: string;
-  nickname: string;
-  year: string;
-  workPosition: string;
-}
+export const join = async (joinParams: JoinRequestBody) => await POST('/users/join', joinParams);
 
-export interface resetPasswrodRequestBody {
-  email: string;
-  password: string;
-}
-
-export const login = async (loginParams: loginRequestBody) => await POST('/users/login', loginParams);
-
-export const join = async (joinParams: joinRequestBody) => await POST('/users/join', joinParams);
-
-export const resetPassword = async (resetPasswrodParams: resetPasswrodRequestBody) =>
+export const resetPassword = async (resetPasswrodParams: ResetPasswrodRequestBody) =>
   await PUT('/users/password', resetPasswrodParams);
 
 export const duplicateCheckEmail = (email: string) => POST('/users/duplicate-email', { email });
