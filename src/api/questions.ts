@@ -1,4 +1,4 @@
-import { GET } from '@/api/config/base';
+import { GET, POST } from '@/api/config/base';
 import { QusetionsRequestBody } from '@/types/request/questions';
 
 export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) => {
@@ -8,3 +8,5 @@ export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) =
       return e;
     });
 };
+
+export const postQuestionId = async () => await POST('/questions');
