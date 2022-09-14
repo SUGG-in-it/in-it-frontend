@@ -4,26 +4,22 @@ import { FiCornerDownRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 
 interface QuestionProps {
-  id: number;
-  isCompleted: boolean;
-  nickName: string;
-  date: string;
+  questionId: number;
   title: string;
   content: string;
-  tags: string[];
 }
 
-const QuestionItem = ({ id, nickName, date, title, content }: QuestionProps) => {
+const QuestionItem = ({ questionId, title, content }: QuestionProps) => {
   const router = useRouter();
 
   const handleQuestionClick = () => {
-    router.push(`/question/detail/${id}`);
+    router.push(`/question/detail/${questionId}`);
   };
 
   return (
     <QuestionWrapper onClick={handleQuestionClick}>
       <TopSection>
-        <Ranking>{id}</Ranking>
+        <Ranking>{questionId}</Ranking>
         <Title>{title}</Title>
       </TopSection>
       <ContentContainer>

@@ -1,92 +1,60 @@
+import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
 import QuestionItem from '@/components/home/QuestionItem';
+import { useQuestions } from '@/hooks/queries/useQuestion';
 import { media } from '@/styles/mediaQuery';
+import { Suspense, useEffect, useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import Skeleton from 'react-loading-skeleton';
 import styled from 'styled-components';
+import { FiRotateCcw } from 'react-icons/fi';
 
-const dummy = [
-  {
-    id: 1,
-    isCompleted: true,
-    nickName: '지렁이',
-    date: '2022-08-17',
-    title: '코드 리뷰 해주세요.',
-    content:
-      '구할 무한한 이는 그와 소담스러운 얼마나 긴지라 우리 사막이다. 석가는 길지 찬미를 아름답고 실현에 동산에는 부패를 공자는 것이다. 지혜는 그것은 따뜻한 가장 그들에게 거선의 예수는 꽃이 부패뿐이다. 능히 청춘은 어디 옷을 피고, 있음으로써 있는가? 대고, 속에 새 뭇 것은 하는 같이, 이것을 그리하였는가? 청춘의 커다란 인생에 피가 든 철환하였는가? 가치를 있을 그들을 갑 내는 뜨고, 모래뿐일 봄바람이다. 못할 이 설산에서 구하지 예수는 힘있다. 석가는 시들어 만천하의 가는 날카로우나 불어 힘있다.',
-    tags: ['react', 'js'],
-  },
-  {
-    id: 2,
-    isCompleted: false,
-    nickName: '깽군',
-    date: '2022-08-17',
-    title: '파워 200드립니다. 구조 좀 봐주세요.',
-    content:
-      '발휘하기 없는 공자는 천하를 이것은 희망의 시들어 봄바람이다. 없는 되려니와, 사는가 청춘의 그림자는 온갖 두기 운다. 청춘을 듣기만 꽃이 그들에게 있는 사막이다. 가진 우리의 열락의 그것은 커다란 청춘은 이 있다. 오아이스도 그와 그것은 있는가? 못할 힘차게 이것은 사막이다. 웅대한 그들에게 이 인간의 스며들어 길지 이것이다. 실로 그들은 생생하며, 황금시대의 가는 우리 이상을 풀밭에 우는 그리하였는가? 작고 천지는 불어 할지니, 봄바람을 황금시대를 사막이다. 피부가 것은 목숨이 이상, 것이다.',
-    tags: ['ts', 'node'],
-  },
-  {
-    id: 3,
-    isCompleted: false,
-    nickName: '깽군',
-    date: '2022-08-17',
-    title: '파워 200드립니다. 구조 좀 봐주세요.',
-    content:
-      'any[]는 배열 타입을 명시적 선언한 것이므로 배열이 아닌 다른 데이터는 할당될 수 없습니다. 다른 데이터 타입을 할당하면 다음과 같은 오류를 컴파일 과정에서 출력합니다.',
-    tags: ['ts', 'any'],
-  },
-];
+const QuestionsFallback = ({ error, resetErrorBoundary }) => (
+  <QuestionContainer>
+    <RetryBox>
+      <p>인기 Q&A를 불러오는데 실패했어요 😭😭😭 </p>
+      <RetryButton onClick={() => resetErrorBoundary()} />
+    </RetryBox>
+  </QuestionContainer>
+);
 
-const dummy2 = [
-  {
-    id: 4,
-    isCompleted: true,
-    nickName: '깽군',
-    date: '2022-08-17',
-    title: '모든 인류 구성원의 천부의 존엄성과 동등하고 양도할 수 없는 권리를 인정하는',
-    content:
-      '만약 복합적으로 어떠한 데이터 타입도 아이템으로 설정할 수 있는 배열이 필요하다면 다음과 같이 명시적 타입 선언을 수행할 수 있습니다. any는 어떤 데이터 타입도 배열 아이템으로 설정 가능함을 말합니다.',
-    tags: ['권리'],
-  },
-  {
-    id: 5,
-    isCompleted: false,
-    nickName: '깽군',
-    date: '2022-08-17',
-    title: '파워 200드립니다. 구조 좀 봐주세요.',
-    content:
-      'any[]는 배열 타입을 명시적 선언한 것이므로 배열이 아닌 다른 데이터는 할당될 수 없습니다. 다른 데이터 타입을 할당하면 다음과 같은 오류를 컴파일 과정에서 출력합니다.',
-    tags: ['ts', 'any'],
-  },
-  {
-    id: 6,
-    isCompleted: true,
-    nickName: '깽군',
-    date: '2022-08-17',
-    title: '모든 인류 구성원의 천부의 존엄성과 동등하고 양도할 수 없는 권리를 인정하는',
-    content:
-      '만약 복합적으로 어떠한 데이터 타입도 아이템으로 설정할 수 있는 배열이 필요하다면 다음과 같이 명시적 타입 선언을 수행할 수 있습니다. any는 어떤 데이터 타입도 배열 아이템으로 설정 가능함을 말합니다.',
-    tags: ['권리'],
-  },
-];
+const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
 
-const QuestionSection = () => {
+const Questions = () => {
+  const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
+  const { data } = useQuestions({ page: 1, count: 6, type: 'total' });
+
+  useEffect(() => {
+    setIsEmptyQuestions(data?.questions?.length === 0);
+  }, [data]);
+
   return (
     <QuestionContainer>
       <QuestionBox>
-        <Label>인기 Q&A</Label>
+        {isEmptyQuestions ? <EmptyMessage>인기 Q&A가 없어요 😭😭😭</EmptyMessage> : <Label>인기 Q&A</Label>}
         <QuestionListWrapper>
           <LeftSection>
-            {dummy.map((question) => (
-              <QuestionItem key={question.id} {...question} />
+            {data?.questions?.map((question) => (
+              <QuestionItem key={question.questionId} {...question} />
             ))}
           </LeftSection>
           <RightSection>
-            {dummy2.map((question) => (
-              <QuestionItem key={question.id} {...question} />
+            {data?.questions?.map((question) => (
+              <QuestionItem key={question.questionId} {...question} />
             ))}
           </RightSection>
         </QuestionListWrapper>
       </QuestionBox>
     </QuestionContainer>
+  );
+};
+
+const QuestionSection = () => {
+  return (
+    <ErrorBoundary FallbackComponent={QuestionsFallback}>
+      <Suspense fallback={<QuestionsLoading />}>
+        <Questions />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
@@ -157,6 +125,40 @@ const RightSection = styled.ul`
       height: 80px;
     }
   }
+`;
+
+const EmptyMessage = styled.p`
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: center;
+`;
+
+const RetryBox = styled.div`
+  max-width: 850px;
+  width: 80vw;
+  height: fit-content;
+  margin: 0 auto;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  padding: 3em;
+  ${media.tablet} {
+    width: 80vw;
+  }
+  ${media.mobile} {
+    padding: 1em;
+  }
+`;
+
+const RetryButton = styled(FiRotateCcw)`
+  width: 30px;
+  height: 30px;
+  margin-top: 30px;
+  color: ${({ theme }) => theme.greyLineColor};
+  cursor: pointer;
 `;
 
 export default QuestionSection;
