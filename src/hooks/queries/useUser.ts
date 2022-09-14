@@ -2,7 +2,7 @@ import { CustomError } from '@/api/config/error';
 import { HttpStatusCode } from '@/api/config/status';
 import { duplicateCheckEmail, join, login } from '@/api/users';
 import { errorToast, successToast } from '@/utils/toast';
-import { MutationCallbacks } from '@/utils/types/MuationCallbacks';
+import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { useMutation } from '@tanstack/react-query';
 
 export const useLoginMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {

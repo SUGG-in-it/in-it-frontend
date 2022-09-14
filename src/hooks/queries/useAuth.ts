@@ -2,7 +2,7 @@ import { verifyCode } from '@/api/auth';
 import { CustomError } from '@/api/config/error';
 import { HttpStatusCode } from '@/api/config/status';
 import { errorToast, successToast } from '@/utils/toast';
-import { MutationCallbacks } from '@/utils/types/MuationCallbacks';
+import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { useMutation } from '@tanstack/react-query';
 
 export const useVerifyMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
