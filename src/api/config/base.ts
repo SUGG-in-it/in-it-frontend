@@ -18,7 +18,20 @@ axios.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
-    return config;
+
+    const contentType = config.url === '/image/upload/1' ? 'multipart/form-data' : 'application/json';
+
+    const contentTypeHeader = {
+      'Content-Type': contentType,
+    };
+
+    return {
+      ...config,
+      headers: {
+        ...config.headers,
+        ...contentTypeHeader,
+      },
+    };
   },
   (error) => Promise.reject(error)
 );
@@ -50,9 +63,6 @@ const request = async ({ url, method, body, params }: RequestType): Promise<Resp
     const config: AxiosRequestConfig = {
       baseURL: process.env.NEXT_PUBLIC_API_PREFIX,
       params,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     };
     const { data } =
       (method === 'get' && (await axios.get(url, config))) ||
