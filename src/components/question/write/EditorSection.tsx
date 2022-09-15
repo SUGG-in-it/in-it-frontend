@@ -39,6 +39,10 @@ const EditorSection = () => {
     router.push('/');
   };
 
+  const handleCancle = () => {
+    router.back();
+  };
+
   return (
     <>
       <LabelInput label="제목">
@@ -71,7 +75,7 @@ const EditorSection = () => {
         <CustomInput value={point.value} onChange={point.onChange} type="number" placeholder="내공을 입력해주세요." />
       </LabelInput>
       <ButtonWrapper>
-        <CancelButton>{'취소'}</CancelButton>
+        <CancelButton onClick={handleCancle}>{'취소'}</CancelButton>
         <PostButton onClick={handleQuestionSubmit}>{'등록'}</PostButton>
       </ButtonWrapper>
     </>
