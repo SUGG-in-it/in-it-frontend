@@ -12,4 +12,4 @@ export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) =
 export const postQuestionId = async () => await POST('/questions');
 
 export const uploadQuestion = async ({ questionId, title, content, tagList, point }: UploadQuestionRequestBody) =>
-  await PUT(`/questions/${questionId}`, { title, content, tagList, point, email: 'wldud060960@gmail.com' });
+  await PUT(`/questions/${questionId}`, { title, content, tagList, point });

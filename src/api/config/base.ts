@@ -19,7 +19,7 @@ axios.interceptors.request.use(
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
 
-    const contentType = config.url === '/image/upload/1' ? 'multipart/form-data' : 'application/json';
+    const contentType = config.url === '/image/upload' ? 'multipart/form-data' : 'application/json';
 
     const contentTypeHeader = {
       'Content-Type': contentType,
