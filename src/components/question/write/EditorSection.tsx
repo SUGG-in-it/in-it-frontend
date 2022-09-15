@@ -10,26 +10,39 @@ import styled from 'styled-components';
 import useValidationInput from '@/hooks/useValidationInput';
 import { validateQuestionTitle } from '@/utils/validations';
 import { media } from '@/styles/mediaQuery';
+import { uploadQuestion } from '@/api/questions';
+import { useRouter } from 'next/router';
+import { successToast } from '@/utils/toast';
 
 const EditorSection = () => {
-  const question = useValidationInput('', validateQuestionTitle);
-  const tag = useInput('');
-  const power = useInput('');
+  const title = useValidationInput('', validateQuestionTitle);
+  const tagList = useInput('');
+  const point = useInput('');
   const editorRef = useRef(null);
+  const router = useRouter();
+  const questionId = router.query.id;
 
   const addImageBlobHook = async (file, callback) => {
     const { data } = await uploadImage(file);
     callback(data.url, '이미지');
   };
 
-  const handleQuestionSubmit = () => {
-    console.log(editorRef.current?.getInstance().getHTML());
+  const handleQuestionSubmit = async () => {
+    await uploadQuestion({
+      questionId: Number(questionId),
+      title: title.value,
+      content: editorRef.current?.getInstance().getHTML(),
+      tagList: tagList.value,
+      point: Number(point.value),
+    });
+    successToast('글 작성이 완료되었습니다. 🥰');
+    router.push('/');
   };
 
   return (
     <>
       <LabelInput label="제목">
-        <CustomInput input={question} type="text" placeholder="제목을 입력해주세요." />
+        <CustomInput value={title.value} onChange={title.onChange} type="text" placeholder="제목을 입력해주세요." />
       </LabelInput>
       <ToastEditorWrapper>
         <Editor
@@ -52,10 +65,10 @@ const EditorSection = () => {
         />
       </ToastEditorWrapper>
       <LabelInput label="태그">
-        <CustomInput input={tag} type="text" placeholder="태그를 입력해주세요." />
+        <CustomInput value={tagList.value} onChange={tagList.onChange} type="text" placeholder="태그를 입력해주세요." />
       </LabelInput>
       <LabelInput label="내공">
-        <CustomInput input={power} type="number" placeholder="내공을 입력해주세요." />
+        <CustomInput value={point.value} onChange={point.onChange} type="number" placeholder="내공을 입력해주세요." />
       </LabelInput>
       <ButtonWrapper>
         <CancelButton>{'취소'}</CancelButton>
