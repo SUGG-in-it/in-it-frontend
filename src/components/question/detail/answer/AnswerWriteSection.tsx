@@ -2,7 +2,7 @@ import Button from '@/components/common/button/Button';
 import dynamic from 'next/dynamic';
 import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
-const ToastEditor = dynamic(() => import('@/components/common/ToastEditor'), { ssr: false });
+const ToastEditor = dynamic(() => import('@/components/question/write/EditorSection'), { ssr: false });
 
 const AnswerWriteSection = () => {
   const handleClick = () => {
