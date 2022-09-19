@@ -28,12 +28,8 @@ export const useMainContentQueries = () => {
 
 export const useUploadQuestionMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(uploadQuestion, {
-    onSuccess: (data: any) => {
-      const { accessToken, refreshToken } = data.data;
+    onSuccess: () => {
       onSuccess && onSuccess();
-
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
       successToast('글 작성이 완료되었습니다. 🥰');
     },
     onError: (error: CustomError) => {
