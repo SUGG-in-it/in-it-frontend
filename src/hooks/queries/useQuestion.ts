@@ -7,13 +7,11 @@ import { MainContentResponseBody, QuestionsResponseBody } from '@/types/response
 import { useQueries, useMutation, useQuery } from '@tanstack/react-query';
 import { errorToast, successToast } from '@/utils/toast';
 
-
 export const useQuestions = (qusetionsRequestBody: QusetionsRequestBody) => {
   return useQuery<QuestionsResponseBody>([KEYS.QUESTIONS], () => getQusetions(qusetionsRequestBody), {
     suspense: true,
   });
 };
-
 
 export const useMainContentQueries = () => {
   const types = ['recent', 'point', 'random', 'popular'];
@@ -25,6 +23,8 @@ export const useMainContentQueries = () => {
         queryFn: () => getMainContent(type),
       };
     }),
+  });
+};
 
 export const useUploadQuestionMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(uploadQuestion, {
@@ -41,6 +41,5 @@ export const useUploadQuestionMutation = ({ onSuccess, onError }: MutationCallba
       errorToast('글 작성에 실패했습니다. 😭');
     },
     useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
-
   });
 };
