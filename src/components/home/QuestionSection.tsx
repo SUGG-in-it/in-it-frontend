@@ -23,7 +23,7 @@ const Questions = () => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
   const [leftSectionQuestions, setLeftSectionQuestions] = useState([]);
   const [rightSectionQuestions, setRightSectionQuestions] = useState([]);
-  const { data: questions } = useQuestionsQuery({ page: 1, count: 6, type: 'total' });
+  const { data: questions } = useQuestionsQuery({ page: 0, size: 6, type: 'total' });
 
   useEffect(() => {
     setIsEmptyQuestions(questions?.questions?.length === 0);

@@ -1,6 +1,6 @@
 export interface QusetionsRequestBody {
   page: number;
-  count: number;
+  size: number;
   type: string;
 }
 
