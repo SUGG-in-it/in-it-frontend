@@ -37,13 +37,13 @@ const Questions = () => {
         {isEmptyQuestions ? <EmptyMessage>인기 Q&A가 없어요 😭😭😭</EmptyMessage> : <Label>인기 Q&A</Label>}
         <QuestionListWrapper>
           <LeftSection>
-            {leftSectionQuestions.map((question) => (
-              <QuestionItem key={question.questionId} {...question} />
+            {leftSectionQuestions.map((question, index) => (
+              <QuestionItem key={question.questionId} order={index + 1} {...question} />
             ))}
           </LeftSection>
           <RightSection>
-            {rightSectionQuestions.map((question) => (
-              <QuestionItem key={question.questionId} {...question} />
+            {rightSectionQuestions.map((question, index) => (
+              <QuestionItem key={question.questionId} order={index + 3} {...question} />
             ))}
           </RightSection>
         </QuestionListWrapper>
