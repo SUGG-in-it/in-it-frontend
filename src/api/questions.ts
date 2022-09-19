@@ -1,5 +1,6 @@
 import { GET, POST, PUT } from '@/api/config/base';
-import { QusetionsRequestBody, UploadQuestionRequestBody } from '@/types/request/questions';
+import { QuestionPageRequestBody, QusetionsRequestBody, UploadQuestionRequestBody } from '@/types/request/questions';
+import { QuestionsPageResponseBody } from '@/types/response/questions';
 
 export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) => {
   return await GET('/questions', qusetionsRequestBody)
@@ -20,4 +21,11 @@ export const getMainContent = async (questionType: string) => {
     .catch((e) => {
       return e;
     });
+};
+
+export const getQuestionPage = async (
+  questionPageRequestBody: QuestionPageRequestBody
+): Promise<QuestionsPageResponseBody> => {
+  const { data } = await GET('/questions/page', questionPageRequestBody);
+  return data;
 };

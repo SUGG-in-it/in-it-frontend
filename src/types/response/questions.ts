@@ -6,6 +6,10 @@ export interface MainContentResponseBody {
   questionId: number;
 }
 
+export interface QuestionsPageResponseBody {
+  count: number;
+}
+
 export interface Question {
   questionId: number;
   title: string;
