@@ -10,9 +10,8 @@ import styled from 'styled-components';
 import useValidationInput from '@/hooks/useValidationInput';
 import { validateQuestionTitle } from '@/utils/validations';
 import { media } from '@/styles/mediaQuery';
-import { uploadQuestion } from '@/api/questions';
 import { useRouter } from 'next/router';
-import { successToast } from '@/utils/toast';
+import { useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
 
 const EditorSection = () => {
   const title = useValidationInput('', validateQuestionTitle);
@@ -21,6 +20,11 @@ const EditorSection = () => {
   const editorRef = useRef(null);
   const router = useRouter();
   const questionId = router.query.id;
+  const mutationUploadQuestion = useUploadQuestionMutation({
+    onSuccess: () => {
+      router.push('/');
+    },
+  });
 
   const addImageBlobHook = async (file, callback) => {
     const { data } = await uploadImage(file);
@@ -28,15 +32,13 @@ const EditorSection = () => {
   };
 
   const handleQuestionSubmit = async () => {
-    await uploadQuestion({
+    mutationUploadQuestion.mutate({
       questionId: Number(questionId),
       title: title.value,
       content: editorRef.current?.getInstance().getHTML(),
       tagList: tagList.value,
       point: Number(point.value),
     });
-    successToast('글 작성이 완료되었습니다. 🥰');
-    router.push('/');
   };
 
   const handleCancle = () => {
