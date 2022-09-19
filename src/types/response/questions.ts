@@ -2,6 +2,10 @@ export interface QuestionsResponseBody {
   questions: Question[];
 }
 
+export interface MainContentResponseBody {
+  questionId: number;
+}
+
 export interface Question {
   questionId: number;
   title: string;
