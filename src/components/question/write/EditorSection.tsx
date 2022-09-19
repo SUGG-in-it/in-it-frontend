@@ -8,15 +8,16 @@ import { uploadImage } from '@/api/images';
 import { useRef } from 'react';
 import styled from 'styled-components';
 import useValidationInput from '@/hooks/useValidationInput';
-import { validateQuestionTitle } from '@/utils/validations';
+import { validateQuestionTitle, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
+import ValidationInput from '@/components/common/Input/ValidationInput';
 
 const EditorSection = () => {
   const title = useValidationInput('', validateQuestionTitle);
   const tagList = useInput('');
-  const point = useInput('');
+  const point = useInput('0');
   const editorRef = useRef(null);
   const router = useRouter();
   const questionId = router.query.id;
@@ -32,13 +33,17 @@ const EditorSection = () => {
   };
 
   const handleQuestionSubmit = async () => {
-    mutationUploadQuestion.mutate({
-      questionId: Number(questionId),
-      title: title.value,
-      content: editorRef.current?.getInstance().getHTML(),
-      tagList: tagList.value,
-      point: Number(point.value),
-    });
+    title.checkValidation();
+
+    if (title.isValid) {
+      mutationUploadQuestion.mutate({
+        questionId: Number(questionId),
+        title: title.value,
+        content: editorRef.current?.getInstance().getHTML(),
+        tagList: tagList.value,
+        point: Number(point.value),
+      });
+    }
   };
 
   const handleCancle = () => {
@@ -48,7 +53,14 @@ const EditorSection = () => {
   return (
     <>
       <LabelInput label="제목">
-        <CustomInput value={title.value} onChange={title.onChange} type="text" placeholder="제목을 입력해주세요." />
+        <ValidationInput
+          type="text"
+          placeholder="제목을 입력해주세요."
+          value={title.value}
+          onChange={title.onChange}
+          isValid={title.isValid}
+          msg={VALIDATION_ERROR_MSG.EMPTY_TITLE}
+        />
       </LabelInput>
       <ToastEditorWrapper>
         <Editor
