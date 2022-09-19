@@ -23,13 +23,13 @@ const Questions = () => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
   const [leftSectionQuestions, setLeftSectionQuestions] = useState([]);
   const [rightSectionQuestions, setRightSectionQuestions] = useState([]);
-  const { data } = useQuestions({ page: 1, count: 6, type: 'total' });
+  const { data: questions } = useQuestions({ page: 1, count: 6, type: 'total' });
 
   useEffect(() => {
-    setIsEmptyQuestions(data?.questions?.length === 0);
-    setLeftSectionQuestions(data?.questions?.slice(0, 3));
-    setRightSectionQuestions(data?.questions?.slice(3, 6));
-  }, [data]);
+    setIsEmptyQuestions(questions?.questions?.length === 0);
+    setLeftSectionQuestions(questions?.questions?.slice(0, 3));
+    setRightSectionQuestions(questions?.questions?.slice(3, 6));
+  }, [questions]);
 
   return (
     <QuestionContainer>
