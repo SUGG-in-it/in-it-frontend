@@ -4,15 +4,26 @@ import Button from '@/components/common/button/Button';
 import { useState } from 'react';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
+import { postQuestionId } from '@/api/questions';
+import LoginRequestModal from '@/components/common/modal/LoginRequestModal';
+import { useRecoilValue } from 'recoil';
+import { loginState } from '@/store/users';
 
 const TAB_MENU = [{ name: '홈' }, { name: '답변하기' }];
 
 const Nav = () => {
   const router = useRouter();
   const [currentTab, setCurrentTab] = useState(0);
+  const [isShowLoginRequestModal, setIsShowLoginRequestModal] = useState(false);
+  const isLogin = useRecoilValue(loginState);
 
-  const handleQuestionClick = () => {
-    router.push('/question/write');
+  const handleQuestionClick = async () => {
+    if (isLogin) {
+      const { data } = await postQuestionId();
+      router.push({ pathname: '/question/write', query: { id: data.questionId } });
+    } else {
+      setIsShowLoginRequestModal(true);
+    }
   };
 
   const handleMenuClick = (index) => {
@@ -44,6 +55,7 @@ const Nav = () => {
         <AnswerButton onClick={handleQuestionClick}>{'질문하기'}</AnswerButton>
       </NavContainer>
       <GrayLine />
+      {isShowLoginRequestModal ? <LoginRequestModal /> : null}
     </NavWrapper>
   );
 };

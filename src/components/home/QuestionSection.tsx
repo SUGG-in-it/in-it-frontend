@@ -21,11 +21,15 @@ const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
 
 const Questions = () => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
-  const { data } = useQuestionsQuery({ page: 1, count: 6, type: 'total' });
+  const [leftSectionQuestions, setLeftSectionQuestions] = useState([]);
+  const [rightSectionQuestions, setRightSectionQuestions] = useState([]);
+  const { data: questions } = useQuestionsQuery({ page: 1, count: 6, type: 'total' });
 
   useEffect(() => {
-    setIsEmptyQuestions(data?.questions?.length === 0);
-  }, [data]);
+    setIsEmptyQuestions(questions?.questions?.length === 0);
+    setLeftSectionQuestions(questions?.questions?.slice(0, 3));
+    setRightSectionQuestions(questions?.questions?.slice(3, 6));
+  }, [questions]);
 
   return (
     <QuestionContainer>
@@ -33,12 +37,12 @@ const Questions = () => {
         {isEmptyQuestions ? <EmptyMessage>인기 Q&A가 없어요 😭😭😭</EmptyMessage> : <Label>인기 Q&A</Label>}
         <QuestionListWrapper>
           <LeftSection>
-            {data?.questions?.map((question) => (
+            {leftSectionQuestions.map((question) => (
               <QuestionItem key={question.questionId} {...question} />
             ))}
           </LeftSection>
           <RightSection>
-            {data?.questions?.map((question) => (
+            {rightSectionQuestions.map((question) => (
               <QuestionItem key={question.questionId} {...question} />
             ))}
           </RightSection>
