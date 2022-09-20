@@ -14,6 +14,7 @@ const QuestionSection = () => {
 
   useEffect(() => {
     async function fetchQuestion() {
+      // todo: useQuery로 처리,, useQuery로 하면 fetch가 무한으로 일어남 => 아직 이유는 모르겠음 ! 왜 인지 알아보기
       const data = await getQuestion(questionId as string);
       setQuestion(data);
     }
