@@ -4,16 +4,25 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { uploadImage } from '@/api/images';
 import { useRef } from 'react';
 import styled from 'styled-components';
+import { postAnswerId } from '@/api/answers';
+import { useUploadAnswerMutation } from '@/hooks/queries/useAnswer';
+
 const ToastEditor = () => {
   const editorRef = useRef(null);
+  const mutationUploadAnswer = useUploadAnswerMutation({});
 
   const addImageBlobHook = async (file, callback) => {
     const { data } = await uploadImage(file);
     callback(data.url, '이미지');
   };
 
-  const handleQuestionSubmit = () => {
-    //
+  const handleQuestionSubmit = async () => {
+    const { data } = await postAnswerId();
+    const answerId = data.answerId;
+    mutationUploadAnswer.mutate({
+      answerId: Number(answerId),
+      content: editorRef.current?.getInstance().getHTML(),
+    });
   };
 
   return (

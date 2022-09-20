@@ -1,4 +1,3 @@
-import Button from '@/components/common/button/Button';
 import dynamic from 'next/dynamic';
 import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
