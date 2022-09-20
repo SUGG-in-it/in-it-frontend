@@ -1,5 +1,5 @@
 import { CustomError } from '@/api/config/error';
-import { getQusetions, getMainContent, uploadQuestion, getQuestion } from '@/api/questions';
+import { getQusetions, getMainContent, uploadQuestion, getQuestion, deleteQuestion } from '@/api/questions';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { QusetionsRequestBody } from '@/types/request/questions';
@@ -50,6 +50,20 @@ export const useUploadQuestionMutation = ({ onSuccess, onError }: MutationCallba
     onError: (error: CustomError) => {
       onError && onError();
       errorToast('글 작성에 실패했습니다. 😭');
+    },
+    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
+  });
+};
+
+export const useDeleteQuestionMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+  return useMutation(deleteQuestion, {
+    onSuccess: () => {
+      onSuccess && onSuccess();
+      successToast('글 삭제가 완료되었습니다. 🥰');
+    },
+    onError: (error: CustomError) => {
+      onError && onError();
+      errorToast('글 삭제에 실패했습니다. 😭');
     },
     useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
