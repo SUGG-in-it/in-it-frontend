@@ -9,8 +9,10 @@ import { errorToast, successToast } from '@/utils/toast';
 
 export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) => {
   const page = qusetionsRequestBody.page;
+  const type = qusetionsRequestBody.type;
+
   const data = useQuery<QuestionsResponseBody>(
-    [KEYS.QUESTIONS, { page: page }],
+    [KEYS.QUESTIONS, { page: page, type: type }],
     () => getQusetions(qusetionsRequestBody),
     {
       suspense: true,

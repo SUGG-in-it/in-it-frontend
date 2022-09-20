@@ -3,20 +3,27 @@ import Pagination from '@/components/common/Pagination';
 import MainLayout from '@/components/layouts/MainLayout';
 import QuestionListSection from '@/components/question/list/QuestionListSection';
 import { media } from '@/styles/mediaQuery';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const QuestionListPage = () => {
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
+  const router = useRouter();
+  const queryStatus = router.query.status as 'doing' | 'completed' | 'total';
+
+  useEffect(() => {
+    if (!queryStatus) router.push({ pathname: '/question/list', query: { status: 'total' } });
+  }, []);
 
   useEffect(() => {
     async function fetchQuestionPage() {
-      const { count } = await getQuestionPage({ size: 10, type: 'total' });
+      const { count } = await getQuestionPage({ size: 10, type: queryStatus });
       setTotalPage(count);
     }
     fetchQuestionPage();
-  }, [currentPage]);
+  }, [queryStatus, currentPage]);
 
   const handlePageClick = (number) => {
     setCurrentPage(number);

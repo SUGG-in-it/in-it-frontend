@@ -5,6 +5,8 @@ import { IoIosArrowForward } from 'react-icons/io';
 function Pagination({ totalPage, currentPage, onPageClick }) {
   const pages = Array.from({ length: totalPage }, (v, i) => i);
 
+  if (!totalPage) return <></>;
+
   return (
     <PaginationContainer>
       <ButtonBackWrapper isShowButton={currentPage !== 0} onClick={() => onPageClick(currentPage - 1)}>

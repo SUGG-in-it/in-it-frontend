@@ -10,6 +10,7 @@ import { FiRotateCcw } from 'react-icons/fi';
 import StatusBar from '@/components/question/list/StatusBar';
 import QuestionItem from '@/components/question/list/QuestionItem';
 import GrayLine from '@/components/common/GreyLine';
+import { useRouter } from 'next/router';
 
 const QuestionsFallback = ({ error, resetErrorBoundary }) => (
   <QuestionContainer>
@@ -24,11 +25,18 @@ const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
 
 const Questions = ({ currentPage }: { currentPage: number }) => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
-  const { data: questions } = useQuestionsQuery({ page: currentPage, size: 10, type: 'total' });
+  const [status, setStatus] = useState('total');
+  const { data: questions } = useQuestionsQuery({ page: currentPage, size: 10, type: status });
+  const router = useRouter();
+  const queryStatus = router.query.status;
 
   useEffect(() => {
     setIsEmptyQuestions(questions?.questions?.length === 0);
   }, [questions]);
+
+  useEffect(() => {
+    setStatus(queryStatus as string);
+  }, [queryStatus]);
 
   return (
     <QuestionListContainer>
@@ -73,6 +81,8 @@ const QuestionListWrapper = styled.ul`
 const EmptyMessage = styled.p`
   font-size: 0.9rem;
   font-weight: 800;
+  margin-top: 5em;
+  margin-bottom: 20em;
   text-align: center;
 `;
 
