@@ -4,12 +4,13 @@ import { FiCornerDownRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 
 interface QuestionProps {
+  order: number;
   questionId: number;
   title: string;
   content: string;
 }
 
-const QuestionItem = ({ questionId, title, content }: QuestionProps) => {
+const QuestionItem = ({ order, questionId, title, content }: QuestionProps) => {
   const router = useRouter();
 
   const handleQuestionClick = () => {
@@ -19,14 +20,13 @@ const QuestionItem = ({ questionId, title, content }: QuestionProps) => {
   return (
     <QuestionWrapper onClick={handleQuestionClick}>
       <TopSection>
-        <Ranking>{questionId}</Ranking>
+        <Ranking>{order}</Ranking>
         <Title>{title}</Title>
       </TopSection>
       <ContentContainer>
         <Arrow />
         <Content>{content}</Content>
       </ContentContainer>
-      <AnswerCount>{`답변수 1`}</AnswerCount>
     </QuestionWrapper>
   );
 };
@@ -89,13 +89,6 @@ const Content = styled.p`
   text-overflow: ellipsis;
   white-space: nowrap;
   width: calc(100% - 4em);
-`;
-
-const AnswerCount = styled.div`
-  color: ${({ theme }) => theme.grayColor};
-  font-size: 0.7rem;
-  margin-right: 2em;
-  margin-top: 0.5em;
 `;
 
 export default QuestionItem;

@@ -7,10 +7,18 @@ import { MainContentResponseBody, QuestionsResponseBody } from '@/types/response
 import { useQueries, useMutation, useQuery } from '@tanstack/react-query';
 import { errorToast, successToast } from '@/utils/toast';
 
-export const useQuestions = (qusetionsRequestBody: QusetionsRequestBody) => {
-  return useQuery<QuestionsResponseBody>([KEYS.QUESTIONS], () => getQusetions(qusetionsRequestBody), {
-    suspense: true,
-  });
+export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) => {
+  const page = qusetionsRequestBody.page;
+  const type = qusetionsRequestBody.type;
+
+  const data = useQuery<QuestionsResponseBody>(
+    [KEYS.QUESTIONS, { page: page, type: type }],
+    () => getQusetions(qusetionsRequestBody),
+    {
+      suspense: true,
+    }
+  );
+  return data;
 };
 
 export const useMainContentQueries = () => {
@@ -28,12 +36,8 @@ export const useMainContentQueries = () => {
 
 export const useUploadQuestionMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(uploadQuestion, {
-    onSuccess: (data: any) => {
-      const { accessToken, refreshToken } = data.data;
+    onSuccess: () => {
       onSuccess && onSuccess();
-
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
       successToast('글 작성이 완료되었습니다. 🥰');
     },
     onError: (error: CustomError) => {

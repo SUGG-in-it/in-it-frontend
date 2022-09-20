@@ -1,22 +1,25 @@
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import dynamic from 'next/dynamic';
+
+const ContentWrapper = dynamic(() => import('@/components/question/list/ContentWrapper'), { ssr: false });
 
 interface QuestionProps {
-  id: number;
+  questionId: number;
   isCompleted: boolean;
-  nickName: string;
+  nickname: string;
   date: string;
   title: string;
   content: string;
-  tags: string[];
+  tagList: string;
 }
 
-const QuestionItem = ({ id, isCompleted, nickName, date, title, content, tags }: QuestionProps) => {
+const QuestionItem = ({ questionId, isCompleted, nickname, date, title, content, tagList }: QuestionProps) => {
   const router = useRouter();
 
   const handleQuestionClick = () => {
-    router.push(`/question/detail/${id}`);
+    router.push(`/question/detail/${questionId}`);
   };
 
   return (
@@ -25,14 +28,12 @@ const QuestionItem = ({ id, isCompleted, nickName, date, title, content, tags }:
         <ProcessLabel isCompleted={isCompleted}>{isCompleted ? '답변 완료' : '답변 진행중'}</ProcessLabel>
         <Title>{title}</Title>
       </TopSection>
-      <Content>{content}</Content>
+      <ContentWrapper content={content} />
       <TagsWrapper>
-        {tags.map((tag, index) => (
-          <Tags key={index}>{`# ${tag}`}</Tags>
-        ))}
+        <Tags>{`# ${tagList}`}</Tags>
       </TagsWrapper>
       <BottomSection>
-        <p>{`작성자  ${nickName}`}</p>
+        <p>{`작성자  ${nickname}`}</p>
         <p>{date}</p>
       </BottomSection>
     </QuestionWrapper>
@@ -68,12 +69,6 @@ const Title = styled.p`
   font-size: 1.1rem;
   font-weight: bold;
   color: ${({ theme }) => theme.textColor};
-`;
-
-const Content = styled.p`
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.grayColor};
-  line-height: 1.3;
 `;
 
 const TagsWrapper = styled.div`

@@ -1,6 +1,6 @@
 import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
 import QuestionItem from '@/components/home/QuestionItem';
-import { useQuestions } from '@/hooks/queries/useQuestion';
+import { useQuestionsQuery } from '@/hooks/queries/useQuestion';
 import { media } from '@/styles/mediaQuery';
 import { Suspense, useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -23,7 +23,7 @@ const Questions = () => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
   const [leftSectionQuestions, setLeftSectionQuestions] = useState([]);
   const [rightSectionQuestions, setRightSectionQuestions] = useState([]);
-  const { data: questions } = useQuestions({ page: 1, count: 6, type: 'total' });
+  const { data: questions } = useQuestionsQuery({ page: 0, size: 6, type: 'total' });
 
   useEffect(() => {
     setIsEmptyQuestions(questions?.questions?.length === 0);
@@ -37,13 +37,13 @@ const Questions = () => {
         {isEmptyQuestions ? <EmptyMessage>인기 Q&A가 없어요 😭😭😭</EmptyMessage> : <Label>인기 Q&A</Label>}
         <QuestionListWrapper>
           <LeftSection>
-            {leftSectionQuestions.map((question) => (
-              <QuestionItem key={question.questionId} {...question} />
+            {leftSectionQuestions.map((question, index) => (
+              <QuestionItem key={question.questionId} order={index + 1} {...question} />
             ))}
           </LeftSection>
           <RightSection>
-            {rightSectionQuestions.map((question) => (
-              <QuestionItem key={question.questionId} {...question} />
+            {rightSectionQuestions.map((question, index) => (
+              <QuestionItem key={question.questionId} order={index + 3} {...question} />
             ))}
           </RightSection>
         </QuestionListWrapper>

@@ -1,7 +1,12 @@
 export interface QusetionsRequestBody {
   page: number;
-  count: number;
+  size: number;
   type: string;
+}
+
+export interface QuestionPageRequestBody {
+  size: number;
+  type: 'total' | 'doing' | 'completed';
 }
 
 export interface UploadQuestionRequestBody {

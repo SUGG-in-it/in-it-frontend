@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import GrayLine from '@/components/common/GreyLine';
 import Button from '@/components/common/button/Button';
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { postQuestionId } from '@/api/questions';
@@ -16,6 +16,11 @@ const Nav = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [isShowLoginRequestModal, setIsShowLoginRequestModal] = useState(false);
   const isLogin = useRecoilValue(loginState);
+
+  useLayoutEffect(() => {
+    if (router.pathname === '/') setCurrentTab(0);
+    else setCurrentTab(1);
+  });
 
   const handleQuestionClick = async () => {
     if (isLogin) {
