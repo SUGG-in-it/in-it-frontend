@@ -1,25 +1,38 @@
 import { getQuestion } from '@/api/questions';
+import Button from '@/components/common/button/Button';
 import GrayLine from '@/components/common/GreyLine';
 import ContentWrapper from '@/components/question/list/ContentWrapper';
+import { userState } from '@/store/users';
 import { QLabel } from '@/styles/commonStyles';
 import { Question } from '@/types/response/questions';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 const QuestionSection = () => {
   const router = useRouter();
   const questionId = router.query.id;
   const [question, setQuestion] = useState<Question>(null);
+  const user = useRecoilValue(userState);
 
   useEffect(() => {
     async function fetchQuestion() {
       // todo: useQuery로 처리,, useQuery로 하면 fetch가 무한으로 일어남 => 아직 이유는 모르겠음 ! 왜 인지 알아보기
       const data = await getQuestion(questionId as string);
       setQuestion(data);
+      console.log(user, user.id, question.userId);
     }
     fetchQuestion();
   }, []);
+
+  const handleEditQuestion = () => {
+    //
+  };
+
+  const handleDeleteQuestion = () => {
+    //
+  };
 
   if (!question || !questionId) return <></>;
 
@@ -27,8 +40,16 @@ const QuestionSection = () => {
     <QuestionSectionContainer>
       <QuestionSectionWrapper>
         <SectionRow>
-          <QLabel>Q.</QLabel>
-          <Title>{question.title}</Title>
+          <TitleContainer>
+            <QLabel>Q.</QLabel>
+            <Title>{question.title}</Title>
+          </TitleContainer>
+          {user.id === question.userId && (
+            <div>
+              <SettingButton onClick={handleEditQuestion}>{'수정'}</SettingButton>
+              <SettingButton onClick={handleDeleteQuestion}>{' | 삭제'}</SettingButton>
+            </div>
+          )}
         </SectionRow>
         <SectionRow>
           <NickName>{question.nickname}</NickName>
@@ -57,8 +78,14 @@ const QuestionSectionWrapper = styled.div`
 const SectionRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-top: 1em;
   margin-bottom: 1em;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Title = styled.div`
@@ -79,9 +106,11 @@ const Date = styled.p`
   color: #adb5bd;
 `;
 
-const Content = styled.p`
-  line-height: 1.3;
-  color: ${({ theme }) => theme.grayColor};
+const SettingButton = styled(Button)`
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+  color: #616568;
+  font-weight: 400;
+  font-size: 0.9rem;
 `;
 
 export default QuestionSection;

@@ -14,6 +14,7 @@ export interface QuestionResponseBody {
   updatedAt: string;
   isCompleted: boolean;
   tagList: string;
+  userId: number;
 }
 
 export interface MainContentResponseBody {
@@ -36,4 +37,5 @@ export interface Question {
   updatedAt: string;
   isCompleted: boolean;
   tagList: string;
+  userId: number;
 }
