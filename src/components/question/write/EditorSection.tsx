@@ -5,7 +5,7 @@ import useInput from '@/hooks/useInput';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { uploadImage } from '@/api/images';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useValidationInput from '@/hooks/useValidationInput';
 import { validateQuestionTitle, VALIDATION_ERROR_MSG } from '@/utils/validations';
@@ -13,6 +13,7 @@ import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
 import ValidationInput from '@/components/common/Input/ValidationInput';
+import { getQuestion } from '@/api/questions';
 
 const EditorSection = () => {
   const title = useValidationInput('', validateQuestionTitle);
@@ -20,12 +21,24 @@ const EditorSection = () => {
   const point = useInput('0');
   const editorRef = useRef(null);
   const router = useRouter();
-  const questionId = router.query.id;
+  const questionId = router.query.id as string;
   const mutationUploadQuestion = useUploadQuestionMutation({
     onSuccess: () => {
       router.push('/');
     },
   });
+
+  useEffect(() => {
+    async function fetchQuestion() {
+      // todo: useQuery로 처리,, useQuery로 하면 fetch가 무한으로 일어남 => 아직 이유는 모르겠음 ! 왜 인지 알아보기
+      const data = await getQuestion(questionId);
+      title.setValue(data.title);
+      tagList.setValue(data.tagList);
+      point.setValue(data.point);
+      editorRef.current?.getInstance().setHTML(data.content);
+    }
+    fetchQuestion();
+  }, [questionId]);
 
   const addImageBlobHook = async (file, callback) => {
     const { data } = await uploadImage(file);
@@ -68,6 +81,7 @@ const EditorSection = () => {
           placeholder="내용을 입력해주세요."
           previewStyle="vertical"
           initialEditType="wysiwyg"
+          initialValue={''}
           height="350px"
           toolbarItems={[
             // 툴바 옵션 설정

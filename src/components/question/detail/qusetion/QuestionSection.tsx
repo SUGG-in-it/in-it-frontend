@@ -32,7 +32,7 @@ const QuestionSection = () => {
   }, []);
 
   const handleEditQuestion = () => {
-    //
+    router.push({ pathname: '/question/write', query: { id: questionId } });
   };
 
   const handleDeleteQuestion = () => {
@@ -91,6 +91,7 @@ const SectionRow = styled.div`
 const TitleContainer = styled.div`
   display: flex;
   align-items: center;
+  width: 500px;
 `;
 
 const Title = styled.div`
