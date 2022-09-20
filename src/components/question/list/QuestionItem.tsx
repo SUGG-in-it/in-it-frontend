@@ -1,6 +1,9 @@
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import dynamic from 'next/dynamic';
+
+const ContentWrapper = dynamic(() => import('@/components/question/list/ContentWrapper'), { ssr: false });
 
 interface QuestionProps {
   questionId: number;
@@ -25,7 +28,7 @@ const QuestionItem = ({ questionId, isCompleted, nickname, date, title, content,
         <ProcessLabel isCompleted={isCompleted}>{isCompleted ? '답변 완료' : '답변 진행중'}</ProcessLabel>
         <Title>{title}</Title>
       </TopSection>
-      <Content>{content}</Content>
+      <ContentWrapper content={content} />
       <TagsWrapper>
         <Tags>{`# ${tagList}`}</Tags>
       </TagsWrapper>
@@ -66,12 +69,6 @@ const Title = styled.p`
   font-size: 1.1rem;
   font-weight: bold;
   color: ${({ theme }) => theme.textColor};
-`;
-
-const Content = styled.p`
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.grayColor};
-  line-height: 1.3;
 `;
 
 const TagsWrapper = styled.div`
