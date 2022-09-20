@@ -22,14 +22,12 @@ const QuestionsFallback = ({ error, resetErrorBoundary }) => (
 
 const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
 
-const Questions = () => {
+const Questions = ({ currentPage }: { currentPage: number }) => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
-  const [tenQuestions, setTenQuestions] = useState([]);
-  const { data: questions } = useQuestionsQuery({ page: 0, size: 10, type: 'total' });
+  const { data: questions } = useQuestionsQuery({ page: currentPage, size: 10, type: 'total' });
 
   useEffect(() => {
     setIsEmptyQuestions(questions?.questions?.length === 0);
-    setTenQuestions(questions?.questions);
   }, [questions]);
 
   return (
@@ -37,7 +35,7 @@ const Questions = () => {
       <StatusBar />
       {isEmptyQuestions ? <EmptyMessage>Q&A가 없어요 😭😭😭</EmptyMessage> : null}
       <QuestionListWrapper>
-        {tenQuestions.map((question, index) => (
+        {questions?.questions.map((question, index) => (
           <>
             <QuestionItem key={question.questionId} {...question} />
             <GrayLine />
@@ -48,11 +46,11 @@ const Questions = () => {
   );
 };
 
-const QuestionSection = () => {
+const QuestionSection = ({ currentPage }: { currentPage: number }) => {
   return (
     <ErrorBoundary FallbackComponent={QuestionsFallback}>
       <Suspense fallback={<QuestionsLoading />}>
-        <Questions />
+        <Questions currentPage={currentPage} />
       </Suspense>
     </ErrorBoundary>
   );
@@ -69,7 +67,6 @@ const QuestionListWrapper = styled.ul`
   max-width: 700px;
   width: 80vw;
   margin: 0 auto;
-  padding-bottom: 100px;
   padding-top: 50px;
 `;
 
