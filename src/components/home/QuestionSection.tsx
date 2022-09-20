@@ -43,7 +43,7 @@ const Questions = () => {
           </LeftSection>
           <RightSection>
             {rightSectionQuestions.map((question, index) => (
-              <QuestionItem key={question.questionId} order={index + 3} {...question} />
+              <QuestionItem key={question.questionId} order={index + 4} {...question} />
             ))}
           </RightSection>
         </QuestionListWrapper>
