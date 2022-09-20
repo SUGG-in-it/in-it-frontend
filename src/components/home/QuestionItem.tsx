@@ -2,6 +2,7 @@ import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
 import { FiCornerDownRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
+import DOMPurify from 'dompurify';
 
 interface QuestionProps {
   order: number;
@@ -25,7 +26,11 @@ const QuestionItem = ({ order, questionId, title, content }: QuestionProps) => {
       </TopSection>
       <ContentContainer>
         <Arrow />
-        <Content>{content}</Content>
+        <Content
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(content),
+          }}
+        />
       </ContentContainer>
     </QuestionWrapper>
   );
@@ -89,6 +94,7 @@ const Content = styled.p`
   text-overflow: ellipsis;
   white-space: nowrap;
   width: calc(100% - 4em);
+  height: 33px;
 `;
 
 export default QuestionItem;

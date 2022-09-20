@@ -4157,10 +4157,10 @@
   dependencies:
     "domelementtype" "^2.2.0"
 
-"dompurify@^2.3.3":
-  "integrity" "sha512-o7Fg/AgC7p/XpKjf/+RC3Ok6k4St5F7Q6q6+Nnm3p2zGWioAY6dh0CbbuwOhH2UcSzKsdniE/YnE2/92JcsA+g=="
-  "resolved" "https://registry.npmjs.org/dompurify/-/dompurify-2.3.10.tgz"
-  "version" "2.3.10"
+"dompurify@^2.3.3", "dompurify@^2.4.0":
+  "integrity" "sha512-Be9tbQMZds4a3C6xTmz68NlMfeONA//4dOavl/1rNw50E+/QO0KVpbcU0PcaW0nsQxurXls9ZocqFxk8R2mWEA=="
+  "resolved" "https://registry.npmjs.org/dompurify/-/dompurify-2.4.0.tgz"
+  "version" "2.4.0"
 
 "domutils@^1.7.0":
   "integrity" "sha512-Lgd2XcJ/NjEw+7tFvfKxOzCYKZsdct5lczQ2ZaQY8Djz7pfAD3Gbp8ySJWtreII/vDlMVmxwa6pHmdxIYgttDg=="
