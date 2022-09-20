@@ -4,7 +4,6 @@ import { IoIosArrowForward } from 'react-icons/io';
 
 function Pagination({ totalPage, currentPage, onPageClick }) {
   const pages = Array.from({ length: totalPage }, (v, i) => i);
-  console.log(pages, totalPage);
 
   return (
     <PaginationContainer>

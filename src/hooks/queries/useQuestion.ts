@@ -8,9 +8,15 @@ import { useQueries, useMutation, useQuery } from '@tanstack/react-query';
 import { errorToast, successToast } from '@/utils/toast';
 
 export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) => {
-  return useQuery<QuestionsResponseBody>([KEYS.QUESTIONS], () => getQusetions(qusetionsRequestBody), {
-    suspense: true,
-  });
+  const page = qusetionsRequestBody.page;
+  const data = useQuery<QuestionsResponseBody>(
+    [KEYS.QUESTIONS, { page: page }],
+    () => getQusetions(qusetionsRequestBody),
+    {
+      suspense: true,
+    }
+  );
+  return data;
 };
 
 export const useMainContentQueries = () => {
