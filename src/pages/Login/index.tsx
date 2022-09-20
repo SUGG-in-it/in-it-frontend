@@ -24,7 +24,7 @@ const LoginPage = () => {
       setIsLogin(true);
       const user = jwt.decode(localStorage.getItem('accessToken'));
       setUserState({
-        id: user.id,
+        id: user.user_id,
         nickname: user.nickname,
       });
     },
