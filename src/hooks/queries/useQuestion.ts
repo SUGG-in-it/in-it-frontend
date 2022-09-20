@@ -1,9 +1,9 @@
 import { CustomError } from '@/api/config/error';
-import { getQusetions, getMainContent, uploadQuestion } from '@/api/questions';
+import { getQusetions, getMainContent, uploadQuestion, getQuestion } from '@/api/questions';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { QusetionsRequestBody } from '@/types/request/questions';
-import { MainContentResponseBody, QuestionsResponseBody } from '@/types/response/questions';
+import { MainContentResponseBody, QuestionResponseBody, QuestionsResponseBody } from '@/types/response/questions';
 import { useQueries, useMutation, useQuery } from '@tanstack/react-query';
 import { errorToast, successToast } from '@/utils/toast';
 
@@ -18,6 +18,13 @@ export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) =>
       suspense: true,
     }
   );
+  return data;
+};
+
+export const useQuestionQuery = (questionId: string) => {
+  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION], () => getQuestion(questionId), {
+    suspense: true,
+  });
   return data;
 };
 

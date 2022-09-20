@@ -29,3 +29,8 @@ export const getQuestionPage = async (
   const { data } = await GET('/questions/page', questionPageRequestBody);
   return data;
 };
+
+export const getQuestion = async (questionId: string) => {
+  const { data } = await GET(`/questions/${questionId}`);
+  return data;
+};
