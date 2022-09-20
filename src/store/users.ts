@@ -24,3 +24,12 @@ export const forgotPasswordState = atom({
     step: 1,
   },
 });
+
+export const userState = atom({
+  key: 'user',
+  default: {
+    nickname: '',
+    id: '',
+  },
+  effects_UNSTABLE: [persistAtom],
+});
