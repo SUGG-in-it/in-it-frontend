@@ -3,20 +3,20 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 interface QuestionProps {
-  id: number;
+  questionId: number;
   isCompleted: boolean;
-  nickName: string;
+  nickname: string;
   date: string;
   title: string;
   content: string;
-  tags: string[];
+  tagList: string;
 }
 
-const QuestionItem = ({ id, isCompleted, nickName, date, title, content, tags }: QuestionProps) => {
+const QuestionItem = ({ questionId, isCompleted, nickname, date, title, content, tagList }: QuestionProps) => {
   const router = useRouter();
 
   const handleQuestionClick = () => {
-    router.push(`/question/detail/${id}`);
+    router.push(`/question/detail/${questionId}`);
   };
 
   return (
@@ -27,12 +27,10 @@ const QuestionItem = ({ id, isCompleted, nickName, date, title, content, tags }:
       </TopSection>
       <Content>{content}</Content>
       <TagsWrapper>
-        {tags.map((tag, index) => (
-          <Tags key={index}>{`# ${tag}`}</Tags>
-        ))}
+        <Tags>{`# ${tagList}`}</Tags>
       </TagsWrapper>
       <BottomSection>
-        <p>{`작성자  ${nickName}`}</p>
+        <p>{`작성자  ${nickname}`}</p>
         <p>{date}</p>
       </BottomSection>
     </QuestionWrapper>

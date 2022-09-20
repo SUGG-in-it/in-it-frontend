@@ -15,10 +15,11 @@ export interface Question {
   title: string;
   content: string;
   nickname: string;
+  date: string;
   level: number;
   point: number;
   createdAt: string;
   updatedAt: string;
   isCompleted: boolean;
-  tagList: string[];
+  tagList: string;
 }
