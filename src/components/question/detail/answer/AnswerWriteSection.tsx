@@ -2,21 +2,16 @@ import Button from '@/components/common/button/Button';
 import dynamic from 'next/dynamic';
 import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
-const ToastEditor = dynamic(() => import('@/components/question/write/EditorSection'), { ssr: false });
+const EditorSection = dynamic(() => import('@/components/question/detail/answer/ToastEditor'), { ssr: false });
 
 const AnswerWriteSection = () => {
-  const handleClick = () => {
-    // TODO: 답변 등록 api 호출
-  };
-
   return (
     <AnswerWriteSectionWrapper>
       <ToastEditorWrapper>
         <Notice>{'지롱님, 답변해주세요! 😉'}</Notice>
-        <ToastEditor />
-        <ButtonWrapper>
-          <PostButton onClick={handleClick}>{'답변 등록'}</PostButton>
-        </ButtonWrapper>
+        <EditorSectionWrapper>
+          <EditorSection />
+        </EditorSectionWrapper>
       </ToastEditorWrapper>
     </AnswerWriteSectionWrapper>
   );
@@ -49,15 +44,17 @@ const Notice = styled.p`
   margin-bottom: 1em;
 `;
 
-const ButtonWrapper = styled.div`
+const EditorSectionWrapper = styled.div`
+  width: 85vw;
+  max-width: 100%;
   display: flex;
-  justify-content: flex-end;
-`;
-
-const PostButton = styled(Button)`
-  background-color: ${({ theme }) => theme.primaryColor};
-  width: 200px;
-  margin-top: 2em;
+  margin: 0 auto;
+  margin-top: 3em;
+  padding-bottom: 5em;
+  flex-direction: column;
+  ${media.tablet} {
+    margin-left: 7vw;
+  }
 `;
 
 export default AnswerWriteSection;
