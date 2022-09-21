@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
@@ -13,18 +13,20 @@ function MyApp({ Component, pageProps }) {
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={lightTheme}>
-          <GlobalStyle />
-          <RootErrorBoundary>
-            <CriticalErrorBoundary>
-              <Head>
-                <title>코드리뷰 사이트 : init()</title>
-              </Head>
-              <Component {...pageProps} />
-              <Toaster position="top-right" />
-            </CriticalErrorBoundary>
-          </RootErrorBoundary>
-        </ThemeProvider>
+        <Hydrate state={pageProps.dehydratedState}>
+          <ThemeProvider theme={lightTheme}>
+            <GlobalStyle />
+            <RootErrorBoundary>
+              <CriticalErrorBoundary>
+                <Head>
+                  <title>코드리뷰 사이트 : init()</title>
+                </Head>
+                <Component {...pageProps} />
+                <Toaster position="top-right" />
+              </CriticalErrorBoundary>
+            </RootErrorBoundary>
+          </ThemeProvider>
+        </Hydrate>
       </QueryClientProvider>
     </RecoilRoot>
   );
