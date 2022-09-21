@@ -30,9 +30,9 @@ export const getQuestionPage = async (
   return data;
 };
 
-export const getQuestion = async (questionId: string) => {
+export const getQuestion = async (questionId: number) => {
   const { data } = await GET(`/questions/${questionId}`);
   return data;
 };
 
-export const deleteQuestion = async (questionId: string) => await DELETE(`/questions/${questionId}`);
+export const deleteQuestion = async (questionId: number) => await DELETE(`/questions/${questionId}`);

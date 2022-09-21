@@ -1,19 +1,20 @@
 import { getQuestion } from '@/api/questions';
 import Button from '@/components/common/button/Button';
 import GrayLine from '@/components/common/GreyLine';
-import ContentWrapper from '@/components/question/list/ContentWrapper';
 import { useDeleteQuestionMutation } from '@/hooks/queries/useQuestion';
 import { userState } from '@/store/users';
 import { QLabel } from '@/styles/commonStyles';
 import { Question } from '@/types/response/questions';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-const QuestionSection = () => {
+const ContentWrapper = dynamic(() => import('@/components/question/list/ContentWrapper'), { ssr: false });
+
+const QuestionSection = ({ id }: { id: number }) => {
   const router = useRouter();
-  const questionId = router.query.id as string;
   const [question, setQuestion] = useState<Question>(null);
   const user = useRecoilValue(userState);
   const mutationDeleteQuestion = useDeleteQuestionMutation({
@@ -25,21 +26,21 @@ const QuestionSection = () => {
   useEffect(() => {
     async function fetchQuestion() {
       // todo: useQuery로 처리,, useQuery로 하면 fetch가 무한으로 일어남 => 아직 이유는 모르겠음 ! 왜 인지 알아보기
-      const data = await getQuestion(questionId);
+      const data = await getQuestion(id);
       setQuestion(data);
     }
     fetchQuestion();
   }, []);
 
   const handleEditQuestion = () => {
-    router.push({ pathname: '/question/write', query: { id: questionId } });
+    router.push({ pathname: '/question/write', query: { id: id } });
   };
 
   const handleDeleteQuestion = () => {
-    mutationDeleteQuestion.mutate(questionId);
+    mutationDeleteQuestion.mutate(id);
   };
 
-  if (!question || !questionId) return <></>;
+  if (!question || !id) return <></>;
 
   return (
     <QuestionSectionContainer>
