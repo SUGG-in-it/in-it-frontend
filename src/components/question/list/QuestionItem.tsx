@@ -7,7 +7,7 @@ const ContentWrapper = dynamic(() => import('@/components/question/list/ContentW
 
 interface QuestionProps {
   questionId: number;
-  isCompleted: boolean;
+  type: string;
   nickname: string;
   date: string;
   title: string;
@@ -15,7 +15,7 @@ interface QuestionProps {
   tagList: string;
 }
 
-const QuestionItem = ({ questionId, isCompleted, nickname, date, title, content, tagList }: QuestionProps) => {
+const QuestionItem = ({ questionId, type, nickname, date, title, content, tagList }: QuestionProps) => {
   const router = useRouter();
 
   const handleQuestionClick = () => {
@@ -25,7 +25,7 @@ const QuestionItem = ({ questionId, isCompleted, nickname, date, title, content,
   return (
     <QuestionWrapper onClick={handleQuestionClick}>
       <TopSection>
-        <ProcessLabel isCompleted={isCompleted}>{isCompleted ? '답변 완료' : '답변 진행중'}</ProcessLabel>
+        <ProcessLabel type={type}>{type === 'completed' ? '답변 완료' : '답변 진행중'}</ProcessLabel>
         <Title>{title}</Title>
       </TopSection>
       <ContentWrapper content={content} />
@@ -62,12 +62,13 @@ const ProcessLabel = styled.div`
   padding: 0.5em;
   font-size: 0.8rem;
   margin-right: 1em;
-  background-color: ${({ isCompleted }) => (isCompleted ? '#adb5bd' : '#4d7cfe')};
+  background-color: ${({ type }) => (type === 'completed' ? '#adb5bd' : '#4d7cfe')};
 `;
 
 const Title = styled.p`
   font-size: 1.1rem;
   font-weight: bold;
+  width: calc(100% - 100px);
   color: ${({ theme }) => theme.textColor};
 `;
 

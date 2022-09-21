@@ -12,7 +12,7 @@ export interface QuestionResponseBody {
   point: number;
   createdAt: string;
   updatedAt: string;
-  isCompleted: boolean;
+  type: string;
   tagList: string;
   userId: number;
 }
@@ -35,7 +35,7 @@ export interface Question {
   point: number;
   createdAt: string;
   updatedAt: string;
-  isCompleted: boolean;
+  type: string;
   tagList: string;
   userId: number;
 }
