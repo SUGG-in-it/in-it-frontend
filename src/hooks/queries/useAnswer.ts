@@ -1,8 +1,11 @@
-import { uploadAnswer } from '@/api/answers';
+import { getAnswers, uploadAnswer } from '@/api/answers';
 import { CustomError } from '@/api/config/error';
+import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
+import { AnswersRequestParams } from '@/types/request/answers';
+import { AnswersResponseBody } from '@/types/response/answers';
 import { errorToast, successToast } from '@/utils/toast';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useUploadAnswerMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(uploadAnswer, {
@@ -16,4 +19,18 @@ export const useUploadAnswerMutation = ({ onSuccess, onError }: MutationCallback
     },
     useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
+};
+
+export const useAnswersQuery = (answersRequestParams: AnswersRequestParams) => {
+  const page = answersRequestParams.page;
+  const questionId = answersRequestParams.questionId;
+
+  const data = useQuery<AnswersResponseBody>(
+    [KEYS.ANSWERS, { page: page, questionId: questionId }],
+    () => getAnswers(answersRequestParams),
+    {
+      suspense: true,
+    }
+  );
+  return data;
 };

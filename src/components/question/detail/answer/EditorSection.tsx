@@ -6,10 +6,15 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import { postAnswerId } from '@/api/answers';
 import { useUploadAnswerMutation } from '@/hooks/queries/useAnswer';
+import { QueryObserverResult } from 'react-query';
 
-const ToastEditor = () => {
+const EditorSection = ({ refetch }: { refetch?: () => Promise<QueryObserverResult<any, unknown>> }) => {
   const editorRef = useRef(null);
-  const mutationUploadAnswer = useUploadAnswerMutation({});
+  const mutationUploadAnswer = useUploadAnswerMutation({
+    onSuccess: () => {
+      refetch();
+    },
+  });
 
   const addImageBlobHook = async (file, callback) => {
     const { data } = await uploadImage(file);
@@ -69,4 +74,4 @@ const PostButton = styled(Button)`
   margin-top: 2em;
 `;
 
-export default ToastEditor;
+export default EditorSection;

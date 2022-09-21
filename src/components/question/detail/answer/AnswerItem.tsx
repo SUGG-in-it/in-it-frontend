@@ -7,15 +7,12 @@ import styled from 'styled-components';
 
 interface AnswerProps {
   id: number;
-  isCompleted: boolean;
   nickName: string;
   date: string;
-  title: string;
   content: string;
-  tags: string[];
 }
 
-const AnswerItem = ({ id, isCompleted, nickName, date, title, content, tags }: AnswerProps) => {
+const AnswerItem = ({ id, nickName, date, content }: AnswerProps) => {
   return (
     <AnswerItemWrapper>
       <AnswerHeader>
