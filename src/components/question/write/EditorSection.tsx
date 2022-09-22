@@ -5,22 +5,47 @@ import useInput from '@/hooks/useInput';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { uploadImage } from '@/api/images';
-import { useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import useValidationInput from '@/hooks/useValidationInput';
 import { validateQuestionTitle, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
-import { useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
+import { useQuestionQuery, useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
 import ValidationInput from '@/components/common/Input/ValidationInput';
+import Skeleton from 'react-loading-skeleton';
+import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
+import { FiRefreshCcw } from 'react-icons/fi';
+import { ErrorBoundary } from 'react-error-boundary';
 
-const EditorSection = () => {
+const QuestionsFallback = ({ error, resetErrorBoundary }) => (
+  <QuestionContainer>
+    <RetryBox>
+      <p>질문을 불러오는데 실패했어요 😭😭😭 </p>
+      <RetryButton onClick={() => resetErrorBoundary()} />
+    </RetryBox>
+  </QuestionContainer>
+);
+
+const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
+
+const QuestionEditor = () => {
   const title = useValidationInput('', validateQuestionTitle);
   const tagList = useInput('');
   const point = useInput('0');
   const editorRef = useRef(null);
   const router = useRouter();
-  const questionId = router.query.id;
+  const questionId = Number(router.query.id);
+
+  const { data: question } = useQuestionQuery(questionId);
+
+  useEffect(() => {
+    title.setValue(question.title || '');
+    tagList.setValue(question.tagList || '');
+    point.setValue(String(question.point || 0));
+    editorRef.current?.getInstance().setHTML(question.content || '');
+  }, [question]);
+
   const mutationUploadQuestion = useUploadQuestionMutation({
     onSuccess: () => {
       router.push('/');
@@ -68,6 +93,7 @@ const EditorSection = () => {
           placeholder="내용을 입력해주세요."
           previewStyle="vertical"
           initialEditType="wysiwyg"
+          initialValue={''}
           height="350px"
           toolbarItems={[
             // 툴바 옵션 설정
@@ -93,6 +119,16 @@ const EditorSection = () => {
         <PostButton onClick={handleQuestionSubmit}>{'등록'}</PostButton>
       </ButtonWrapper>
     </>
+  );
+};
+
+const EditorSection = () => {
+  return (
+    <ErrorBoundary FallbackComponent={QuestionsFallback}>
+      <Suspense fallback={<QuestionsLoading />}>
+        <QuestionEditor />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
@@ -130,4 +166,36 @@ const CustomInput = styled(Input)`
   }
 `;
 
+const QuestionContainer = styled.div`
+  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  padding-bottom: 6em;
+`;
+
+const RetryBox = styled.div`
+  max-width: 850px;
+  width: 80vw;
+  height: fit-content;
+  margin: 0 auto;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  padding: 3em;
+  ${media.tablet} {
+    width: 80vw;
+  }
+  ${media.mobile} {
+    padding: 1em;
+  }
+`;
+
+const RetryButton = styled(FiRefreshCcw)`
+  width: 30px;
+  height: 30px;
+  margin-top: 30px;
+  color: ${({ theme }) => theme.greyLineColor};
+  cursor: pointer;
+`;
 export default EditorSection;

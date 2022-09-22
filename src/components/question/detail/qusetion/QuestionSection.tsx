@@ -1,36 +1,87 @@
+import Button from '@/components/common/button/Button';
 import GrayLine from '@/components/common/GreyLine';
+import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
+import { useDeleteQuestionMutation, useQuestionQuery } from '@/hooks/queries/useQuestion';
+import { userState } from '@/store/users';
 import { QLabel } from '@/styles/commonStyles';
+import { media } from '@/styles/mediaQuery';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
+import { FiRotateCcw } from 'react-icons/fi';
+import Skeleton from 'react-loading-skeleton';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-const QuestionSection = () => {
-  const question = {
-    id: 1,
-    isCompleted: true,
-    nickName: '지렁이',
-    date: '2022-08-17',
-    title: '코드 리뷰 해주세요.',
-    content:
-      '구할 무한한 이는 그와 소담스러운 얼마나 긴지라 우리 사막이다. 석가는 길지 찬미를 아름답고 실현에 동산에는 부패를 공자는 것이다. 지혜는 그것은 따뜻한 가장 그들에게 거선의 예수는 꽃이 부패뿐이다. 능히 청춘은 어디 옷을 피고, 있음으로써 있는가? 대고, 속에 새 뭇 것은 하는 같이, 이것을 그리하였는가? 청춘의 커다란 인생에 피가 든 철환하였는가? 가치를 있을 그들을 갑 내는 뜨고, 모래뿐일 봄바람이다. 못할 이 설산에서 구하지 예수는 힘있다. 석가는 시들어 만천하의 가는 날카로우나 불어 힘있다.',
-    tags: ['react', 'js'],
+const ContentWrapper = dynamic(() => import('@/components/question/list/ContentWrapper'), { ssr: false });
+
+const QuestionsFallback = ({ error, resetErrorBoundary }) => (
+  <QuestionContainer>
+    <RetryBox>
+      <p>질문을 불러오는데 실패했어요 😭😭😭 </p>
+      <RetryButton onClick={() => resetErrorBoundary()} />
+    </RetryBox>
+  </QuestionContainer>
+);
+
+const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
+
+const QuestionDetail = ({ id }: { id: number }) => {
+  const { data: question } = useQuestionQuery(id);
+  const user = useRecoilValue(userState);
+
+  const router = useRouter();
+  const mutationDeleteQuestion = useDeleteQuestionMutation({
+    onSuccess: () => {
+      router.back();
+    },
+  });
+
+  const handleEditQuestion = () => {
+    router.push({ pathname: '/question/write', query: { id: id } });
+  };
+
+  const handleDeleteQuestion = () => {
+    mutationDeleteQuestion.mutate(id);
   };
 
   return (
     <QuestionSectionContainer>
       <QuestionSectionWrapper>
         <SectionRow>
-          <QLabel>Q.</QLabel>
-          <Title>{question.title}</Title>
+          <TitleContainer>
+            <QLabel>Q.</QLabel>
+            <Title>{question.title}</Title>
+          </TitleContainer>
+          {user.id === question.userId && (
+            <div>
+              <SettingButton onClick={handleEditQuestion}>{'수정'}</SettingButton>
+              <SettingButton>|</SettingButton>
+              <SettingButton onClick={handleDeleteQuestion}>{'삭제'}</SettingButton>
+            </div>
+          )}
         </SectionRow>
         <SectionRow>
-          <NickName>{question.nickName}</NickName>
+          <NickName>{question.nickname}</NickName>
           <Date>{question.date}</Date>
         </SectionRow>
         <GrayLine />
         <SectionRow>
-          <Content>{question.content}</Content>
+          <ContentWrapper content={question.content} />
         </SectionRow>
       </QuestionSectionWrapper>
     </QuestionSectionContainer>
+  );
+};
+
+const QuestionSection = ({ id }: { id: number }) => {
+  return (
+    <ErrorBoundary FallbackComponent={QuestionsFallback}>
+      <Suspense fallback={<QuestionsLoading />}>
+        <QuestionDetail id={id} />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
@@ -48,8 +99,15 @@ const QuestionSectionWrapper = styled.div`
 const SectionRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-top: 1em;
   margin-bottom: 1em;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 500px;
 `;
 
 const Title = styled.div`
@@ -70,9 +128,44 @@ const Date = styled.p`
   color: #adb5bd;
 `;
 
-const Content = styled.p`
-  line-height: 1.3;
-  color: ${({ theme }) => theme.grayColor};
+const SettingButton = styled(Button)`
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+  color: #616568;
+  font-weight: 400;
+  font-size: 0.9rem;
+`;
+
+const QuestionContainer = styled.div`
+  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  padding-bottom: 6em;
+`;
+
+const RetryBox = styled.div`
+  max-width: 850px;
+  width: 80vw;
+  height: fit-content;
+  margin: 0 auto;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  padding: 3em;
+  ${media.tablet} {
+    width: 80vw;
+  }
+  ${media.mobile} {
+    padding: 1em;
+  }
+`;
+
+const RetryButton = styled(FiRotateCcw)`
+  width: 30px;
+  height: 30px;
+  margin-top: 30px;
+  color: ${({ theme }) => theme.greyLineColor};
+  cursor: pointer;
 `;
 
 export default QuestionSection;

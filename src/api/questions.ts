@@ -1,4 +1,4 @@
-import { GET, POST, PUT } from '@/api/config/base';
+import { DELETE, GET, POST, PUT } from '@/api/config/base';
 import { QuestionPageRequestBody, QusetionsRequestBody, UploadQuestionRequestBody } from '@/types/request/questions';
 import { QuestionsPageResponseBody } from '@/types/response/questions';
 
@@ -29,3 +29,13 @@ export const getQuestionPage = async (
   const { data } = await GET('/questions/page', questionPageRequestBody);
   return data;
 };
+
+export const getQuestion = async (questionId: number) => {
+  return await GET(`/questions/${questionId}`)
+    .then((res) => res.data)
+    .catch((e) => {
+      return e;
+    });
+};
+
+export const deleteQuestion = async (questionId: number) => await DELETE(`/questions/${questionId}`);

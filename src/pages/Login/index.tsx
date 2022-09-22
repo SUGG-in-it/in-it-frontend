@@ -3,23 +3,30 @@ import ValidationInput from '@/components/common/Input/ValidationInput';
 import AccountLayout from '@/components/layouts/AccountLayout';
 import { useLoginMutation } from '@/hooks/queries/useUser';
 import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
-import { loginState } from '@/store/users';
+import { loginState, userState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
 import { validateLoginEmail, validateLoginPwd, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import jwt from 'jsonwebtoken';
 
 const LoginPage = () => {
   const router = useRouter();
   const email = useValidationInput('', validateLoginEmail);
   const password = useValidationInput('', validateLoginPwd);
+  const setUserState = useSetRecoilState(userState);
 
   const setIsLogin = useSetRecoilState(loginState);
   const mutationLogin = useLoginMutation({
     onSuccess: () => {
       router.push('/');
       setIsLogin(true);
+      const user = jwt.decode(localStorage.getItem('accessToken'));
+      setUserState({
+        id: user.user_id,
+        nickname: user.nickname,
+      });
     },
   });
 

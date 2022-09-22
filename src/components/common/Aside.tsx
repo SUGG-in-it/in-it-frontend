@@ -1,7 +1,7 @@
-import { loginState } from '@/store/users';
+import { loginState, userState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { successToast } from '@/utils/toast';
 
@@ -22,6 +22,7 @@ const dummy = [
 const Aside = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useRecoilState(loginState);
+  const user = useRecoilValue(userState);
 
   const handleLogoutClick = () => {
     // 로그아웃이 너무 빠르게 되는거 같아 500ms 뒤에 로그아웃 처리하도록 했습니다.
@@ -48,7 +49,7 @@ const Aside = () => {
         {isLogin ? (
           <>
             <Header>
-              <NickName>{'안녕하세요! 지롱님'}</NickName>
+              <NickName>{`안녕하세요! ${user.nickname}`}</NickName>
               <LogoutButton onClick={handleLogoutClick}>{'로그아웃'}</LogoutButton>
             </Header>
             <ProfileButton onClick={handleProfileClick}>{'프로필 바로가기 >'}</ProfileButton>

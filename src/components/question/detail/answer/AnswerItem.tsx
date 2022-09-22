@@ -1,28 +1,49 @@
-import Button from '@/components/common/button/Button';
 import CommentSection from '@/components/question/detail/comment/CommentSection';
-import CommentList from '@/components/question/detail/comment/CommentList';
-import { QLabel } from '@/styles/commonStyles';
-import { useState } from 'react';
 import styled from 'styled-components';
+import DOMPurify from 'dompurify';
+import { useRecoilValue } from 'recoil';
+import { userState } from '@/store/users';
+import Button from '@/components/common/button/Button';
 
 interface AnswerProps {
   id: number;
-  isCompleted: boolean;
   nickName: string;
   date: string;
-  title: string;
   content: string;
-  tags: string[];
+  userId: number;
 }
 
-const AnswerItem = ({ id, isCompleted, nickName, date, title, content, tags }: AnswerProps) => {
+const AnswerItem = ({ id, nickName, date, content, userId }: AnswerProps) => {
+  const user = useRecoilValue(userState);
+
+  const handleEditQuestion = () => {
+    //
+  };
+
+  const handleDeleteQuestion = () => {
+    //
+  };
+
   return (
     <AnswerItemWrapper>
       <AnswerHeader>
-        <NickName>{`작성자 ${nickName}`}</NickName>
-        <Date>{date}</Date>
+        <div>
+          <NickName>{`작성자 ${nickName}`}</NickName>
+          <Date>{date}</Date>
+        </div>
+        {user.id === userId && (
+          <div>
+            <SettingButton onClick={handleEditQuestion}>{'수정'}</SettingButton>
+            <SettingButton>|</SettingButton>
+            <SettingButton onClick={handleDeleteQuestion}>{'삭제'}</SettingButton>
+          </div>
+        )}
       </AnswerHeader>
-      <Content>{content}</Content>
+      <Content
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(content),
+        }}
+      />
       <CommentSection />
     </AnswerItemWrapper>
   );
@@ -32,17 +53,19 @@ const AnswerItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.5em 1em;
-  margin-top: 2em;
+  margin-top: 1em;
   background-color: ${({ theme }) => theme.backgrondLightColor};
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   border-radius: 5px;
+  margin-bottom: 2em;
 `;
 
 const AnswerHeader = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
-  padding-bottom: 1em;
 `;
 
 const NickName = styled.p`
@@ -62,6 +85,14 @@ const Content = styled.p`
   color: ${({ theme }) => theme.grayColor};
   line-height: 1.5;
   margin-top: 1em;
+`;
+
+const SettingButton = styled(Button)`
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+  color: #616568;
+  font-weight: 400;
+  font-size: 0.9rem;
+  height: 30px;
 `;
 
 export default AnswerItem;
