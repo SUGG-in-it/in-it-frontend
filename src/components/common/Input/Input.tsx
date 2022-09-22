@@ -6,6 +6,7 @@ export interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
+  readonly?: boolean;
 }
 
 const InputWrapper = styled.input`

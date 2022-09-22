@@ -1,6 +1,6 @@
 import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
-import TabPanel from '@/components/mypage/TabPanel';
+import TabMenu from '@/components/mypage/TabMenu';
 import styled from 'styled-components';
 import { ReactElement } from 'react';
 import { media } from '@/styles/mediaQuery';
@@ -15,25 +15,26 @@ interface MypageLayoutProps {
 
 const MypageLayout = ({ children }: MypageLayoutProps) => {
   return (
-    <MyPageContainer>
+    <MyPageWrapper>
       <Header />
-      <TabPanel />
-      <SectionWrapper>
+      <MyPageContainer>
+        <TabMenu />
         <SectionPanel>{children}</SectionPanel>
-      </SectionWrapper>
+      </MyPageContainer>
       <Footer />
-    </MyPageContainer>
+    </MyPageWrapper>
   );
 };
 
-const MyPageContainer = styled.div`
-  background-color: ${({ theme }) => theme.backgrondLightColor};
+const MyPageWrapper = styled.div`
+  background-image: linear-gradient(to bottom, #004b91 25%, white 25%);
+  padding-bottom: 100px;
 `;
 
-const SectionWrapper = styled.div`
-  height: calc(100vh - 110px);
+const MyPageContainer = styled.div`
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   width: 80vw;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   ${media.mobile} {
     width: 90vw;
@@ -41,10 +42,8 @@ const SectionWrapper = styled.div`
 `;
 
 const SectionPanel = styled.div`
-  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  background-color: ${({ theme }) => theme.backgrondLightColor};
   min-height: 50vh;
-  border: 1px solid ${({ theme }) => theme.greyLineColor};
-  border-radius: 8px;
 `;
 
 export default MypageLayout;

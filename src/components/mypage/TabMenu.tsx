@@ -2,19 +2,22 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { userState } from '@/store/users';
 
 const TAB_MENU = [{ name: '프로필' }, { name: '나의 질문' }, { name: '나의 답변' }, { name: '나의 댓글' }];
 
-const TabPanel = () => {
+const TabMenu = () => {
   const router = useRouter();
   const [currentTab, setCurrentTab] = useState(0);
+  const user = useRecoilValue(userState);
 
   useEffect(() => {
     matchUrlTab();
   }, []);
 
   const matchUrlTab = () => {
-    if (router.route === '/mypage/profile') {
+    if (router.route.includes('/mypage/profile')) {
       setCurrentTab(0);
     }
     if (router.route === '/mypage/question') {
@@ -28,10 +31,10 @@ const TabPanel = () => {
     }
   };
 
-  const selectMenuHandler = (index) => {
+  const selectMenuHandler = (index: number, nickname: string) => {
     switch (index) {
       case 0:
-        router.push('/mypage/profile');
+        router.push({ pathname: '/mypage/profile', query: { nickname: nickname } });
         break;
       case 1:
         router.push('/mypage/question');
@@ -47,41 +50,43 @@ const TabPanel = () => {
 
   return (
     <TabContainer>
-      <TabMenu>
+      <TabMenuItem>
         {TAB_MENU.map((menu, index) => (
           <li
             key={index}
             className={currentTab === index ? 'clicked-menu' : 'menu'}
-            onClick={() => selectMenuHandler(index)}
+            onClick={() => selectMenuHandler(index, user.nickname)}
           >
             {menu.name}
           </li>
         ))}
-      </TabMenu>
+      </TabMenuItem>
     </TabContainer>
   );
 };
 
 const TabContainer = styled.div`
   display: flex;
-  margin: 3em auto;
+  margin-top: 5em;
+  padding-top: 4em;
+  padding-bottom: 2em;
   height: 50px;
   width: 80vw;
-  max-width: 900px;
+  max-width: 1100px;
   align-items: center;
-  background-color: ${({ theme }) => theme.backgrondDarkColor};
-  border: 1px solid ${({ theme }) => theme.greyLineColor};
-  border-radius: 8px;
+  border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
+  background-color: ${({ theme }) => theme.backgrondLightColor};
   ${media.mobile} {
     width: 90vw;
   }
 `;
 
-const TabMenu = styled.ul`
+const TabMenuItem = styled.ul`
   display: flex;
-  margin: 0 10%;
+  width: 90%;
+  margin: 0 auto;
   border: none;
-  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  background-color: ${({ theme }) => theme.backgrondLightColor};
   color: ${({ theme }) => theme.grayColor};
   font-size: 1rem;
   cursor: pointer;
@@ -108,4 +113,4 @@ const TabMenu = styled.ul`
   }
 `;
 
-export default TabPanel;
+export default TabMenu;

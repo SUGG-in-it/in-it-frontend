@@ -3,4 +3,5 @@ export const KEYS = {
   MAIN_CONTENT: 'getMainContent',
   QUESTION: 'getQuestion',
   ANSWERS: 'getAnswers',
+  PROFILE: 'getProfile',
 };
