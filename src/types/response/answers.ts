@@ -1,5 +1,5 @@
 export interface AnswersResponseBody {
-  answerList: Answer[];
+  answers: Answer[];
 }
 
 export interface Answer {
@@ -7,4 +7,5 @@ export interface Answer {
   nickName: string;
   date: string;
   content: string;
+  userId: number;
 }

@@ -1,7 +1,7 @@
 import { GET, POST, PUT } from '@/api/config/base';
 import { AnswerPageRequestParams, AnswersRequestParams, UploadAnswerRequestBody } from '@/types/request/answers';
 
-export const postAnswerId = async () => await POST('/answers');
+export const postAnswerId = async (questionId: number) => await POST('/answers', { questionId });
 
 export const uploadAnswer = async ({ answerId, content }: UploadAnswerRequestBody) =>
   await PUT(`/answers/${answerId}`, { content });

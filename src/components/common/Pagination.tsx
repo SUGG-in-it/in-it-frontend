@@ -29,7 +29,6 @@ const PaginationContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 1em;
-  padding-bottom: 100px;
   .arrow-button {
     cursor: pointer;
   }

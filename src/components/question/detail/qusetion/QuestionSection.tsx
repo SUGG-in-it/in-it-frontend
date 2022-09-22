@@ -57,7 +57,8 @@ const QuestionDetail = ({ id }: { id: number }) => {
           {user.id === question.userId && (
             <div>
               <SettingButton onClick={handleEditQuestion}>{'수정'}</SettingButton>
-              <SettingButton onClick={handleDeleteQuestion}>{' | 삭제'}</SettingButton>
+              <SettingButton>|</SettingButton>
+              <SettingButton onClick={handleDeleteQuestion}>{'삭제'}</SettingButton>
             </div>
           )}
         </SectionRow>

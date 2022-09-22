@@ -6,10 +6,10 @@ export interface UploadAnswerRequestBody {
 export interface AnswersRequestParams {
   page: number;
   size: number;
-  questionId: string;
+  questionId: number;
 }
 
 export interface AnswerPageRequestParams {
   size: number;
-  questionId: string;
+  questionId: number;
 }

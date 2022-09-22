@@ -5,7 +5,6 @@ import AnswerHeader from '@/components/question/detail/answer/AnswerHeader';
 import AnswerItem from '@/components/question/detail/answer/AnswerItem';
 import { useAnswersQuery } from '@/hooks/queries/useAnswer';
 import { media } from '@/styles/mediaQuery';
-import { useRouter } from 'next/router';
 import { Suspense, useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { FiRotateCcw } from 'react-icons/fi';
@@ -26,20 +25,18 @@ const AnswerListFallBack = ({ error, resetErrorBoundary }) => (
 
 const AnswerListLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
 
-const AnswerList = () => {
+const AnswerList = ({ id }: { id: number }) => {
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const router = useRouter();
-  const questionId = router.query.id as string;
-  const { data: answers, refetch } = useAnswersQuery({ page: currentPage, size: 5, questionId: questionId });
+  const { data: answers, refetch } = useAnswersQuery({ page: currentPage, size: 5, questionId: id });
 
   useEffect(() => {
     async function fetchQuestionPage() {
-      const { count } = await getAnswerPage({ size: 5, questionId: questionId });
+      const { count } = await getAnswerPage({ size: 5, questionId: id });
       setTotalPage(count);
     }
     fetchQuestionPage();
-  }, [currentPage]);
+  }, [currentPage, answers]);
 
   const handlePageClick = (number: number) => {
     setCurrentPage(number);
@@ -49,27 +46,27 @@ const AnswerList = () => {
     <>
       <AnswerHeader />
       <AnswerListSectionWrapper>
-        {answers?.answerList.map((answer) => (
+        {answers?.answers.map((answer) => (
           <AnswerItem key={answer.id} {...answer} />
         ))}
         <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
-        <AnswerWriteSectionWrapper>
-          <ToastEditorWrapper>
-            <Notice>{'지롱님, 답변해주세요! 😉'}</Notice>
-            <EditorSectionWrapper>
-              <EditorSection refetch={refetch} />
-            </EditorSectionWrapper>
-          </ToastEditorWrapper>
-        </AnswerWriteSectionWrapper>
       </AnswerListSectionWrapper>
+      <AnswerWriteSectionWrapper>
+        <ToastEditorWrapper>
+          <Notice>{'지롱님, 답변해주세요! 😉'}</Notice>
+          <EditorSectionWrapper>
+            <EditorSection refetch={refetch} id={id} />
+          </EditorSectionWrapper>
+        </ToastEditorWrapper>
+      </AnswerWriteSectionWrapper>
     </>
   );
 };
 
-const AnswerListSection = () => (
+const AnswerListSection = ({ id }: { id: number }) => (
   <ErrorBoundary FallbackComponent={AnswerListFallBack}>
     <Suspense fallback={<AnswerListLoading />}>
-      <AnswerList />
+      <AnswerList id={id} />
     </Suspense>
   </ErrorBoundary>
 );

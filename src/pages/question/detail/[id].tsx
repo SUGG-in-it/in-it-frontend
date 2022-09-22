@@ -11,7 +11,7 @@ const QuestionDetailPage = ({ id }: { id: number }) => {
       <QuestionWrapper>
         <QuestionSection id={id} />
         <GrayLine />
-        <AnswerSection />
+        <AnswerSection id={id} />
       </QuestionWrapper>
     </QuestionLayout>
   );

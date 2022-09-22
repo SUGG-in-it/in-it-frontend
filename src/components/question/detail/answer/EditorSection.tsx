@@ -8,7 +8,7 @@ import { postAnswerId } from '@/api/answers';
 import { useUploadAnswerMutation } from '@/hooks/queries/useAnswer';
 import { QueryObserverResult } from 'react-query';
 
-const EditorSection = ({ refetch }: { refetch?: () => Promise<QueryObserverResult<any, unknown>> }) => {
+const EditorSection = ({ refetch, id }: { refetch?: () => Promise<QueryObserverResult<any, unknown>>; id: number }) => {
   const editorRef = useRef(null);
   const mutationUploadAnswer = useUploadAnswerMutation({
     onSuccess: () => {
@@ -22,7 +22,7 @@ const EditorSection = ({ refetch }: { refetch?: () => Promise<QueryObserverResul
   };
 
   const handleQuestionSubmit = async () => {
-    const { data } = await postAnswerId();
+    const { data } = await postAnswerId(id);
     const answerId = data.answerId;
     mutationUploadAnswer.mutate({
       answerId: Number(answerId),
