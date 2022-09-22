@@ -4,14 +4,27 @@ import AnswerHeader from '@/components/question/detail/answer/AnswerHeader';
 import AnswerItem from '@/components/question/detail/answer/AnswerItem';
 import { useAnswersQuery } from '@/hooks/queries/useAnswer';
 import { media } from '@/styles/mediaQuery';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { Question } from '@/types/response/questions';
+import { ErrorBoundary } from 'react-error-boundary';
+import Skeleton from 'react-loading-skeleton';
+import MoonLoading from '@/components/common/loading/MoonLoading';
+import { FiRotateCcw } from 'react-icons/fi';
 
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
 
-const AnswerListSection = ({ question }: { question: Question }) => {
+const AnswerListFallBack = ({ error, resetErrorBoundary }) => (
+  <RetryBox>
+    <p>답변을 불러오는데 실패했어요 😭😭😭 </p>
+    <RetryButton onClick={() => resetErrorBoundary()} />
+  </RetryBox>
+);
+
+const AnswerListLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
+
+const AnswerSection = ({ question }: { question: Question }) => {
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const { data: answers, refetch } = useAnswersQuery({ page: currentPage, size: 5, questionId: question.questionId });
@@ -46,6 +59,16 @@ const AnswerListSection = ({ question }: { question: Question }) => {
         </ToastEditorWrapper>
       </AnswerWriteSectionWrapper>
     </>
+  );
+};
+
+const AnswerListSection = ({ question }: { question: Question }) => {
+  return (
+    <ErrorBoundary FallbackComponent={AnswerListFallBack}>
+      <Suspense fallback={<AnswerListLoading />}>
+        <AnswerSection question={question} />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
@@ -93,6 +116,34 @@ const EditorSectionWrapper = styled.div`
   ${media.tablet} {
     margin-left: 7vw;
   }
+`;
+
+const RetryBox = styled.div`
+  max-width: 850px;
+  width: 80vw;
+  height: fit-content;
+  margin: 0 auto;
+  background-color: ${({ theme }) => theme.backgrondLightColor};
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  padding: 3em;
+  ${media.tablet} {
+    width: 80vw;
+  }
+  ${media.mobile} {
+    padding: 1em;
+  }
+`;
+
+const RetryButton = styled(FiRotateCcw)`
+  width: 30px;
+  height: 30px;
+  margin-top: 30px;
+  color: ${({ theme }) => theme.greyLineColor};
+  cursor: pointer;
 `;
 
 export default AnswerListSection;

@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '@/store/users';
 import Button from '@/components/common/button/Button';
 import { Question } from '@/types/response/questions';
+import { useSelectAnswerMutation } from '@/hooks/queries/useAnswer';
 
 interface AnswerProps {
   id: number;
@@ -17,6 +18,7 @@ interface AnswerProps {
 
 const AnswerItem = ({ id, nickName, date, content, userId, question }: AnswerProps) => {
   const user = useRecoilValue(userState);
+  const mutationSelectAnswer = useSelectAnswerMutation({});
 
   const handleEditQuestion = () => {
     //
@@ -26,9 +28,15 @@ const AnswerItem = ({ id, nickName, date, content, userId, question }: AnswerPro
     //
   };
 
+  const handleSelectAnswer = () => {
+    mutationSelectAnswer.mutate(id);
+  };
+
   return (
     <>
-      <ButtonWrapper>{user.id === question.userId && <SelectButton>{'답변 채택하기 ☺️'}</SelectButton>}</ButtonWrapper>
+      <ButtonWrapper>
+        {user.id === question.userId && <SelectButton onClick={handleSelectAnswer}>{'답변 채택하기 ☺️'}</SelectButton>}
+      </ButtonWrapper>
       <AnswerItemWrapper>
         <AnswerHeader>
           <div>

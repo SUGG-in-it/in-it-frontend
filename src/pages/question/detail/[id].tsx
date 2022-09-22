@@ -6,6 +6,7 @@ import AnswerSection from '@/components/question/detail/answer/AnswerSection';
 import QuestionSection from '@/components/question/detail/qusetion/QuestionSection';
 import { useQuestionQuery, useQuestionsQuery } from '@/hooks/queries/useQuestion';
 import { media } from '@/styles/mediaQuery';
+import { Question } from '@/types/response/questions';
 import { GetServerSideProps } from 'next';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -22,34 +23,27 @@ const QuestionsFallback = ({ error, resetErrorBoundary }) => (
 
 const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
 
-const AnswerListFallBack = ({ error, resetErrorBoundary }) => (
-  <RetryBox>
-    <p>답변을 불러오는데 실패했어요 😭😭😭 </p>
-    <RetryButton onClick={() => resetErrorBoundary()} />
-  </RetryBox>
-);
-
-const AnswerListLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
-
-const QuestionDetailPage = ({ id }: { id: number }) => {
+const QuestionDetail = ({ id }: { id: number }) => {
   const { data: question } = useQuestionQuery(id);
 
   return (
     <QuestionLayout>
       <QuestionWrapper>
-        <ErrorBoundary FallbackComponent={QuestionsFallback}>
-          <Suspense fallback={<QuestionsLoading />}>
-            <QuestionSection question={question} />
-          </Suspense>
-        </ErrorBoundary>
+        <QuestionSection question={question} />
         <GrayLine />
-        <ErrorBoundary FallbackComponent={AnswerListFallBack}>
-          <Suspense fallback={<AnswerListLoading />}>
-            <AnswerSection question={question} />
-          </Suspense>
-        </ErrorBoundary>
+        <AnswerSection question={question} />
       </QuestionWrapper>
     </QuestionLayout>
+  );
+};
+
+const QuestionDetailPage = ({ id }: { id: number }) => {
+  return (
+    <ErrorBoundary FallbackComponent={QuestionsFallback}>
+      <Suspense fallback={<QuestionsLoading />}>
+        <QuestionDetail id={id} />
+      </Suspense>
+    </ErrorBoundary>
   );
 };
 
