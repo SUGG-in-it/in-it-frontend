@@ -3,11 +3,16 @@ import LabelInput from '@/components/common/Input/LabelInput';
 import styled from 'styled-components';
 import { UseInputReturn } from '@/hooks/useInput';
 
-const ProfileRow = ({ label, info }: { label: string; info: UseInputReturn }) => {
+const ProfileInput = ({ label, info }: { label: string; info: UseInputReturn }) => {
   return (
     <Container>
       <CustomLabelInput label={label}>
-        <CustomInput type="text" value={info.value} onChange={info.onChange} readonly />
+        <CustomInput
+          type="text"
+          value={info.value}
+          onChange={info.onChange}
+          placeholder={info.value ?? '정보를 입력해주세요 😛'}
+        />
       </CustomLabelInput>
     </Container>
   );
@@ -28,4 +33,4 @@ const CustomInput = styled(Input)`
   background: #fbfcfd;
 `;
 
-export default ProfileRow;
+export default ProfileInput;

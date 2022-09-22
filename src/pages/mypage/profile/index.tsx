@@ -1,8 +1,7 @@
-import GrayLine from '@/components/common/GreyLine';
 import MoonLoading from '@/components/common/loading/MoonLoading';
 import MypageLayout from '@/components/layouts/MypageLayout';
-import { useProfileQuery } from '@/hooks/queries/useProfile';
-import ProfileInfo from '@/components/mypage/ProfileInfo';
+import { useProfileMutation, useProfileQuery } from '@/hooks/queries/useProfile';
+import ProfileInput from '@/components/mypage/ProfileInput';
 import { media } from '@/styles/mediaQuery';
 import { GetServerSideProps } from 'next';
 import { Suspense } from 'react';
@@ -11,6 +10,7 @@ import { FiRefreshCcw } from 'react-icons/fi';
 import styled from 'styled-components';
 import useInput from '@/hooks/useInput';
 import Button from '@/components/common/button/Button';
+import GrayLine from '@/components/common/GreyLine';
 
 const ProfileFallback = ({ error, resetErrorBoundary }) => (
   <RetryBox>
@@ -23,9 +23,8 @@ const ProfileLoading = () => <MoonLoading />;
 
 const Profile = ({ nickname }: { nickname: string }) => {
   const { data: profile } = useProfileQuery(nickname);
+  const profileMutation = useProfileMutation({});
 
-  const level = useInput(profile.level);
-  const point = useInput(profile.point);
   const email = useInput(profile.email);
   const nickName = useInput(profile.nickname);
   const githubAccount = useInput(profile.githubAccount);
@@ -35,33 +34,52 @@ const Profile = ({ nickname }: { nickname: string }) => {
   const career = useInput(profile.career);
   const company = useInput(profile.company);
 
+  const handleEditProfile = () => {
+    profileMutation.mutate({
+      level: profile.level,
+      point: profile.point,
+      email: email.value,
+      nickname: nickName.value,
+      githubAccount: githubAccount.value,
+      introduction: introduction.value,
+      year: year.value,
+      workPosition: workPosition.value,
+      career: career.value,
+      company: company.value,
+    });
+  };
+
   return (
     <MypageLayout>
       <>
         <ProfileCotainer>
           <ProfileRow>
-            <ProfileInfo label={'등급'} info={level} />
-            <ProfileInfo label={'포인트'} info={point} />
+            <Label>{'포인트'}</Label>
+            <ProfileInfo>{profile.level}</ProfileInfo>
           </ProfileRow>
           <ProfileRow>
-            <ProfileInfo label={'이메일'} info={email} />
-            <ProfileInfo label={'닉네임'} info={nickName} />
+            <Label>{'등급'}</Label>
+            <ProfileInfo>{profile.point}</ProfileInfo>
           </ProfileRow>
           <ProfileRow>
-            <ProfileInfo label={'깃허브 계정'} info={githubAccount} />
-            <ProfileInfo label={'자기소개'} info={introduction} />
+            <ProfileInput label={'이메일'} info={email} />
+            <ProfileInput label={'닉네임'} info={nickName} />
           </ProfileRow>
           <ProfileRow>
-            <ProfileInfo label={'경력'} info={year} />
-            <ProfileInfo label={'직무'} info={workPosition} />
+            <ProfileInput label={'깃허브 계정'} info={githubAccount} />
+            <ProfileInput label={'자기소개'} info={introduction} />
           </ProfileRow>
           <ProfileRow>
-            <ProfileInfo label={'이력'} info={career} />
-            <ProfileInfo label={'소속'} info={company} />
+            <ProfileInput label={'경력'} info={year} />
+            <ProfileInput label={'직무'} info={workPosition} />
+          </ProfileRow>
+          <ProfileRow>
+            <ProfileInput label={'이력'} info={career} />
+            <ProfileInput label={'소속'} info={company} />
           </ProfileRow>
         </ProfileCotainer>
         <ButtonWrapper>
-          <EditButton>{'수정하기'}</EditButton>
+          <EditButton onClick={handleEditProfile}>{'수정하기'}</EditButton>
         </ButtonWrapper>
       </>
     </MypageLayout>
@@ -86,6 +104,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
+
+const Label = styled.p`
+  font-size: 1rem;
+  color: ${({ theme }) => theme.pointColor};
+  margin-bottom: 0.5em;
+  font-weight: 800;
+`;
+
+const ProfileInfo = styled.p``;
 
 const ProfileCotainer = styled.div`
   padding: 5%;
@@ -115,6 +142,7 @@ const EditButton = styled(Button)`
 const ProfileRow = styled.div`
   display: flex;
   justify-content: space-between;
+  min-height: 4em;
 `;
 
 const RetryBox = styled.div`
