@@ -1,34 +1,17 @@
 import Button from '@/components/common/button/Button';
 import GrayLine from '@/components/common/GreyLine';
-import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
-import { useDeleteQuestionMutation, useQuestionQuery } from '@/hooks/queries/useQuestion';
+import { useDeleteQuestionMutation } from '@/hooks/queries/useQuestion';
 import { userState } from '@/store/users';
 import { QLabel } from '@/styles/commonStyles';
-import { media } from '@/styles/mediaQuery';
+import { Question } from '@/types/response/questions';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
-import { FiRotateCcw } from 'react-icons/fi';
-import Skeleton from 'react-loading-skeleton';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 const ContentWrapper = dynamic(() => import('@/components/question/list/ContentWrapper'), { ssr: false });
 
-const QuestionsFallback = ({ error, resetErrorBoundary }) => (
-  <QuestionContainer>
-    <RetryBox>
-      <p>질문을 불러오는데 실패했어요 😭😭😭 </p>
-      <RetryButton onClick={() => resetErrorBoundary()} />
-    </RetryBox>
-  </QuestionContainer>
-);
-
-const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
-
-const QuestionDetail = ({ id }: { id: number }) => {
-  const { data: question } = useQuestionQuery(id);
+const QuestionSection = ({ question }: { question: Question }) => {
   const user = useRecoilValue(userState);
 
   const router = useRouter();
@@ -39,11 +22,11 @@ const QuestionDetail = ({ id }: { id: number }) => {
   });
 
   const handleEditQuestion = () => {
-    router.push({ pathname: '/question/write', query: { id: id } });
+    router.push({ pathname: '/question/write', query: { id: question.questionId } });
   };
 
   const handleDeleteQuestion = () => {
-    mutationDeleteQuestion.mutate(id);
+    mutationDeleteQuestion.mutate(question.questionId);
   };
 
   return (
@@ -72,16 +55,6 @@ const QuestionDetail = ({ id }: { id: number }) => {
         </SectionRow>
       </QuestionSectionWrapper>
     </QuestionSectionContainer>
-  );
-};
-
-const QuestionSection = ({ id }: { id: number }) => {
-  return (
-    <ErrorBoundary FallbackComponent={QuestionsFallback}>
-      <Suspense fallback={<QuestionsLoading />}>
-        <QuestionDetail id={id} />
-      </Suspense>
-    </ErrorBoundary>
   );
 };
 
@@ -133,39 +106,6 @@ const SettingButton = styled(Button)`
   color: #616568;
   font-weight: 400;
   font-size: 0.9rem;
-`;
-
-const QuestionContainer = styled.div`
-  background-color: ${({ theme }) => theme.backgrondDarkColor};
-  padding-bottom: 6em;
-`;
-
-const RetryBox = styled.div`
-  max-width: 850px;
-  width: 80vw;
-  height: fit-content;
-  margin: 0 auto;
-  background-color: ${({ theme }) => theme.backgrondLightColor};
-  border: 1px solid ${({ theme }) => theme.greyLineColor};
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  display: flex;
-  padding: 3em;
-  ${media.tablet} {
-    width: 80vw;
-  }
-  ${media.mobile} {
-    padding: 1em;
-  }
-`;
-
-const RetryButton = styled(FiRotateCcw)`
-  width: 30px;
-  height: 30px;
-  margin-top: 30px;
-  color: ${({ theme }) => theme.greyLineColor};
-  cursor: pointer;
 `;
 
 export default QuestionSection;
