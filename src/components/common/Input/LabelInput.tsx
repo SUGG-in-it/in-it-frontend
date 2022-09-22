@@ -4,11 +4,12 @@ import styled from 'styled-components';
 interface LabelInputProps {
   label: string;
   children: ReactElement;
+  className?: string;
 }
 
-const LabelInput = ({ label, children }: LabelInputProps) => {
+const LabelInput = ({ label, children, className }: LabelInputProps) => {
   return (
-    <LabelInputContainer>
+    <LabelInputContainer className={className}>
       <Label>{label}</Label>
       {children}
     </LabelInputContainer>
