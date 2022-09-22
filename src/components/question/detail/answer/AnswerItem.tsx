@@ -35,7 +35,9 @@ const AnswerItem = ({ id, nickName, date, content, userId, question }: AnswerPro
   return (
     <>
       <ButtonWrapper>
-        {user.id === question.userId && <SelectButton onClick={handleSelectAnswer}>{'답변 채택하기 ☺️'}</SelectButton>}
+        {user.id === question.userId && question.type === 'doing' && (
+          <SelectButton onClick={handleSelectAnswer}>{'답변 채택하기 ☺️'}</SelectButton>
+        )}
       </ButtonWrapper>
       <AnswerItemWrapper>
         <AnswerHeader>
