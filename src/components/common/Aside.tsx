@@ -35,8 +35,8 @@ const Aside = () => {
     }, 500);
   };
 
-  const handleProfileClick = () => {
-    router.push('/mypage/profile');
+  const handleProfileClick = (nickname:string) => {
+    router.push({ pathname: '/mypage/profile', query: { nickname: nickname } });
   };
 
   const handleLoginClick = () => {
@@ -52,7 +52,7 @@ const Aside = () => {
               <NickName>{`안녕하세요! ${user.nickname}`}</NickName>
               <LogoutButton onClick={handleLogoutClick}>{'로그아웃'}</LogoutButton>
             </Header>
-            <ProfileButton onClick={handleProfileClick}>{'프로필 바로가기 >'}</ProfileButton>
+            <ProfileButton onClick={() => handleProfileClick(user.nickname)}>{'프로필 바로가기 >'}</ProfileButton>
           </>
         ) : (
           <>
