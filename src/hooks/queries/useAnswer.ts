@@ -1,4 +1,4 @@
-import { getAnswers, uploadAnswer } from '@/api/answers';
+import { getAnswers, selectAnswer, uploadAnswer } from '@/api/answers';
 import { CustomError } from '@/api/config/error';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
@@ -33,4 +33,18 @@ export const useAnswersQuery = (answersRequestParams: AnswersRequestParams) => {
     }
   );
   return data;
+};
+
+export const useSelectAnswerMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+  return useMutation(selectAnswer, {
+    onSuccess: () => {
+      onSuccess && onSuccess();
+      successToast('답변이 채택되었습니다. 🥰');
+    },
+    onError: (error: CustomError) => {
+      onError && onError();
+      errorToast('답변 채택에 실패했습니다. 😭');
+    },
+    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
+  });
 };

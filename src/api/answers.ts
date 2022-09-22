@@ -18,3 +18,7 @@ export const getAnswerPage = async (answerPageRequestParams: AnswerPageRequestPa
   const { data } = await GET('/answers/page', answerPageRequestParams);
   return data;
 };
+
+export const selectAnswer = async (answerId: number) => {
+  await POST(`/answers/select/${answerId}`);
+};
