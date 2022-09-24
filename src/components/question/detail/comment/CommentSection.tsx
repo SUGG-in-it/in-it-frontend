@@ -1,23 +1,30 @@
+import { getCommentPage } from '@/api/comments';
 import Button from '@/components/common/button/Button';
 import CommentList from '@/components/question/detail/comment/CommentList';
 import CommentWrite from '@/components/question/detail/comment/CommentWrite';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const CommentSection = () => {
+const CommentSection = ({ answerId }: { answerId: number }) => {
   const [isCommentShow, setIsCommentShow] = useState(false);
+  const [totalPage, setTotalPage] = useState(0);
+
+  const handleCommentShow = async () => {
+    const { count } = await getCommentPage({ size: 5, answerId });
+    setIsCommentShow(!isCommentShow);
+    setTotalPage(count);
+  };
 
   return (
     <CommentContainer>
       <CommentHeader>
         <CommentLabel>{'댓글'}</CommentLabel>
-        <MoreButton onClick={() => setIsCommentShow(!isCommentShow)}>
-          {isCommentShow ? '😮 댓글 접기 > ' : '😎 댓글 보기 > '}
-        </MoreButton>
+        <MoreButton onClick={handleCommentShow}>{isCommentShow ? '😮 댓글 접기 > ' : '😎 댓글 보기 > '}</MoreButton>
       </CommentHeader>
       {isCommentShow && (
         <>
-          <CommentList /> <CommentWrite />
+          <CommentList totalPage={totalPage} />
+          <CommentWrite answerId={answerId} />
         </>
       )}
     </CommentContainer>

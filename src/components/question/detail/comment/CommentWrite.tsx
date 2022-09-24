@@ -1,14 +1,23 @@
 import Button from '@/components/common/button/Button';
+import { useUploadAnswerMutation } from '@/hooks/queries/useComments';
+import { useState } from 'react';
 import styled from 'styled-components';
 
-const CommentWrite = () => {
+const CommentWrite = ({ answerId }: { answerId: number }) => {
+  const muatationUploadComment = useUploadAnswerMutation({});
+  const [comment, setComment] = useState('');
+
   const handleClick = () => {
-    // TODO: 댓글 등록 api 호출
+    muatationUploadComment.mutate({ comment, answerId });
+  };
+
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
   };
 
   return (
     <CommentWriteContainer>
-      <textarea name="comment" placeholder="댓글을 작성해주세요!"></textarea>
+      <textarea name="comment" placeholder="댓글을 작성해주세요!" onChange={handleCommentChange}></textarea>
       <PostButton onClick={handleClick}>{'댓글 등록'}</PostButton>
     </CommentWriteContainer>
   );
