@@ -58,7 +58,7 @@ const AnswerItem = ({ id, nickName, date, content, userId, question }: AnswerPro
             __html: DOMPurify.sanitize(content),
           }}
         />
-        <CommentSection />
+        <CommentSection answerId={id} />
       </AnswerItemWrapper>
     </>
   );
