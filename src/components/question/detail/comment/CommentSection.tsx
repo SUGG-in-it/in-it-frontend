@@ -24,7 +24,7 @@ const CommentSection = ({ answerId }: { answerId: number }) => {
       {isCommentShow && (
         <>
           <CommentList totalPage={totalPage} />
-          <CommentWrite />
+          <CommentWrite answerId={answerId} />
         </>
       )}
     </CommentContainer>
