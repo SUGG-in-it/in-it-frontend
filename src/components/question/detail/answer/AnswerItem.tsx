@@ -5,7 +5,8 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '@/store/users';
 import Button from '@/components/common/button/Button';
 import { Question } from '@/types/response/questions';
-import { useSelectAnswerMutation } from '@/hooks/queries/useAnswer';
+import { useDeleteAnswerMutation, useSelectAnswerMutation } from '@/hooks/queries/useAnswer';
+import { QueryObserverResult } from 'react-query';
 
 interface AnswerProps {
   id: number;
@@ -14,18 +15,24 @@ interface AnswerProps {
   content: string;
   userId: number;
   question: Question;
+  refetch: () => Promise<QueryObserverResult<any, unknown>>;
 }
 
-const AnswerItem = ({ id, nickName, date, content, userId, question }: AnswerProps) => {
+const AnswerItem = ({ id, nickName, date, content, userId, question, refetch }: AnswerProps) => {
   const user = useRecoilValue(userState);
   const mutationSelectAnswer = useSelectAnswerMutation({});
+  const mutationDeleteAnswer = useDeleteAnswerMutation({
+    onSuccess: () => {
+      refetch();
+    },
+  });
 
   const handleEditQuestion = () => {
     //
   };
 
   const handleDeleteQuestion = () => {
-    //
+    mutationDeleteAnswer.mutate(id);
   };
 
   const handleSelectAnswer = () => {

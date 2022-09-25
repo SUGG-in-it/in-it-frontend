@@ -1,4 +1,4 @@
-import { getAnswers, selectAnswer, uploadAnswer } from '@/api/answers';
+import { deleteAnswer, getAnswers, selectAnswer, uploadAnswer } from '@/api/answers';
 import { CustomError } from '@/api/config/error';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
@@ -44,6 +44,20 @@ export const useSelectAnswerMutation = ({ onSuccess, onError }: MutationCallback
     onError: (error: CustomError) => {
       onError && onError();
       errorToast('답변 채택에 실패했습니다. 😭');
+    },
+    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
+  });
+};
+
+export const useDeleteAnswerMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+  return useMutation(deleteAnswer, {
+    onSuccess: () => {
+      onSuccess && onSuccess();
+      successToast('답변 삭제가 완료되었습니다. 🥰');
+    },
+    onError: (error: CustomError) => {
+      onError && onError();
+      errorToast('답변 삭제에 실패했습니다. 😭');
     },
     useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });

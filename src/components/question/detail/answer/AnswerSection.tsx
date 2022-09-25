@@ -46,7 +46,7 @@ const AnswerSection = ({ question }: { question: Question }) => {
       <AnswerHeader />
       <AnswerListSectionWrapper>
         {answers?.answers.map((answer) => (
-          <AnswerItem key={answer.id} question={question} {...answer} />
+          <AnswerItem key={answer.id} question={question} refetch={refetch} {...answer} />
         ))}
         <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
       </AnswerListSectionWrapper>
