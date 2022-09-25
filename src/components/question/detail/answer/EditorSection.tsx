@@ -7,12 +7,22 @@ import styled from 'styled-components';
 import { postAnswerId } from '@/api/answers';
 import { useUploadAnswerMutation } from '@/hooks/queries/useAnswer';
 import { QueryObserverResult } from 'react-query';
+import { useRouter } from 'next/router';
 
-const EditorSection = ({ refetch, id }: { refetch?: () => Promise<QueryObserverResult<any, unknown>>; id: number }) => {
+interface EditorSectionProps {
+  refetch?: () => Promise<QueryObserverResult<any, unknown>>;
+  questionId: number;
+  answerId?: number;
+  content?: string;
+  onCancelEdit?: () => void;
+}
+
+const EditorSection = ({ refetch, questionId, answerId, content, onCancelEdit }: EditorSectionProps) => {
   const editorRef = useRef(null);
   const mutationUploadAnswer = useUploadAnswerMutation({
     onSuccess: () => {
       refetch();
+      onCancelEdit();
     },
   });
 
@@ -21,11 +31,18 @@ const EditorSection = ({ refetch, id }: { refetch?: () => Promise<QueryObserverR
     callback(data.url, '이미지');
   };
 
-  const handleQuestionSubmit = async () => {
-    const { data } = await postAnswerId(id);
+  const handleAnswerSubmit = async () => {
+    const { data } = await postAnswerId(questionId);
     const answerId = data.answerId;
     mutationUploadAnswer.mutate({
       answerId: Number(answerId),
+      content: editorRef.current?.getInstance().getHTML(),
+    });
+  };
+
+  const handleAnswerEdit = async () => {
+    mutationUploadAnswer.mutate({
+      answerId: answerId,
       content: editorRef.current?.getInstance().getHTML(),
     });
   };
@@ -37,6 +54,7 @@ const EditorSection = ({ refetch, id }: { refetch?: () => Promise<QueryObserverR
         placeholder="내용을 입력해주세요."
         previewStyle="vertical"
         initialEditType="wysiwyg"
+        initialValue={content}
         height="350px"
         toolbarItems={[
           // 툴바 옵션 설정
@@ -51,7 +69,11 @@ const EditorSection = ({ refetch, id }: { refetch?: () => Promise<QueryObserverR
         }}
       />
       <ButtonWrapper>
-        <PostButton onClick={handleQuestionSubmit}>{'등록'}</PostButton>
+        {content ? (
+          <PostButton onClick={handleAnswerEdit}>{'수정'}</PostButton>
+        ) : (
+          <PostButton onClick={handleAnswerSubmit}>{'등록'}</PostButton>
+        )}
       </ButtonWrapper>
     </ToastEditorWrapper>
   );

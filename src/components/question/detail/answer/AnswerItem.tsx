@@ -7,6 +7,11 @@ import Button from '@/components/common/button/Button';
 import { Question } from '@/types/response/questions';
 import { useDeleteAnswerMutation, useSelectAnswerMutation } from '@/hooks/queries/useAnswer';
 import { QueryObserverResult } from 'react-query';
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { media } from '@/styles/mediaQuery';
+
+const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
 
 interface AnswerProps {
   id: number;
@@ -20,6 +25,7 @@ interface AnswerProps {
 
 const AnswerItem = ({ id, nickName, date, content, userId, question, refetch }: AnswerProps) => {
   const user = useRecoilValue(userState);
+  const [isEditMode, setIsEditMode] = useState(false);
   const mutationSelectAnswer = useSelectAnswerMutation({});
   const mutationDeleteAnswer = useDeleteAnswerMutation({
     onSuccess: () => {
@@ -28,7 +34,7 @@ const AnswerItem = ({ id, nickName, date, content, userId, question, refetch }: 
   });
 
   const handleEditQuestion = () => {
-    //
+    setIsEditMode(true);
   };
 
   const handleDeleteQuestion = () => {
@@ -37,6 +43,10 @@ const AnswerItem = ({ id, nickName, date, content, userId, question, refetch }: 
 
   const handleSelectAnswer = () => {
     mutationSelectAnswer.mutate(id);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditMode(false);
   };
 
   return (
@@ -60,12 +70,26 @@ const AnswerItem = ({ id, nickName, date, content, userId, question, refetch }: 
             </div>
           )}
         </AnswerHeader>
-        <Content
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(content),
-          }}
-        />
-        <CommentSection answerId={id} />
+        {isEditMode ? (
+          <EditorSectionWrapper>
+            <EditorSection
+              refetch={refetch}
+              questionId={question.questionId}
+              content={content}
+              answerId={id}
+              onCancelEdit={handleCancelEdit}
+            />
+          </EditorSectionWrapper>
+        ) : (
+          <>
+            <Content
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(content),
+              }}
+            />
+            <CommentSection answerId={id} />
+          </>
+        )}
       </AnswerItemWrapper>
     </>
   );
@@ -129,6 +153,19 @@ const SelectButton = styled(Button)`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: end;
+`;
+
+const EditorSectionWrapper = styled.div`
+  width: 85vw;
+  max-width: 100%;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 3em;
+  padding-bottom: 5em;
+  flex-direction: column;
+  ${media.tablet} {
+    margin-left: 7vw;
+  }
 `;
 
 export default AnswerItem;
