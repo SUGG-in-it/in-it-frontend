@@ -1,7 +1,6 @@
-import { MouseEventHandler } from 'react';
 import styled from 'styled-components';
-export interface ButtonProps extends React.HTMLAttributes<Element> {
-  onClick: MouseEventHandler<HTMLButtonElement>;
+export interface ButtonProps {
+  onClick: (e: MouseEvent) => void;
   children: React.ReactNode;
   className?: string;
 }

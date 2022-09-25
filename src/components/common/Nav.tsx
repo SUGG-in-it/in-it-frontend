@@ -5,7 +5,7 @@ import { useLayoutEffect, useState } from 'react';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { postQuestionId } from '@/api/questions';
-import LoginRequestModal from '@/components/common/modal/LoginRequestModal';
+import LoginRequestDialog from '@/components/common/dialog/LoginRequestDialog';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '@/store/users';
 
@@ -60,7 +60,7 @@ const Nav = () => {
         <AnswerButton onClick={handleQuestionClick}>{'질문하기'}</AnswerButton>
       </NavContainer>
       <GrayLine />
-      {isShowLoginRequestModal ? <LoginRequestModal /> : null}
+      {isShowLoginRequestModal ? <LoginRequestDialog /> : null}
     </NavWrapper>
   );
 };
