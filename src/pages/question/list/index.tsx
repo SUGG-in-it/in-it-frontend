@@ -2,6 +2,7 @@ import { getQuestionPage } from '@/api/questions';
 import Pagination from '@/components/common/Pagination';
 import MainLayout from '@/components/layouts/MainLayout';
 import QuestionListSection from '@/components/question/list/QuestionListSection';
+import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -19,7 +20,7 @@ const QuestionListPage = () => {
 
   useEffect(() => {
     async function fetchQuestionPage() {
-      const { count } = await getQuestionPage({ size: 10, type: queryStatus });
+      const { count } = await getQuestionPage({ size: PAGINATION_SIZE.QUESTION_LIST, type: queryStatus });
       setTotalPage(count);
     }
     fetchQuestionPage();

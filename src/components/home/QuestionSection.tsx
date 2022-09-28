@@ -7,6 +7,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Skeleton from 'react-loading-skeleton';
 import styled from 'styled-components';
 import { FiRotateCcw } from 'react-icons/fi';
+import { PAGINATION_SIZE } from '@/constants/paginationSize';
 
 const QuestionsFallback = ({ error, resetErrorBoundary }) => (
   <QuestionContainer>
@@ -23,7 +24,7 @@ const Questions = () => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
   const [leftSectionQuestions, setLeftSectionQuestions] = useState([]);
   const [rightSectionQuestions, setRightSectionQuestions] = useState([]);
-  const { data: questions } = useQuestionsQuery({ page: 0, size: 6, type: 'total' });
+  const { data: questions } = useQuestionsQuery({ page: 0, size: PAGINATION_SIZE.MAIN_QUESTION, type: 'total' });
 
   useEffect(() => {
     setIsEmptyQuestions(questions?.questions?.length === 0);

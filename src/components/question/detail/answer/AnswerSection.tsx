@@ -12,6 +12,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Skeleton from 'react-loading-skeleton';
 import MoonLoading from '@/components/common/loading/MoonLoading';
 import { FiRotateCcw } from 'react-icons/fi';
+import { PAGINATION_SIZE } from '@/constants/paginationSize';
 
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
 
@@ -27,7 +28,11 @@ const AnswerListLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
 const AnswerSection = ({ question }: { question: Question }) => {
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const { data: answers, refetch } = useAnswersQuery({ page: currentPage, size: 5, questionId: question.questionId });
+  const { data: answers, refetch } = useAnswersQuery({
+    page: currentPage,
+    size: PAGINATION_SIZE.ANSWER_LIST,
+    questionId: question.questionId,
+  });
 
   useEffect(() => {
     async function fetchQuestionPage() {
