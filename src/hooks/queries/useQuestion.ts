@@ -11,19 +11,16 @@ export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) =>
   const page = qusetionsRequestBody.page;
   const type = qusetionsRequestBody.type;
 
-  const data = useQuery<QuestionsResponseBody>(
-    [KEYS.QUESTIONS, { page: page, type: type }],
-    () => getQusetions(qusetionsRequestBody),
-    {
-      suspense: true,
-    }
-  );
+  const data = useQuery<QuestionsResponseBody>([KEYS.QUESTIONS], () => getQusetions(qusetionsRequestBody), {
+    suspense: true,
+  });
   return data;
 };
 
 export const useQuestionQuery = (questionId: number) => {
-  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION, { id: questionId }], () => getQuestion(questionId), {
+  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION], () => getQuestion(questionId), {
     suspense: true,
+    retry: 0,
   });
   return data;
 };

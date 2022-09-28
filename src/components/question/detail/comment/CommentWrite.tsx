@@ -5,14 +5,14 @@ import styled from 'styled-components';
 
 const CommentWrite = ({ answerId }: { answerId: number }) => {
   const muatationUploadComment = useUploadAnswerMutation({});
-  const [comment, setComment] = useState('');
+  const [content, setContent] = useState('');
 
   const handleClick = () => {
-    muatationUploadComment.mutate({ comment, answerId });
+    muatationUploadComment.mutate({ content, answerId });
   };
 
   const handleCommentChange = (e) => {
-    setComment(e.target.value);
+    setContent(e.target.value);
   };
 
   return (
