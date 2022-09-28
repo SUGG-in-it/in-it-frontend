@@ -1,10 +1,10 @@
 import Button from '@/components/common/button/Button';
-import { useUploadAnswerMutation } from '@/hooks/queries/useComments';
+import { useUploadCommentMutation } from '@/hooks/queries/useComments';
 import { useState } from 'react';
 import styled from 'styled-components';
 
 const CommentWrite = ({ answerId }: { answerId: number }) => {
-  const muatationUploadComment = useUploadAnswerMutation({});
+  const muatationUploadComment = useUploadCommentMutation({});
   const [content, setContent] = useState('');
 
   const handleClick = () => {

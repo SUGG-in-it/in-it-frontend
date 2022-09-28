@@ -4,7 +4,7 @@ import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { errorToast, successToast } from '@/utils/toast';
 import { useMutation } from '@tanstack/react-query';
 
-export const useUploadAnswerMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+export const useUploadCommentMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(uploadComment, {
     onSuccess: () => {
       onSuccess && onSuccess();
