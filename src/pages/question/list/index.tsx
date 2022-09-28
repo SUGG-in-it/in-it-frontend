@@ -19,7 +19,7 @@ const QuestionListPage = () => {
 
   useEffect(() => {
     async function fetchQuestionPage() {
-      const { count } = await getQuestionPage({ size: 3, type: queryStatus });
+      const { count } = await getQuestionPage({ size: 10, type: queryStatus });
       setTotalPage(count);
     }
     fetchQuestionPage();

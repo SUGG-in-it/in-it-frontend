@@ -11,9 +11,13 @@ export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) =>
   const page = qusetionsRequestBody.page;
   const type = qusetionsRequestBody.type;
 
-  const data = useQuery<QuestionsResponseBody>([KEYS.QUESTIONS], () => getQusetions(qusetionsRequestBody), {
-    suspense: true,
-  });
+  const data = useQuery<QuestionsResponseBody>(
+    [KEYS.QUESTIONS, { page, type }],
+    () => getQusetions(qusetionsRequestBody),
+    {
+      suspense: true,
+    }
+  );
   return data;
 };
 
