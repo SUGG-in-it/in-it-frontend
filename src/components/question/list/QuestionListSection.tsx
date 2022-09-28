@@ -28,7 +28,7 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
   const [status, setStatus] = useState('total');
   const { data: questions } = useQuestionsQuery({
-    page: currentPage,
+    page: currentPage - 1,
     size: PAGINATION_SIZE.QUESTION_LIST,
     type: status,
   });

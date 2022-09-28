@@ -10,9 +10,9 @@ import styled from 'styled-components';
 
 const QuestionListPage = () => {
   const [totalPage, setTotalPage] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
   const router = useRouter();
   const queryStatus = router.query.status as 'doing' | 'completed' | 'total';
+  const currentPage = Number(router.query.page) || 1;
 
   useEffect(() => {
     if (!queryStatus) router.push({ pathname: '/question/list', query: { status: 'total' } });
@@ -26,8 +26,8 @@ const QuestionListPage = () => {
     fetchQuestionPage();
   }, [queryStatus, currentPage]);
 
-  const handlePageClick = (number) => {
-    setCurrentPage(number);
+  const handlePageClick = (number: number) => {
+    router.push({ pathname: '/question/list', query: { status: queryStatus, page: number + 1 } });
   };
 
   return (

@@ -29,7 +29,7 @@ const AnswerListLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
 
 const AnswerSection = ({ question }: { question: Question }) => {
   const [totalPage, setTotalPage] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const user = useRecoilValue(userState);
 
   const { data: answers, refetch } = useAnswersQuery({
@@ -47,7 +47,7 @@ const AnswerSection = ({ question }: { question: Question }) => {
   }, [currentPage, answers]);
 
   const handlePageClick = (number: number) => {
-    setCurrentPage(number);
+    setCurrentPage(number + 1);
   };
 
   return (

@@ -9,15 +9,20 @@ function Pagination({ totalPage, currentPage, onPageClick }) {
 
   return (
     <PaginationContainer>
-      <ButtonBackWrapper isShowButton={currentPage !== 0} onClick={() => onPageClick(currentPage - 1)}>
+      <ButtonBackWrapper isShowButton={currentPage !== 1} onClick={() => onPageClick(currentPage - 1)}>
         <IoIosArrowBack className="arrow-button" />
       </ButtonBackWrapper>
-      {pages.map((number, index) => (
-        <Page key={index} isActive={currentPage === number} onClick={() => onPageClick(number)}>
-          {number + 1}
-        </Page>
-      ))}
-      <ButtonForwardWrapper isShowButton={currentPage !== totalPage - 1} onClick={() => onPageClick(currentPage + 1)}>
+      {pages.map(
+        (number, index) => (
+          console.log(currentPage, number),
+          (
+            <Page key={index} isActive={currentPage === number + 1} onClick={() => onPageClick(number)}>
+              {number + 1}
+            </Page>
+          )
+        )
+      )}
+      <ButtonForwardWrapper isShowButton={currentPage !== totalPage} onClick={() => onPageClick(currentPage + 1)}>
         <IoIosArrowForward className="arrow-button" />
       </ButtonForwardWrapper>
     </PaginationContainer>
