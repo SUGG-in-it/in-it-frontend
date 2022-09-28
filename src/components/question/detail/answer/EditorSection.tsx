@@ -7,13 +7,12 @@ import styled from 'styled-components';
 import { postAnswerId } from '@/api/answers';
 import { useUploadAnswerMutation } from '@/hooks/queries/useAnswer';
 import { QueryObserverResult } from 'react-query';
-import { useRouter } from 'next/router';
 
 interface EditorSectionProps {
   refetch?: () => Promise<QueryObserverResult<any, unknown>>;
   questionId: number;
   answerId?: number;
-  content?: string;
+  content: string;
   onCancelEdit?: () => void;
 }
 
@@ -25,6 +24,7 @@ const EditorSection = ({ refetch, questionId, answerId, content, onCancelEdit }:
       onCancelEdit();
     },
   });
+  console.log(content);
 
   const addImageBlobHook = async (file, callback) => {
     const { data } = await uploadImage(file);
@@ -54,7 +54,7 @@ const EditorSection = ({ refetch, questionId, answerId, content, onCancelEdit }:
         placeholder="내용을 입력해주세요."
         previewStyle="vertical"
         initialEditType="wysiwyg"
-        initialValue={content}
+        initialValue={'<p>' + content + '</p>'}
         height="350px"
         toolbarItems={[
           // 툴바 옵션 설정

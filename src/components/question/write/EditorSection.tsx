@@ -93,7 +93,7 @@ const QuestionEditor = () => {
           placeholder="내용을 입력해주세요."
           previewStyle="vertical"
           initialEditType="wysiwyg"
-          initialValue={''}
+          initialValue={'<p></p>'}
           height="350px"
           toolbarItems={[
             // 툴바 옵션 설정

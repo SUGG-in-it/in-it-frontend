@@ -63,7 +63,7 @@ const AnswerSection = ({ question }: { question: Question }) => {
         <ToastEditorWrapper>
           <Notice>{`${user.nickname}님, 답변해주세요! 😉`}</Notice>
           <EditorSectionWrapper>
-            <EditorSection refetch={refetch} questionId={question.questionId} />
+            <EditorSection refetch={refetch} questionId={question.questionId} content={''} />
           </EditorSectionWrapper>
         </ToastEditorWrapper>
       </AnswerWriteSectionWrapper>
@@ -122,9 +122,6 @@ const EditorSectionWrapper = styled.div`
   margin-top: 3em;
   padding-bottom: 5em;
   flex-direction: column;
-  ${media.tablet} {
-    margin-left: 7vw;
-  }
 `;
 
 const RetryBox = styled.div`
