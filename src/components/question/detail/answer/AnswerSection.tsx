@@ -40,7 +40,7 @@ const AnswerSection = ({ question }: { question: Question }) => {
 
   useEffect(() => {
     async function fetchQuestionPage() {
-      const { count } = await getAnswerPage({ size: 5, questionId: question.questionId });
+      const { count } = await getAnswerPage({ size: PAGINATION_SIZE.ANSWER_LIST, questionId: question.questionId });
       setTotalPage(count);
     }
     fetchQuestionPage();
