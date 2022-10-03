@@ -1,4 +1,4 @@
-import { GET, POST, PUT } from '@/api/config/base';
+import { DELETE, GET, POST, PUT } from '@/api/config/base';
 import { AnswerPageRequestParams, AnswersRequestParams, UploadAnswerRequestBody } from '@/types/request/answers';
 
 export const postAnswerId = async (questionId: number) => await POST('/answers', { questionId });
@@ -22,3 +22,5 @@ export const getAnswerPage = async (answerPageRequestParams: AnswerPageRequestPa
 export const selectAnswer = async (answerId: number) => {
   await POST(`/answers/select/${answerId}`);
 };
+
+export const deleteAnswer = async (answerId: number) => await DELETE(`/answers/${answerId}`);

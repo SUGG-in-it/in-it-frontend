@@ -1,11 +1,15 @@
 import { QLabel } from '@/styles/commonStyles';
 import styled from 'styled-components';
 
-const AnswerHeader = () => {
+const AnswerHeader = ({ answerCount }: { answerCount: number }) => {
   return (
     <AnswerWriteHeader>
       <QLabel>{'A.'}</QLabel>
-      <Label>{'총 0개의 답변이 달렸습니다.'}</Label>
+      {answerCount ? (
+        <Label>{`총 ${answerCount}개의 답변이 달렸습니다.`}</Label>
+      ) : (
+        <Label>{`답변이 한개도 없어요! 첫 답변을 등록해주세요 🙌`}</Label>
+      )}
     </AnswerWriteHeader>
   );
 };

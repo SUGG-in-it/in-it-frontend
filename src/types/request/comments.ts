@@ -3,6 +3,6 @@ export interface CommentPageRequestParams {
   answerId: number;
 }
 export interface UploadCommentRequestBody {
-  comment: string;
+  content: string;
   answerId: number;
 }

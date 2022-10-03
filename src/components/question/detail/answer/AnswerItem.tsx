@@ -5,31 +5,48 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '@/store/users';
 import Button from '@/components/common/button/Button';
 import { Question } from '@/types/response/questions';
-import { useSelectAnswerMutation } from '@/hooks/queries/useAnswer';
+import { useDeleteAnswerMutation, useSelectAnswerMutation } from '@/hooks/queries/useAnswer';
+import { QueryObserverResult } from 'react-query';
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { media } from '@/styles/mediaQuery';
+
+const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
 
 interface AnswerProps {
   id: number;
-  nickName: string;
+  nickname: string;
   date: string;
   content: string;
   userId: number;
   question: Question;
+  refetch: () => Promise<QueryObserverResult<any, unknown>>;
 }
 
-const AnswerItem = ({ id, nickName, date, content, userId, question }: AnswerProps) => {
+const AnswerItem = ({ id, nickname, date, content, userId, question, refetch }: AnswerProps) => {
   const user = useRecoilValue(userState);
+  const [isEditMode, setIsEditMode] = useState(false);
   const mutationSelectAnswer = useSelectAnswerMutation({});
+  const mutationDeleteAnswer = useDeleteAnswerMutation({
+    onSuccess: () => {
+      refetch();
+    },
+  });
 
   const handleEditQuestion = () => {
-    //
+    setIsEditMode(true);
   };
 
   const handleDeleteQuestion = () => {
-    //
+    mutationDeleteAnswer.mutate(id);
   };
 
   const handleSelectAnswer = () => {
     mutationSelectAnswer.mutate(id);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditMode(false);
   };
 
   return (
@@ -42,7 +59,7 @@ const AnswerItem = ({ id, nickName, date, content, userId, question }: AnswerPro
       <AnswerItemWrapper>
         <AnswerHeader>
           <div>
-            <NickName>{`작성자 ${nickName}`}</NickName>
+            <NickName>{`작성자 ${nickname}`}</NickName>
             <Date>{date}</Date>
           </div>
           {user.id === userId && (
@@ -53,12 +70,25 @@ const AnswerItem = ({ id, nickName, date, content, userId, question }: AnswerPro
             </div>
           )}
         </AnswerHeader>
-        <Content
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(content),
-          }}
-        />
-        <CommentSection answerId={id} />
+        {isEditMode ? (
+          <EditorSectionWrapper>
+            <EditorSection
+              questionId={question.questionId}
+              content={content}
+              answerId={id}
+              onCancelEdit={handleCancelEdit}
+            />
+          </EditorSectionWrapper>
+        ) : (
+          <>
+            <Content
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(content),
+              }}
+            />
+            <CommentSection answerId={id} />
+          </>
+        )}
       </AnswerItemWrapper>
     </>
   );
@@ -95,11 +125,14 @@ const Date = styled.p`
   margin-top: 0.5em;
 `;
 
-const Content = styled.p`
+const Content = styled.div`
   font-size: 0.9rem;
   color: ${({ theme }) => theme.grayColor};
   line-height: 1.5;
   margin-top: 1em;
+  img {
+    width: 100%;
+  }
 `;
 
 const SettingButton = styled(Button)`
@@ -122,6 +155,19 @@ const SelectButton = styled(Button)`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: end;
+`;
+
+const EditorSectionWrapper = styled.div`
+  width: 85vw;
+  max-width: 100%;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 3em;
+  padding-bottom: 5em;
+  flex-direction: column;
+  ${media.tablet} {
+    margin-left: 7vw;
+  }
 `;
 
 export default AnswerItem;

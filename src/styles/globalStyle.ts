@@ -26,9 +26,4 @@ export const GlobalStyle = createGlobalStyle`
     .toastui-editor-defaultUI{
         width: 100%;
     }
-    ${media.tablet}{
-        .toastui-editor-defaultUI{
-            width:85vw;
-        }
-    }
 `;

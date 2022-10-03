@@ -12,7 +12,7 @@ export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) =>
   const type = qusetionsRequestBody.type;
 
   const data = useQuery<QuestionsResponseBody>(
-    [KEYS.QUESTIONS, { page: page, type: type }],
+    [KEYS.QUESTIONS, { page, type }],
     () => getQusetions(qusetionsRequestBody),
     {
       suspense: true,
@@ -22,8 +22,9 @@ export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) =>
 };
 
 export const useQuestionQuery = (questionId: number) => {
-  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION, { id: questionId }], () => getQuestion(questionId), {
+  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION], () => getQuestion(questionId), {
     suspense: true,
+    retry: 0,
   });
   return data;
 };

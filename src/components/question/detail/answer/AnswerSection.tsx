@@ -12,6 +12,10 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Skeleton from 'react-loading-skeleton';
 import MoonLoading from '@/components/common/loading/MoonLoading';
 import { FiRotateCcw } from 'react-icons/fi';
+import { PAGINATION_SIZE } from '@/constants/paginationSize';
+import { useRecoilValue } from 'recoil';
+import { userState } from '@/store/users';
+import { Answer } from '@/types/response/answers';
 
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
 
@@ -26,35 +30,42 @@ const AnswerListLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
 
 const AnswerSection = ({ question }: { question: Question }) => {
   const [totalPage, setTotalPage] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  const { data: answers, refetch } = useAnswersQuery({ page: currentPage, size: 5, questionId: question.questionId });
+  const [currentPage, setCurrentPage] = useState(1);
+  const user = useRecoilValue(userState);
+
+  const { data: answers, refetch } = useAnswersQuery({
+    page: currentPage - 1,
+    size: PAGINATION_SIZE.ANSWER_LIST,
+    questionId: question.questionId,
+  });
 
   useEffect(() => {
     async function fetchQuestionPage() {
-      const { count } = await getAnswerPage({ size: 5, questionId: question.questionId });
+      const { count } = await getAnswerPage({ size: PAGINATION_SIZE.ANSWER_LIST, questionId: question.questionId });
       setTotalPage(count);
     }
     fetchQuestionPage();
   }, [currentPage, answers]);
 
   const handlePageClick = (number: number) => {
-    setCurrentPage(number);
+    setCurrentPage(number + 1);
   };
 
   return (
     <>
-      <AnswerHeader />
+      <AnswerHeader answerCount={question.answerCount} />
       <AnswerListSectionWrapper>
-        {answers?.answers.map((answer) => (
-          <AnswerItem key={answer.id} question={question} {...answer} />
-        ))}
+        {answers &&
+          answers.map((answer: Answer) => (
+            <AnswerItem key={answer.id} question={question} refetch={refetch} {...answer} />
+          ))}
         <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
       </AnswerListSectionWrapper>
       <AnswerWriteSectionWrapper>
         <ToastEditorWrapper>
-          <Notice>{'지롱님, 답변해주세요! 😉'}</Notice>
+          <Notice>{`${user.nickname}님, 답변해주세요! 😉`}</Notice>
           <EditorSectionWrapper>
-            <EditorSection refetch={refetch} id={question.questionId} />
+            <EditorSection questionId={question.questionId} content={''} />
           </EditorSectionWrapper>
         </ToastEditorWrapper>
       </AnswerWriteSectionWrapper>
@@ -113,9 +124,6 @@ const EditorSectionWrapper = styled.div`
   margin-top: 3em;
   padding-bottom: 5em;
   flex-direction: column;
-  ${media.tablet} {
-    margin-left: 7vw;
-  }
 `;
 
 const RetryBox = styled.div`

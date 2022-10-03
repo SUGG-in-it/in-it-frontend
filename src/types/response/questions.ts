@@ -38,4 +38,5 @@ export interface Question {
   type: string;
   tagList: string;
   userId: number;
+  answerCount?: number;
 }

@@ -4,7 +4,7 @@ import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { ProfileResponseBody } from '@/types/response/profiles';
 import { errorToast, successToast } from '@/utils/toast';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useProfileQuery = (nickname: string) => {
   const data = useQuery<ProfileResponseBody>([KEYS.PROFILE, { nickname: nickname }], () => getProfile(nickname), {
@@ -14,9 +14,11 @@ export const useProfileQuery = (nickname: string) => {
 };
 
 export const useProfileMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+  const queryClient = useQueryClient();
   return useMutation(editProfile, {
     onSuccess: () => {
       onSuccess && onSuccess();
+      queryClient.invalidateQueries([KEYS.PROFILE]);
       successToast('프로필 수정이 완료되었습니다. 🥰');
     },
     onError: (error: CustomError) => {

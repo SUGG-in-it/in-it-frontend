@@ -7,11 +7,12 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Skeleton from 'react-loading-skeleton';
 import styled from 'styled-components';
 import { FiRotateCcw } from 'react-icons/fi';
+import { PAGINATION_SIZE } from '@/constants/paginationSize';
 
 const QuestionsFallback = ({ error, resetErrorBoundary }) => (
   <QuestionContainer>
     <RetryBox>
-      <p>인기 Q&A를 불러오는데 실패했어요 😭😭😭 </p>
+      <p>최신 Q&A를 불러오는데 실패했어요 😭😭😭 </p>
       <RetryButton onClick={() => resetErrorBoundary()} />
     </RetryBox>
   </QuestionContainer>
@@ -23,7 +24,7 @@ const Questions = () => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
   const [leftSectionQuestions, setLeftSectionQuestions] = useState([]);
   const [rightSectionQuestions, setRightSectionQuestions] = useState([]);
-  const { data: questions } = useQuestionsQuery({ page: 0, size: 6, type: 'total' });
+  const { data: questions } = useQuestionsQuery({ page: 0, size: PAGINATION_SIZE.MAIN_QUESTION, type: 'total' });
 
   useEffect(() => {
     setIsEmptyQuestions(questions?.questions?.length === 0);
@@ -34,7 +35,7 @@ const Questions = () => {
   return (
     <QuestionContainer>
       <QuestionBox>
-        {isEmptyQuestions ? <EmptyMessage>인기 Q&A가 없어요 😭😭😭</EmptyMessage> : <Label>인기 Q&A</Label>}
+        {isEmptyQuestions ? <EmptyMessage>최신 Q&A가 없어요 😭😭😭</EmptyMessage> : <Label>최신 Q&A</Label>}
         <QuestionListWrapper>
           <LeftSection>
             {leftSectionQuestions.map((question, index) => (

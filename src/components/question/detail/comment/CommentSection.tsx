@@ -2,6 +2,7 @@ import { getCommentPage } from '@/api/comments';
 import Button from '@/components/common/button/Button';
 import CommentList from '@/components/question/detail/comment/CommentList';
 import CommentWrite from '@/components/question/detail/comment/CommentWrite';
+import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -10,7 +11,7 @@ const CommentSection = ({ answerId }: { answerId: number }) => {
   const [totalPage, setTotalPage] = useState(0);
 
   const handleCommentShow = async () => {
-    const { count } = await getCommentPage({ size: 5, answerId });
+    const { count } = await getCommentPage({ size: PAGINATION_SIZE.COMMENT_LIST, answerId });
     setIsCommentShow(!isCommentShow);
     setTotalPage(count);
   };

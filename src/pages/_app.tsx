@@ -7,6 +7,7 @@ import { GlobalStyle } from '@/styles/globalStyle';
 import { Toaster } from 'react-hot-toast';
 import CriticalErrorBoundary from '@/components/common/errorrBoundary/CriticalErrorBoundary';
 import RootErrorBoundary from '@/components/common/errorrBoundary/RootErrorBoundary';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function MyApp({ Component, pageProps }) {
   const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }) {
             </RootErrorBoundary>
           </ThemeProvider>
         </Hydrate>
+        <ReactQueryDevtools initialIsOpen={true} />
       </QueryClientProvider>
     </RecoilRoot>
   );

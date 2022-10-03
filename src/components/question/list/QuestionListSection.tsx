@@ -11,6 +11,7 @@ import StatusBar from '@/components/question/list/StatusBar';
 import QuestionItem from '@/components/question/list/QuestionItem';
 import GrayLine from '@/components/common/GreyLine';
 import { useRouter } from 'next/router';
+import { PAGINATION_SIZE } from '@/constants/paginationSize';
 
 const QuestionsFallback = ({ error, resetErrorBoundary }) => (
   <QuestionContainer>
@@ -26,7 +27,11 @@ const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
 const Questions = ({ currentPage }: { currentPage: number }) => {
   const [isEmptyQuestions, setIsEmptyQuestions] = useState(false);
   const [status, setStatus] = useState('total');
-  const { data: questions } = useQuestionsQuery({ page: currentPage, size: 10, type: status });
+  const { data: questions } = useQuestionsQuery({
+    page: currentPage - 1,
+    size: PAGINATION_SIZE.QUESTION_LIST,
+    type: status,
+  });
   const router = useRouter();
   const queryStatus = router.query.status;
 
