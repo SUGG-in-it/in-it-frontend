@@ -53,7 +53,7 @@ const AnswerSection = ({ question }: { question: Question }) => {
 
   return (
     <>
-      <AnswerHeader />
+      <AnswerHeader answerCount={question.answerCount} />
       <AnswerListSectionWrapper>
         {answers &&
           answers.map((answer: Answer) => (
