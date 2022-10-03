@@ -9,21 +9,15 @@ import { useUploadAnswerMutation } from '@/hooks/queries/useAnswer';
 import { QueryObserverResult } from 'react-query';
 
 interface EditorSectionProps {
-  refetch?: () => Promise<QueryObserverResult<any, unknown>>;
   questionId: number;
   answerId?: number;
   content: string;
   onCancelEdit?: () => void;
 }
 
-const EditorSection = ({ refetch, questionId, answerId, content, onCancelEdit }: EditorSectionProps) => {
+const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSectionProps) => {
   const editorRef = useRef(null);
-  const mutationUploadAnswer = useUploadAnswerMutation({
-    onSuccess: () => {
-      refetch();
-      onCancelEdit();
-    },
-  });
+  const mutationUploadAnswer = useUploadAnswerMutation();
   console.log(content);
 
   const addImageBlobHook = async (file, callback) => {

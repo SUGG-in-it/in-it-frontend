@@ -64,7 +64,7 @@ const AnswerSection = ({ question }: { question: Question }) => {
         <ToastEditorWrapper>
           <Notice>{`${user.nickname}님, 답변해주세요! 😉`}</Notice>
           <EditorSectionWrapper>
-            <EditorSection refetch={refetch} questionId={question.questionId} content={''} />
+            <EditorSection questionId={question.questionId} content={''} />
           </EditorSectionWrapper>
         </ToastEditorWrapper>
       </AnswerWriteSectionWrapper>

@@ -73,7 +73,6 @@ const AnswerItem = ({ id, nickname, date, content, userId, question, refetch }: 
         {isEditMode ? (
           <EditorSectionWrapper>
             <EditorSection
-              refetch={refetch}
               questionId={question.questionId}
               content={content}
               answerId={id}

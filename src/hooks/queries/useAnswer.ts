@@ -5,12 +5,14 @@ import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { AnswersRequestParams } from '@/types/request/answers';
 import { AnswersResponseBody } from '@/types/response/answers';
 import { errorToast, successToast } from '@/utils/toast';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useUploadAnswerMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+  const queryClient = useQueryClient();
   return useMutation(uploadAnswer, {
     onSuccess: () => {
       onSuccess && onSuccess();
+      queryClient.invalidateQueries([KEYS.ANSWERS]);
       successToast('답변 작성이 완료되었습니다. 🥰');
     },
     onError: (error: CustomError) => {
