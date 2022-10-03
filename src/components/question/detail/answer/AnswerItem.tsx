@@ -15,7 +15,7 @@ const EditorSection = dynamic(() => import('@/components/question/detail/answer/
 
 interface AnswerProps {
   id: number;
-  nickName: string;
+  nickname: string;
   date: string;
   content: string;
   userId: number;
@@ -23,7 +23,7 @@ interface AnswerProps {
   refetch: () => Promise<QueryObserverResult<any, unknown>>;
 }
 
-const AnswerItem = ({ id, nickName, date, content, userId, question, refetch }: AnswerProps) => {
+const AnswerItem = ({ id, nickname, date, content, userId, question, refetch }: AnswerProps) => {
   const user = useRecoilValue(userState);
   const [isEditMode, setIsEditMode] = useState(false);
   const mutationSelectAnswer = useSelectAnswerMutation({});
@@ -59,7 +59,7 @@ const AnswerItem = ({ id, nickName, date, content, userId, question, refetch }: 
       <AnswerItemWrapper>
         <AnswerHeader>
           <div>
-            <NickName>{`작성자 ${nickName}`}</NickName>
+            <NickName>{`작성자 ${nickname}`}</NickName>
             <Date>{date}</Date>
           </div>
           {user.id === userId && (
