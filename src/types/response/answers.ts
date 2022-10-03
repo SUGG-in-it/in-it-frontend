@@ -4,7 +4,7 @@ export interface AnswersResponseBody {
 
 export interface Answer {
   id: number;
-  nickName: string;
+  nickname: string;
   date: string;
   content: string;
   userId: number;
