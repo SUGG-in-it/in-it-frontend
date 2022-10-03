@@ -125,11 +125,14 @@ const Date = styled.p`
   margin-top: 0.5em;
 `;
 
-const Content = styled.p`
+const Content = styled.div`
   font-size: 0.9rem;
   color: ${({ theme }) => theme.grayColor};
   line-height: 1.5;
   margin-top: 1em;
+  img {
+    width: 100%;
+  }
 `;
 
 const SettingButton = styled(Button)`
