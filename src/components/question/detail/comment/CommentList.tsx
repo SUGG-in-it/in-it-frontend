@@ -1,10 +1,11 @@
+import { getCommentPage } from '@/api/comments';
 import MoonLoading from '@/components/common/loading/MoonLoading';
 import Pagination from '@/components/common/Pagination';
 import CommentItem from '@/components/question/detail/comment/CommentItem';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { useCommentsQuery } from '@/hooks/queries/useComments';
 import { media } from '@/styles/mediaQuery';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { FiRotateCcw } from 'react-icons/fi';
 import Skeleton from 'react-loading-skeleton';
@@ -21,12 +22,25 @@ const CommentsFallback = ({ error, resetErrorBoundary }) => (
 
 const CommentsLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
 
-const Comments = ({ totalPage, answerId }: { totalPage: number; answerId: number }) => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const { data: comments } = useCommentsQuery({ page: 0, size: PAGINATION_SIZE.COMMENT_LIST, answerId: answerId });
+const Comments = ({ answerId }: { answerId: number }) => {
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data: comments } = useCommentsQuery({
+    page: currentPage - 1,
+    size: PAGINATION_SIZE.COMMENT_LIST,
+    answerId: answerId,
+  });
+
+  useEffect(() => {
+    async function fetchQuestionPage() {
+      const { count } = await getCommentPage({ size: PAGINATION_SIZE.COMMENT_LIST, answerId });
+      setTotalPage(count);
+    }
+    fetchQuestionPage();
+  }, [currentPage, comments]);
 
   const handlePageClick = (number: number) => {
-    setCurrentPage(number);
+    setCurrentPage(number + 1);
   };
 
   return (
@@ -39,10 +53,10 @@ const Comments = ({ totalPage, answerId }: { totalPage: number; answerId: number
   );
 };
 
-const CommentList = ({ totalPage, answerId }: { totalPage: number; answerId: number }) => (
+const CommentList = ({ answerId }: { answerId: number }) => (
   <ErrorBoundary FallbackComponent={CommentsFallback}>
     <Suspense fallback={<CommentsLoading />}>
-      <Comments totalPage={totalPage} answerId={answerId} />
+      <Comments answerId={answerId} />
     </Suspense>
   </ErrorBoundary>
 );
