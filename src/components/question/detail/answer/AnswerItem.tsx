@@ -14,7 +14,7 @@ import { media } from '@/styles/mediaQuery';
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
 
 interface AnswerProps {
-  id: number;
+  answerId: number;
   nickname: string;
   date: string;
   content: string;
@@ -23,7 +23,7 @@ interface AnswerProps {
   refetch: () => Promise<QueryObserverResult<any, unknown>>;
 }
 
-const AnswerItem = ({ id, nickname, date, content, userId, question, refetch }: AnswerProps) => {
+const AnswerItem = ({ answerId, nickname, date, content, userId, question, refetch }: AnswerProps) => {
   const user = useRecoilValue(userState);
   const [isEditMode, setIsEditMode] = useState(false);
   const mutationSelectAnswer = useSelectAnswerMutation({});
@@ -38,11 +38,11 @@ const AnswerItem = ({ id, nickname, date, content, userId, question, refetch }: 
   };
 
   const handleDeleteQuestion = () => {
-    mutationDeleteAnswer.mutate(id);
+    mutationDeleteAnswer.mutate(answerId);
   };
 
   const handleSelectAnswer = () => {
-    mutationSelectAnswer.mutate(id);
+    mutationSelectAnswer.mutate(answerId);
   };
 
   const handleCancelEdit = () => {
@@ -75,7 +75,7 @@ const AnswerItem = ({ id, nickname, date, content, userId, question, refetch }: 
             <EditorSection
               questionId={question.questionId}
               content={content}
-              answerId={id}
+              answerId={answerId}
               onCancelEdit={handleCancelEdit}
             />
           </EditorSectionWrapper>
@@ -86,7 +86,7 @@ const AnswerItem = ({ id, nickname, date, content, userId, question, refetch }: 
                 __html: DOMPurify.sanitize(content),
               }}
             />
-            <CommentSection answerId={id} />
+            <CommentSection answerId={answerId} />
           </>
         )}
       </AnswerItemWrapper>

@@ -3,9 +3,10 @@ export interface AnswersResponseBody {
 }
 
 export interface Answer {
-  id: number;
+  answerId: number;
   nickname: string;
   date: string;
   content: string;
   userId: number;
+  selected: boolean;
 }

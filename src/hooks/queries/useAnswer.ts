@@ -39,9 +39,12 @@ export const useAnswersQuery = (answersRequestParams: AnswersRequestParams) => {
 };
 
 export const useSelectAnswerMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+  const queryClient = useQueryClient();
   return useMutation(selectAnswer, {
     onSuccess: () => {
       onSuccess && onSuccess();
+      queryClient.invalidateQueries([KEYS.ANSWERS]);
+      queryClient.invalidateQueries([KEYS.QUESTION]);
       successToast('답변이 채택되었습니다. 🥰');
     },
     onError: (error: CustomError) => {
