@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
 interface CommentProps {
-  id: number;
-  nickName: string;
-  date: string;
+  commentId: number;
+  nickname: string;
+  updatedAt: string;
   content: string;
 }
 
-const CommentItem = ({ id, nickName, date, content }: CommentProps) => {
+const CommentItem = ({ commentId, nickname, updatedAt, content }: CommentProps) => {
   return (
     <AnswerItemWrapper>
       <AnswerHeader>
-        <NickName>{`작성자 ${nickName}`}</NickName>
-        <Date>{date}</Date>
+        <NickName>{`작성자 ${nickname}`}</NickName>
+        <Date>{updatedAt}</Date>
       </AnswerHeader>
       <Content>{content}</Content>
     </AnswerItemWrapper>

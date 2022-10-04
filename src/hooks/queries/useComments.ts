@@ -1,8 +1,19 @@
-import { uploadComment } from '@/api/comments';
+import { getComments, uploadComment } from '@/api/comments';
 import { CustomError } from '@/api/config/error';
+import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
+import { CommentsRequestBody } from '@/types/request/comments';
+import { CommentsResponseBody } from '@/types/response/comments';
 import { errorToast, successToast } from '@/utils/toast';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+
+export const useCommentsQuery = (commentsRequestBody: CommentsRequestBody) => {
+  const page = commentsRequestBody.page;
+  const data = useQuery<CommentsResponseBody>([KEYS.COMMENTS, { page }], () => getComments(commentsRequestBody), {
+    suspense: true,
+  });
+  return data;
+};
 
 export const useUploadCommentMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(uploadComment, {
