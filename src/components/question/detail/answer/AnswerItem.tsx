@@ -20,18 +20,13 @@ interface AnswerProps {
   content: string;
   userId: number;
   question: Question;
-  refetch: () => Promise<QueryObserverResult<any, unknown>>;
 }
 
-const AnswerItem = ({ answerId, nickname, date, content, userId, question, refetch }: AnswerProps) => {
+const AnswerItem = ({ answerId, nickname, date, content, userId, question }: AnswerProps) => {
   const user = useRecoilValue(userState);
   const [isEditMode, setIsEditMode] = useState(false);
   const mutationSelectAnswer = useSelectAnswerMutation({});
-  const mutationDeleteAnswer = useDeleteAnswerMutation({
-    onSuccess: () => {
-      refetch();
-    },
-  });
+  const mutationDeleteAnswer = useDeleteAnswerMutation({});
 
   const handleEditQuestion = () => {
     setIsEditMode(true);

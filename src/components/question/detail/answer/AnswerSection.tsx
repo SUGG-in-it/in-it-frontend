@@ -33,7 +33,7 @@ const AnswerSection = ({ question }: { question: Question }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const user = useRecoilValue(userState);
 
-  const { data: answers, refetch } = useAnswersQuery({
+  const { data: answers } = useAnswersQuery({
     page: currentPage - 1,
     size: PAGINATION_SIZE.ANSWER_LIST,
     questionId: question.questionId,
@@ -56,9 +56,7 @@ const AnswerSection = ({ question }: { question: Question }) => {
       <AnswerHeader answerCount={question.answerCount} />
       <AnswerListSectionWrapper>
         {answers &&
-          answers.map((answer: Answer) => (
-            <AnswerItem key={answer.id} question={question} refetch={refetch} {...answer} />
-          ))}
+          answers.map((answer: Answer) => <AnswerItem key={answer.answerId} question={question} {...answer} />)}
         <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
       </AnswerListSectionWrapper>
       <AnswerWriteSectionWrapper>
