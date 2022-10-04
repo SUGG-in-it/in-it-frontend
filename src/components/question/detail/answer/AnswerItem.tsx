@@ -6,7 +6,6 @@ import { userState } from '@/store/users';
 import Button from '@/components/common/button/Button';
 import { Question } from '@/types/response/questions';
 import { useDeleteAnswerMutation, useSelectAnswerMutation } from '@/hooks/queries/useAnswer';
-import { QueryObserverResult } from 'react-query';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { media } from '@/styles/mediaQuery';
