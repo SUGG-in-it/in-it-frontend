@@ -13,6 +13,7 @@ export const useUploadAnswerMutation = ({ onSuccess, onError }: MutationCallback
     onSuccess: () => {
       onSuccess && onSuccess();
       queryClient.invalidateQueries([KEYS.ANSWERS]);
+      queryClient.invalidateQueries([KEYS.QUESTION]);
       successToast('답변 작성이 완료되었습니다. 🥰');
     },
     onError: (error: CustomError) => {
