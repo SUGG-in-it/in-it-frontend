@@ -5,7 +5,7 @@ import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { CommentsRequestBody } from '@/types/request/comments';
 import { CommentsResponseBody } from '@/types/response/comments';
 import { errorToast, successToast } from '@/utils/toast';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useCommentsQuery = (commentsRequestBody: CommentsRequestBody) => {
   const page = commentsRequestBody.page;
@@ -16,9 +16,11 @@ export const useCommentsQuery = (commentsRequestBody: CommentsRequestBody) => {
 };
 
 export const useUploadCommentMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+  const queryClient = useQueryClient();
   return useMutation(uploadComment, {
     onSuccess: () => {
       onSuccess && onSuccess();
+      queryClient.invalidateQueries([KEYS.COMMENTS]);
       successToast('댓글 작성이 완료되었습니다. 🥰');
     },
     onError: (error: CustomError) => {
