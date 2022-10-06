@@ -31,6 +31,7 @@ const AnswerListLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
 const AnswerSection = ({ question }: { question: Question }) => {
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortedAnswer, setSortedAnswer] = useState([]);
   const user = useRecoilValue(userState);
 
   const { data: answers } = useAnswersQuery({
@@ -47,6 +48,11 @@ const AnswerSection = ({ question }: { question: Question }) => {
     fetchQuestionPage();
   }, [currentPage, answers]);
 
+  useEffect(() => {
+    answers?.sort((a: Answer, b: Answer) => b.selected - a.selected);
+    setSortedAnswer(answers);
+  }, [answers]);
+
   const handlePageClick = (number: number) => {
     setCurrentPage(number + 1);
   };
@@ -55,8 +61,8 @@ const AnswerSection = ({ question }: { question: Question }) => {
     <>
       <AnswerHeader answerCount={question.answerCount} />
       <AnswerListSectionWrapper>
-        {answers &&
-          answers.map((answer: Answer) => <AnswerItem key={answer.answerId} question={question} {...answer} />)}
+        {sortedAnswer &&
+          sortedAnswer.map((answer: Answer) => <AnswerItem key={answer.answerId} question={question} {...answer} />)}
         <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
       </AnswerListSectionWrapper>
       <AnswerWriteSectionWrapper>
