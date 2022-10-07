@@ -1,3 +1,7 @@
+import Button from '@/components/common/button/Button';
+import { useDeleteCommentMutation } from '@/hooks/queries/useComments';
+import { userState } from '@/store/users';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
 interface CommentProps {
@@ -5,9 +9,16 @@ interface CommentProps {
   nickname: string;
   updatedAt: string;
   content: string;
+  userId: number;
 }
 
-const CommentItem = ({ commentId, nickname, updatedAt, content }: CommentProps) => {
+const CommentItem = ({ commentId, nickname, updatedAt, content, userId }: CommentProps) => {
+  const user = useRecoilValue(userState);
+  const deleteCommentMutation = useDeleteCommentMutation();
+  const handleDeleteComment = () => {
+    deleteCommentMutation.mutate(commentId);
+  };
+
   return (
     <AnswerItemWrapper>
       <AnswerHeader>
@@ -15,6 +26,7 @@ const CommentItem = ({ commentId, nickname, updatedAt, content }: CommentProps) 
         <Date>{updatedAt}</Date>
       </AnswerHeader>
       <Content>{content}</Content>
+      {user.id === userId && <SettingButton onClick={handleDeleteComment}>{'삭제'}</SettingButton>}
     </AnswerItemWrapper>
   );
 };
@@ -52,7 +64,16 @@ const Content = styled.p`
   color: ${({ theme }) => theme.grayColor};
   line-height: 1.5;
   margin-top: 1em;
-  width: 80%;
+  width: 70%;
+`;
+
+const SettingButton = styled(Button)`
+  background-color: transparent;
+  color: ${({ theme }) => theme.pointColor};
+  font-weight: 400;
+  font-size: 0.9rem;
+  height: 30px;
+  width: 10%;
 `;
 
 export default CommentItem;

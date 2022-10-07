@@ -1,4 +1,4 @@
-import { GET, POST } from '@/api/config/base';
+import { DELETE, GET, POST } from '@/api/config/base';
 import { CommentPageRequestParams, CommentsRequestBody, UploadCommentRequestBody } from '@/types/request/comments';
 
 export const getCommentPage = async (commentPageRequestParams: CommentPageRequestParams) => {
@@ -16,3 +16,5 @@ export const getComments = async (commentsRequestBody: CommentsRequestBody) => {
       return e;
     });
 };
+
+export const deleteComment = async (commentId: number) => await DELETE(`/comments/${commentId}`);
