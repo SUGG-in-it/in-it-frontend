@@ -6,10 +6,10 @@ import { userState } from '@/store/users';
 import Button from '@/components/common/button/Button';
 import { Question } from '@/types/response/questions';
 import { useDeleteAnswerMutation, useSelectAnswerMutation } from '@/hooks/queries/useAnswer';
-import { QueryObserverResult } from 'react-query';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { media } from '@/styles/mediaQuery';
+import { AiFillCheckCircle } from 'react-icons/ai';
 
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
 
@@ -20,9 +20,10 @@ interface AnswerProps {
   content: string;
   userId: number;
   question: Question;
+  selected: boolean;
 }
 
-const AnswerItem = ({ answerId, nickname, date, content, userId, question }: AnswerProps) => {
+const AnswerItem = ({ answerId, nickname, date, content, userId, question, selected }: AnswerProps) => {
   const user = useRecoilValue(userState);
   const [isEditMode, setIsEditMode] = useState(false);
   const mutationSelectAnswer = useSelectAnswerMutation({});
@@ -52,6 +53,12 @@ const AnswerItem = ({ answerId, nickname, date, content, userId, question }: Ans
         )}
       </ButtonWrapper>
       <AnswerItemWrapper>
+        {question.type === 'completed' && selected && (
+          <SelectedBox>
+            <CheckIcon width={50} />
+            <SelectedAnswer>{'채택된 답변입니다 ☺️'}</SelectedAnswer>
+          </SelectedBox>
+        )}
         <AnswerHeader>
           <div>
             <NickName>{`작성자 ${nickname}`}</NickName>
@@ -145,6 +152,24 @@ const SelectButton = styled(Button)`
   padding: 0.5em;
   cursor: pointer;
   width: 150px;
+`;
+
+const SelectedBox = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.pointColor};
+  margin-bottom: 1.5em;
+`;
+
+const CheckIcon = styled(AiFillCheckCircle)`
+  width: 25px;
+  height: 25px;
+`;
+
+const SelectedAnswer = styled.p`
+  font-weight: bold;
+  padding: 0.5em;
+  font-size: 1.1rem;
 `;
 
 const ButtonWrapper = styled.div`

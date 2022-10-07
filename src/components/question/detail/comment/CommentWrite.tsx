@@ -4,8 +4,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const CommentWrite = ({ answerId }: { answerId: number }) => {
-  const muatationUploadComment = useUploadCommentMutation({});
   const [content, setContent] = useState('');
+  const muatationUploadComment = useUploadCommentMutation({
+    onSuccess: () => {
+      setContent('');
+    },
+  });
 
   const handleClick = () => {
     muatationUploadComment.mutate({ content, answerId });
@@ -17,7 +21,7 @@ const CommentWrite = ({ answerId }: { answerId: number }) => {
 
   return (
     <CommentWriteContainer>
-      <textarea name="comment" placeholder="댓글을 작성해주세요!" onChange={handleCommentChange}></textarea>
+      <textarea name="comment" placeholder="댓글을 작성해주세요!" onChange={handleCommentChange} value={content} />
       <PostButton onClick={handleClick}>{'댓글 등록'}</PostButton>
     </CommentWriteContainer>
   );

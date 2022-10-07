@@ -6,7 +6,6 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import { postAnswerId } from '@/api/answers';
 import { useUploadAnswerMutation } from '@/hooks/queries/useAnswer';
-import { QueryObserverResult } from 'react-query';
 
 interface EditorSectionProps {
   questionId: number;
@@ -17,8 +16,18 @@ interface EditorSectionProps {
 
 const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSectionProps) => {
   const editorRef = useRef(null);
-  const mutationUploadAnswer = useUploadAnswerMutation();
-  console.log(content);
+  const mutationUploadAnswer = useUploadAnswerMutation({
+    onSuccess: () => {
+      editorRef.current?.getInstance().setHTML('');
+    },
+  });
+
+  const mutationEditAnswer = useUploadAnswerMutation({
+    onSuccess: () => {
+      editorRef.current?.getInstance().setHTML('');
+      onCancelEdit();
+    },
+  });
 
   const addImageBlobHook = async (file, callback) => {
     const { data } = await uploadImage(file);
@@ -35,7 +44,7 @@ const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSe
   };
 
   const handleAnswerEdit = async () => {
-    mutationUploadAnswer.mutate({
+    mutationEditAnswer.mutate({
       answerId: answerId,
       content: editorRef.current?.getInstance().getHTML(),
     });
