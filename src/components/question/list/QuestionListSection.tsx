@@ -61,7 +61,7 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
   );
 };
 
-const QuestionSection = ({ currentPage }: { currentPage: number }) => {
+const QuestionsSection = ({ currentPage }: { currentPage: number }) => {
   return (
     <ErrorBoundary FallbackComponent={QuestionsFallback}>
       <Suspense fallback={<QuestionsLoading />}>
@@ -121,4 +121,4 @@ const RetryButton = styled(FiRotateCcw)`
   cursor: pointer;
 `;
 
-export default QuestionSection;
+export default QuestionsSection;

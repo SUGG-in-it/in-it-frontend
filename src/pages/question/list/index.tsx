@@ -19,8 +19,10 @@ const QuestionListPage = () => {
       const { count } = await getQuestionPage({ size: PAGINATION_SIZE.QUESTION_LIST, type: queryStatus });
       setTotalPage(count);
     }
-    fetchQuestionPage();
-  }, [queryStatus, currentPage]);
+    if (queryStatus) {
+      fetchQuestionPage();
+    }
+  }, [queryStatus]);
 
   const handlePageClick = (number: number) => {
     router.push({ pathname: '/question/list', query: { status: queryStatus, page: number + 1 } });
@@ -42,7 +44,9 @@ const QuestionListPage = () => {
   );
 };
 
-const QuestionListContainer = styled.div``;
+const QuestionListContainer = styled.div`
+  padding-bottom: 5em;
+`;
 
 const ContentSection = styled.div`
   display: flex;
