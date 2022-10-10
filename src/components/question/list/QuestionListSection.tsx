@@ -40,7 +40,9 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
   }, [questions]);
 
   useEffect(() => {
-    setStatus(queryStatus as string);
+    if (queryStatus) {
+      setStatus(queryStatus as string);
+    }
   }, [queryStatus]);
 
   return (

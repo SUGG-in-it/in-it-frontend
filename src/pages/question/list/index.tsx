@@ -15,10 +15,6 @@ const QuestionListPage = () => {
   const currentPage = Number(router.query.page) || 1;
 
   useEffect(() => {
-    if (!queryStatus) router.push({ pathname: '/question/list', query: { status: 'total' } });
-  }, []);
-
-  useEffect(() => {
     async function fetchQuestionPage() {
       const { count } = await getQuestionPage({ size: PAGINATION_SIZE.QUESTION_LIST, type: queryStatus });
       setTotalPage(count);
