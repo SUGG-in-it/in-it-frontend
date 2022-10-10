@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { successToast } from '@/utils/toast';
+import Tags from '@/components/common/tag/Tags';
 
-const dummy = [
+const dummy: string[] = [
   'react',
   'javascript',
   'typescript',
@@ -35,7 +36,7 @@ const Aside = () => {
     }, 500);
   };
 
-  const handleProfileClick = (nickname:string) => {
+  const handleProfileClick = (nickname: string) => {
     router.push({ pathname: '/mypage/profile', query: { nickname: nickname } });
   };
 
@@ -65,11 +66,7 @@ const Aside = () => {
       </MypageWrapper>
       <TagListWrapper>
         <p>인기 태그</p>
-        {dummy.map((tag, index) => (
-          <TagWrapper key={index}>
-            <span>{`# ${tag}`}</span>
-          </TagWrapper>
-        ))}
+        <Tags tagList={dummy} />
       </TagListWrapper>
     </AsideContainer>
   );

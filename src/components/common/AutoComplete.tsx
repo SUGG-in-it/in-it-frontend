@@ -9,22 +9,26 @@ const SearchContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: #eaeaea;
+  background-color: rgba(77, 124, 254, 0.05);
   border: 0;
   margin-bottom: 1em;
   position: relative;
+  padding: 0.2em 0.5em;
+  height: 35px;
   img {
     width: 20px;
     height: 20px;
     position: absolute;
+    margin-left: 1em;
   }
 `;
 
 const SearchInput = styled(Input)`
   border: 0;
-  background-color: #eaeaea;
+  background-color: transparent;
   width: 100%;
   outline: none;
+  height: 35px;
   font-size: 0.9rem;
   font-weight: bold;
 `;
@@ -32,6 +36,7 @@ const SearchInput = styled(Input)`
 const AutoSearchContainer = styled.div`
   z-index: 3;
   height: fit-content;
+  max-height: 5em;
   width: 20em;
   background-color: #fff;
   position: absolute;
@@ -41,7 +46,10 @@ const AutoSearchContainer = styled.div`
   padding: 15px;
 `;
 
-const AutoSearchWrap = styled.ul``;
+const AutoSearchWrap = styled.ul`
+  max-height: 5em;
+  overflow: scroll;
+`;
 
 const AutoSearchData = styled.li`
   padding: 0.6em;
@@ -67,7 +75,7 @@ const AutoComplete = ({
   const [autoCompleteWords, setAutoCompleteWords] = useState<string[]>([]);
 
   useEffect(() => {
-    if (tags?.tags?.length) {
+    if (tags?.tags?.length && searchWord.value !== '') {
       const filteredTags = tags?.tags?.filter((tag: string) => tag.includes(searchWord.value));
       setAutoCompleteWords(filteredTags);
     }
@@ -76,6 +84,7 @@ const AutoComplete = ({
   const handleAutoSearchDataClick = (word: string) => {
     handleTagList(word);
     searchWord.setValue('');
+    setAutoCompleteWords([]);
   };
 
   return (
@@ -87,7 +96,7 @@ const AutoComplete = ({
         onChange={searchWord.onChange}
         placeholder={'태그를 입력해주세요!'}
       />
-      {autoCompleteWords.length && (
+      {autoCompleteWords.length > 0 && (
         <AutoSearchContainer>
           <AutoSearchWrap>
             {autoCompleteWords.map((word: string) => (

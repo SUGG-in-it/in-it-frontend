@@ -18,6 +18,7 @@ import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { ErrorBoundary } from 'react-error-boundary';
 import AutoComplete from '@/components/common/AutoComplete';
+import TagsWithDeleteButton from '@/components/common/tag/TagsWithDeleteButton';
 
 const QuestionsFallback = ({ error, resetErrorBoundary }) => (
   <QuestionContainer>
@@ -62,7 +63,6 @@ const QuestionEditor = () => {
     title.checkValidation();
 
     if (title.isValid) {
-      console.log(tagList);
       mutationUploadQuestion.mutate({
         questionId: Number(questionId),
         title: title.value,
@@ -78,7 +78,9 @@ const QuestionEditor = () => {
   };
 
   const handleTagList = (tag: string) => {
-    setTagList((tagList) => [...tagList, tag]);
+    if (!tagList.includes(tag)) {
+      setTagList((tagList) => [...tagList, tag]);
+    }
   };
 
   return (
@@ -114,10 +116,12 @@ const QuestionEditor = () => {
           }}
         />
       </ToastEditorWrapper>
+      <TagLimit>최대 5개의 태그를 입력할 수 있습니다 !</TagLimit>
+      <TagsWithDeleteButton tagList={tagList} setTagList={setTagList} />
+      <AutoComplete searchWord={searchWord} handleTagList={handleTagList} />
       <LabelInput label="내공">
         <CustomInput value={point.value} onChange={point.onChange} type="number" placeholder="내공을 입력해주세요." />
       </LabelInput>
-      <AutoComplete searchWord={searchWord} handleTagList={handleTagList} />
       <ButtonWrapper>
         <CancelButton onClick={handleCancle}>{'취소'}</CancelButton>
         <PostButton onClick={handleQuestionSubmit}>{'등록'}</PostButton>
@@ -202,4 +206,11 @@ const RetryButton = styled(FiRefreshCcw)`
   color: ${({ theme }) => theme.greyLineColor};
   cursor: pointer;
 `;
+
+const TagLimit = styled.p`
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.pointColor};
+  margin-bottom: 1em;
+`;
+
 export default EditorSection;
