@@ -1,5 +1,6 @@
 import Button from '@/components/common/button/Button';
 import GrayLine from '@/components/common/GreyLine';
+import Tags from '@/components/common/tag/Tags';
 import { useDeleteQuestionMutation } from '@/hooks/queries/useQuestion';
 import { userState } from '@/store/users';
 import { QLabel } from '@/styles/commonStyles';
@@ -32,6 +33,17 @@ const QuestionSection = ({ question }: { question: Question }) => {
   return (
     <QuestionSectionContainer>
       <QuestionSectionWrapper>
+        {question.point ? (
+          <PointContainer>
+            <h5>{`${question.point}`}</h5>
+            <p>{`포인트`}</p>
+          </PointContainer>
+        ) : (
+          <PointContainer>
+            <h5>{`0`}</h5>
+            <p>{'포인트'}</p>
+          </PointContainer>
+        )}
         <SectionRow>
           <TitleContainer>
             <QLabel>Q.</QLabel>
@@ -45,14 +57,16 @@ const QuestionSection = ({ question }: { question: Question }) => {
             </div>
           )}
         </SectionRow>
-        <SectionRow>
+        <DetailRow>
           <NickName>{question.nickname}</NickName>
-          <Date>{question.date}</Date>
-        </SectionRow>
+          <span> · </span>
+          <Date>{question.updateDate}</Date>
+        </DetailRow>
         <GrayLine />
         <SectionRow>
           <ContentWrapper content={question.content} />
         </SectionRow>
+        <Tags tagList={question.tagList.split(',')} />
       </QuestionSectionWrapper>
     </QuestionSectionContainer>
   );
@@ -69,12 +83,43 @@ const QuestionSectionWrapper = styled.div`
   margin: 0 auto;
 `;
 
+const PointContainer = styled.div`
+  position: fixed;
+  right: 15vw;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 1px solid #dee2e6;
+  background-color: white;
+  h5 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  p {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #616568;
+  }
+`;
+
 const SectionRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 1em;
   margin-bottom: 1em;
+`;
+
+const DetailRow = styled.div`
+  display: flex;
+  span {
+    margin-right: 10px;
+  }
 `;
 
 const TitleContainer = styled.div`
