@@ -5,4 +5,5 @@ export const KEYS = {
   ANSWERS: 'getAnswers',
   PROFILE: 'getProfile',
   COMMENTS: 'getComments',
+  TAGS: 'getTags',
 };

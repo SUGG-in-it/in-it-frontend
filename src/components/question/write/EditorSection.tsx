@@ -5,7 +5,7 @@ import useInput from '@/hooks/useInput';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { uploadImage } from '@/api/images';
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useValidationInput from '@/hooks/useValidationInput';
 import { validateQuestionTitle, VALIDATION_ERROR_MSG } from '@/utils/validations';
@@ -17,6 +17,8 @@ import Skeleton from 'react-loading-skeleton';
 import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { ErrorBoundary } from 'react-error-boundary';
+import AutoComplete from '@/components/common/AutoComplete';
+import TagsWithDeleteButton from '@/components/common/tag/TagsWithDeleteButton';
 
 const QuestionsFallback = ({ error, resetErrorBoundary }) => (
   <QuestionContainer>
@@ -31,8 +33,9 @@ const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
 
 const QuestionEditor = () => {
   const title = useValidationInput('', validateQuestionTitle);
-  const tagList = useInput('');
+  const [tagList, setTagList] = useState<string[]>([]);
   const point = useInput('0');
+  const searchWord = useInput('');
   const editorRef = useRef(null);
   const router = useRouter();
   const questionId = Number(router.query.id);
@@ -41,7 +44,6 @@ const QuestionEditor = () => {
 
   useEffect(() => {
     title.setValue(question.title || '');
-    tagList.setValue(question.tagList || '');
     point.setValue(String(question.point || 0));
     editorRef.current?.getInstance().setHTML(question.content || '');
   }, [question]);
@@ -65,7 +67,7 @@ const QuestionEditor = () => {
         questionId: Number(questionId),
         title: title.value,
         content: editorRef.current?.getInstance().getHTML(),
-        tagList: tagList.value,
+        tagList: tagList.join(','),
         point: Number(point.value),
       });
     }
@@ -73,6 +75,12 @@ const QuestionEditor = () => {
 
   const handleCancle = () => {
     router.back();
+  };
+
+  const handleTagList = (tag: string) => {
+    if (!tagList.includes(tag)) {
+      setTagList((tagList) => [...tagList, tag]);
+    }
   };
 
   return (
@@ -108,9 +116,9 @@ const QuestionEditor = () => {
           }}
         />
       </ToastEditorWrapper>
-      <LabelInput label="태그">
-        <CustomInput value={tagList.value} onChange={tagList.onChange} type="text" placeholder="태그를 입력해주세요." />
-      </LabelInput>
+      <TagLimit>최대 5개의 태그를 입력할 수 있습니다 !</TagLimit>
+      <TagsWithDeleteButton tagList={tagList} setTagList={setTagList} />
+      <AutoComplete searchWord={searchWord} handleTagList={handleTagList} />
       <LabelInput label="내공">
         <CustomInput value={point.value} onChange={point.onChange} type="number" placeholder="내공을 입력해주세요." />
       </LabelInput>
@@ -198,4 +206,11 @@ const RetryButton = styled(FiRefreshCcw)`
   color: ${({ theme }) => theme.greyLineColor};
   cursor: pointer;
 `;
+
+const TagLimit = styled.p`
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.pointColor};
+  margin-bottom: 1em;
+`;
+
 export default EditorSection;
