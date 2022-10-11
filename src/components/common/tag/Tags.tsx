@@ -20,6 +20,9 @@ const TagWrapper = styled.li`
   width: fit-content;
   margin: 0em 1em 1em 0em;
   display: inline-block;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export default Tags;
