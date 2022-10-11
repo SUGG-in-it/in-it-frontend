@@ -40,7 +40,9 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
   }, [questions]);
 
   useEffect(() => {
-    setStatus(queryStatus as string);
+    if (queryStatus) {
+      setStatus(queryStatus as string);
+    }
   }, [queryStatus]);
 
   return (
@@ -59,7 +61,7 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
   );
 };
 
-const QuestionSection = ({ currentPage }: { currentPage: number }) => {
+const QuestionsSection = ({ currentPage }: { currentPage: number }) => {
   return (
     <ErrorBoundary FallbackComponent={QuestionsFallback}>
       <Suspense fallback={<QuestionsLoading />}>
@@ -119,4 +121,4 @@ const RetryButton = styled(FiRotateCcw)`
   cursor: pointer;
 `;
 
-export default QuestionSection;
+export default QuestionsSection;

@@ -71,7 +71,7 @@ const AutoComplete = ({
   searchWord: UseInputReturn;
   handleTagList: (tag: string) => void;
 }) => {
-  const { data: tags } = useTagsQuery('all');
+  const { data: tags } = useTagsQuery('All');
   const [autoCompleteWords, setAutoCompleteWords] = useState<string[]>([]);
 
   useEffect(() => {

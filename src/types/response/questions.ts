@@ -10,8 +10,8 @@ export interface QuestionResponseBody {
   date: string;
   level: number;
   point: number;
-  createdAt: string;
-  updatedAt: string;
+  createDate: string;
+  updateDate: string;
   type: string;
   tagList: string;
   userId: number;
@@ -33,8 +33,8 @@ export interface Question {
   date: string;
   level: number;
   point: number;
-  createdAt: string;
-  updatedAt: string;
+  createDate: string;
+  updateDate: string;
   type: string;
   tagList: string;
   userId: number;

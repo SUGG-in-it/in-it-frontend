@@ -23,10 +23,11 @@ export const getMainContent = async (questionType: string) => {
     });
 };
 
-export const getQuestionPage = async (
-  questionPageRequestBody: QuestionPageRequestBody
-): Promise<QuestionsPageResponseBody> => {
-  const { data } = await GET('/questions/page', questionPageRequestBody);
+export const getQuestionPage = async ({
+  size,
+  type = 'total',
+}: QuestionPageRequestBody): Promise<QuestionsPageResponseBody> => {
+  const { data } = await GET(`/questions/page?size=${size}&type=${type}`);
   return data;
 };
 
