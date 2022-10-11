@@ -5,22 +5,22 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { successToast } from '@/utils/toast';
 import Tags from '@/components/common/tag/Tags';
+import { usePopularTagsQuery } from '@/hooks/queries/useTags';
+import { ErrorBoundary } from 'react-error-boundary';
+import { Suspense } from 'react';
+import { FiRotateCcw } from 'react-icons/fi';
 
-const dummy: string[] = [
-  'react',
-  'javascript',
-  'typescript',
-  'node',
-  'spring',
-  'express',
-  'java',
-  'python',
-  'ai',
-  'front-end',
-  'back-end',
-];
+const QuestionsFallback = ({ error, resetErrorBoundary }) => (
+  <AsideContainer>
+    <TagListWrapper>
+      <p>인기 태그를 불러오는데 실패했어요 😭😭😭 </p>
+    </TagListWrapper>
+  </AsideContainer>
+);
 
-const Aside = () => {
+const QuestionsLoading = () => <div />;
+
+const MyInfo = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useRecoilState(loginState);
   const user = useRecoilValue(userState);
@@ -45,36 +45,60 @@ const Aside = () => {
   };
 
   return (
-    <AsideContainer>
-      <MypageWrapper>
-        {isLogin ? (
-          <>
-            <Header>
-              <NickName>{`안녕하세요! ${user.nickname}`}</NickName>
-              <LogoutButton onClick={handleLogoutClick}>{'로그아웃'}</LogoutButton>
-            </Header>
-            <ProfileButton onClick={() => handleProfileClick(user.nickname)}>{'프로필 바로가기 >'}</ProfileButton>
-          </>
-        ) : (
-          <>
-            <Header>
-              <NickName>{'안녕하세요! 로그인해주세요 😉'}</NickName>
-            </Header>
-            <LogoutButton onClick={handleLoginClick}>{'로그인'}</LogoutButton>
-          </>
-        )}
-      </MypageWrapper>
-      <TagListWrapper>
-        <p>인기 태그</p>
-        <Tags tagList={dummy} />
-      </TagListWrapper>
-    </AsideContainer>
+    <MypageWrapper>
+      {isLogin ? (
+        <>
+          <Header>
+            <NickName>{`안녕하세요! ${user.nickname}`}</NickName>
+            <LogoutButton onClick={handleLogoutClick}>{'로그아웃'}</LogoutButton>
+          </Header>
+          <ProfileButton onClick={() => handleProfileClick(user.nickname)}>{'프로필 바로가기 >'}</ProfileButton>
+        </>
+      ) : (
+        <>
+          <Header>
+            <NickName>{'안녕하세요! 로그인해주세요 😉'}</NickName>
+          </Header>
+          <LogoutButton onClick={handleLoginClick}>{'로그인'}</LogoutButton>
+        </>
+      )}
+    </MypageWrapper>
   );
 };
+
+const TagList = () => {
+  const { data: tags } = usePopularTagsQuery();
+
+  return (
+    <TagListWrapper>
+      <p>인기 태그</p>
+      <Tags tagList={tags.tags} />
+    </TagListWrapper>
+  );
+};
+
+const Aside = () => (
+  <AsideContainer>
+    <MyInfo />
+    <ErrorBoundary FallbackComponent={QuestionsFallback}>
+      <Suspense fallback={<QuestionsLoading />}>
+        <TagList />
+      </Suspense>
+    </ErrorBoundary>
+  </AsideContainer>
+);
 
 const AsideContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const RetryButton = styled(FiRotateCcw)`
+  width: 30px;
+  height: 30px;
+  margin-top: 30px;
+  color: ${({ theme }) => theme.greyLineColor};
+  cursor: pointer;
 `;
 
 const Header = styled.div`
@@ -141,16 +165,6 @@ const TagListWrapper = styled.ul`
   ${media.tablet} {
     display: none;
   }
-`;
-
-const TagWrapper = styled.li`
-  background-color: #eff3fa;
-  color: #3e4042;
-  padding: 0.3em;
-  border-radius: 3px;
-  width: fit-content;
-  margin: 0em 1em 1em 0em;
-  display: inline-block;
 `;
 
 export default Aside;

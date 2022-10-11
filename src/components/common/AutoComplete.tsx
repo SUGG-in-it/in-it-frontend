@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FaHashtag } from 'react-icons/fa';
 import Input from '@/components/common/Input/Input';
 import { UseInputReturn } from '@/hooks/useInput';
-import { useTagsQuery } from '@/hooks/queries/useTags';
+import { useAllTagsQuery } from '@/hooks/queries/useTags';
 import { useEffect, useState } from 'react';
 
 const SearchContainer = styled.div`
@@ -71,7 +71,7 @@ const AutoComplete = ({
   searchWord: UseInputReturn;
   handleTagList: (tag: string) => void;
 }) => {
-  const { data: tags } = useTagsQuery('All');
+  const { data: tags } = useAllTagsQuery();
   const [autoCompleteWords, setAutoCompleteWords] = useState<string[]>([]);
 
   useEffect(() => {

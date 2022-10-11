@@ -3,7 +3,14 @@ import { KEYS } from '@/constants/reactQuery';
 import { TagsResponseBody } from '@/types/response/tags';
 import { useQuery } from '@tanstack/react-query';
 
-export const useTagsQuery = (type: string) => {
-  const data = useQuery<TagsResponseBody>([KEYS.TAGS, { type: type }], () => getTags(type));
+export const useAllTagsQuery = () => {
+  const data = useQuery<TagsResponseBody>([KEYS.TAGS, { type: 'All' }], () => getTags('All'));
+  return data;
+};
+
+export const usePopularTagsQuery = () => {
+  const data = useQuery<TagsResponseBody>([KEYS.TAGS, { type: 'popular' }], () => getTags('popular'), {
+    suspense: true,
+  });
   return data;
 };
