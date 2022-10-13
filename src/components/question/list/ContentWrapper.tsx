@@ -10,7 +10,9 @@ const ContentWrapper = ({ content }: { content: string }) => {
 };
 
 const ViewerWrapper = styled.div`
-  padding: 10px;
+  padding: 1em 0;
+  color: #616568;
+  font-size: 0.9rem;
 `;
 
 export default ContentWrapper;
