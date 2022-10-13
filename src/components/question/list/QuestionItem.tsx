@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import Tags from '@/components/common/tag/Tags';
 
-const ContentWrapper = dynamic(() => import('@/components/question/list/ContentWrapper'), { ssr: false });
+const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
 interface QuestionProps {
   questionId: number;
@@ -33,7 +33,7 @@ const QuestionItem = ({ questionId, type, nickname, updateDate, title, content, 
             <ProcessLabel type={type}>{type === 'completed' ? '답변 완료' : '답변 진행중'}</ProcessLabel>
             <Title>{title}</Title>
           </TopSection>
-          <ContentWrapper content={content} />
+          <ContentViewer content={content} length={100} />
           <TagsWrapper>
             <Tags tagList={tagList.split(',')} />
           </TagsWrapper>

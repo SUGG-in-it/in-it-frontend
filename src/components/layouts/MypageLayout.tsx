@@ -1,6 +1,6 @@
 import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
-import TabMenu from '@/components/mypage/TabMenu';
+import TabMenu from '@/components/common/TabMenu';
 import styled from 'styled-components';
 import { ReactElement } from 'react';
 import { media } from '@/styles/mediaQuery';

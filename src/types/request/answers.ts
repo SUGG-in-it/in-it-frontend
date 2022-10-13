@@ -9,6 +9,11 @@ export interface AnswersRequestParams {
   questionId: number;
 }
 
+export interface UserAnswersRequestParams {
+  page: number;
+  size: number;
+}
+
 export interface AnswerPageRequestParams {
   size: number;
   questionId: number;

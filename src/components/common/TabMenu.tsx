@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { userState } from '@/store/users';
 
-const TAB_MENU = [{ name: '프로필' }, { name: '나의 질문' }, { name: '나의 답변' }, { name: '나의 댓글' }];
+const TAB_MENU = [{ name: '프로필' }, { name: '나의 질문' }, { name: '나의 답변' }];
 
 const TabMenu = () => {
   const router = useRouter();
@@ -26,9 +26,6 @@ const TabMenu = () => {
     if (router.route === '/mypage/answer') {
       setCurrentTab(2);
     }
-    if (router.route === '/mypage/comment') {
-      setCurrentTab(3);
-    }
   };
 
   const selectMenuHandler = (index: number, nickname: string) => {
@@ -41,9 +38,6 @@ const TabMenu = () => {
         break;
       case 2:
         router.push('/mypage/answer');
-        break;
-      case 3:
-        router.push('/mypage/comment');
         break;
     }
   };

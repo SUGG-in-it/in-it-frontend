@@ -4,6 +4,11 @@ export interface QusetionsRequestBody {
   type: string;
 }
 
+export interface UserQusetionsRequestBody {
+  page: number;
+  size: number;
+}
+
 export interface QuestionPageRequestBody {
   size: number;
   type: 'total' | 'doing' | 'completed';
