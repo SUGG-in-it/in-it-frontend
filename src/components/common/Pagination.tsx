@@ -41,9 +41,18 @@ const PaginationContainer = styled.div`
 
 const ButtonBackWrapper = styled.div`
   visibility: ${({ isShowButton }) => (isShowButton ? 'visible' : 'hidden')};
+  :hover {
+    color: #111;
+    font-size: 1.2rem;
+  }
 `;
+
 const ButtonForwardWrapper = styled.div`
   visibility: ${({ isShowButton }) => (isShowButton ? 'visible' : 'hidden')};
+  :hover {
+    color: #111;
+    font-size: 1.2rem;
+  }
 `;
 
 const Page = styled.div`
@@ -54,6 +63,10 @@ const Page = styled.div`
   text-align: center;
   font-weight: ${({ isActive }) => (isActive ? '700' : '400')};
   color: ${({ isActive }) => (isActive ? '#000' : '#333')};
+  :hover {
+    color: #111;
+    font-size: 1.2rem;
+  }
 `;
 
 export default Pagination;
