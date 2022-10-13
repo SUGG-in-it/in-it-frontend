@@ -1,8 +1,10 @@
 import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
+import dynamic from 'next/dynamic';
 import { FiCornerDownRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
-import DOMPurify from 'dompurify';
+
+const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
 interface QuestionProps {
   order: number;
@@ -26,11 +28,7 @@ const QuestionItem = ({ order, questionId, title, content }: QuestionProps) => {
       </TopSection>
       <ContentContainer>
         <Arrow />
-        <Content
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(content),
-          }}
-        />
+        <ContentViewer content={content} length={30} />
       </ContentContainer>
     </QuestionWrapper>
   );
