@@ -3,7 +3,6 @@ import { useUserQuestionsQuery } from '@/hooks/queries/useQuestion';
 import { Question } from '@/types/response/questions';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { FiCornerDownRight } from 'react-icons/fi';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';

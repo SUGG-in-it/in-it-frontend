@@ -1,9 +1,9 @@
-import { deleteAnswer, getAnswers, selectAnswer, uploadAnswer } from '@/api/answers';
+import { deleteAnswer, getAnswers, getUserAnswers, selectAnswer, uploadAnswer } from '@/api/answers';
 import { CustomError } from '@/api/config/error';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
-import { AnswersRequestParams } from '@/types/request/answers';
-import { AnswersResponseBody } from '@/types/response/answers';
+import { AnswersRequestParams, UserAnswersRequestParams } from '@/types/request/answers';
+import { AnswersResponseBody, MyAnswersResponseBody } from '@/types/response/answers';
 import { errorToast, successToast } from '@/utils/toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -31,6 +31,19 @@ export const useAnswersQuery = (answersRequestParams: AnswersRequestParams) => {
   const data = useQuery<AnswersResponseBody>(
     [KEYS.ANSWERS, { page: page, questionId: questionId }],
     () => getAnswers(answersRequestParams),
+    {
+      suspense: true,
+    }
+  );
+  return data;
+};
+
+export const useUserAnswersQuery = (userAnswersRequestParams: UserAnswersRequestParams) => {
+  const page = userAnswersRequestParams.page;
+
+  const data = useQuery<MyAnswersResponseBody>(
+    [KEYS.USER_ANSWERS, { page }],
+    () => getUserAnswers(userAnswersRequestParams),
     {
       suspense: true,
     }

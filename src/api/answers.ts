@@ -1,5 +1,10 @@
 import { DELETE, GET, POST, PUT } from '@/api/config/base';
-import { AnswerPageRequestParams, AnswersRequestParams, UploadAnswerRequestBody } from '@/types/request/answers';
+import {
+  AnswerPageRequestParams,
+  AnswersRequestParams,
+  UploadAnswerRequestBody,
+  UserAnswersRequestParams,
+} from '@/types/request/answers';
 
 export const postAnswerId = async (questionId: number) => await POST('/answers', { questionId });
 
@@ -8,6 +13,14 @@ export const uploadAnswer = async ({ answerId, content }: UploadAnswerRequestBod
 
 export const getAnswers = async (answersRequestParams: AnswersRequestParams) => {
   return await GET('/answers', answersRequestParams)
+    .then((res) => res.data)
+    .catch((e) => {
+      return e;
+    });
+};
+
+export const getUserAnswers = async (userAnswersRequestParams: UserAnswersRequestParams) => {
+  return await GET('/answers/manage', userAnswersRequestParams)
     .then((res) => res.data)
     .catch((e) => {
       return e;
