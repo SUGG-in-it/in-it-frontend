@@ -6,11 +6,6 @@ export const getCommentPage = async (commentPageRequestParams: CommentPageReques
   return data;
 };
 
-export const getUserCommentPage = async (size: number) => {
-  const { data } = await GET(`/comments/user-page?size=${size}`);
-  return data;
-};
-
 export const uploadComment = async (uploadCommentRequestBody: UploadCommentRequestBody) =>
   await POST(`/comments`, uploadCommentRequestBody);
 
