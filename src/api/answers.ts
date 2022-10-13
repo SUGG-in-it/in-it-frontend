@@ -19,6 +19,11 @@ export const getAnswerPage = async (answerPageRequestParams: AnswerPageRequestPa
   return data;
 };
 
+export const getUserAnswerPage = async (size: number) => {
+  const { data } = await GET(`/answers/user-page?size=${size}`);
+  return data;
+};
+
 export const selectAnswer = async (answerId: number) => {
   await POST(`/answers/select/${answerId}`);
 };
