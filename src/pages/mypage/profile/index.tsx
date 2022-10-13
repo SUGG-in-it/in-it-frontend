@@ -1,7 +1,7 @@
 import MoonLoading from '@/components/common/loading/MoonLoading';
 import MypageLayout from '@/components/layouts/MypageLayout';
 import { useProfileMutation, useProfileQuery } from '@/hooks/queries/useProfile';
-import ProfileInput from '@/components/mypage/ProfileInput';
+import ProfileInput from '@/components/mypage/profile/ProfileInput';
 import { media } from '@/styles/mediaQuery';
 import { GetServerSideProps } from 'next';
 import { Suspense } from 'react';
