@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 
-const ContentWrapper = dynamic(() => import('@/components/question/list/ContentWrapper'), { ssr: false });
+const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
 const QuestionSection = ({ question }: { question: Question }) => {
   const user = useRecoilValue(userState);
@@ -64,7 +64,7 @@ const QuestionSection = ({ question }: { question: Question }) => {
         </DetailRow>
         <GrayLine />
         <SectionRow>
-          <ContentWrapper content={question.content} />
+          <ContentViewer content={question.content} />
         </SectionRow>
         <Tags tagList={question.tagList.split(',')} />
       </QuestionSectionWrapper>

@@ -1,9 +1,22 @@
 import { DELETE, GET, POST, PUT } from '@/api/config/base';
-import { QuestionPageRequestBody, QusetionsRequestBody, UploadQuestionRequestBody } from '@/types/request/questions';
+import {
+  QuestionPageRequestBody,
+  QusetionsRequestBody,
+  UploadQuestionRequestBody,
+  UserQusetionsRequestBody,
+} from '@/types/request/questions';
 import { QuestionsPageResponseBody } from '@/types/response/questions';
 
 export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) => {
   return await GET('/questions', qusetionsRequestBody)
+    .then((res) => res.data)
+    .catch((e) => {
+      return e;
+    });
+};
+
+export const getUserQusetions = async (userQusetionsRequestBody: UserQusetionsRequestBody) => {
+  return await GET('/questions/manage', userQusetionsRequestBody)
     .then((res) => res.data)
     .catch((e) => {
       return e;
@@ -28,6 +41,11 @@ export const getQuestionPage = async ({
   type = 'total',
 }: QuestionPageRequestBody): Promise<QuestionsPageResponseBody> => {
   const { data } = await GET(`/questions/page?size=${size}&type=${type}`);
+  return data;
+};
+
+export const getUserQuestionPage = async (size: number): Promise<QuestionsPageResponseBody> => {
+  const { data } = await GET(`/questions/user-page?size=${size}`);
   return data;
 };
 
