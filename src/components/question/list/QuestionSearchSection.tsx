@@ -23,7 +23,8 @@ const QuestionSearchSection = () => {
   };
 
   const handleInit = () => {
-    //
+    setTagList([]);
+    searchWord.setValue('');
   };
 
   return (
