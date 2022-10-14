@@ -3,7 +3,7 @@ export interface AnswersResponseBody {
 }
 
 export interface MyAnswersResponseBody {
-  answers: MyAnswer[];
+  managedAnswers: MyAnswer[];
 }
 
 export interface Answer {
@@ -22,4 +22,5 @@ export interface MyAnswer {
   content: string;
   userId: number;
   questionId: number;
+  questionTitle: string;
 }

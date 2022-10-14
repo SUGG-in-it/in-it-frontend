@@ -84,15 +84,4 @@ const Title = styled.p`
   white-space: nowrap;
 `;
 
-const Content = styled.p`
-  display: block;
-  overflow: hidden;
-  position: relative;
-  color: ${({ theme }) => theme.texColor};
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: calc(100% - 4em);
-  height: 33px;
-`;
-
 export default QuestionItem;
