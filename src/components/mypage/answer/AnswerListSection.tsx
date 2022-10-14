@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useUserAnswersQuery } from '@/hooks/queries/useAnswer';
 import { MyAnswer } from '@/types/response/answers';
+import { FiCornerDownRight } from 'react-icons/fi';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
@@ -31,10 +32,17 @@ const AnswerList = ({ currentPage }: { currentPage: number }) => {
 
   return (
     <div>
-      {answers?.answers?.map((answer: MyAnswer) => (
+      {answers?.managedAnswers?.map((answer: MyAnswer) => (
         <AnswerWrapper key={answer.id} onClick={() => handleQuestionClick(answer.questionId)}>
-          <ALabel>A</ALabel>
-          {answer.content && <ContentViewer content={answer.content} length={30} />}
+          <QuestionSection>
+            <QLabel>Q</QLabel>
+            <Title>{answer.questionTitle}</Title>
+          </QuestionSection>
+          <AnswerSection>
+            <Arrow />
+            <ALabel>A</ALabel>
+            {answer.content && <ContentViewer content={answer.content} length={50} />}
+          </AnswerSection>
         </AnswerWrapper>
       ))}
     </div>
@@ -51,7 +59,7 @@ const AnswerListSection = ({ currentPage }: { currentPage: number }) => (
 
 const AnswerWrapper = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   position: relative;
   padding: 20px 4px 16px 30px;
   border-bottom: 1px solid #f2f2f2;
@@ -66,10 +74,45 @@ const AnswerWrapper = styled.div`
 `;
 
 const ALabel = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
+  margin-right: 0.5em;
+  color: ${({ theme }) => theme.pointColor};
+`;
+
+const QuestionSection = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+`;
+
+const AnswerSection = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+`;
+
+const QLabel = styled.p`
   font-size: 1.1rem;
   font-weight: bold;
   margin-right: 0.5em;
   color: ${({ theme }) => theme.pointColor};
+`;
+
+const Title = styled.p`
+  display: block;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: ${({ theme }) => theme.textColor};
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const Arrow = styled(FiCornerDownRight)`
+  width: 20px;
+  margin-right: 0.5em;
+  color: ${({ theme }) => theme.grayColor};
 `;
 
 export default AnswerListSection;
