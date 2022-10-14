@@ -9,8 +9,8 @@ const SearchContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: rgba(77, 124, 254, 0.05);
-  border: 0;
+  background-color: white;
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
   margin-bottom: 1em;
   position: relative;
   padding: 0.2em 0.5em;
@@ -65,25 +65,25 @@ const AutoSearchData = styled.li`
 `;
 
 const AutoComplete = ({
-  searchWord,
+  searchTag,
   handleTagList,
 }: {
-  searchWord: UseInputReturn;
+  searchTag: UseInputReturn;
   handleTagList: (tag: string) => void;
 }) => {
   const { data: tags } = useAllTagsQuery();
   const [autoCompleteWords, setAutoCompleteWords] = useState<string[]>([]);
 
   useEffect(() => {
-    if (tags?.tags?.length && searchWord.value !== '') {
-      const filteredTags = tags?.tags?.filter((tag: string) => tag.includes(searchWord.value));
+    if (tags?.tags?.length && searchTag.value !== '') {
+      const filteredTags = tags?.tags?.filter((tag: string) => tag.includes(searchTag.value));
       setAutoCompleteWords(filteredTags);
     }
-  }, [searchWord.value]);
+  }, [searchTag.value]);
 
   const handleAutoSearchDataClick = (word: string) => {
     handleTagList(word);
-    searchWord.setValue('');
+    searchTag.setValue('');
     setAutoCompleteWords([]);
   };
 
@@ -92,8 +92,8 @@ const AutoComplete = ({
       <FaHashtag />
       <SearchInput
         type="text"
-        value={searchWord.value}
-        onChange={searchWord.onChange}
+        value={searchTag.value}
+        onChange={searchTag.onChange}
         placeholder={'태그를 입력해주세요!'}
       />
       {autoCompleteWords.length > 0 && (

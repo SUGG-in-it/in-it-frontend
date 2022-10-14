@@ -93,14 +93,6 @@ const AsideContainer = styled.div`
   flex-direction: column;
 `;
 
-const RetryButton = styled(FiRotateCcw)`
-  width: 30px;
-  height: 30px;
-  margin-top: 30px;
-  color: ${({ theme }) => theme.greyLineColor};
-  cursor: pointer;
-`;
-
 const Header = styled.div`
   display: flex;
   justify-content: space-between;

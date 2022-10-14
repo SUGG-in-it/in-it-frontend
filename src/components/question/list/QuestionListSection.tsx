@@ -12,6 +12,7 @@ import QuestionItem from '@/components/question/list/QuestionItem';
 import GrayLine from '@/components/common/GreyLine';
 import { useRouter } from 'next/router';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
+import QuestionSearchSection from '@/components/question/list/QuestionSearchSection';
 
 const QuestionsFallback = ({ error, resetErrorBoundary }) => (
   <QuestionContainer>
@@ -49,6 +50,7 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
     <QuestionListContainer>
       <StatusBar />
       {isEmptyQuestions ? <EmptyMessage>Q&A가 없어요 😭😭😭</EmptyMessage> : null}
+      <QuestionSearchSection />
       <QuestionListWrapper>
         {questions?.questions.map((question, index) => (
           <>

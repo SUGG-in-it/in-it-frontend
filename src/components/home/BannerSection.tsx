@@ -20,7 +20,7 @@ const BannerSection = () => {
 const BannerContainer = styled.div`
   display: flex;
   justify-content: center;
-  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  background-color: white;
   cursor: pointer;
   padding-top: 3em;
   justify-content: space-between;

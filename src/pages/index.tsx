@@ -15,7 +15,7 @@ const HomePage = () => {
 };
 
 const MainContainer = styled.div`
-  background-color: ${({ theme }) => theme.backgrondLightColor};
+  background-color: white;
 `;
 
 export default HomePage;
