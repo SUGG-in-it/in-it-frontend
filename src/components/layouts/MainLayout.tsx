@@ -31,6 +31,7 @@ const ContentSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: white;
 `;
 
 export default MainLayout;

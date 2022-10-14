@@ -9,8 +9,8 @@ const SearchContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: rgba(77, 124, 254, 0.05);
-  border: 0;
+  background-color: white;
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
   margin-bottom: 1em;
   position: relative;
   padding: 0.2em 0.5em;

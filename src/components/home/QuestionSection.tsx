@@ -64,7 +64,7 @@ const QuestionSection = () => {
 };
 
 const QuestionContainer = styled.div`
-  background-color: ${({ theme }) => theme.backgrondDarkColor};
+  background-color: white;
   padding-bottom: 6em;
 `;
 

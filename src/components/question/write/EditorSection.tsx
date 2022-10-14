@@ -86,7 +86,7 @@ const QuestionEditor = () => {
   return (
     <>
       <LabelInput label="제목">
-        <ValidationInput
+        <CustomValidtaionInput
           type="text"
           placeholder="제목을 입력해주세요."
           value={title.value}
@@ -172,6 +172,14 @@ const CustomInput = styled(Input)`
   ${media.mobile} {
     margin-bottom: 1em;
   }
+`;
+
+const CustomValidtaionInput = styled(ValidationInput)`
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  width: 100%;
+  height: fit-content;
+  margin-bottom: 1em;
 `;
 
 const QuestionContainer = styled.div`
