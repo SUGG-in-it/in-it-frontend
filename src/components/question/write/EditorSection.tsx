@@ -35,7 +35,7 @@ const QuestionEditor = () => {
   const title = useValidationInput('', validateQuestionTitle);
   const [tagList, setTagList] = useState<string[]>([]);
   const point = useInput('0');
-  const searchWord = useInput('');
+  const searchTag = useInput('');
   const editorRef = useRef(null);
   const router = useRouter();
   const questionId = Number(router.query.id);
@@ -118,7 +118,7 @@ const QuestionEditor = () => {
       </ToastEditorWrapper>
       <TagLimit>최대 5개의 태그를 입력할 수 있습니다 !</TagLimit>
       <TagsWithDeleteButton tagList={tagList} setTagList={setTagList} />
-      <AutoComplete searchWord={searchWord} handleTagList={handleTagList} />
+      <AutoComplete searchTag={searchTag} handleTagList={handleTagList} />
       <LabelInput label="내공">
         <CustomInput value={point.value} onChange={point.onChange} type="number" placeholder="내공을 입력해주세요." />
       </LabelInput>
