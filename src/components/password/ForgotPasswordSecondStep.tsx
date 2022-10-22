@@ -1,52 +1,62 @@
 import { resetPassword } from '@/api/users';
-import Button from '@/components/common/button/Button';
-import ValidationInput from '@/components/common/Input/ValidationInput';
-import useValidationInput from '@/hooks/useValidationInput';
 import { forgotPasswordState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
-import { validatePassword, validateRePassword, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 
 const ForgotPasswordSecondStep = () => {
   const router = useRouter();
-  const password = useValidationInput('', validatePassword);
-  const rePassword = useValidationInput('', validateRePassword, password.value);
-
   const forgotPassword = useRecoilValue(forgotPasswordState);
 
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      password: '',
+      confirmPassword: '',
+    },
+  });
+
   const handleChangePassword = async () => {
-    password.checkValidation();
-    rePassword.checkValidation();
-    if (password.isValid && rePassword.isValid) {
-      await resetPassword({
-        email: forgotPassword.email,
-        password: password.value,
-      });
-      router.push('/login');
-    }
+    await resetPassword({
+      email: forgotPassword.email,
+      password: getValues().password,
+    });
+    router.push('/login');
   };
 
   return (
     <ForgotPasswordWrapper>
-      <ValidationInput
-        type={'password'}
-        placeholder={'비밀번호를 입력해주세요'}
-        value={password.value}
-        onChange={password.onChange}
-        isValid={password.isValid}
-        msg={VALIDATION_ERROR_MSG.INVALID_PASSWORD}
-      />
-      <ValidationInput
-        type={'password'}
-        placeholder={'비밀번호를 다시 입력해주세요'}
-        value={rePassword.value}
-        onChange={rePassword.onChange}
-        isValid={rePassword.isValid}
-        msg={VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD}
-      />
-      <PostButton onClick={handleChangePassword}>{'비밀번호 변경'}</PostButton>
+      <PasswordForm onSubmit={handleSubmit(handleChangePassword)}>
+        <input
+          {...register('password', {
+            required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
+            pattern: {
+              value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+              message: VALIDATION_ERROR_MSG.INVALID_PASSWORD,
+            },
+          })}
+          type="password"
+          placeholder={'비밀번호'}
+        />
+        <p>{errors.password?.message}</p>
+        <input
+          {...register('confirmPassword', {
+            required: VALIDATION_ERROR_MSG.EMPTY_PASSWORD,
+            validate: (value) => value === getValues().password || VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD,
+          })}
+          type="password"
+          placeholder={'비밀번호 확인'}
+        />
+        <p>{errors.confirmPassword?.message}</p>
+        <ResetButton>{'비밀번호 변경'}</ResetButton>
+      </PasswordForm>
     </ForgotPasswordWrapper>
   );
 };
@@ -62,9 +72,43 @@ const ForgotPasswordWrapper = styled.div`
   }
 `;
 
-const PostButton = styled(Button)`
+const PasswordForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  input {
+    font-size: 1rem;
+    padding: 0.5em;
+    border: none;
+    border-radius: 0.3em;
+    width: calc(100% - 1em);
+    height: 30px;
+    margin-top: 20px;
+    background-color: ${({ theme }) => theme.backgrondLightColor};
+    color: ${({ theme }) => theme.textColor};
+    ::placeholder {
+      color: darkgray;
+      font-size: 0.8rem;
+    }
+    :focus {
+      outline: none;
+    }
+  }
+  p {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+`;
+
+const ResetButton = styled.button`
   background-color: ${({ theme }) => theme.primaryColor};
   margin-bottom: 2em;
+  border: none;
+  height: 50px;
+  color: white;
+  border-radius: 3px;
+  margin-top: 20px;
 `;
 
 export default ForgotPasswordSecondStep;

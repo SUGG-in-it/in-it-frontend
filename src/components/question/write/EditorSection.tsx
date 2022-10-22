@@ -7,12 +7,9 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { uploadImage } from '@/api/images';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import useValidationInput from '@/hooks/useValidationInput';
-import { validateQuestionTitle, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useQuestionQuery, useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
-import ValidationInput from '@/components/common/Input/ValidationInput';
 import Skeleton from 'react-loading-skeleton';
 import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
 import { FiRefreshCcw } from 'react-icons/fi';
@@ -32,7 +29,7 @@ const QuestionsFallback = ({ error, resetErrorBoundary }) => (
 const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
 
 const QuestionEditor = () => {
-  const title = useValidationInput('', validateQuestionTitle);
+  const title = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
   const point = useInput('0');
   const searchTag = useInput('');
@@ -60,9 +57,7 @@ const QuestionEditor = () => {
   };
 
   const handleQuestionSubmit = async () => {
-    title.checkValidation();
-
-    if (title.isValid) {
+    if (title.value && editorRef.current?.getInstance().getHTML()) {
       mutationUploadQuestion.mutate({
         questionId: Number(questionId),
         title: title.value,
@@ -86,14 +81,7 @@ const QuestionEditor = () => {
   return (
     <>
       <LabelInput label="제목">
-        <CustomValidtaionInput
-          type="text"
-          placeholder="제목을 입력해주세요."
-          value={title.value}
-          onChange={title.onChange}
-          isValid={title.isValid}
-          msg={VALIDATION_ERROR_MSG.EMPTY_TITLE}
-        />
+        <CustomInput value={title.value} onChange={title.onChange} placeholder="제목을 입력해주세요." />
       </LabelInput>
       <ToastEditorWrapper>
         <Editor
@@ -172,14 +160,6 @@ const CustomInput = styled(Input)`
   ${media.mobile} {
     margin-bottom: 1em;
   }
-`;
-
-const CustomValidtaionInput = styled(ValidationInput)`
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  width: 100%;
-  height: fit-content;
-  margin-bottom: 1em;
 `;
 
 const QuestionContainer = styled.div`

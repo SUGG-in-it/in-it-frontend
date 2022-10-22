@@ -13,6 +13,7 @@ const SignUpSecondStep = () => {
 
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -78,6 +79,7 @@ const SignUpSecondStep = () => {
         <input
           {...register('confirmPassword', {
             required: VALIDATION_ERROR_MSG.EMPTY_CONFIRM_PASSWORD,
+            validate: (value) => value === getValues().password || VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD,
           })}
           type="password"
           placeholder={'비밀번호 확인'}
