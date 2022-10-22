@@ -1,30 +1,30 @@
-import Button from '@/components/common/button/Button';
-import ValidationInput from '@/components/common/Input/ValidationInput';
+import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import { useJoinMutation } from '@/hooks/queries/useUser';
-import useValidationInput from '@/hooks/useValidationInput';
 import { signUpState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
-import {
-  validateNickName,
-  validatePassword,
-  validateRePassword,
-  validateWorkPostion,
-  VALIDATION_ERROR_MSG,
-} from '@/utils/validations';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 const SignUpSecondStep = () => {
   const router = useRouter();
-  const nickname = useValidationInput('', validateNickName);
-  const password = useValidationInput('', validatePassword);
-  const workPosition = useValidationInput('', validateWorkPostion);
-  const rePassword = useValidationInput('', validateRePassword, password.value);
-
-  const [year, setYear] = useState('');
   const [signUp, setSignUp] = useRecoilState(signUpState);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      nickname: '',
+      year: '',
+      workPosition: '',
+    },
+  });
 
   const mutationJoin = useJoinMutation({
     onSuccess: () => {
@@ -39,81 +39,75 @@ const SignUpSecondStep = () => {
     },
   });
 
-  const handleYearSelect = (e) => {
-    setYear(e.target.value);
-  };
-
-  const validationCheck = () => {
-    return rePassword.isValid && nickname.isValid && password.isValid && workPosition.isValid;
-  };
-
-  const handleSignUp = () => {
-    nickname.checkValidation();
-    password.checkValidation();
-    rePassword.checkValidation();
-    workPosition.checkValidation();
-
-    if (validationCheck()) {
-      mutationJoin.mutate({
-        email: signUp.email,
-        password: password.value,
-        nickname: nickname.value,
-        year,
-        workPosition: workPosition.value,
-      });
-    }
-  };
-
   return (
-    <InputSection>
-      <ValidationInput
-        type={'text'}
-        placeholder={'닉네임을 입력해주세요'}
-        value={nickname.value}
-        onChange={nickname.onChange}
-        isValid={nickname.isValid}
-        msg={VALIDATION_ERROR_MSG.EMPTY_NICKNAME}
-      />
-      <ValidationInput
-        type={'password'}
-        placeholder={'비밀번호를 입력해주세요'}
-        value={password.value}
-        onChange={password.onChange}
-        isValid={password.isValid}
-        msg={VALIDATION_ERROR_MSG.INVALID_PASSWORD}
-      />
-      <ValidationInput
-        type={'password'}
-        placeholder={'비밀번호를 다시 입력해주세요'}
-        value={rePassword.value}
-        onChange={rePassword.onChange}
-        isValid={rePassword.isValid}
-        msg={VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD}
-      />
-      <select name="year" value={year} onChange={handleYearSelect}>
-        <option value="신입">신입</option>
-        <option value="1년차">1년차</option>
-        <option value="2년차">2년차</option>
-        <option value="3년차">3년차</option>
-        <option value="4년차">4년차</option>
-        <option value="5년차 이상">5년차 이상</option>
-        <option value="10년차 이상">10년차 이상</option>
-        <option value="20년차 이상">20년차 이상</option>
-      </select>
-      <ValidationInput
-        type={'text'}
-        placeholder={'직군을 입력해주세요'}
-        value={workPosition.value}
-        onChange={workPosition.onChange}
-        isValid={workPosition.isValid}
-        msg={VALIDATION_ERROR_MSG.EMPTY_WORK_POSITION}
-      />
-      <Button onClick={handleSignUp}>{'회원가입'}</Button>
-    </InputSection>
+    <SignUpWrapper>
+      <SingUpForm
+        onSubmit={handleSubmit((data) => {
+          mutationJoin.mutate({
+            email: data.email,
+            password: data.password,
+            nickname: data.nickname,
+            year: data.year,
+            workPosition: data.workPosition,
+          });
+        })}
+      >
+        <input
+          {...register('nickname', {
+            required: VALIDATION_ERROR_MSG.EMPTY_NICKNAME,
+            pattern: {
+              value: /^[a-z0-9_-]{2,10}$/,
+              message: VALIDATION_ERROR_MSG.INVALID_NICKNAME,
+            },
+          })}
+          placeholder={'닉네임'}
+        />
+        <p>{errors.nickname?.message}</p>
+        <input
+          {...register('password', {
+            required: VALIDATION_ERROR_MSG.EMPTY_PASSWORD,
+            pattern: {
+              value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+              message: VALIDATION_ERROR_MSG.INVALID_PASSWORD,
+            },
+          })}
+          type="password"
+          placeholder={'비밀번호'}
+        />
+        <p>{errors.password?.message}</p>
+        <input
+          {...register('confirmPassword', {
+            required: VALIDATION_ERROR_MSG.EMPTY_CONFIRM_PASSWORD,
+          })}
+          type="password"
+          placeholder={'비밀번호 확인'}
+        />
+        <p>{errors.confirmPassword?.message}</p>
+        <select {...register('year')}>
+          <option value="신입">신입</option>
+          <option value="1년차">1년차</option>
+          <option value="2년차">2년차</option>
+          <option value="3년차">3년차</option>
+          <option value="4년차">4년차</option>
+          <option value="5년차 이상">5년차 이상</option>
+          <option value="10년차 이상">10년차 이상</option>
+          <option value="20년차 이상">20년차 이상</option>
+        </select>
+        <p>{errors.year?.message}</p>
+        <input
+          {...register('workPosition', {
+            required: VALIDATION_ERROR_MSG.EMPTY_WORK_POSITION,
+          })}
+          placeholder={'직무'}
+        />
+        <p>{errors.workPosition?.message}</p>
+        <SignUpButton>{'회원가입'}</SignUpButton>
+      </SingUpForm>
+    </SignUpWrapper>
   );
 };
 
-const InputSection = styled.div`
+const SignUpWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -122,38 +116,50 @@ const InputSection = styled.div`
     width: 300px;
     margin: 0 auto;
   }
-  select {
-    font-size: 0.8rem;
+`;
+
+const SingUpForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  input {
+    font-size: 1rem;
     padding: 0.5em;
     border: none;
     border-radius: 0.3em;
-    height: 40px;
-    margin-bottom: 1em;
-    width: 100%;
+    width: calc(100% - 1em);
+    height: 30px;
+    margin-top: 20px;
+    background-color: ${({ theme }) => theme.backgrondLightColor};
+    color: ${({ theme }) => theme.textColor};
+    ::placeholder {
+      color: darkgray;
+      font-size: 0.8rem;
+    }
     :focus {
       outline: none;
     }
   }
-  option {
-    font-size: 1rem;
+  select {
+    height: 45px;
+    border: none;
+    margin-top: 20px;
   }
-  button {
-    width: 100%;
-    background-color: ${({ theme }) => theme.primaryColor};
-  }
-  input {
-    margin-bottom: 0.5em;
+  p {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    margin-left: 5px;
   }
 `;
 
-const Label = styled.p`
-  margin-bottom: 0.5em;
+const SignUpButton = styled.button`
+  background-color: ${({ theme }) => theme.primaryColor};
+  margin-bottom: 2em;
+  border: none;
+  height: 50px;
   color: white;
-  font-size: 0.8rem;
-  font-weight: 800;
-  ${media.tablet} {
-    color: ${({ theme }) => theme.pointColor};
-  }
+  border-radius: 3px;
+  margin-top: 20px;
 `;
 
 export default SignUpSecondStep;
