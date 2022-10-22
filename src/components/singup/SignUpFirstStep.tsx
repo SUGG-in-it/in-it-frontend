@@ -51,26 +51,24 @@ const SignUpFirstStep = () => {
   return (
     <SignUpWrapper>
       {!isSentCode ? (
-        <>
-          <SendEmailForm
-            onSubmit={handleSubmit((data) => {
-              mutationCheckEmail.mutate(data.email);
+        <SendEmailForm
+          onSubmit={handleSubmit((data) => {
+            mutationCheckEmail.mutate(data.email);
+          })}
+        >
+          <input
+            {...register('email', {
+              required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
+              pattern: {
+                value: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
+                message: VALIDATION_ERROR_MSG.INVALID_EMAIL,
+              },
             })}
-          >
-            <input
-              {...register('email', {
-                required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
-                pattern: {
-                  value: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
-                  message: VALIDATION_ERROR_MSG.INVALID_EMAIL,
-                },
-              })}
-              placeholder={'이메일'}
-            />
-            <p>{errors.email?.message}</p>
-            <SendButton>인증번호 전송</SendButton>
-          </SendEmailForm>
-        </>
+            placeholder={'이메일'}
+          />
+          <p>{errors.email?.message}</p>
+          <SendButton>인증번호 전송</SendButton>
+        </SendEmailForm>
       ) : (
         <SendEmailForm
           onSubmit={handleSubmit((data) => {
