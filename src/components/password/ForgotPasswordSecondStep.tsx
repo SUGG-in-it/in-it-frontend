@@ -1,12 +1,11 @@
 import { resetPassword } from '@/api/users';
-import useValidationInput from '@/hooks/useValidationInput';
 import { forgotPasswordState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
-import { validatePassword, validateRePassword, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 
 const ForgotPasswordSecondStep = () => {
   const router = useRouter();
