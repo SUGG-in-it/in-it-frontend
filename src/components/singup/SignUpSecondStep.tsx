@@ -71,6 +71,7 @@ const SignUpSecondStep = () => {
               message: VALIDATION_ERROR_MSG.INVALID_PASSWORD,
             },
           })}
+          type="password"
           placeholder={'비밀번호'}
         />
         <p>{errors.password?.message}</p>
@@ -78,6 +79,7 @@ const SignUpSecondStep = () => {
           {...register('confirmPassword', {
             required: VALIDATION_ERROR_MSG.EMPTY_CONFIRM_PASSWORD,
           })}
+          type="password"
           placeholder={'비밀번호 확인'}
         />
         <p>{errors.confirmPassword?.message}</p>
@@ -115,6 +117,7 @@ const SignUpWrapper = styled.div`
     margin: 0 auto;
   }
 `;
+
 const SingUpForm = styled.form`
   display: flex;
   flex-direction: column;

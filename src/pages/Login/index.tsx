@@ -1,21 +1,27 @@
-import Button from '@/components/common/button/Button';
-import ValidationInput from '@/components/common/Input/ValidationInput';
 import AccountLayout from '@/components/layouts/AccountLayout';
 import { useLoginMutation } from '@/hooks/queries/useUser';
-import useValidationInput, { UseValidationInputReturn } from '@/hooks/useValidationInput';
 import { loginState, userState } from '@/store/users';
-import { media } from '@/styles/mediaQuery';
-import { validateLoginEmail, validateLoginPwd, VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import jwt from 'jsonwebtoken';
+import { useForm } from 'react-hook-form';
+import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 
 const LoginPage = () => {
   const router = useRouter();
-  const email = useValidationInput('', validateLoginEmail);
-  const password = useValidationInput('', validateLoginPwd);
   const setUserState = useSetRecoilState(userState);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
 
   const setIsLogin = useSetRecoilState(loginState);
   const mutationLogin = useLoginMutation({
@@ -38,56 +44,37 @@ const LoginPage = () => {
     router.push('/password');
   };
 
-  const handleLogin = (email: UseValidationInputReturn, password: UseValidationInputReturn) => {
-    email.checkValidation();
-    password.checkValidation();
-    if (email.isValid && password.isValid) {
-      mutationLogin.mutate({ email: email.value, password: password.value });
-    }
-  };
-
   return (
     <AccountLayout>
-      <LoginContainer>
-        <ValidationInput
-          type={'email'}
-          placeholder={'이메일을 입력해주세요'}
-          value={email.value}
-          onChange={email.onChange}
-          isValid={email.isValid}
-          msg={VALIDATION_ERROR_MSG.EMPTY_EMAIL}
+      <LoginForm
+        onSubmit={handleSubmit((data) => {
+          mutationLogin.mutate({ email: data.email, password: data.password });
+        })}
+      >
+        <input
+          {...register('email', {
+            required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
+          })}
+          placeholder={'이메일'}
         />
-        <ValidationInput
-          type={'password'}
-          placeholder={'비밀번호를 입력해주세요'}
-          value={password.value}
-          onChange={password.onChange}
-          isValid={password.isValid}
-          msg={VALIDATION_ERROR_MSG.EMPTY_PASSWORD}
+        <p>{errors.email?.message}</p>
+        <input
+          {...register('password', {
+            required: VALIDATION_ERROR_MSG.EMPTY_PASSWORD,
+          })}
+          type="password"
+          placeholder={'비밀번호'}
         />
-        <LoginButton onClick={() => handleLogin(email, password)}>{'로그인'}</LoginButton>
+        <p>{errors.password?.message}</p>
+        <LoginButton>{'로그인'}</LoginButton>
         <SignUpContainer>
           <u onClick={moveToForgotPassword}>비밀번호 찾기</u>
           <u onClick={moveToSignUp}>회원가입</u>{' '}
         </SignUpContainer>
-      </LoginContainer>
+      </LoginForm>
     </AccountLayout>
   );
 };
-
-const LoginContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 20em;
-  ${media.mobile} {
-    width: 300px;
-  }
-  img {
-    width: 150px;
-    margin-bottom: 2em;
-  }
-`;
 
 const SignUpContainer = styled.div`
   justify-content: space-between;
@@ -102,9 +89,45 @@ const SignUpContainer = styled.div`
   }
 `;
 
-const LoginButton = styled(Button)`
+const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20em;
+  input {
+    font-size: 1rem;
+    padding: 0.5em;
+    border: none;
+    border-radius: 0.3em;
+    width: calc(100% - 1em);
+    height: 30px;
+    margin-top: 20px;
+    background-color: ${({ theme }) => theme.backgrondLightColor};
+    color: ${({ theme }) => theme.textColor};
+    ::placeholder {
+      color: darkgray;
+      font-size: 0.8rem;
+    }
+    :focus {
+      outline: none;
+    }
+  }
+  p {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+`;
+
+const LoginButton = styled.button`
   background-color: ${({ theme }) => theme.primaryColor};
-  border-radius: 0;
+  margin-bottom: 2em;
+  border: none;
+  height: 50px;
+  color: white;
+  border-radius: 3px;
+  margin-top: 20px;
 `;
 
 export default LoginPage;
