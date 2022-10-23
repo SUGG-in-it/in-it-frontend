@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
+import { useResetPasswordMutation } from '@/hooks/queries/useUser';
 
 const ForgotPasswordSecondStep = () => {
   const router = useRouter();
@@ -23,17 +24,19 @@ const ForgotPasswordSecondStep = () => {
     },
   });
 
-  const handleChangePassword = async () => {
-    await resetPassword({
-      email: forgotPassword.email,
-      password: getValues().password,
-    });
-    router.push('/login');
-  };
+  const resetPasswordMutation = useResetPasswordMutation({
+    onSuccess: () => {
+      router.push('/login');
+    },
+  });
 
   return (
     <ForgotPasswordWrapper>
-      <PasswordForm onSubmit={handleSubmit(handleChangePassword)}>
+      <PasswordForm
+        onSubmit={handleSubmit((data) => {
+          resetPasswordMutation.mutate({ email: forgotPassword.email, password: data.password });
+        })}
+      >
         <input
           {...register('password', {
             required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
