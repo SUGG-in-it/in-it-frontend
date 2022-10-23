@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
@@ -60,7 +61,7 @@ const QuestionSection = ({ question }: { question: Question }) => {
         <DetailRow>
           <NickName>{question.nickname}</NickName>
           <span> · </span>
-          <Date>{question.updateDate}</Date>
+          <Date>{dayjs(question.updateDate).format('YYYY-MM-DD HH:mm:ss')}</Date>
         </DetailRow>
         <GrayLine />
         <SectionRow>

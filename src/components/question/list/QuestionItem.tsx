@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import Tags from '@/components/common/tag/Tags';
+import dayjs from 'dayjs';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
@@ -40,7 +41,7 @@ const QuestionItem = ({ questionId, type, nickname, updateDate, title, content, 
           <BottomSection>
             <span>{`작성자  ${nickname}`}</span>
             <span> · </span>
-            <span>{updateDate}</span>
+            <span>{dayjs(updateDate).format('YYYY-MM-DD HH:mm:ss')}</span>
           </BottomSection>
         </LeftSection>
         <RightSection>
