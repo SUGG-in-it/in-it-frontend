@@ -9,3 +9,5 @@ export const resetPassword = async (resetPasswrodParams: ResetPasswrodRequestBod
   await PUT('/users/password', resetPasswrodParams);
 
 export const duplicateCheckEmail = (email: string) => POST('/users/duplicate-email', { email });
+
+export const duplicateCheckNickname = (nickname: string) => POST('/users/duplicate-nickname', { nickname });

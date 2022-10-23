@@ -1,5 +1,5 @@
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
-import { useJoinMutation } from '@/hooks/queries/useUser';
+import { useJoinMutation, useNicknameCheckMutation } from '@/hooks/queries/useUser';
 import { signUpState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
@@ -22,7 +22,7 @@ const SignUpSecondStep = () => {
       password: '',
       confirmPassword: '',
       nickname: '',
-      year: '',
+      year: '신입',
       workPosition: '',
     },
   });
@@ -35,8 +35,18 @@ const SignUpSecondStep = () => {
         email: '',
       });
     },
-    onError: () => {
-      console.log('error');
+  });
+
+  const mutationCheckNickname = useNicknameCheckMutation({
+    onSuccess: () => {
+      const data = getValues();
+      mutationJoin.mutate({
+        email: signUp.email,
+        password: data.password,
+        nickname: data.nickname,
+        year: data.year || '신입',
+        workPosition: data.workPosition,
+      });
     },
   });
 
@@ -44,13 +54,7 @@ const SignUpSecondStep = () => {
     <SignUpWrapper>
       <SingUpForm
         onSubmit={handleSubmit((data) => {
-          mutationJoin.mutate({
-            email: data.email,
-            password: data.password,
-            nickname: data.nickname,
-            year: data.year,
-            workPosition: data.workPosition,
-          });
+          mutationCheckNickname.mutate(data.nickname);
         })}
       >
         <input
@@ -86,7 +90,10 @@ const SignUpSecondStep = () => {
         />
         <p>{errors.confirmPassword?.message}</p>
         <select {...register('year')}>
-          <option value="신입">신입</option>
+          <option disabled>경력을 선택해주세요.</option>
+          <option value="신입" selected>
+            신입
+          </option>
           <option value="1년차">1년차</option>
           <option value="2년차">2년차</option>
           <option value="3년차">3년차</option>

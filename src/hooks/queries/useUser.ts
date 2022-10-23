@@ -1,6 +1,6 @@
 import { CustomError } from '@/api/config/error';
 import { HttpStatusCode } from '@/api/config/status';
-import { duplicateCheckEmail, join, login } from '@/api/users';
+import { duplicateCheckEmail, duplicateCheckNickname, join, login } from '@/api/users';
 import { errorToast, successToast } from '@/utils/toast';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { useMutation } from '@tanstack/react-query';
@@ -47,6 +47,20 @@ export const useEmailCheckMutation = ({ onSuccess, onError }: MutationCallbacks 
       onError && onError();
       if (error.statusCode === HttpStatusCode.CONFLICT) {
         errorToast('이미 가입된 메일입니다.');
+      }
+    },
+  });
+};
+
+export const useNicknameCheckMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+  return useMutation(duplicateCheckNickname, {
+    onSuccess: () => {
+      onSuccess && onSuccess();
+    },
+    onError: (error: CustomError) => {
+      onError && onError();
+      if (error.statusCode === HttpStatusCode.CONFLICT) {
+        errorToast('이미 가입된 닉네임 입니다.');
       }
     },
   });
