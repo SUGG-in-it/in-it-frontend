@@ -1,10 +1,8 @@
 import { POST } from '@/api/config/base';
-import { VerifyCodeRequestBody } from '@/types/request/auth';
+import { SendEmailRequestBody, VerifyCodeRequestBody } from '@/types/request/auth';
 
-//TODO: token check 하는 api 추가하기
-export const verifyToken = async () => await POST('', {});
-
-export const sendCode = async (email: string) => await POST('/auth/issue', { email });
+export const sendCode = async (sendEmailRequestBody: SendEmailRequestBody) =>
+  await POST('/auth/issue', sendEmailRequestBody);
 
 export const verifyCode = async (verifyCodeParams: VerifyCodeRequestBody) =>
   await POST('auth/verify', verifyCodeParams);
