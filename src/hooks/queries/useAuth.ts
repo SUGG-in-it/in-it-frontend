@@ -1,4 +1,4 @@
-import { verifyCode } from '@/api/auth';
+import { sendCode, verifyCode } from '@/api/auth';
 import { CustomError } from '@/api/config/error';
 import { HttpStatusCode } from '@/api/config/status';
 import { errorToast, successToast } from '@/utils/toast';
@@ -16,6 +16,20 @@ export const useVerifyMutation = ({ onSuccess, onError }: MutationCallbacks = {}
       if (error.statusCode === HttpStatusCode.UNAUTHORIZED) {
         errorToast('인증번호가 올바르지 않습니다.');
       }
+    },
+    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
+  });
+};
+
+export const useSendMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
+  return useMutation(sendCode, {
+    onSuccess: () => {
+      onSuccess && onSuccess();
+      successToast(`이메일을 전송하였습니다.`);
+    },
+    onError: (error: CustomError) => {
+      onError && onError();
+      successToast(`이메일을 전송을 실패하였습니다.`);
     },
     useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });

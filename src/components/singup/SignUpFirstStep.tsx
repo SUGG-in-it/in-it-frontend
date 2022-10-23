@@ -1,14 +1,12 @@
-import { sendCode } from '@/api/auth';
-import { useVerifyMutation } from '@/hooks/queries/useAuth';
+import { useSendMutation, useVerifyMutation } from '@/hooks/queries/useAuth';
 import { useEmailCheckMutation } from '@/hooks/queries/useUser';
 import { signUpState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
-import { successToast } from '@/utils/toast';
-import { VALIDATION_ERROR_MSG } from '@/utils/validations';
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 
 const SignUpFirstStep = () => {
   const [isSentCode, setIsSentCode] = useState(false);
@@ -34,6 +32,7 @@ const SignUpFirstStep = () => {
 
   const mutationVerifyCode = useVerifyMutation({
     onSuccess: () => {
+      console.log(getValues().email);
       setSignUp({
         step: 2,
         email: getValues().email,
@@ -41,11 +40,15 @@ const SignUpFirstStep = () => {
     },
   });
 
+  const mutationSendCode = useSendMutation({
+    onSuccess: () => {
+      setIsSentCode(true);
+    },
+  });
+
   const sendEmail = () => {
     const email = getValues().email;
-    sendCode(email);
-    successToast(`${email}로 이메일을 전송하였습니다.`);
-    setIsSentCode(true);
+    mutationSendCode.mutate({ email, type: 'join' });
   };
 
   return (
