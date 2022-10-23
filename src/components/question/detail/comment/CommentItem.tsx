@@ -3,6 +3,7 @@ import { useDeleteCommentMutation } from '@/hooks/queries/useComments';
 import { userState } from '@/store/users';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
 interface CommentProps {
   commentId: number;
@@ -23,7 +24,7 @@ const CommentItem = ({ commentId, nickname, updatedAt, content, userId }: Commen
     <AnswerItemWrapper>
       <AnswerHeader>
         <NickName>{`작성자 ${nickname}`}</NickName>
-        <Date>{updatedAt}</Date>
+        <Date>{dayjs(updatedAt).format('YYYY-MM-DD HH:mm:ss')}</Date>
       </AnswerHeader>
       <Content>{content}</Content>
       {user.id === userId && <SettingButton onClick={handleDeleteComment}>{'삭제'}</SettingButton>}
