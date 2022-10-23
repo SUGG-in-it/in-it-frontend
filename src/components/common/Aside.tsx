@@ -8,17 +8,8 @@ import Tags from '@/components/common/tag/Tags';
 import { usePopularTagsQuery } from '@/hooks/queries/useTags';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Suspense } from 'react';
-import { FiRotateCcw } from 'react-icons/fi';
-
-const QuestionsFallback = ({ error, resetErrorBoundary }) => (
-  <AsideContainer>
-    <TagListWrapper>
-      <p>인기 태그를 불러오는데 실패했어요 😭😭😭 </p>
-    </TagListWrapper>
-  </AsideContainer>
-);
-
-const QuestionsLoading = () => <div />;
+import TagListSkeleton from '@/components/common/skelton/TagListSkeleton';
+import TagsFallback from '@/components/common/fallback/TagListFallback';
 
 const MyInfo = () => {
   const router = useRouter();
@@ -49,7 +40,7 @@ const MyInfo = () => {
       {isLogin ? (
         <>
           <Header>
-            <NickName>{`안녕하세요! ${user.nickname}`}</NickName>
+            <NickName>{`안녕하세요! ${user.nickname} 님`}</NickName>
             <LogoutButton onClick={handleLogoutClick}>{'로그아웃'}</LogoutButton>
           </Header>
           <ProfileButton onClick={() => handleProfileClick(user.nickname)}>{'프로필 바로가기 >'}</ProfileButton>
@@ -80,8 +71,8 @@ const TagList = () => {
 const Aside = () => (
   <AsideContainer>
     <MyInfo />
-    <ErrorBoundary FallbackComponent={QuestionsFallback}>
-      <Suspense fallback={<QuestionsLoading />}>
+    <ErrorBoundary FallbackComponent={TagsFallback}>
+      <Suspense fallback={<TagListSkeleton />}>
         <TagList />
       </Suspense>
     </ErrorBoundary>
