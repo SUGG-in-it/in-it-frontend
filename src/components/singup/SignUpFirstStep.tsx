@@ -32,7 +32,6 @@ const SignUpFirstStep = () => {
 
   const mutationVerifyCode = useVerifyMutation({
     onSuccess: () => {
-      console.log(getValues().email);
       setSignUp({
         step: 2,
         email: getValues().email,

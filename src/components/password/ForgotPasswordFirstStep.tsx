@@ -1,10 +1,7 @@
-import { sendCode } from '@/api/auth';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
-import { useVerifyMutation } from '@/hooks/queries/useAuth';
-import { useEmailCheckMutation } from '@/hooks/queries/useUser';
+import { useSendMutation, useVerifyMutation } from '@/hooks/queries/useAuth';
 import { forgotPasswordState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
-import { successToast } from '@/utils/toast';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState } from 'recoil';
@@ -35,17 +32,15 @@ const ForgotPasswordFirstStep = () => {
     },
   });
 
-  const mutationCheckEmail = useEmailCheckMutation({
+  const mutationSendCode = useSendMutation({
     onSuccess: () => {
-      sendEmail();
+      setIsSentCode(true);
     },
   });
 
   const sendEmail = () => {
     const email = getValues().email;
-    sendCode(email);
-    successToast(`${email}로 이메일을 전송하였습니다.`);
-    setIsSentCode(true);
+    mutationSendCode.mutate({ email, type: 'password' });
   };
 
   return (
@@ -54,7 +49,7 @@ const ForgotPasswordFirstStep = () => {
         <>
           <SendEmailForm
             onSubmit={handleSubmit((data) => {
-              mutationCheckEmail.mutate(data.email);
+              mutationSendCode.mutate({ email: data.email, type: 'password' });
             })}
           >
             <input
