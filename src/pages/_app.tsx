@@ -8,9 +8,21 @@ import { Toaster } from 'react-hot-toast';
 import CriticalErrorBoundary from '@/components/common/errorrBoundary/CriticalErrorBoundary';
 import RootErrorBoundary from '@/components/common/errorrBoundary/RootErrorBoundary';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
+  const [showChild, setShowChild] = useState(false);
+
+  useEffect(() => {
+    setShowChild(true);
+  }, []);
+
+  if (!showChild) {
+    return null;
+  }
+
   const queryClient = new QueryClient();
+
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
@@ -22,7 +34,7 @@ function MyApp({ Component, pageProps }) {
                 <Head>
                   <title>코드리뷰 사이트 : init()</title>
                 </Head>
-                <Component {...pageProps} />
+                {typeof window === 'undefined' ? <></> : <Component {...pageProps} />}
                 <Toaster position="top-right" />
               </CriticalErrorBoundary>
             </RootErrorBoundary>
