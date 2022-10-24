@@ -1,4 +1,3 @@
-import { resetPassword } from '@/api/users';
 import { forgotPasswordState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
 import { useRecoilValue } from 'recoil';
@@ -7,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import { useResetPasswordMutation } from '@/hooks/queries/useUser';
+import APIButton from '@/components/common/button/APIButton';
 
 const ForgotPasswordSecondStep = () => {
   const router = useRouter();
@@ -24,7 +24,7 @@ const ForgotPasswordSecondStep = () => {
     },
   });
 
-  const resetPasswordMutation = useResetPasswordMutation({
+  const mutationResetPassword = useResetPasswordMutation({
     onSuccess: () => {
       router.push('/login');
     },
@@ -32,11 +32,7 @@ const ForgotPasswordSecondStep = () => {
 
   return (
     <ForgotPasswordWrapper>
-      <PasswordForm
-        onSubmit={handleSubmit((data) => {
-          resetPasswordMutation.mutate({ email: forgotPassword.email, password: data.password });
-        })}
-      >
+      <PasswordForm>
         <input
           {...register('password', {
             required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
@@ -58,7 +54,14 @@ const ForgotPasswordSecondStep = () => {
           placeholder={'비밀번호 확인'}
         />
         <p>{errors.confirmPassword?.message}</p>
-        <ResetButton>{'비밀번호 변경'}</ResetButton>
+        <ResetButton
+          onClick={handleSubmit((data) => {
+            mutationResetPassword.mutate({ email: forgotPassword.email, password: data.password });
+          })}
+          isLoading={mutationResetPassword.isLoading}
+        >
+          {'비밀번호 변경'}
+        </ResetButton>
       </PasswordForm>
     </ForgotPasswordWrapper>
   );
@@ -104,12 +107,10 @@ const PasswordForm = styled.form`
   }
 `;
 
-const ResetButton = styled.button`
-  background-color: ${({ theme }) => theme.primaryColor};
+const ResetButton = styled(APIButton)`
   margin-bottom: 2em;
   border: none;
   height: 50px;
-  color: white;
   border-radius: 3px;
   margin-top: 20px;
 `;
