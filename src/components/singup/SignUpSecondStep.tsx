@@ -1,3 +1,4 @@
+import APIButton from '@/components/common/button/APIButton';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import { useJoinMutation, useNicknameCheckMutation } from '@/hooks/queries/useUser';
 import { signUpState } from '@/store/users';
@@ -52,11 +53,7 @@ const SignUpSecondStep = () => {
 
   return (
     <SignUpWrapper>
-      <SingUpForm
-        onSubmit={handleSubmit((data) => {
-          mutationCheckNickname.mutate(data.nickname);
-        })}
-      >
+      <SingUpForm>
         <input
           {...register('nickname', {
             required: VALIDATION_ERROR_MSG.EMPTY_NICKNAME,
@@ -110,7 +107,14 @@ const SignUpSecondStep = () => {
           placeholder={'직무'}
         />
         <p>{errors.workPosition?.message}</p>
-        <SignUpButton>{'회원가입'}</SignUpButton>
+        <SignUpButton
+          onClick={handleSubmit((data) => {
+            mutationCheckNickname.mutate(data.nickname);
+          })}
+          isLoading={mutationCheckNickname.isLoading}
+        >
+          {'회원가입'}
+        </SignUpButton>
       </SingUpForm>
     </SignUpWrapper>
   );
@@ -161,12 +165,10 @@ const SingUpForm = styled.form`
   }
 `;
 
-const SignUpButton = styled.button`
-  background-color: ${({ theme }) => theme.primaryColor};
+const SignUpButton = styled(APIButton)`
   margin-bottom: 2em;
   border: none;
   height: 50px;
-  color: white;
   border-radius: 3px;
   margin-top: 20px;
 `;

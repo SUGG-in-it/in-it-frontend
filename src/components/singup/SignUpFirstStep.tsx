@@ -7,6 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
+import APIButton from '@/components/common/button/APIButton';
 
 const SignUpFirstStep = () => {
   const [isSentCode, setIsSentCode] = useState(false);
@@ -53,11 +54,7 @@ const SignUpFirstStep = () => {
   return (
     <SignUpWrapper>
       {!isSentCode ? (
-        <SendEmailForm
-          onSubmit={handleSubmit((data) => {
-            mutationCheckEmail.mutate(data.email);
-          })}
-        >
+        <SendEmailForm>
           <input
             {...register('email', {
               required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
@@ -69,14 +66,17 @@ const SignUpFirstStep = () => {
             placeholder={'이메일'}
           />
           <p>{errors.email?.message}</p>
-          <SendButton>인증번호 전송</SendButton>
+          <SendButton
+            onClick={handleSubmit((data) => {
+              mutationCheckEmail.mutate(data.email);
+            })}
+            isLoading={mutationCheckEmail.isLoading || mutationSendCode.isLoading}
+          >
+            인증번호 전송
+          </SendButton>
         </SendEmailForm>
       ) : (
-        <SendEmailForm
-          onSubmit={handleSubmit((data) => {
-            mutationVerifyCode.mutate({ email: data.email, code: data.code });
-          })}
-        >
+        <SendEmailForm>
           <input
             {...register('code', {
               required: VALIDATION_ERROR_MSG.EMPTY_CODE,
@@ -84,7 +84,14 @@ const SignUpFirstStep = () => {
             placeholder={'인증번호'}
           />
           <p>{errors.code?.message}</p>
-          <SendButton>확인</SendButton>
+          <VerifyButton
+            onClick={handleSubmit((data) => {
+              mutationVerifyCode.mutate({ email: data.email, code: data.code });
+            })}
+            isLoading={mutationVerifyCode.isLoading}
+          >
+            확인
+          </VerifyButton>
           <ResendContainer>
             <span>메일을 받지 못하셨습니까?</span>
             <u onClick={sendEmail}>재전송 하기</u>
@@ -152,12 +159,18 @@ const SendEmailForm = styled.form`
   }
 `;
 
-const SendButton = styled.button`
-  background-color: ${({ theme }) => theme.primaryColor};
+const SendButton = styled(APIButton)`
   margin-bottom: 2em;
   border: none;
   height: 50px;
-  color: white;
+  border-radius: 3px;
+  margin-top: 20px;
+`;
+
+const VerifyButton = styled(APIButton)`
+  margin-bottom: 2em;
+  border: none;
+  height: 50px;
   border-radius: 3px;
   margin-top: 20px;
 `;
