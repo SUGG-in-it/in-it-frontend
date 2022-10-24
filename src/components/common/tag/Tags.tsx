@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Tags = ({ tagList }: { tagList: string[] }) => {
   return (
     <div>
-      {tagList.map((tag) => (
+      {tagList?.map((tag) => (
         <TagWrapper key={tag}>
           <span>{`# ${tag}`}</span>
         </TagWrapper>

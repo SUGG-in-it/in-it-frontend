@@ -14,7 +14,7 @@ const TagsWithDeleteButton = ({
 
   return (
     <TagsContainer>
-      {tagList.map((tag) => (
+      {tagList?.map((tag) => (
         <TagWrapper key={tag}>
           <span>{`# ${tag}`}</span>
           <span onClick={() => handleDeleteClick(tag)}>x</span>
