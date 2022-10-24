@@ -24,7 +24,7 @@ const ButtonWrapper = styled.button<{ isLoading: boolean }>`
 
 const APIButton = ({ children, onClick, className, isLoading }: ButtonProps) => {
   return (
-    <ButtonWrapper {...{ className, isLoading, onClick }} type={'button'}>
+    <ButtonWrapper {...{ className, isLoading, onClick }} disabled={isLoading} type={'button'}>
       {children}
     </ButtonWrapper>
   );
