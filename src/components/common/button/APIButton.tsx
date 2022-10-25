@@ -1,3 +1,4 @@
+import PulseLoading from '@/components/common/loading/PulseLoading';
 import styled from 'styled-components';
 
 export interface ButtonProps {
@@ -9,7 +10,7 @@ export interface ButtonProps {
 
 const ButtonWrapper = styled.button<{ isLoading: boolean }>`
   border: none;
-  color: ${({ isLoading }) => (isLoading ? '#ADB5BD' : '#fff')};
+  color: #fff;
   background-color: ${({ isLoading }) => (isLoading ? '#DEE2E6' : '#4d7cfe')};
   font-size: 1rem;
   padding: 0.5em;
@@ -24,9 +25,11 @@ const ButtonWrapper = styled.button<{ isLoading: boolean }>`
 
 const APIButton = ({ children, onClick, className, isLoading }: ButtonProps) => {
   return (
-    <ButtonWrapper {...{ className, isLoading, onClick }} disabled={isLoading} type={'button'}>
-      {children}
-    </ButtonWrapper>
+    <>
+      <ButtonWrapper {...{ className, isLoading, onClick }} disabled={isLoading} type={'button'}>
+        {isLoading ? <PulseLoading /> : children}
+      </ButtonWrapper>
+    </>
   );
 };
 
