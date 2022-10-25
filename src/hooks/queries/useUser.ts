@@ -8,11 +8,11 @@ import { useMutation } from '@tanstack/react-query';
 export const useLoginMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(login, {
     onSuccess: (data: any) => {
-      onSuccess && onSuccess();
       successToast('로그인이 되었습니다. 환영합니다!');
       const { accessToken, refreshToken } = data.data;
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
+      onSuccess && onSuccess();
     },
     onError: (error: CustomError) => {
       onError && onError();

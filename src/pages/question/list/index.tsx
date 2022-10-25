@@ -19,9 +19,7 @@ const QuestionListPage = () => {
       const { count } = await getQuestionPage({ size: PAGINATION_SIZE.QUESTION_LIST, type: queryStatus });
       setTotalPage(count);
     }
-    if (queryStatus) {
-      fetchQuestionPage();
-    }
+    fetchQuestionPage();
   }, [queryStatus]);
 
   const handlePageClick = (number: number) => {
