@@ -8,11 +8,8 @@ import {
 import { QuestionsPageResponseBody } from '@/types/response/questions';
 
 export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) => {
-  return await GET('/questions', qusetionsRequestBody)
-    .then((res) => res.data)
-    .catch((e) => {
-      return e;
-    });
+  const { data } = await GET('/questions', qusetionsRequestBody);
+  return data;
 };
 
 export const getUserQusetions = async (userQusetionsRequestBody: UserQusetionsRequestBody) => {

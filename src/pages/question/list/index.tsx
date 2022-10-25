@@ -29,18 +29,14 @@ const QuestionListPage = () => {
   };
 
   return (
-    <>
-      <MainLayout>
-        <>
-          <QuestionListContainer>
-            <ContentSection>
-              <QuestionListSection currentPage={currentPage} />
-            </ContentSection>
-            <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
-          </QuestionListContainer>
-        </>
-      </MainLayout>
-    </>
+    <MainLayout>
+      <QuestionListContainer>
+        <ContentSection>
+          <QuestionListSection currentPage={currentPage} />
+        </ContentSection>
+        <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
+      </QuestionListContainer>
+    </MainLayout>
   );
 };
 
