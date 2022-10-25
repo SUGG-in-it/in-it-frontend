@@ -25,6 +25,8 @@ const BannerContainer = styled.div`
   padding-top: 3em;
   justify-content: space-between;
   padding-bottom: 3em;
+  width: 80vw;
+  max-width: 850px;
 
   .banner-img1 {
     width: 20vw;

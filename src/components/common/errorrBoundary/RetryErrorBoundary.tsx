@@ -42,6 +42,7 @@ const RetryBox = styled.div`
   flex-direction: column;
   display: flex;
   padding: 2em;
+  margin-top: 30px;
   ${media.tablet} {
     width: 80vw;
   }

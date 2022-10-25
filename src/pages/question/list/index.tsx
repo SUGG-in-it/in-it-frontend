@@ -1,7 +1,7 @@
 import { getQuestionPage } from '@/api/questions';
 import Pagination from '@/components/common/Pagination';
 import MainLayout from '@/components/layouts/MainLayout';
-import QuestionListSection from '@/components/question/list/QustionListSection';
+import QuestionListSection from '@/components/question/list/qustionListSection';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';

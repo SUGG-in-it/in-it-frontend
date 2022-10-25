@@ -32,6 +32,7 @@ const ContentSection = styled.div`
   flex-direction: row;
   justify-content: center;
   background-color: white;
+  min-height: 80vh;
 `;
 
 export default MainLayout;

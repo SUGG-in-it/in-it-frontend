@@ -1,14 +1,13 @@
-import QuestionDetailFallback from '@/components/common/fallback/QuestionDetailFallback';
 import GrayLine from '@/components/common/GreyLine';
-import QuestionDetailSkeleton from '@/components/common/skelton/QuestionDetailSkeleton';
+import QuestionDetailSkeleton from '@/components/question/detail/qusetion/questionSection/index.skeleton';
 import QuestionLayout from '@/components/layouts/QuestionLayout';
 import AnswerSection from '@/components/question/detail/answer/AnswerSection';
-import QuestionSection from '@/components/question/detail/qusetion/QuestionSection';
+import QuestionSection from '@/components/question/detail/qusetion/questionSection';
 import { useQuestionQuery } from '@/hooks/queries/useQuestion';
 import { GetServerSideProps } from 'next';
 import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
+import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
 
 const QuestionDetail = ({ id }: { id: number }) => {
   const { data: question } = useQuestionQuery(id);
@@ -25,11 +24,11 @@ const QuestionDetail = ({ id }: { id: number }) => {
 const QuestionDetailPage = ({ id }: { id: number }) => {
   return (
     <QuestionLayout>
-      <ErrorBoundary FallbackComponent={QuestionDetailFallback}>
+      <RetryErrorBoundary>
         <Suspense fallback={<QuestionDetailSkeleton />}>
           <QuestionDetail id={id} />
         </Suspense>
-      </ErrorBoundary>
+      </RetryErrorBoundary>
     </QuestionLayout>
   );
 };

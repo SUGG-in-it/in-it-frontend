@@ -7,7 +7,7 @@ import GrayLine from '@/components/common/GreyLine';
 import { useRouter } from 'next/router';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import QuestionSearchSection from '@/components/question/list/QuestionSearchSection';
-import QuestionListSkeleton from '@/components/question/list/QustionListSection/index.skeleton';
+import QuestionListSkeleton from '@/components/question/list/qustionListSection/index.skeleton';
 import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
 
 const Questions = ({ currentPage }: { currentPage: number }) => {
