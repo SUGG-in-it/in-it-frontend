@@ -4,12 +4,11 @@ import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { successToast } from '@/utils/toast';
-import Tags from '@/components/common/tag/Tags';
+import Tags from '@/components/common/tags/Tags';
 import { usePopularTagsQuery } from '@/hooks/queries/useTags';
-import { ErrorBoundary } from 'react-error-boundary';
 import { Suspense } from 'react';
-import TagListSkeleton from '@/components/common/skelton/TagListSkeleton';
-import TagsFallback from '@/components/common/fallback/TagListFallback';
+import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import TagListSkeleton from '@/components/common/tagsWithDeleteButton/index.skeleton';
 
 const MyInfo = () => {
   const router = useRouter();
@@ -67,17 +66,18 @@ const TagList = () => {
 const Aside = () => (
   <AsideContainer>
     <MyInfo />
-    <ErrorBoundary FallbackComponent={TagsFallback}>
+    <RetryErrorBoundary>
       <Suspense fallback={<TagListSkeleton />}>
         <TagList />
       </Suspense>
-    </ErrorBoundary>
+    </RetryErrorBoundary>
   </AsideContainer>
 );
 
 const AsideContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 3vw;
 `;
 
 const Header = styled.div`
@@ -109,10 +109,8 @@ const NickName = styled.p`
 `;
 
 const MypageWrapper = styled.div`
-  width: 250px;
   height: fit-content;
   margin-top: 5em;
-  margin-left: 3vw;
   padding: 1em 0.5em 1em 0.8em;
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   background-color: ${({ theme }) => theme.backgrondLightColor};
@@ -130,7 +128,6 @@ const MypageWrapper = styled.div`
 const TagListWrapper = styled.ul`
   width: 250px;
   height: fit-content;
-  margin-left: 3vw;
   padding: 1em 0.5em 1em 0.8em;
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   background-color: ${({ theme }) => theme.backgrondLightColor};

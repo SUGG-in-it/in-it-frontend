@@ -15,7 +15,7 @@ import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { ErrorBoundary } from 'react-error-boundary';
 import AutoComplete from '@/components/common/AutoComplete';
-import TagsWithDeleteButton from '@/components/common/tag/TagsWithDeleteButton';
+import TagsWithDeleteButton from '@/components/common/tagsWithDeleteButton';
 import APIButton from '@/components/common/button/APIButton';
 
 const QuestionsFallback = ({ error, resetErrorBoundary }) => (

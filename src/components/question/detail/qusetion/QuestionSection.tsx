@@ -1,6 +1,6 @@
 import Button from '@/components/common/button/Button';
 import GrayLine from '@/components/common/GreyLine';
-import Tags from '@/components/common/tag/Tags';
+import Tags from '@/components/common/tags/Tags';
 import { useDeleteQuestionMutation } from '@/hooks/queries/useQuestion';
 import { userState } from '@/store/users';
 import { QLabel } from '@/styles/commonStyles';

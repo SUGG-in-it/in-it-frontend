@@ -2,7 +2,7 @@ import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
-import Tags from '@/components/common/tag/Tags';
+import Tags from '@/components/common/tags/Tags';
 import dayjs from 'dayjs';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });

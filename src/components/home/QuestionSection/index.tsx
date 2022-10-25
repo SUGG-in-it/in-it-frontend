@@ -2,11 +2,10 @@ import QuestionItem from '@/components/home/QuestionItem';
 import { useQuestionsQuery } from '@/hooks/queries/useQuestion';
 import { media } from '@/styles/mediaQuery';
 import { Suspense, useEffect, useState } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
-import MainQuestionsSkeleton from '@/components/common/skelton/MainQuestionSkeleton';
-import MainQuestionFallback from '@/components/common/fallback/MainQuestionFallback';
+import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import QuestionListSkeleton from '@/components/home/QuestionSection/index.skeleton';
 
 const Questions = () => {
   const [leftSectionQuestions, setLeftSectionQuestions] = useState([]);
@@ -41,11 +40,11 @@ const Questions = () => {
 
 const QuestionSection = () => {
   return (
-    <ErrorBoundary FallbackComponent={MainQuestionFallback}>
-      <Suspense fallback={<MainQuestionsSkeleton />}>
+    <RetryErrorBoundary>
+      <Suspense fallback={<QuestionListSkeleton />}>
         <Questions />
       </Suspense>
-    </ErrorBoundary>
+    </RetryErrorBoundary>
   );
 };
 
