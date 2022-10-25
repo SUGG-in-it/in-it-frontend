@@ -1,7 +1,5 @@
 import { useQuestionsQuery } from '@/hooks/queries/useQuestion';
-
 import { Suspense, useEffect, useState } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import StatusBar from '@/components/question/list/StatusBar';
 import QuestionItem from '@/components/question/list/QuestionItem';
@@ -9,8 +7,8 @@ import GrayLine from '@/components/common/GreyLine';
 import { useRouter } from 'next/router';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import QuestionSearchSection from '@/components/question/list/QuestionSearchSection';
-import QuestionListSkeleton from '@/components/common/skelton/QuestionListSkelton';
-import QuestionListFallback from '@/components/common/fallback/QuestionListFallback';
+import QuestionListSkeleton from '@/components/question/list/QustionListSection/index.skeleton';
+import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
 
 const Questions = ({ currentPage }: { currentPage: number }) => {
   const [status, setStatus] = useState('total');
@@ -45,21 +43,22 @@ const QuestionsSection = ({ currentPage }: { currentPage: number }) => {
     <QuestionListContainer>
       <StatusBar />
       <QuestionSearchSection />
-      <ErrorBoundary FallbackComponent={QuestionListFallback}>
+      <RetryErrorBoundary>
         <Suspense fallback={<QuestionListSkeleton />}>
           <Questions currentPage={currentPage} />
         </Suspense>
-      </ErrorBoundary>
+      </RetryErrorBoundary>
     </QuestionListContainer>
   );
 };
 
-const QuestionListContainer = styled.div``;
-
-const QuestionListWrapper = styled.ul`
+const QuestionListContainer = styled.div`
   max-width: 700px;
   width: 80vw;
   margin: 0 auto;
+`;
+
+const QuestionListWrapper = styled.ul`
   padding-top: 50px;
 `;
 
