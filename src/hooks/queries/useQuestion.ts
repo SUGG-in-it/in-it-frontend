@@ -64,8 +64,8 @@ export const useMainContentQueries = () => {
 export const useUploadQuestionMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(uploadQuestion, {
     onSuccess: () => {
-      onSuccess && onSuccess();
       successToast('글 작성이 완료되었습니다. 🥰');
+      onSuccess && onSuccess();
     },
     onError: (error: CustomError) => {
       onError && onError();
