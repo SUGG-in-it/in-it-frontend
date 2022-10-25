@@ -67,7 +67,7 @@ const QuestionSection = ({ question }: { question: Question }) => {
         <SectionRow>
           <ContentViewer content={question.content} />
         </SectionRow>
-        <Tags tagList={question.tagList.split(',')} />
+        <Tags tagList={question?.tagList?.split(',')} />
       </QuestionSectionWrapper>
     </QuestionSectionContainer>
   );

@@ -1,4 +1,5 @@
 import { useQuestionsQuery } from '@/hooks/queries/useQuestion';
+
 import { Suspense, useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';

@@ -44,7 +44,6 @@ export const useUserQuestionsQuery = (userQusetionsRequestBody: UserQusetionsReq
 export const useQuestionQuery = (questionId: number) => {
   const data = useQuery<QuestionResponseBody>([KEYS.QUESTION], () => getQuestion(questionId), {
     suspense: true,
-    retry: 0,
   });
   return data;
 };
