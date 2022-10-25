@@ -1,5 +1,5 @@
-import { media } from '@/styles/mediaQuery';
-import { FiRotateCcw } from 'react-icons/fi';
+import { RetryBox } from '@/components/common/fallback/RetryBox.style';
+import { RetryButton } from '@/components/common/fallback/RetryButton.style';
 import styled from 'styled-components';
 
 const MainQuestionFallback = ({ error, resetErrorBoundary }) => (
@@ -14,34 +14,6 @@ const MainQuestionFallback = ({ error, resetErrorBoundary }) => (
 const QuestionContainer = styled.div`
   background-color: white;
   padding-bottom: 6em;
-`;
-
-const RetryBox = styled.div`
-  max-width: 850px;
-  width: 80vw;
-  height: fit-content;
-  margin: 0 auto;
-  background-color: ${({ theme }) => theme.backgrondLightColor};
-  border: 1px solid ${({ theme }) => theme.greyLineColor};
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  display: flex;
-  padding: 3em;
-  ${media.tablet} {
-    width: 80vw;
-  }
-  ${media.mobile} {
-    padding: 1em;
-  }
-`;
-
-const RetryButton = styled(FiRotateCcw)`
-  width: 30px;
-  height: 30px;
-  margin-top: 30px;
-  color: ${({ theme }) => theme.greyLineColor};
-  cursor: pointer;
 `;
 
 export default MainQuestionFallback;

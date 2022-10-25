@@ -1,16 +1,8 @@
-import { RetryButton } from '@/components/common/fallback/RetryButton.style';
 import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
 
-const QuestionListFallback = ({ error, resetErrorBoundary }) => (
-  <RetryBox>
-    <p>Q&A를 불러오는데 실패했어요 😭😭😭 </p>
-    <RetryButton onClick={() => resetErrorBoundary()} />
-  </RetryBox>
-);
-
-const RetryBox = styled.div`
-  max-width: 700px;
+export const RetryBox = styled.div`
+  max-width: 850px;
   width: 80vw;
   height: fit-content;
   margin: 0 auto;
@@ -28,5 +20,3 @@ const RetryBox = styled.div`
     padding: 1em;
   }
 `;
-
-export default QuestionListFallback;
