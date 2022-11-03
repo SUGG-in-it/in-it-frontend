@@ -9,6 +9,7 @@ import CriticalErrorBoundary from '@/components/common/errorrBoundary/CriticalEr
 import RootErrorBoundary from '@/components/common/errorrBoundary/RootErrorBoundary';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useEffect, useState } from 'react';
+import { CustomError } from '@/api/config/error';
 
 function MyApp({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
@@ -21,7 +22,18 @@ function MyApp({ Component, pageProps }) {
     return null;
   }
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        suspense: true,
+        retry: 1,
+        refetchOnWindowFocus: false,
+      },
+      mutations: {
+        useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
+      },
+    },
+  });
 
   return (
     <RecoilRoot>

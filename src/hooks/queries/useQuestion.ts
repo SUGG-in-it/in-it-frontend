@@ -11,19 +11,15 @@ import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { QusetionsRequestBody, UserQusetionsRequestBody } from '@/types/request/questions';
 import { MainContentResponseBody, QuestionResponseBody, QuestionsResponseBody } from '@/types/response/questions';
-import { useQueries, useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { errorToast, successToast } from '@/utils/toast';
 
 export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) => {
   const page = qusetionsRequestBody.page;
   const type = qusetionsRequestBody.type;
 
-  const data = useQuery<QuestionsResponseBody>(
-    [KEYS.QUESTIONS, { page, type }],
-    () => getQusetions(qusetionsRequestBody),
-    {
-      suspense: true,
-    }
+  const data = useQuery<QuestionsResponseBody>([KEYS.QUESTIONS, { page, type }], () =>
+    getQusetions(qusetionsRequestBody)
   );
   return data;
 };
@@ -31,34 +27,22 @@ export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) =>
 export const useUserQuestionsQuery = (userQusetionsRequestBody: UserQusetionsRequestBody) => {
   const page = userQusetionsRequestBody.page;
 
-  const data = useQuery<QuestionsResponseBody>(
-    [KEYS.USER_QUESTIONS, { page }],
-    () => getUserQusetions(userQusetionsRequestBody),
-    {
-      suspense: true,
-    }
+  const data = useQuery<QuestionsResponseBody>([KEYS.USER_QUESTIONS, { page }], () =>
+    getUserQusetions(userQusetionsRequestBody)
   );
   return data;
 };
 
 export const useQuestionQuery = (questionId: number) => {
-  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION], () => getQuestion(questionId), {
-    suspense: true,
-  });
+  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION], () => getQuestion(questionId));
   return data;
 };
 
-export const useMainContentQueries = () => {
-  const types = ['recent', 'point', 'random', 'popular'];
-
-  return useQueries<MainContentResponseBody[]>({
-    queries: types.map((type) => {
-      return {
-        queryKey: [KEYS.MAIN_CONTENT, type],
-        queryFn: () => getMainContent(type),
-      };
-    }),
+export const useMainContentQuery = (type: string) => {
+  const data = useQuery<MainContentResponseBody>([KEYS.MAIN_CONTENT, type], () => getMainContent(type), {
+    suspense: false,
   });
+  return data;
 };
 
 export const useUploadQuestionMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
@@ -71,7 +55,6 @@ export const useUploadQuestionMutation = ({ onSuccess, onError }: MutationCallba
       onError && onError();
       errorToast('글 작성에 실패했습니다. 😭');
     },
-    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
 };
 
@@ -85,6 +68,5 @@ export const useDeleteQuestionMutation = ({ onSuccess, onError }: MutationCallba
       onError && onError();
       errorToast('글 삭제에 실패했습니다. 😭');
     },
-    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
 };
