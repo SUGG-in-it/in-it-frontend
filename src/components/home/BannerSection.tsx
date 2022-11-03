@@ -9,10 +9,10 @@ import Image from 'next/image';
 const BannerSection = () => {
   return (
     <BannerContainer>
-      <Image className={'banner-img1'} src={BannerImg1} width={200} height={200} />
-      <Image className={'banner-img2'} src={BannerImg2} width={200} height={200} />
-      <Image className={'banner-img3'} src={BannerImg3} width={200} height={200} />
-      <Image className={'banner-img4'} src={BannerImg4} width={200} height={200} />
+      <Image className={'banner-img1'} src={BannerImg1} width={200} height={200} placeholder="blur" />
+      <Image className={'banner-img2'} src={BannerImg2} width={200} height={200} placeholder="blur" />
+      <Image className={'banner-img3'} src={BannerImg3} width={200} height={200} placeholder="blur" />
+      <Image className={'banner-img4'} src={BannerImg4} width={200} height={200} placeholder="blur" />
     </BannerContainer>
   );
 };
@@ -25,6 +25,8 @@ const BannerContainer = styled.div`
   padding-top: 3em;
   justify-content: space-between;
   padding-bottom: 3em;
+  width: 80vw;
+  max-width: 850px;
 
   .banner-img1 {
     width: 20vw;

@@ -12,16 +12,11 @@ function Pagination({ totalPage, currentPage, onPageClick }) {
       <ButtonBackWrapper isShowButton={currentPage !== 1} onClick={() => onPageClick(currentPage - 1)}>
         <IoIosArrowBack className="arrow-button" />
       </ButtonBackWrapper>
-      {pages.map(
-        (number, index) => (
-          console.log(currentPage, number),
-          (
-            <Page key={index} isActive={currentPage === number + 1} onClick={() => onPageClick(number)}>
-              {number + 1}
-            </Page>
-          )
-        )
-      )}
+      {pages.map((number, index) => (
+        <Page key={index} isActive={currentPage === number + 1} onClick={() => onPageClick(number)}>
+          {number + 1}
+        </Page>
+      ))}
       <ButtonForwardWrapper isShowButton={currentPage !== totalPage} onClick={() => onPageClick(currentPage + 1)}>
         <IoIosArrowForward className="arrow-button" />
       </ButtonForwardWrapper>

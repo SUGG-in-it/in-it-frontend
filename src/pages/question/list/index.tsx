@@ -1,7 +1,7 @@
 import { getQuestionPage } from '@/api/questions';
 import Pagination from '@/components/common/Pagination';
 import MainLayout from '@/components/layouts/MainLayout';
-import QuestionListSection from '@/components/question/list/QuestionListSection';
+import QuestionListSection from '@/components/question/list/qustionListSection';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
@@ -19,9 +19,7 @@ const QuestionListPage = () => {
       const { count } = await getQuestionPage({ size: PAGINATION_SIZE.QUESTION_LIST, type: queryStatus });
       setTotalPage(count);
     }
-    if (queryStatus) {
-      fetchQuestionPage();
-    }
+    fetchQuestionPage();
   }, [queryStatus]);
 
   const handlePageClick = (number: number) => {
@@ -29,18 +27,14 @@ const QuestionListPage = () => {
   };
 
   return (
-    <>
-      <MainLayout>
-        <>
-          <QuestionListContainer>
-            <ContentSection>
-              <QuestionListSection currentPage={currentPage} />
-            </ContentSection>
-            <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
-          </QuestionListContainer>
-        </>
-      </MainLayout>
-    </>
+    <MainLayout>
+      <QuestionListContainer>
+        <ContentSection>
+          <QuestionListSection currentPage={currentPage} />
+        </ContentSection>
+        <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
+      </QuestionListContainer>
+    </MainLayout>
   );
 };
 

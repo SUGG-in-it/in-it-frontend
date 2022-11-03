@@ -44,7 +44,6 @@ export const useUserQuestionsQuery = (userQusetionsRequestBody: UserQusetionsReq
 export const useQuestionQuery = (questionId: number) => {
   const data = useQuery<QuestionResponseBody>([KEYS.QUESTION], () => getQuestion(questionId), {
     suspense: true,
-    retry: 0,
   });
   return data;
 };
@@ -65,8 +64,8 @@ export const useMainContentQueries = () => {
 export const useUploadQuestionMutation = ({ onSuccess, onError }: MutationCallbacks = {}) => {
   return useMutation(uploadQuestion, {
     onSuccess: () => {
-      onSuccess && onSuccess();
       successToast('글 작성이 완료되었습니다. 🥰');
+      onSuccess && onSuccess();
     },
     onError: (error: CustomError) => {
       onError && onError();

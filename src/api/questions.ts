@@ -8,11 +8,8 @@ import {
 import { QuestionsPageResponseBody } from '@/types/response/questions';
 
 export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) => {
-  return await GET('/questions', qusetionsRequestBody)
-    .then((res) => res.data)
-    .catch((e) => {
-      return e;
-    });
+  const { data } = await GET('/questions', qusetionsRequestBody);
+  return data;
 };
 
 export const getUserQusetions = async (userQusetionsRequestBody: UserQusetionsRequestBody) => {
@@ -50,11 +47,8 @@ export const getUserQuestionPage = async (size: number): Promise<QuestionsPageRe
 };
 
 export const getQuestion = async (questionId: number) => {
-  return await GET(`/questions/${questionId}`)
-    .then((res) => res.data)
-    .catch((e) => {
-      return e;
-    });
+  const { data } = await GET(`/questions/${questionId}`);
+  return data;
 };
 
 export const deleteQuestion = async (questionId: number) => await DELETE(`/questions/${questionId}`);

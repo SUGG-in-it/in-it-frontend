@@ -4,21 +4,11 @@ import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { successToast } from '@/utils/toast';
-import Tags from '@/components/common/tag/Tags';
+import Tags from '@/components/common/tags/Tags';
 import { usePopularTagsQuery } from '@/hooks/queries/useTags';
-import { ErrorBoundary } from 'react-error-boundary';
 import { Suspense } from 'react';
-import { FiRotateCcw } from 'react-icons/fi';
-
-const QuestionsFallback = ({ error, resetErrorBoundary }) => (
-  <AsideContainer>
-    <TagListWrapper>
-      <p>인기 태그를 불러오는데 실패했어요 😭😭😭 </p>
-    </TagListWrapper>
-  </AsideContainer>
-);
-
-const QuestionsLoading = () => <div />;
+import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import TagListSkeleton from '@/components/common/tagsWithDeleteButton/index.skeleton';
 
 const MyInfo = () => {
   const router = useRouter();
@@ -26,14 +16,10 @@ const MyInfo = () => {
   const user = useRecoilValue(userState);
 
   const handleLogoutClick = () => {
-    // 로그아웃이 너무 빠르게 되는거 같아 500ms 뒤에 로그아웃 처리하도록 했습니다.
-    setTimeout(() => {
-      localStorage.setItem('accessToken', '');
-      localStorage.setItem('refreshToken', '');
-      setIsLogin(false);
-      router.push('/login');
-      successToast('로그아웃이 완료되었습니다.');
-    }, 500);
+    localStorage.setItem('accessToken', '');
+    localStorage.setItem('refreshToken', '');
+    setIsLogin(false);
+    successToast('로그아웃이 완료되었습니다.');
   };
 
   const handleProfileClick = (nickname: string) => {
@@ -49,7 +35,7 @@ const MyInfo = () => {
       {isLogin ? (
         <>
           <Header>
-            <NickName>{`안녕하세요! ${user.nickname}`}</NickName>
+            <NickName>{`안녕하세요! ${user.nickname} 님`}</NickName>
             <LogoutButton onClick={handleLogoutClick}>{'로그아웃'}</LogoutButton>
           </Header>
           <ProfileButton onClick={() => handleProfileClick(user.nickname)}>{'프로필 바로가기 >'}</ProfileButton>
@@ -80,17 +66,18 @@ const TagList = () => {
 const Aside = () => (
   <AsideContainer>
     <MyInfo />
-    <ErrorBoundary FallbackComponent={QuestionsFallback}>
-      <Suspense fallback={<QuestionsLoading />}>
+    <RetryErrorBoundary>
+      <Suspense fallback={<TagListSkeleton />}>
         <TagList />
       </Suspense>
-    </ErrorBoundary>
+    </RetryErrorBoundary>
   </AsideContainer>
 );
 
 const AsideContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 3vw;
 `;
 
 const Header = styled.div`
@@ -122,10 +109,8 @@ const NickName = styled.p`
 `;
 
 const MypageWrapper = styled.div`
-  width: 250px;
   height: fit-content;
   margin-top: 5em;
-  margin-left: 3vw;
   padding: 1em 0.5em 1em 0.8em;
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   background-color: ${({ theme }) => theme.backgrondLightColor};
@@ -143,7 +128,6 @@ const MypageWrapper = styled.div`
 const TagListWrapper = styled.ul`
   width: 250px;
   height: fit-content;
-  margin-left: 3vw;
   padding: 1em 0.5em 1em 0.8em;
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   background-color: ${({ theme }) => theme.backgrondLightColor};

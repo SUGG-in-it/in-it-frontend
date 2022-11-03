@@ -1,5 +1,4 @@
 import { getCommentPage } from '@/api/comments';
-import MoonLoading from '@/components/common/loading/MoonLoading';
 import Pagination from '@/components/common/Pagination';
 import CommentItem from '@/components/question/detail/comment/CommentItem';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
@@ -20,7 +19,7 @@ const CommentsFallback = ({ error, resetErrorBoundary }) => (
   </>
 );
 
-const CommentsLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
+const CommentsLoading = () => <></>;
 
 const Comments = ({ answerId }: { answerId: number }) => {
   const [totalPage, setTotalPage] = useState(0);

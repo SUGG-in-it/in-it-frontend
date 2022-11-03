@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import jwt from 'jsonwebtoken';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
+import APIButton from '@/components/common/button/APIButton';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -46,11 +47,7 @@ const LoginPage = () => {
 
   return (
     <AccountLayout>
-      <LoginForm
-        onSubmit={handleSubmit((data) => {
-          mutationLogin.mutate({ email: data.email, password: data.password });
-        })}
-      >
+      <LoginForm>
         <input
           {...register('email', {
             required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
@@ -66,7 +63,14 @@ const LoginPage = () => {
           placeholder={'비밀번호'}
         />
         <p>{errors.password?.message}</p>
-        <LoginButton>{'로그인'}</LoginButton>
+        <LoginButton
+          onClick={handleSubmit((data) => {
+            mutationLogin.mutate({ email: data.email, password: data.password });
+          })}
+          isLoading={mutationLogin.isLoading}
+        >
+          {'로그인'}
+        </LoginButton>
         <SignUpContainer>
           <u onClick={moveToForgotPassword}>비밀번호 찾기</u>
           <u onClick={moveToSignUp}>회원가입</u>{' '}
@@ -120,12 +124,10 @@ const LoginForm = styled.form`
   }
 `;
 
-const LoginButton = styled.button`
-  background-color: ${({ theme }) => theme.primaryColor};
+const LoginButton = styled(APIButton)`
   margin-bottom: 2em;
   border: none;
   height: 50px;
-  color: white;
   border-radius: 3px;
   margin-top: 20px;
 `;

@@ -1,3 +1,4 @@
+import APIButton from '@/components/common/button/APIButton';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import { useSendMutation, useVerifyMutation } from '@/hooks/queries/useAuth';
 import { forgotPasswordState } from '@/store/users';
@@ -46,32 +47,29 @@ const ForgotPasswordFirstStep = () => {
   return (
     <ForgotPasswordWrapper>
       {!isSentCode ? (
-        <>
-          <SendEmailForm
-            onSubmit={handleSubmit((data) => {
+        <SendEmailForm>
+          <input
+            {...register('email', {
+              required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
+              pattern: {
+                value: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
+                message: VALIDATION_ERROR_MSG.INVALID_EMAIL,
+              },
+            })}
+            placeholder={'이메일'}
+          />
+          <p>{errors.email?.message}</p>
+          <SendButton
+            onClick={handleSubmit((data) => {
               mutationSendCode.mutate({ email: data.email, type: 'password' });
             })}
+            isLoading={mutationSendCode.isLoading}
           >
-            <input
-              {...register('email', {
-                required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
-                pattern: {
-                  value: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
-                  message: VALIDATION_ERROR_MSG.INVALID_EMAIL,
-                },
-              })}
-              placeholder={'이메일'}
-            />
-            <p>{errors.email?.message}</p>
-            <SendButton>인증번호 전송</SendButton>
-          </SendEmailForm>
-        </>
+            인증번호 전송
+          </SendButton>
+        </SendEmailForm>
       ) : (
-        <SendEmailForm
-          onSubmit={handleSubmit((data) => {
-            mutationVerifyCode.mutate({ email: data.email, code: data.code });
-          })}
-        >
+        <SendEmailForm>
           <input
             {...register('code', {
               required: VALIDATION_ERROR_MSG.EMPTY_CODE,
@@ -79,7 +77,14 @@ const ForgotPasswordFirstStep = () => {
             placeholder={'인증번호'}
           />
           <p>{errors.code?.message}</p>
-          <SendButton>확인</SendButton>
+          <SendButton
+            onClick={handleSubmit((data) => {
+              mutationVerifyCode.mutate({ email: data.email, code: data.code });
+            })}
+            isLoading={mutationVerifyCode.isLoading}
+          >
+            확인
+          </SendButton>
           <ResendContainer>
             <span>메일을 받지 못하셨습니까?</span>
             <u onClick={sendEmail}>재전송 하기</u>
@@ -147,12 +152,10 @@ const SendEmailForm = styled.form`
   }
 `;
 
-const SendButton = styled.button`
-  background-color: ${({ theme }) => theme.primaryColor};
+const SendButton = styled(APIButton)`
   margin-bottom: 2em;
   border: none;
   height: 50px;
-  color: white;
   border-radius: 3px;
   margin-top: 20px;
 `;

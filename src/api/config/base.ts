@@ -1,4 +1,3 @@
-import { newToken } from '@/api/auth';
 import { CustomError } from '@/api/config/error';
 import axios, { AxiosRequestConfig } from 'axios';
 interface RequestType {
@@ -73,7 +72,6 @@ const request = async ({ url, method, body, params }: RequestType): Promise<Resp
       {};
     return data;
   } catch (error: any) {
-    console.log('API error', error);
     throw new CustomError(error.response.data?.status, error.response.data?.message, error.response.data?.code);
   }
 };

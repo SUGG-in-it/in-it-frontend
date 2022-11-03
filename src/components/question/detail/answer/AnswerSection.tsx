@@ -9,8 +9,6 @@ import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { Question } from '@/types/response/questions';
 import { ErrorBoundary } from 'react-error-boundary';
-import Skeleton from 'react-loading-skeleton';
-import MoonLoading from '@/components/common/loading/MoonLoading';
 import { FiRotateCcw } from 'react-icons/fi';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { useRecoilValue } from 'recoil';
@@ -26,7 +24,7 @@ const AnswerListFallBack = ({ error, resetErrorBoundary }) => (
   </RetryBox>
 );
 
-const AnswerListLoading = () => <Skeleton wrapper={MoonLoading} count={5} />;
+const AnswerListLoading = () => <></>;
 
 const AnswerSection = ({ question }: { question: Question }) => {
   const [totalPage, setTotalPage] = useState(0);

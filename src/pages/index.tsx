@@ -1,7 +1,7 @@
 import MainLayout from '@/components/layouts/MainLayout';
 import BannerSection from '@/components/home/BannerSection';
-import QuestionSection from '@/components/home/QuestionSection';
 import styled from 'styled-components';
+import QuestionSection from '@/components/home/questionSection';
 
 const HomePage = () => {
   return (

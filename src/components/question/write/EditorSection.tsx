@@ -15,7 +15,8 @@ import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { ErrorBoundary } from 'react-error-boundary';
 import AutoComplete from '@/components/common/AutoComplete';
-import TagsWithDeleteButton from '@/components/common/tag/TagsWithDeleteButton';
+import TagsWithDeleteButton from '@/components/common/tagsWithDeleteButton';
+import APIButton from '@/components/common/button/APIButton';
 
 const QuestionsFallback = ({ error, resetErrorBoundary }) => (
   <QuestionContainer>
@@ -112,7 +113,9 @@ const QuestionEditor = () => {
       </LabelInput>
       <ButtonWrapper>
         <CancelButton onClick={handleCancle}>{'취소'}</CancelButton>
-        <PostButton onClick={handleQuestionSubmit}>{'등록'}</PostButton>
+        <PostButton onClick={handleQuestionSubmit} isLoading={mutationUploadQuestion.isLoading}>
+          {'등록'}
+        </PostButton>
       </ButtonWrapper>
     </>
   );
@@ -146,8 +149,7 @@ const CancelButton = styled(Button)`
   margin-right: 1em;
 `;
 
-const PostButton = styled(Button)`
-  background-color: ${({ theme }) => theme.primaryColor};
+const PostButton = styled(APIButton)`
   width: 100px;
 `;
 
