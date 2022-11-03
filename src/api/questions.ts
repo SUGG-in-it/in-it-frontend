@@ -26,11 +26,8 @@ export const uploadQuestion = async ({ questionId, title, content, tagList, poin
   await PUT(`/questions/${questionId}`, { title, content, tagList, point });
 
 export const getMainContent = async (questionType: string) => {
-  return await GET(`/questions/main?type=${questionType}`)
-    .then((res) => res.data)
-    .catch((e) => {
-      return e;
-    });
+  const { data } = await GET(`/questions/main?type=${questionType}`);
+  return data;
 };
 
 export const getQuestionPage = async ({
