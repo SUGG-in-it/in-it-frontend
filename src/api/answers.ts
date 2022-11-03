@@ -17,11 +17,8 @@ export const getAnswers = async (answersRequestParams: AnswersRequestParams) => 
 };
 
 export const getUserAnswers = async (userAnswersRequestParams: UserAnswersRequestParams) => {
-  return await GET('/answers/manage', userAnswersRequestParams)
-    .then((res) => res.data)
-    .catch((e) => {
-      return e;
-    });
+  const { data } = await GET('/answers/manage', userAnswersRequestParams);
+  return data;
 };
 
 export const getAnswerPage = async (answerPageRequestParams: AnswerPageRequestParams) => {
