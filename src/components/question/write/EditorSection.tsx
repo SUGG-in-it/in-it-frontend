@@ -11,7 +11,6 @@ import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useQuestionQuery, useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
 import Skeleton from 'react-loading-skeleton';
-import QuestionSkelton from '@/components/common/skelton/QuestionSkelton';
 import { FiRefreshCcw } from 'react-icons/fi';
 import { ErrorBoundary } from 'react-error-boundary';
 import AutoComplete from '@/components/common/AutoComplete';
@@ -27,7 +26,7 @@ const QuestionsFallback = ({ error, resetErrorBoundary }) => (
   </QuestionContainer>
 );
 
-const QuestionsLoading = () => <Skeleton wrapper={QuestionSkelton} count={5} />;
+const QuestionsLoading = () => <Skeleton count={5} />;
 
 const QuestionEditor = () => {
   const title = useInput('');

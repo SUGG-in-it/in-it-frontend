@@ -5,14 +5,55 @@ import BannerImg3 from '@/assets/images/003.png';
 import BannerImg4 from '@/assets/images/004.png';
 import { media } from '@/styles/mediaQuery';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useMainContentQuery } from '@/hooks/queries/useQuestion';
 
 const BannerSection = () => {
+  const router = useRouter();
+  const { data: recent } = useMainContentQuery('recent');
+  const { data: point } = useMainContentQuery('point');
+  const { data: random } = useMainContentQuery('random');
+  const { data: popular } = useMainContentQuery('popular');
+
+  const handleBannerClick = (id: number) => {
+    if (!id) return;
+    router.push(`question/detail/${id}`);
+  };
+
   return (
     <BannerContainer>
-      <Image className={'banner-img1'} src={BannerImg1} width={200} height={200} placeholder="blur" />
-      <Image className={'banner-img2'} src={BannerImg2} width={200} height={200} placeholder="blur" />
-      <Image className={'banner-img3'} src={BannerImg3} width={200} height={200} placeholder="blur" />
-      <Image className={'banner-img4'} src={BannerImg4} width={200} height={200} placeholder="blur" />
+      <Image
+        className={'banner-img1'}
+        src={BannerImg1}
+        width={200}
+        height={200}
+        placeholder="blur"
+        onClick={() => handleBannerClick(recent.questionId)}
+      />
+      <Image
+        className={'banner-img2'}
+        src={BannerImg2}
+        width={200}
+        height={200}
+        placeholder="blur"
+        onClick={() => handleBannerClick(point.questionId)}
+      />
+      <Image
+        className={'banner-img3'}
+        src={BannerImg3}
+        width={200}
+        height={200}
+        placeholder="blur"
+        onClick={() => handleBannerClick(random.questionId)}
+      />
+      <Image
+        className={'banner-img4'}
+        src={BannerImg4}
+        width={200}
+        height={200}
+        placeholder="blur"
+        onClick={() => handleBannerClick(popular.questionId)}
+      />
     </BannerContainer>
   );
 };
