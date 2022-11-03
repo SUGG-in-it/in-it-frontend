@@ -8,29 +8,19 @@ import { Suspense, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { Question } from '@/types/response/questions';
-import { ErrorBoundary } from 'react-error-boundary';
-import { FiRotateCcw } from 'react-icons/fi';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { useRecoilValue } from 'recoil';
 import { userState } from '@/store/users';
 import { Answer } from '@/types/response/answers';
+import AnswerListSkeleton from '@/components/question/detail/answer/AnswerSection/index.skeleton';
+import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
 
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
-
-const AnswerListFallBack = ({ error, resetErrorBoundary }) => (
-  <RetryBox>
-    <p>답변을 불러오는데 실패했어요 😭😭😭 </p>
-    <RetryButton onClick={() => resetErrorBoundary()} />
-  </RetryBox>
-);
-
-const AnswerListLoading = () => <></>;
 
 const AnswerSection = ({ question }: { question: Question }) => {
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortedAnswer, setSortedAnswer] = useState([]);
-  const user = useRecoilValue(userState);
 
   const { data: answers } = useAnswersQuery({
     page: currentPage - 1,
@@ -56,13 +46,25 @@ const AnswerSection = ({ question }: { question: Question }) => {
   };
 
   return (
+    <AnswerListSectionWrapper>
+      {sortedAnswer &&
+        sortedAnswer.map((answer: Answer) => <AnswerItem key={answer.answerId} question={question} {...answer} />)}
+      <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
+    </AnswerListSectionWrapper>
+  );
+};
+
+const AnswerListSection = ({ question }: { question: Question }) => {
+  const user = useRecoilValue(userState);
+
+  return (
     <>
       <AnswerHeader answerCount={question.answerCount} />
-      <AnswerListSectionWrapper>
-        {sortedAnswer &&
-          sortedAnswer.map((answer: Answer) => <AnswerItem key={answer.answerId} question={question} {...answer} />)}
-        <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
-      </AnswerListSectionWrapper>
+      <RetryErrorBoundary>
+        <Suspense fallback={<AnswerListSkeleton />}>
+          <AnswerSection question={question} />
+        </Suspense>
+      </RetryErrorBoundary>
       <AnswerWriteSectionWrapper>
         <ToastEditorWrapper>
           <Notice>{`${user.nickname}님, 답변해주세요! 😉`}</Notice>
@@ -72,16 +74,6 @@ const AnswerSection = ({ question }: { question: Question }) => {
         </ToastEditorWrapper>
       </AnswerWriteSectionWrapper>
     </>
-  );
-};
-
-const AnswerListSection = ({ question }: { question: Question }) => {
-  return (
-    <ErrorBoundary FallbackComponent={AnswerListFallBack}>
-      <Suspense fallback={<AnswerListLoading />}>
-        <AnswerSection question={question} />
-      </Suspense>
-    </ErrorBoundary>
   );
 };
 
@@ -126,34 +118,6 @@ const EditorSectionWrapper = styled.div`
   margin-top: 3em;
   padding-bottom: 5em;
   flex-direction: column;
-`;
-
-const RetryBox = styled.div`
-  max-width: 850px;
-  width: 80vw;
-  height: fit-content;
-  margin: 0 auto;
-  background-color: ${({ theme }) => theme.backgrondLightColor};
-  border: 1px solid ${({ theme }) => theme.greyLineColor};
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  display: flex;
-  padding: 3em;
-  ${media.tablet} {
-    width: 80vw;
-  }
-  ${media.mobile} {
-    padding: 1em;
-  }
-`;
-
-const RetryButton = styled(FiRotateCcw)`
-  width: 30px;
-  height: 30px;
-  margin-top: 30px;
-  color: ${({ theme }) => theme.greyLineColor};
-  cursor: pointer;
 `;
 
 export default AnswerListSection;
