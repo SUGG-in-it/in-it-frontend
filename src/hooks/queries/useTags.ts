@@ -9,8 +9,6 @@ export const useAllTagsQuery = () => {
 };
 
 export const usePopularTagsQuery = () => {
-  const data = useQuery<TagsResponseBody>([KEYS.TAGS, { type: 'popular' }], () => getTags('popular'), {
-    suspense: true,
-  });
+  const data = useQuery<TagsResponseBody>([KEYS.TAGS, { type: 'popular' }], () => getTags('popular'));
   return data;
 };

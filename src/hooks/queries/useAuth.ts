@@ -17,7 +17,6 @@ export const useVerifyMutation = ({ onSuccess, onError }: MutationCallbacks = {}
         errorToast('인증번호가 올바르지 않습니다.');
       }
     },
-    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
 };
 
@@ -31,6 +30,5 @@ export const useSendMutation = ({ onSuccess, onError }: MutationCallbacks = {}) 
       onError && onError();
       successToast(`이메일을 전송을 실패하였습니다.`);
     },
-    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
 };
