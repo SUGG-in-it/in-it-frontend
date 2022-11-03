@@ -1,4 +1,3 @@
-import Button from '@/components/common/button/Button';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { uploadImage } from '@/api/images';
@@ -6,6 +5,7 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import { postAnswerId } from '@/api/answers';
 import { useUploadAnswerMutation } from '@/hooks/queries/useAnswer';
+import APIButton from '@/components/common/button/APIButton';
 
 interface EditorSectionProps {
   questionId: number;
@@ -73,9 +73,13 @@ const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSe
       />
       <ButtonWrapper>
         {content ? (
-          <PostButton onClick={handleAnswerEdit}>{'수정'}</PostButton>
+          <PostButton onClick={handleAnswerEdit} isLoading={mutationEditAnswer.isLoading}>
+            {'수정'}
+          </PostButton>
         ) : (
-          <PostButton onClick={handleAnswerSubmit}>{'등록'}</PostButton>
+          <PostButton onClick={handleAnswerSubmit} isLoading={mutationUploadAnswer.isLoading}>
+            {'등록'}
+          </PostButton>
         )}
       </ButtonWrapper>
     </ToastEditorWrapper>
@@ -93,7 +97,7 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-const PostButton = styled(Button)`
+const PostButton = styled(APIButton)`
   background-color: ${({ theme }) => theme.primaryColor};
   width: 100px;
   margin-top: 2em;
