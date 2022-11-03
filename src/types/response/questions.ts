@@ -2,6 +2,10 @@ export interface QuestionsResponseBody {
   questions: Question[];
 }
 
+export interface QuestionPageResponseBody {
+  count: number;
+}
+
 export interface QuestionResponseBody {
   questionId: number;
   title: string;

@@ -6,11 +6,17 @@ import {
   getQuestion,
   deleteQuestion,
   getUserQusetions,
+  getQuestionPage,
 } from '@/api/questions';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
-import { QusetionsRequestBody, UserQusetionsRequestBody } from '@/types/request/questions';
-import { MainContentResponseBody, QuestionResponseBody, QuestionsResponseBody } from '@/types/response/questions';
+import { QuestionPageRequestBody, QusetionsRequestBody, UserQusetionsRequestBody } from '@/types/request/questions';
+import {
+  MainContentResponseBody,
+  QuestionResponseBody,
+  QuestionPageResponseBody,
+  QuestionsResponseBody,
+} from '@/types/response/questions';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { errorToast, successToast } from '@/utils/toast';
 
@@ -24,6 +30,18 @@ export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) =>
   return data;
 };
 
+export const useQuestionPageQuery = (questionPageRequestBody: QuestionPageRequestBody) => {
+  const type = questionPageRequestBody.type;
+
+  const data = useQuery<QuestionPageResponseBody>(
+    [KEYS.QUESTIONS_PAGE, { type }],
+    () => getQuestionPage(questionPageRequestBody),
+    {
+      suspense: false,
+    }
+  );
+  return data;
+};
 export const useUserQuestionsQuery = (userQusetionsRequestBody: UserQusetionsRequestBody) => {
   const page = userQusetionsRequestBody.page;
 

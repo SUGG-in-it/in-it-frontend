@@ -7,7 +7,7 @@ import GrayLine from '@/components/common/GreyLine';
 import { useRouter } from 'next/router';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import QuestionSearchSection from '@/components/question/list/QuestionSearchSection';
-import QuestionListSkeleton from '@/components/question/list/qustionListSection/index.skeleton';
+import QuestionListSkeleton from '@/components/question/list/QuestionListSection/index.skeleton';
 import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
 
 const Questions = ({ currentPage }: { currentPage: number }) => {
@@ -28,7 +28,7 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
 
   return (
     <QuestionListWrapper>
-      {questions?.questions?.map((question, index) => (
+      {questions.questions.map((question, index) => (
         <>
           <QuestionItem key={question.questionId} {...question} />
           <GrayLine />
