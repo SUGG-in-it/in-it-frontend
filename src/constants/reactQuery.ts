@@ -1,11 +1,16 @@
 export const KEYS = {
   USER_QUESTIONS: 'getUserQuestions',
+  USER_QUESTIONS_PAGE: 'getUSerQuestionPage',
   USER_ANSWERS: 'getUserAnswers',
+  USER_ANSWERS_PAGE: 'getUserAnswersPage',
   QUESTIONS: 'getQuestions',
+  QUESTIONS_PAGE: 'getQuestionsPage',
   MAIN_CONTENT: 'getMainContent',
   QUESTION: 'getQuestion',
   ANSWERS: 'getAnswers',
+  ANSWERS_PAGE: 'getAnswersPage',
   PROFILE: 'getProfile',
   COMMENTS: 'getComments',
+  COMMENTS_PAGE: 'getCommentsPage',
   TAGS: 'getTags',
 };

@@ -10,11 +10,8 @@ export const uploadComment = async (uploadCommentRequestBody: UploadCommentReque
   await POST(`/comments`, uploadCommentRequestBody);
 
 export const getComments = async (commentsRequestBody: CommentsRequestBody) => {
-  return await GET('/comments', commentsRequestBody)
-    .then((res) => res.data)
-    .catch((e) => {
-      return e;
-    });
+  const { data } = await GET('/comments', commentsRequestBody);
+  return data;
 };
 
 export const deleteComment = async (commentId: number) => await DELETE(`/comments/${commentId}`);

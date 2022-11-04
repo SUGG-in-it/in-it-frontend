@@ -7,9 +7,7 @@ import { errorToast, successToast } from '@/utils/toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useProfileQuery = (nickname: string) => {
-  const data = useQuery<ProfileResponseBody>([KEYS.PROFILE, { nickname: nickname }], () => getProfile(nickname), {
-    suspense: true,
-  });
+  const data = useQuery<ProfileResponseBody>([KEYS.PROFILE, { nickname: nickname }], () => getProfile(nickname));
   return data;
 };
 
@@ -25,6 +23,5 @@ export const useProfileMutation = ({ onSuccess, onError }: MutationCallbacks = {
       onError && onError();
       errorToast('프로필 수정이 실패했습니다. 😭');
     },
-    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
 };

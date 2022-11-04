@@ -6,11 +6,18 @@ import {
   getQuestion,
   deleteQuestion,
   getUserQusetions,
+  getQuestionPage,
+  getUserQuestionPage,
 } from '@/api/questions';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
-import { QusetionsRequestBody, UserQusetionsRequestBody } from '@/types/request/questions';
-import { MainContentResponseBody, QuestionResponseBody, QuestionsResponseBody } from '@/types/response/questions';
+import { QuestionPageRequestBody, QusetionsRequestBody, UserQusetionsRequestBody } from '@/types/request/questions';
+import {
+  MainContentResponseBody,
+  QuestionResponseBody,
+  QuestionPageResponseBody,
+  QuestionsResponseBody,
+} from '@/types/response/questions';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { errorToast, successToast } from '@/utils/toast';
 
@@ -24,6 +31,19 @@ export const useQuestionsQuery = (qusetionsRequestBody: QusetionsRequestBody) =>
   return data;
 };
 
+export const useQuestionPageQuery = (questionPageRequestBody: QuestionPageRequestBody) => {
+  const type = questionPageRequestBody.type;
+
+  const data = useQuery<QuestionPageResponseBody>(
+    [KEYS.QUESTIONS_PAGE, { type }],
+    () => getQuestionPage(questionPageRequestBody),
+    {
+      suspense: false,
+    }
+  );
+  return data;
+};
+
 export const useUserQuestionsQuery = (userQusetionsRequestBody: UserQusetionsRequestBody) => {
   const page = userQusetionsRequestBody.page;
 
@@ -33,13 +53,20 @@ export const useUserQuestionsQuery = (userQusetionsRequestBody: UserQusetionsReq
   return data;
 };
 
+export const useUserQuestionPageQuery = (size: number) => {
+  const data = useQuery<QuestionPageResponseBody>([KEYS.USER_QUESTIONS_PAGE], () => getUserQuestionPage(size), {
+    suspense: false,
+  });
+  return data;
+};
+
 export const useQuestionQuery = (questionId: number) => {
-  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION], () => getQuestion(questionId));
+  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION, { questionId }], () => getQuestion(questionId));
   return data;
 };
 
 export const useMainContentQuery = (type: string) => {
-  const data = useQuery<MainContentResponseBody>([KEYS.MAIN_CONTENT, type], () => getMainContent(type), {
+  const data = useQuery<MainContentResponseBody>([KEYS.MAIN_CONTENT, { type }], () => getMainContent(type), {
     suspense: false,
   });
   return data;

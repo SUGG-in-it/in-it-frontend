@@ -10,6 +10,7 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { media } from '@/styles/mediaQuery';
 import { AiFillCheckCircle } from 'react-icons/ai';
+import APIButton from '@/components/common/button/APIButton';
 
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
 
@@ -49,7 +50,9 @@ const AnswerItem = ({ answerId, nickname, date, content, userId, question, selec
     <>
       <ButtonWrapper>
         {user.id === question.userId && question.type === 'doing' && (
-          <SelectButton onClick={handleSelectAnswer}>{'답변 채택하기 ☺️'}</SelectButton>
+          <SelectButton onClick={handleSelectAnswer} isLoading={mutationSelectAnswer.isLoading}>
+            {'답변 채택하기 ☺️'}
+          </SelectButton>
         )}
       </ButtonWrapper>
       <AnswerItemWrapper>
@@ -145,9 +148,8 @@ const SettingButton = styled(Button)`
   height: 30px;
 `;
 
-const SelectButton = styled(Button)`
+const SelectButton = styled(APIButton)`
   border: none;
-  background-color: ${({ theme }) => theme.primaryColor};
   color: white;
   padding: 0.5em;
   cursor: pointer;

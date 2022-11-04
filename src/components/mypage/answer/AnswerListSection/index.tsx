@@ -1,22 +1,15 @@
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useUserAnswersQuery } from '@/hooks/queries/useAnswer';
 import { MyAnswer } from '@/types/response/answers';
 import { FiCornerDownRight } from 'react-icons/fi';
+import AnswerListSkeleton from '@/components/mypage/answer/AnswerListSection/index.skeleton';
+import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
-
-const AnswerListFallback = ({ error, resetErrorBoundary }) => (
-  <div>
-    <p>나의 답글을 불러오는데 실패했어요 😭😭😭 </p>
-  </div>
-);
-
-const AnswerListLoading = () => <div />;
 
 const AnswerList = ({ currentPage }: { currentPage: number }) => {
   const router = useRouter();
@@ -50,11 +43,11 @@ const AnswerList = ({ currentPage }: { currentPage: number }) => {
 };
 
 const AnswerListSection = ({ currentPage }: { currentPage: number }) => (
-  <ErrorBoundary FallbackComponent={AnswerListFallback}>
-    <Suspense fallback={<AnswerListLoading />}>
+  <RetryErrorBoundary>
+    <Suspense fallback={<AnswerListSkeleton />}>
       <AnswerList currentPage={currentPage} />
     </Suspense>
-  </ErrorBoundary>
+  </RetryErrorBoundary>
 );
 
 const AnswerWrapper = styled.div`

@@ -10,23 +10,12 @@ import styled from 'styled-components';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useQuestionQuery, useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
-import Skeleton from 'react-loading-skeleton';
 import { FiRefreshCcw } from 'react-icons/fi';
-import { ErrorBoundary } from 'react-error-boundary';
 import AutoComplete from '@/components/common/AutoComplete';
 import TagsWithDeleteButton from '@/components/common/tagsWithDeleteButton';
 import APIButton from '@/components/common/button/APIButton';
-
-const QuestionsFallback = ({ error, resetErrorBoundary }) => (
-  <QuestionContainer>
-    <RetryBox>
-      <p>질문을 불러오는데 실패했어요 😭😭😭 </p>
-      <RetryButton onClick={() => resetErrorBoundary()} />
-    </RetryBox>
-  </QuestionContainer>
-);
-
-const QuestionsLoading = () => <Skeleton count={5} />;
+import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import EditorSkeleton from '@/components/question/write/EditorSection/index.skeleton';
 
 const QuestionEditor = () => {
   const title = useInput('');
@@ -42,6 +31,11 @@ const QuestionEditor = () => {
   useEffect(() => {
     title.setValue(question.title || '');
     point.setValue(String(question.point || 0));
+    if (question.tagList && question.tagList.length) {
+      setTagList(question.tagList.split(','));
+    } else {
+      setTagList([]);
+    }
     editorRef.current?.getInstance().setHTML(question.content || '');
   }, [question]);
 
@@ -73,6 +67,7 @@ const QuestionEditor = () => {
   };
 
   const handleTagList = (tag: string) => {
+    console.log(tagList);
     if (!tagList.includes(tag)) {
       setTagList((tagList) => [...tagList, tag]);
     }
@@ -122,11 +117,11 @@ const QuestionEditor = () => {
 
 const EditorSection = () => {
   return (
-    <ErrorBoundary FallbackComponent={QuestionsFallback}>
-      <Suspense fallback={<QuestionsLoading />}>
+    <RetryErrorBoundary>
+      <Suspense fallback={<EditorSkeleton />}>
         <QuestionEditor />
       </Suspense>
-    </ErrorBoundary>
+    </RetryErrorBoundary>
   );
 };
 

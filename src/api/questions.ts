@@ -13,11 +13,8 @@ export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) =
 };
 
 export const getUserQusetions = async (userQusetionsRequestBody: UserQusetionsRequestBody) => {
-  return await GET('/questions/manage', userQusetionsRequestBody)
-    .then((res) => res.data)
-    .catch((e) => {
-      return e;
-    });
+  const { data } = await GET('/questions/manage', userQusetionsRequestBody);
+  return data;
 };
 
 export const postQuestionId = async () => await POST('/questions');

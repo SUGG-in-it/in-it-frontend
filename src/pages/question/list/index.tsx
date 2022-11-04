@@ -1,26 +1,18 @@
-import { getQuestionPage } from '@/api/questions';
 import Pagination from '@/components/common/Pagination';
 import MainLayout from '@/components/layouts/MainLayout';
-import QuestionListSection from '@/components/question/list/qustionListSection';
+import QuestionsSection from '@/components/question/list/QuestionListSection';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
+import { useQuestionPageQuery } from '@/hooks/queries/useQuestion';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const QuestionListPage = () => {
-  const [totalPage, setTotalPage] = useState(0);
   const router = useRouter();
   const queryStatus = router.query.status as 'doing' | 'completed' | 'total';
   const currentPage = Number(router.query.page) || 1;
 
-  useEffect(() => {
-    async function fetchQuestionPage() {
-      const { count } = await getQuestionPage({ size: PAGINATION_SIZE.QUESTION_LIST, type: queryStatus });
-      setTotalPage(count);
-    }
-    fetchQuestionPage();
-  }, [queryStatus]);
+  const { data: page } = useQuestionPageQuery({ size: PAGINATION_SIZE.QUESTION_LIST, type: queryStatus });
 
   const handlePageClick = (number: number) => {
     router.push({ pathname: '/question/list', query: { status: queryStatus, page: number + 1 } });
@@ -30,9 +22,9 @@ const QuestionListPage = () => {
     <MainLayout>
       <QuestionListContainer>
         <ContentSection>
-          <QuestionListSection currentPage={currentPage} />
+          <QuestionsSection currentPage={currentPage} />
         </ContentSection>
-        <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
+        <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />
       </QuestionListContainer>
     </MainLayout>
   );

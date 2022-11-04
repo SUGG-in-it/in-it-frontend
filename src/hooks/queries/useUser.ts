@@ -20,7 +20,6 @@ export const useLoginMutation = ({ onSuccess, onError }: MutationCallbacks = {})
         errorToast('아이디 혹은 비밀번호가 일치하지 않습니다.');
       }
     },
-    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
 };
 
@@ -33,7 +32,6 @@ export const useJoinMutation = ({ onSuccess, onError }: MutationCallbacks = {}) 
     onError: () => {
       onError && onError();
     },
-    useErrorBoundary: (error: CustomError) => error.statusCode >= 500,
   });
 };
 

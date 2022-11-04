@@ -25,11 +25,9 @@ const ButtonWrapper = styled.button<{ isLoading: boolean }>`
 
 const APIButton = ({ children, onClick, className, isLoading }: ButtonProps) => {
   return (
-    <>
-      <ButtonWrapper {...{ className, isLoading, onClick }} disabled={isLoading} type={'button'}>
-        {isLoading ? <PulseLoading /> : children}
-      </ButtonWrapper>
-    </>
+    <ButtonWrapper {...{ className, isLoading, onClick }} disabled={isLoading} type={'button'}>
+      {isLoading ? <PulseLoading /> : children}
+    </ButtonWrapper>
   );
 };
 
