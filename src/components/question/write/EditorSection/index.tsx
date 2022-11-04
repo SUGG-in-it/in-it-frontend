@@ -31,6 +31,9 @@ const QuestionEditor = () => {
   useEffect(() => {
     title.setValue(question.title || '');
     point.setValue(String(question.point || 0));
+    if (question.tagList && question.tagList.length) {
+      setTagList(question.tagList.split(','));
+    }
     editorRef.current?.getInstance().setHTML(question.content || '');
   }, [question]);
 
@@ -62,6 +65,7 @@ const QuestionEditor = () => {
   };
 
   const handleTagList = (tag: string) => {
+    console.log(tagList);
     if (!tagList.includes(tag)) {
       setTagList((tagList) => [...tagList, tag]);
     }
