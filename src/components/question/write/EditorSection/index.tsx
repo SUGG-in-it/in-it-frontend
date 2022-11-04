@@ -33,6 +33,8 @@ const QuestionEditor = () => {
     point.setValue(String(question.point || 0));
     if (question.tagList && question.tagList.length) {
       setTagList(question.tagList.split(','));
+    } else {
+      setTagList([]);
     }
     editorRef.current?.getInstance().setHTML(question.content || '');
   }, [question]);

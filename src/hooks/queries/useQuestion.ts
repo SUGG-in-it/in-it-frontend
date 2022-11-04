@@ -61,12 +61,12 @@ export const useUserQuestionPageQuery = (size: number) => {
 };
 
 export const useQuestionQuery = (questionId: number) => {
-  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION], () => getQuestion(questionId));
+  const data = useQuery<QuestionResponseBody>([KEYS.QUESTION, { questionId }], () => getQuestion(questionId));
   return data;
 };
 
 export const useMainContentQuery = (type: string) => {
-  const data = useQuery<MainContentResponseBody>([KEYS.MAIN_CONTENT, type], () => getMainContent(type), {
+  const data = useQuery<MainContentResponseBody>([KEYS.MAIN_CONTENT, { type }], () => getMainContent(type), {
     suspense: false,
   });
   return data;
