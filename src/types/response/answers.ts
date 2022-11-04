@@ -25,6 +25,6 @@ export interface MyAnswer {
   questionTitle: string;
 }
 
-export interface UserAnswerPageResponseBody {
+export interface AnswerPageResponseBody {
   count: number;
 }

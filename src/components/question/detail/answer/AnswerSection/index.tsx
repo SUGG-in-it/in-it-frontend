@@ -1,8 +1,7 @@
-import { getAnswerPage } from '@/api/answers';
 import Pagination from '@/components/common/Pagination';
 import AnswerHeader from '@/components/question/detail/answer/AnswerHeader';
 import AnswerItem from '@/components/question/detail/answer/AnswerItem';
-import { useAnswersQuery } from '@/hooks/queries/useAnswer';
+import { useAnswerPageQuery, useAnswersQuery } from '@/hooks/queries/useAnswer';
 import { media } from '@/styles/mediaQuery';
 import { Suspense, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -18,23 +17,16 @@ import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBou
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
 
 const AnswerSection = ({ question }: { question: Question }) => {
-  const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortedAnswer, setSortedAnswer] = useState([]);
+
+  const { data: page } = useAnswerPageQuery({ size: PAGINATION_SIZE.ANSWER_LIST, questionId: question.questionId });
 
   const { data: answers } = useAnswersQuery({
     page: currentPage - 1,
     size: PAGINATION_SIZE.ANSWER_LIST,
     questionId: question.questionId,
   });
-
-  useEffect(() => {
-    async function fetchQuestionPage() {
-      const { count } = await getAnswerPage({ size: PAGINATION_SIZE.ANSWER_LIST, questionId: question.questionId });
-      setTotalPage(count);
-    }
-    fetchQuestionPage();
-  }, [currentPage, answers]);
 
   useEffect(() => {
     answers?.sort((a: Answer, b: Answer) => b.selected - a.selected);
@@ -49,7 +41,7 @@ const AnswerSection = ({ question }: { question: Question }) => {
     <AnswerListSectionWrapper>
       {sortedAnswer &&
         sortedAnswer.map((answer: Answer) => <AnswerItem key={answer.answerId} question={question} {...answer} />)}
-      <Pagination totalPage={totalPage} currentPage={currentPage} onPageClick={handlePageClick} />
+      <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />
     </AnswerListSectionWrapper>
   );
 };

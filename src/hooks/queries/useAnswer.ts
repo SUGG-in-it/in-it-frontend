@@ -1,9 +1,17 @@
-import { deleteAnswer, getAnswers, getUserAnswerPage, getUserAnswers, selectAnswer, uploadAnswer } from '@/api/answers';
+import {
+  deleteAnswer,
+  getAnswerPage,
+  getAnswers,
+  getUserAnswerPage,
+  getUserAnswers,
+  selectAnswer,
+  uploadAnswer,
+} from '@/api/answers';
 import { CustomError } from '@/api/config/error';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
-import { AnswersRequestParams, UserAnswersRequestParams } from '@/types/request/answers';
-import { AnswersResponseBody, MyAnswersResponseBody, UserAnswerPageResponseBody } from '@/types/response/answers';
+import { AnswerPageRequestParams, AnswersRequestParams, UserAnswersRequestParams } from '@/types/request/answers';
+import { AnswersResponseBody, MyAnswersResponseBody, AnswerPageResponseBody } from '@/types/response/answers';
 import { errorToast, successToast } from '@/utils/toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -74,8 +82,15 @@ export const useDeleteAnswerMutation = ({ onSuccess, onError }: MutationCallback
   });
 };
 
+export const useAnswerPageQuery = (answerPageRequestParams: AnswerPageRequestParams) => {
+  const data = useQuery<AnswerPageResponseBody>([KEYS.ANSWERS_PAGE], () => getAnswerPage(answerPageRequestParams), {
+    suspense: false,
+  });
+  return data;
+};
+
 export const useUserAnswerPageQuery = (size: number) => {
-  const data = useQuery<UserAnswerPageResponseBody>([KEYS.USER_ANSWERS_PAGE], () => getUserAnswerPage(size), {
+  const data = useQuery<AnswerPageResponseBody>([KEYS.USER_ANSWERS_PAGE], () => getUserAnswerPage(size), {
     suspense: false,
   });
   return data;
