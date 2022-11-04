@@ -9,3 +9,7 @@ export interface Comment {
   updatedAt: string;
   userId: number;
 }
+
+export interface CommentPageResponseBody {
+  count: number;
+}

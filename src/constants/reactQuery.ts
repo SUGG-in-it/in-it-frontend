@@ -10,5 +10,6 @@ export const KEYS = {
   ANSWERS: 'getAnswers',
   PROFILE: 'getProfile',
   COMMENTS: 'getComments',
+  COMMENTS_PAGE: 'getCommentsPage',
   TAGS: 'getTags',
 };

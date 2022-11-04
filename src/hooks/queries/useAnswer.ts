@@ -74,7 +74,7 @@ export const useDeleteAnswerMutation = ({ onSuccess, onError }: MutationCallback
   });
 };
 
-export const useAnswerPageQuery = (size: number) => {
+export const useUserAnswerPageQuery = (size: number) => {
   const data = useQuery<UserAnswerPageResponseBody>([KEYS.USER_ANSWERS_PAGE], () => getUserAnswerPage(size), {
     suspense: false,
   });
