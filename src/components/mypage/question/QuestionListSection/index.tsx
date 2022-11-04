@@ -2,20 +2,13 @@ import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { useUserQuestionsQuery } from '@/hooks/queries/useQuestion';
 import { Question } from '@/types/response/questions';
 import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import QuestionListSkeleton from '@/components/mypage/question/QuestionListSection/index.skeleton';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
-
-const QuestionListFallback = ({ error, resetErrorBoundary }) => (
-  <div>
-    <p>나의 질문을 불러오는데 실패했어요 😭😭😭 </p>
-  </div>
-);
-
-const QuestionListLoading = () => <div />;
 
 const QuestionList = ({ currentPage }: { currentPage: number }) => {
   const router = useRouter();
@@ -47,11 +40,11 @@ const QuestionList = ({ currentPage }: { currentPage: number }) => {
 };
 
 const QuestionListSection = ({ currentPage }: { currentPage: number }) => (
-  <ErrorBoundary FallbackComponent={QuestionListFallback}>
-    <Suspense fallback={<QuestionListLoading />}>
+  <RetryErrorBoundary>
+    <Suspense fallback={<QuestionListSkeleton />}>
       <QuestionList currentPage={currentPage} />
     </Suspense>
-  </ErrorBoundary>
+  </RetryErrorBoundary>
 );
 
 const QuestionWrapper = styled.div`

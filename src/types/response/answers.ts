@@ -24,3 +24,7 @@ export interface MyAnswer {
   questionId: number;
   questionTitle: string;
 }
+
+export interface UserAnswerPageResponseBody {
+  count: number;
+}

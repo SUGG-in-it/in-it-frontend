@@ -42,6 +42,7 @@ export const useQuestionPageQuery = (questionPageRequestBody: QuestionPageReques
   );
   return data;
 };
+
 export const useUserQuestionsQuery = (userQusetionsRequestBody: UserQusetionsRequestBody) => {
   const page = userQusetionsRequestBody.page;
 
