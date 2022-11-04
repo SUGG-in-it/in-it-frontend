@@ -4,6 +4,7 @@ export const KEYS = {
   USER_ANSWERS_PAGE: 'getUserAnswersPage',
   QUESTIONS: 'getQuestions',
   QUESTIONS_PAGE: 'getQuestionsPage',
+  USER_QUESTIONS_PAGE: 'getUSerQuestionPage',
   MAIN_CONTENT: 'getMainContent',
   QUESTION: 'getQuestion',
   ANSWERS: 'getAnswers',

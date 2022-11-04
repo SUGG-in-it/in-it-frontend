@@ -7,6 +7,7 @@ import {
   deleteQuestion,
   getUserQusetions,
   getQuestionPage,
+  getUserQuestionPage,
 } from '@/api/questions';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
@@ -49,6 +50,13 @@ export const useUserQuestionsQuery = (userQusetionsRequestBody: UserQusetionsReq
   const data = useQuery<QuestionsResponseBody>([KEYS.USER_QUESTIONS, { page }], () =>
     getUserQusetions(userQusetionsRequestBody)
   );
+  return data;
+};
+
+export const useUserQuestionPageQuery = (size: number) => {
+  const data = useQuery<QuestionPageResponseBody>([KEYS.USER_QUESTIONS_PAGE], () => getUserQuestionPage(size), {
+    suspense: false,
+  });
   return data;
 };
 
