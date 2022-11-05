@@ -1,4 +1,5 @@
 import { CustomError } from '@/api/config/error';
+import { errorToast } from '@/utils/toast';
 import axios, { AxiosRequestConfig } from 'axios';
 interface RequestType {
   url: string;
@@ -53,7 +54,8 @@ axios.interceptors.response.use(
         return axios(originalRequest);
       } else {
         localStorage.clear();
-        throw new CustomError(response.data?.status, response.data?.message, response.data?.code);
+        errorToast('인증시간이 만료되었습니다. 로그인을 다시해주세요.');
+        setTimeout(() => (window.location.href = '/login'), 1000);
       }
     } else if (config.url !== '/token/refresh-token') {
       throw new CustomError(response.data?.status, response.data?.message, response.data?.code);
