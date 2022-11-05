@@ -1,4 +1,5 @@
 import Pagination from '@/components/common/Pagination';
+import withAuth from '@/components/hoc/withAuth';
 import MypageLayout from '@/components/layouts/MypageLayout';
 import QuestionListSection from '@/components/mypage/question/QuestionListSection';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
@@ -31,4 +32,4 @@ const UserQuestionSection = styled.ul`
   padding-top: 10px;
 `;
 
-export default MyQuestion;
+export default withAuth(MyQuestion);

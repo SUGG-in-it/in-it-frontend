@@ -9,6 +9,7 @@ import useInput from '@/hooks/useInput';
 import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
 import ProfileSkeleton from '@/components/mypage/profile/ProfileSection/index.skeleton';
 import APIButton from '@/components/common/button/APIButton';
+import withAuth from '@/components/hoc/withAuth';
 
 const Profile = ({ nickname }: { nickname: string }) => {
   const { data: profile } = useProfileQuery(nickname);
