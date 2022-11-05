@@ -6,5 +6,3 @@ export const sendCode = async (sendEmailRequestBody: SendEmailRequestBody) =>
 
 export const verifyCode = async (verifyCodeParams: VerifyCodeRequestBody) =>
   await POST('auth/verify', verifyCodeParams);
-
-export const newToken = async (refreshToken: string) => await POST('/token/refresh-token', { refreshToken });
