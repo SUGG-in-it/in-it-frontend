@@ -4,7 +4,6 @@ import LabelInput from '@/components/common/Input/LabelInput';
 import useInput from '@/hooks/useInput';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
-import { uploadImage } from '@/api/images';
 import { Suspense, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { media } from '@/styles/mediaQuery';
@@ -16,6 +15,7 @@ import TagsWithDeleteButton from '@/components/common/tagsWithDeleteButton';
 import APIButton from '@/components/common/button/APIButton';
 import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
 import EditorSkeleton from '@/components/question/write/EditorSection/index.skeleton';
+import { useUploadImageMutation } from '@/hooks/queries/useImage';
 
 const QuestionEditor = () => {
   const title = useInput('');
@@ -28,6 +28,14 @@ const QuestionEditor = () => {
 
   const { data: question } = useQuestionQuery(questionId);
 
+  const mutationUploadQuestion = useUploadQuestionMutation({
+    onSuccess: () => {
+      router.push('/');
+    },
+  });
+
+  const mutationUploadImage = useUploadImageMutation({});
+
   useEffect(() => {
     title.setValue(question.title || '');
     point.setValue(String(question.point || 0));
@@ -39,15 +47,12 @@ const QuestionEditor = () => {
     editorRef.current?.getInstance().setHTML(question.content || '');
   }, [question]);
 
-  const mutationUploadQuestion = useUploadQuestionMutation({
-    onSuccess: () => {
-      router.push('/');
-    },
-  });
-
   const addImageBlobHook = async (file, callback) => {
-    const { data } = await uploadImage(file);
-    callback(data.url, '이미지');
+    mutationUploadImage.mutate(file, {
+      onSuccess: (data) => {
+        callback(data.data.url, '이미지');
+      },
+    });
   };
 
   const handleQuestionSubmit = async () => {
