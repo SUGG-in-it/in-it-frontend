@@ -1,4 +1,5 @@
 import { CustomError } from '@/api/config/error';
+import { errorToast } from '@/utils/toast';
 import axios, { AxiosRequestConfig } from 'axios';
 interface RequestType {
   url: string;
@@ -35,45 +36,46 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-/* axios.interceptors.response.use(
+axios.interceptors.response.use(
   (response) => {
     return response;
   },
   async (error) => {
     const { config, response } = error;
     // 401 error => refreshToken으로 accessToken 갱신 => 재요청
-
-    if (response?.status === 401 && response.data.code !== 'UNAUTHORIZED_PASSWORD') {
+    if (response?.data?.status === 401 && response?.data?.error === 'Unauthorized' && !config.retry) {
+      config.retry = true;
       const originalRequest = config;
       const refreshToken = localStorage.getItem('refreshToken');
-      const data = await newToken(refreshToken);
-      const accessToken = data.data.accessToken;
-      localStorage.setItem('accessToken', accessToken);
-      return axios(originalRequest);
-    } else {
-      console.log('???', response.data.status, response.data.message, response.data.code);
+      const data = await POST('/token/refresh-token', { refreshToken });
+      if (data?.data?.accessToken) {
+        const accessToken = data.data.accessToken;
+        localStorage.setItem('accessToken', accessToken);
+        return axios(originalRequest);
+      } else {
+        localStorage.clear();
+        errorToast('인증시간이 만료되었습니다. 로그인을 다시해주세요.');
+        setTimeout(() => (window.location.href = '/login'), 1000);
+      }
+    } else if (config.url !== '/token/refresh-token') {
       throw new CustomError(response.data?.status, response.data?.message, response.data?.code);
     }
   }
-); */
+);
 
 const request = async ({ url, method, body, params }: RequestType): Promise<ResponseType> => {
-  try {
-    const config: AxiosRequestConfig = {
-      baseURL: process.env.NEXT_PUBLIC_API_PREFIX,
-      params,
-    };
-    const { data } =
-      (method === 'get' && (await axios.get(url, config))) ||
-      (method === 'post' && (await axios.post(url, body, config))) ||
-      (method === 'patch' && (await axios.patch(url, body, config))) ||
-      (method === 'put' && (await axios.put(url, body, config))) ||
-      (method === 'delete' && (await axios.delete(url, config))) ||
-      {};
-    return data;
-  } catch (error: any) {
-    throw new CustomError(error.response.data?.status, error.response.data?.message, error.response.data?.code);
-  }
+  const config: AxiosRequestConfig = {
+    baseURL: process.env.NEXT_PUBLIC_API_PREFIX,
+    params,
+  };
+  const { data } =
+    (method === 'get' && (await axios.get(url, config))) ||
+    (method === 'post' && (await axios.post(url, body, config))) ||
+    (method === 'patch' && (await axios.patch(url, body, config))) ||
+    (method === 'put' && (await axios.put(url, body, config))) ||
+    (method === 'delete' && (await axios.delete(url, config))) ||
+    {};
+  return data;
 };
 
 export const GET = (url: string, params?: object) => request({ url, method: 'get', params });

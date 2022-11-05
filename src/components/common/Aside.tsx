@@ -13,11 +13,14 @@ import TagListSkeleton from '@/components/common/tagsWithDeleteButton/index.skel
 const MyInfo = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useRecoilState(loginState);
-  const user = useRecoilValue(userState);
+  const [user, setUserState] = useRecoilState(userState);
 
   const handleLogoutClick = () => {
-    localStorage.setItem('accessToken', '');
-    localStorage.setItem('refreshToken', '');
+    localStorage.clear();
+    setUserState({
+      id: '',
+      nickname: '',
+    });
     setIsLogin(false);
     successToast('로그아웃이 완료되었습니다.');
   };

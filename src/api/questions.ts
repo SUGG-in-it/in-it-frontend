@@ -17,7 +17,10 @@ export const getUserQusetions = async (userQusetionsRequestBody: UserQusetionsRe
   return data;
 };
 
-export const postQuestionId = async () => await POST('/questions');
+export const postQuestionId = async () =>
+  await POST('/questions')
+    .then((res) => res)
+    .catch((e) => console.log(e));
 
 export const uploadQuestion = async ({ questionId, title, content, tagList, point }: UploadQuestionRequestBody) =>
   await PUT(`/questions/${questionId}`, { title, content, tagList, point });

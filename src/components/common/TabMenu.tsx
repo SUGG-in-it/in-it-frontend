@@ -34,10 +34,10 @@ const TabMenu = () => {
         router.push({ pathname: '/mypage/profile', query: { nickname: nickname } });
         break;
       case 1:
-        router.push('/mypage/question');
+        router.push({ pathname: '/mypage/question', query: { nickname: nickname } });
         break;
       case 2:
-        router.push('/mypage/answer');
+        router.push({ pathname: '/mypage/answer', query: { nickname: nickname } });
         break;
     }
   };
