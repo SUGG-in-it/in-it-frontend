@@ -6,7 +6,10 @@ import {
   UserAnswersRequestParams,
 } from '@/types/request/answers';
 
-export const postAnswerId = async (questionId: number) => await POST('/answers', { questionId });
+export const postAnswerId = async (questionId: number) =>
+  await POST('/answers', { questionId })
+    .then((res) => res)
+    .catch((e) => console.log(e));
 
 export const uploadAnswer = async ({ answerId, content }: UploadAnswerRequestBody) =>
   await PUT(`/answers/${answerId}`, { content });
