@@ -136,4 +136,4 @@ const ProfileRow = styled.div`
   min-height: 4em;
 `;
 
-export default ProfileSection;
+export default withAuth(ProfileSection);
