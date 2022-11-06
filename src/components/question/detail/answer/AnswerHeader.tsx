@@ -19,7 +19,7 @@ const AnswerWriteHeader = styled.div`
   align-items: center;
   max-width: 700px;
   width: 85vw;
-  margin: 3em auto 0;
+  margin: 3em auto 1em;
 `;
 
 const Label = styled.p`

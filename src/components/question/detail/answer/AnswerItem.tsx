@@ -55,13 +55,13 @@ const AnswerItem = ({ answerId, nickname, date, content, userId, question, selec
           </SelectButton>
         )}
       </ButtonWrapper>
+      {question.type === 'completed' && selected && (
+        <SelectedBox>
+          <CheckIcon />
+          <SelectedAnswer>{'채택된 답변입니다 ☺️'}</SelectedAnswer>
+        </SelectedBox>
+      )}
       <AnswerItemWrapper>
-        {question.type === 'completed' && selected && (
-          <SelectedBox>
-            <CheckIcon width={50} />
-            <SelectedAnswer>{'채택된 답변입니다 ☺️'}</SelectedAnswer>
-          </SelectedBox>
-        )}
         <AnswerHeader>
           <div>
             <NickName>{`작성자 ${nickname}`}</NickName>
@@ -103,11 +103,10 @@ const AnswerItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.5em 1em;
-  margin-top: 1em;
   background-color: ${({ theme }) => theme.backgrondLightColor};
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   border-radius: 5px;
-  margin-bottom: 3em;
+  margin-bottom: 4em;
 `;
 
 const AnswerHeader = styled.div`
@@ -160,18 +159,17 @@ const SelectedBox = styled.div`
   display: flex;
   align-items: center;
   color: ${({ theme }) => theme.pointColor};
-  margin-bottom: 1.5em;
 `;
 
 const CheckIcon = styled(AiFillCheckCircle)`
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 `;
 
 const SelectedAnswer = styled.p`
   font-weight: bold;
   padding: 0.5em;
-  font-size: 1.1rem;
+  font-size: 1rem;
 `;
 
 const ButtonWrapper = styled.div`

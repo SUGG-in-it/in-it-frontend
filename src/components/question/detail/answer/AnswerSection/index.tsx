@@ -65,21 +65,23 @@ const AnswerListSection = ({ question }: { question: Question }) => {
           <AnswerSection question={question} />
         </Suspense>
       </RetryErrorBoundary>
-      <AnswerWriteSectionWrapper>
-        {isLogin ? (
-          <ToastEditorWrapper>
-            <Notice>{`${user.nickname}님, 답변해주세요! 😉`}</Notice>
-            <EditorSectionWrapper>
-              <EditorSection questionId={question.questionId} content={''} />
-            </EditorSectionWrapper>
-          </ToastEditorWrapper>
-        ) : (
-          <ButtonContainer>
-            <Notice>{`로그인하여 답변해주세요!`}</Notice>
-            <LoginButton onClick={handleLoginButton}>{`😎 로그인 하러 가기`}</LoginButton>
-          </ButtonContainer>
-        )}
-      </AnswerWriteSectionWrapper>
+      {question.type === 'completed' ? null : (
+        <AnswerWriteSectionWrapper>
+          {isLogin ? (
+            <ToastEditorWrapper>
+              <Notice>{`${user.nickname}님, 답변해주세요! 😉`}</Notice>
+              <EditorSectionWrapper>
+                <EditorSection questionId={question.questionId} content={''} />
+              </EditorSectionWrapper>
+            </ToastEditorWrapper>
+          ) : (
+            <ButtonContainer>
+              <Notice>{`로그인하여 답변해주세요!`}</Notice>
+              <LoginButton onClick={handleLoginButton}>{`😎 로그인 하러 가기`}</LoginButton>
+            </ButtonContainer>
+          )}
+        </AnswerWriteSectionWrapper>
+      )}
     </>
   );
 };
