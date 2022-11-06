@@ -61,7 +61,6 @@ export const getSearchQuestionPage = async ({
   let url = `/questions/search/page?size=${size}&type=${type}`;
   if (tag) url = url.concat(`&tag=${tag}`);
   if (query) url = url.concat(`&query=${query}`);
-  console.log(query, url);
   const { data } = await GET(url);
   return data;
 };
