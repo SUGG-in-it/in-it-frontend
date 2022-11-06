@@ -1,4 +1,4 @@
-import { useQuestionsQuery } from '@/hooks/queries/useQuestion';
+import { useSearchQuestionQuery } from '@/hooks/queries/useQuestion';
 import { Suspense, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import StatusBar from '@/components/question/list/StatusBar';
@@ -12,13 +12,18 @@ import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBou
 
 const Questions = ({ currentPage }: { currentPage: number }) => {
   const [status, setStatus] = useState('total');
-  const { data: questions } = useQuestionsQuery({
+  const router = useRouter();
+  const queryStatus = router.query.status;
+  const query = router.query.query as string;
+  const tag = router.query.tag as string;
+
+  const { data: questions } = useSearchQuestionQuery({
     page: currentPage - 1,
     size: PAGINATION_SIZE.QUESTION_LIST,
     type: status,
+    tag,
+    query,
   });
-  const router = useRouter();
-  const queryStatus = router.query.status;
 
   useEffect(() => {
     if (queryStatus) {
@@ -28,7 +33,7 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
 
   return (
     <QuestionListWrapper>
-      {questions.questions.map((question, index) => (
+      {questions.searchQuestionList.map((question, index) => (
         <>
           <QuestionItem key={question.questionId} {...question} />
           <GrayLine />

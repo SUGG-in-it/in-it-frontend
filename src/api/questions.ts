@@ -2,10 +2,12 @@ import { DELETE, GET, POST, PUT } from '@/api/config/base';
 import {
   QuestionPageRequestBody,
   QusetionsRequestBody,
+  SearchQusetionsPageRequestParams,
+  SearchQusetionsRequestParams,
   UploadQuestionRequestBody,
   UserQusetionsRequestBody,
 } from '@/types/request/questions';
-import { QuestionsPageResponseBody } from '@/types/response/questions';
+import { QuestionsPageResponseBody, SearchQuestionsResponseBody } from '@/types/response/questions';
 
 export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) => {
   const { data } = await GET('/questions', qusetionsRequestBody);
@@ -49,3 +51,31 @@ export const getQuestion = async (questionId: number) => {
 };
 
 export const deleteQuestion = async (questionId: number) => await DELETE(`/questions/${questionId}`);
+
+export const getSearchQuestionPage = async ({
+  size,
+  type = 'total',
+  tag,
+  query = '',
+}: SearchQusetionsPageRequestParams): Promise<QuestionsPageResponseBody> => {
+  let url = `/questions/search/page?size=${size}&type=${type}`;
+  if (tag) url = url.concat(`&tag=${tag}`);
+  if (query) url = url.concat(`&query=${query}`);
+  console.log(query, url);
+  const { data } = await GET(url);
+  return data;
+};
+
+export const getSearchQuestion = async ({
+  size,
+  type = 'total',
+  tag,
+  query = '',
+  page,
+}: SearchQusetionsRequestParams): Promise<SearchQuestionsResponseBody> => {
+  let url = `/questions/search?page=${page}&size=${size}&type=${type}`;
+  if (tag) url = url.concat(`&tag=${tag}`);
+  if (query) url = url.concat(`&query=${query}`);
+  const { data } = await GET(url);
+  return data;
+};

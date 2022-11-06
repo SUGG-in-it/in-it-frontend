@@ -6,11 +6,14 @@ import useInput from '@/hooks/useInput';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { FiRotateCcw } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 
 const QuestionSearchSection = () => {
   const searchWord = useInput('');
   const searchTag = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
+  const router = useRouter();
+  let type = router.query.status as 'doing' | 'completed' | 'total';
 
   const handleTagList = (tag: string) => {
     if (!tagList.includes(tag)) {
@@ -19,7 +22,18 @@ const QuestionSearchSection = () => {
   };
 
   const handleSearch = () => {
-    //
+    if (!type) type = 'total';
+    const query = searchWord.value;
+    const tag = tagList.join(',');
+    if (tag && query) {
+      router.push({ pathname: '/question/list', query: { status: type, tag, query, page: 1 } });
+    }
+    if (tag) {
+      router.push({ pathname: '/question/list', query: { status: type, tag, page: 1 } });
+    }
+    if (query) {
+      router.push({ pathname: '/question/list', query: { status: type, query, page: 1 } });
+    }
   };
 
   const handleInit = () => {
