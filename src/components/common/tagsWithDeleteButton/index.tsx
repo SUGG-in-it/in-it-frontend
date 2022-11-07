@@ -39,7 +39,8 @@ const TagWrapper = styled.li`
   align-items: center;
   font-weight: bold;
   span {
-    padding-left: 0.5em;
+    padding: 0.3em;
+    font-size: 1.1rem;
   }
   :hover {
     cursor: pointer;
