@@ -4,6 +4,21 @@ export interface QusetionsRequestBody {
   type: string;
 }
 
+export interface SearchQusetionsPageRequestParams {
+  query?: string;
+  size: number;
+  type: string;
+  tag?: string;
+}
+
+export interface SearchQusetionsRequestParams {
+  query?: string;
+  size: number;
+  type: string;
+  tag?: string;
+  page: number;
+}
+
 export interface UserQusetionsRequestBody {
   page: number;
   size: number;

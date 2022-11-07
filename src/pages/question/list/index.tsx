@@ -2,20 +2,30 @@ import Pagination from '@/components/common/Pagination';
 import MainLayout from '@/components/layouts/MainLayout';
 import QuestionsSection from '@/components/question/list/QuestionListSection';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
-import { useQuestionPageQuery } from '@/hooks/queries/useQuestion';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { useSearchQuestionPageQuery } from '@/hooks/queries/useQuestion';
 
 const QuestionListPage = () => {
   const router = useRouter();
-  const queryStatus = router.query.status as 'doing' | 'completed' | 'total';
+  const type = router.query.status as 'doing' | 'completed' | 'total';
+  const tag = router.query.tag as string;
+  const query = router.query.query as string;
   const currentPage = Number(router.query.page) || 1;
 
-  const { data: page } = useQuestionPageQuery({ size: PAGINATION_SIZE.QUESTION_LIST, type: queryStatus });
+  const { data: page } = useSearchQuestionPageQuery({ size: PAGINATION_SIZE.QUESTION_LIST, type, query, tag });
 
   const handlePageClick = (number: number) => {
-    router.push({ pathname: '/question/list', query: { status: queryStatus, page: number + 1 } });
+    if (tag && query) {
+      router.push({ pathname: '/question/list', query: { status: type, tag, query, page: number + 1 } });
+    }
+    if (tag) {
+      router.push({ pathname: '/question/list', query: { status: type, tag, page: number + 1 } });
+    }
+    if (query) {
+      router.push({ pathname: '/question/list', query: { status: type, query, page: number + 1 } });
+    }
   };
 
   return (

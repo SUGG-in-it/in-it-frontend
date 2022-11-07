@@ -19,7 +19,6 @@ interface QuestionProps {
 }
 
 const QuestionItem = ({ questionId, type, nickname, updateDate, title, content, tagList, point }: QuestionProps) => {
-  console.log(point);
   const router = useRouter();
 
   const handleQuestionClick = () => {

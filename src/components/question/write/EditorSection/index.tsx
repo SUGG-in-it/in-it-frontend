@@ -72,7 +72,6 @@ const QuestionEditor = () => {
   };
 
   const handleTagList = (tag: string) => {
-    console.log(tagList);
     if (!tagList.includes(tag)) {
       setTagList((tagList) => [...tagList, tag]);
     }

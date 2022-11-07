@@ -3,14 +3,31 @@ import Button from '@/components/common/button/Button';
 import SearchBar from '@/components/common/SearchBar';
 import TagsWithDeleteButton from '@/components/common/tagsWithDeleteButton';
 import useInput from '@/hooks/useInput';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FiRotateCcw } from 'react-icons/fi';
+import { useRouter } from 'next/router';
 
 const QuestionSearchSection = () => {
   const searchWord = useInput('');
   const searchTag = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
+  const router = useRouter();
+  let type = router.query.status as 'doing' | 'completed' | 'total';
+  const query = router.query.query as string;
+  const tag = router.query.tag as string;
+
+  useEffect(() => {
+    searchWord.setValue(query);
+    const tagList = tag?.split(',');
+    if (tagList && tagList.length >= 1) {
+      setTagList(tagList);
+    }
+  }, [tag, query]);
+
+  useEffect(() => {
+    handleSearch();
+  }, [tagList]);
 
   const handleTagList = (tag: string) => {
     if (!tagList.includes(tag)) {
@@ -19,7 +36,19 @@ const QuestionSearchSection = () => {
   };
 
   const handleSearch = () => {
-    //
+    if (!type) type = 'total';
+    const query = searchWord.value;
+    const tag = tagList.join(',');
+    if (tag && query) {
+      return router.push({ pathname: '/question/list', query: { status: type, tag, query, page: 1 } });
+    }
+    if (tag) {
+      return router.push({ pathname: '/question/list', query: { status: type, tag, page: 1 } });
+    }
+    if (query) {
+      return router.push({ pathname: '/question/list', query: { status: type, query, page: 1 } });
+    }
+    return router.push({ pathname: '/question/list', query: { status: type, page: 1 } });
   };
 
   const handleInit = () => {
@@ -36,8 +65,8 @@ const QuestionSearchSection = () => {
       </SearchInput>
       <ButtonContainer>
         <SearchButton onClick={handleSearch}>{'검색'}</SearchButton>
-        <InitButtonWrapper>
-          <InitButton onClick={handleInit} />
+        <InitButtonWrapper onClick={handleInit}>
+          <InitButton />
           <span>{'초기화'}</span>
         </InitButtonWrapper>
       </ButtonContainer>

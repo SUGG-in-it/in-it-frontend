@@ -8,15 +8,24 @@ import {
   getUserQusetions,
   getQuestionPage,
   getUserQuestionPage,
+  getSearchQuestionPage,
+  getSearchQuestion,
 } from '@/api/questions';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
-import { QuestionPageRequestBody, QusetionsRequestBody, UserQusetionsRequestBody } from '@/types/request/questions';
+import {
+  QuestionPageRequestBody,
+  QusetionsRequestBody,
+  SearchQusetionsPageRequestParams,
+  SearchQusetionsRequestParams,
+  UserQusetionsRequestBody,
+} from '@/types/request/questions';
 import {
   MainContentResponseBody,
   QuestionResponseBody,
   QuestionPageResponseBody,
   QuestionsResponseBody,
+  SearchQuestionsResponseBody,
 } from '@/types/response/questions';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { errorToast, successToast } from '@/utils/toast';
@@ -96,4 +105,31 @@ export const useDeleteQuestionMutation = ({ onSuccess, onError }: MutationCallba
       errorToast('글 삭제에 실패했습니다. 😭');
     },
   });
+};
+
+export const useSearchQuestionPageQuery = (searchQusetionsPageRequestParams: SearchQusetionsPageRequestParams) => {
+  const type = searchQusetionsPageRequestParams.type;
+  const tag = searchQusetionsPageRequestParams.tag;
+  const query = searchQusetionsPageRequestParams.query;
+
+  const data = useQuery<QuestionPageResponseBody>(
+    [KEYS.SEARCH_QUESTIONS_PAGE, { type, tag, query }],
+    () => getSearchQuestionPage(searchQusetionsPageRequestParams),
+    {
+      suspense: false,
+    }
+  );
+  return data;
+};
+
+export const useSearchQuestionQuery = (searchQusetionsRequestParams: SearchQusetionsRequestParams) => {
+  const type = searchQusetionsRequestParams.type;
+  const tag = searchQusetionsRequestParams.tag;
+  const query = searchQusetionsRequestParams.query;
+  const page = searchQusetionsRequestParams.page;
+
+  const data = useQuery<SearchQuestionsResponseBody>([KEYS.SEARCH_QUESTIONS, { type, tag, query, page }], () =>
+    getSearchQuestion(searchQusetionsRequestParams)
+  );
+  return data;
 };

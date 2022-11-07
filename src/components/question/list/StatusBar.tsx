@@ -7,19 +7,32 @@ const StatusBar = () => {
   const menuList = ['전체', '답변 완료', '답변 진행중'];
   const router = useRouter();
 
+  const tag = router.query.tag as string;
+  const query = router.query.query as string;
+
   const hadleStatus = (index: number) => {
     setCurrentTab(index);
+    let type = 'total';
     switch (index) {
       case 0:
-        router.push({ pathname: '/question/list', query: { status: 'total' } });
         break;
       case 1:
-        router.push({ pathname: '/question/list', query: { status: 'completed' } });
+        type = 'completed';
         break;
       case 2:
-        router.push({ pathname: '/question/list', query: { status: 'doing' } });
+        type = 'doing';
         break;
     }
+    if (tag && query) {
+      return router.push({ pathname: '/question/list', query: { status: type, tag, query } });
+    }
+    if (tag) {
+      return router.push({ pathname: '/question/list', query: { status: type, tag } });
+    }
+    if (query) {
+      return router.push({ pathname: '/question/list', query: { status: type, query } });
+    }
+    router.push({ pathname: '/question/list', query: { status: type } });
   };
 
   return (
