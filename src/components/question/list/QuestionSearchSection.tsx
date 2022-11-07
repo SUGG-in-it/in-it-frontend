@@ -65,8 +65,8 @@ const QuestionSearchSection = () => {
       </SearchInput>
       <ButtonContainer>
         <SearchButton onClick={handleSearch}>{'검색'}</SearchButton>
-        <InitButtonWrapper>
-          <InitButton onClick={handleInit} />
+        <InitButtonWrapper onClick={handleInit}>
+          <InitButton />
           <span>{'초기화'}</span>
         </InitButtonWrapper>
       </ButtonContainer>
