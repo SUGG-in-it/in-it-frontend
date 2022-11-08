@@ -14,7 +14,7 @@ const DialogTitle = ({ children }: DialogTitleProps) => {
 const DialogTitleType = (<DialogTitle />).type;
 
 const getDialogTitle = (children: ReactNode) => {
-  return Children.toArray(children).find((child) => child.type === DialogTitleType);
+  return Children.toArray(children).find((child: any) => child.type === DialogTitleType);
 };
 
 interface DialogLabelButtonProps {
@@ -34,7 +34,7 @@ const DialogLabelButtonType = (<DialogLabelButton />).type;
 
 function getDialogLabelButtons(children: ReactNode) {
   const childrenArray = Children.toArray(children);
-  return childrenArray.filter((child) => child.type === DialogLabelButtonType).slice(0, 2);
+  return childrenArray.filter((child: any) => child.type === DialogLabelButtonType).slice(0, 2);
 }
 
 interface DialoggetDialogDescriptionProps {
@@ -49,7 +49,7 @@ const DialogDescriptionType = (<DialogDescription />).type;
 
 function getDialogDescription(children: ReactNode) {
   const childrenArray = Children.toArray(children);
-  return childrenArray.filter((child) => child.type === DialogDescriptionType).slice(0, 2);
+  return childrenArray.filter((child: any) => child.type === DialogDescriptionType).slice(0, 2);
 }
 
 interface DialogMainProps {
