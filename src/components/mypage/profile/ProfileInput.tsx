@@ -2,6 +2,7 @@ import Input from '@/components/common/Input/Input';
 import LabelInput from '@/components/common/Input/LabelInput';
 import styled from 'styled-components';
 import { UseInputReturn } from '@/hooks/useInput';
+import { media } from '@/styles/mediaQuery';
 
 const ProfileInput = ({ label, info }: { label: string; info: UseInputReturn }) => {
   return (
@@ -22,10 +23,16 @@ const Container = styled.div`
   display: flex;
   margin-top: 2em;
   width: 90%;
+  ${media.mobile} {
+    width: 100%;
+  }
 `;
 
 const CustomLabelInput = styled(LabelInput)`
   width: 90%;
+  ${media.mobile} {
+    width: 100%;
+  }
 `;
 
 const CustomInput = styled(Input)`

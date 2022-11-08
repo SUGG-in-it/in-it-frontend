@@ -66,7 +66,7 @@ axios.interceptors.response.use(
 const request = async ({ url, method, body, params }: RequestType): Promise<ResponseType> => {
   const config: AxiosRequestConfig = {
     baseURL: process.env.NEXT_PUBLIC_API_PREFIX,
-    timeout: 3000,
+    timeout: url === '/auth/issue' ? 20000 : 5000,
     params,
   };
   const { data } =

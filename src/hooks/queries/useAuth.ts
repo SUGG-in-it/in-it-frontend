@@ -28,7 +28,7 @@ export const useSendMutation = ({ onSuccess, onError }: MutationCallbacks = {}) 
     },
     onError: (error: CustomError) => {
       onError && onError();
-      successToast(`이메일을 전송을 실패하였습니다.`);
+      errorToast(`이메일을 전송을 실패하였습니다.`);
     },
   });
 };
