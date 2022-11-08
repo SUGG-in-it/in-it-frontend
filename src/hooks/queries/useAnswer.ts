@@ -35,7 +35,7 @@ export const useAnswersQuery = (answersRequestParams: AnswersRequestParams) => {
   const page = answersRequestParams.page;
   const questionId = answersRequestParams.questionId;
 
-  const data = useQuery<AnswersResponseBody>([KEYS.ANSWERS, { page: page, questionId: questionId }], () =>
+  const data = useQuery<any>([KEYS.ANSWERS, { page: page, questionId: questionId }], () =>
     getAnswers(answersRequestParams)
   );
   return data;

@@ -36,8 +36,8 @@ const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSe
 
   const handleAnswerSubmit = async () => {
     const data = await postAnswerId(questionId);
-    if (data?.data?.answerId) {
-      const answerId = data.data.answerId;
+    if (data?.answerId) {
+      const answerId = data?.answerId;
       mutationUploadAnswer.mutate({
         answerId: Number(answerId),
         content: editorRef.current?.getInstance().getHTML(),

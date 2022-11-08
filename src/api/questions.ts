@@ -7,7 +7,7 @@ import {
   UploadQuestionRequestBody,
   UserQusetionsRequestBody,
 } from '@/types/request/questions';
-import { QuestionsPageResponseBody, SearchQuestionsResponseBody } from '@/types/response/questions';
+import { QuestionId, QuestionsPageResponseBody, SearchQuestionsResponseBody } from '@/types/response/questions';
 
 export const getQusetions = async (qusetionsRequestBody: QusetionsRequestBody) => {
   const { data } = await GET('/questions', qusetionsRequestBody);
@@ -19,10 +19,14 @@ export const getUserQusetions = async (userQusetionsRequestBody: UserQusetionsRe
   return data;
 };
 
-export const postQuestionId = async () =>
-  await POST('/questions')
-    .then((res) => res)
-    .catch((e) => console.log(e));
+export const postQuestionId = async (): Promise<QuestionId> => {
+  try {
+    const { data } = await POST('/questions');
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export const uploadQuestion = async ({ questionId, title, content, tagList, point }: UploadQuestionRequestBody) =>
   await PUT(`/questions/${questionId}`, { title, content, tagList, point });

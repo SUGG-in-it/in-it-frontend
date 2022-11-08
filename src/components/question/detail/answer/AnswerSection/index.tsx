@@ -20,7 +20,6 @@ const EditorSection = dynamic(() => import('@/components/question/detail/answer/
 
 const AnswerSection = ({ question }: { question: Question }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortedAnswer, setSortedAnswer] = useState([]);
 
   const { data: page } = useAnswerPageQuery({ size: PAGINATION_SIZE.ANSWER_LIST, questionId: question.questionId });
 
@@ -30,19 +29,13 @@ const AnswerSection = ({ question }: { question: Question }) => {
     questionId: question.questionId,
   });
 
-  useEffect(() => {
-    answers?.sort((a: Answer, b: Answer) => b.selected - a.selected);
-    setSortedAnswer(answers);
-  }, [answers]);
-
   const handlePageClick = (number: number) => {
     setCurrentPage(number + 1);
   };
 
   return (
     <AnswerListSectionWrapper>
-      {sortedAnswer &&
-        sortedAnswer.map((answer: Answer) => <AnswerItem key={answer.answerId} question={question} {...answer} />)}
+      {answers && answers.map((answer: Answer) => <AnswerItem key={answer.answerId} question={question} {...answer} />)}
       <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />
     </AnswerListSectionWrapper>
   );
