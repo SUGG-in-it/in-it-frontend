@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.5",
@@ -39,7 +39,7 @@
     "format": "prettier --write \"src\"",
     "heroku-postbuild": "npm run build"
   },
-  "engine": {
+  "engines": {
     "node": "16.13.1",
     "npm": "8.1.2"
   },
