@@ -34,9 +34,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "lint": "eslint .",
-    "format": "prettier --write \"src\""
+    "format": "prettier --write \"src\"",
+    "heroku-postbuild": "npm run build"
+  },
+  "engine": {
+    "node": "16.13.1",
+    "npm": "8.1.2"
   },
   "eslintConfig": {
     "extends": [
