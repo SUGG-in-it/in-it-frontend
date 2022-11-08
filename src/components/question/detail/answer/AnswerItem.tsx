@@ -107,6 +107,9 @@ const AnswerItemWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   border-radius: 5px;
   margin-bottom: 4em;
+  ${media.mobile} {
+    margin-bottom: 2em;
+  }
 `;
 
 const AnswerHeader = styled.div`
@@ -153,6 +156,7 @@ const SelectButton = styled(APIButton)`
   padding: 0.5em;
   cursor: pointer;
   width: 150px;
+  margin-bottom: 1em;
 `;
 
 const SelectedBox = styled.div`

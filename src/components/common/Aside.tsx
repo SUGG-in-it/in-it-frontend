@@ -81,6 +81,12 @@ const AsideContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 3vw;
+  ${media.tablet} {
+    display: none;
+  }
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 const Header = styled.div`

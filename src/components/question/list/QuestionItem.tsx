@@ -67,7 +67,10 @@ const QuestionWrapper = styled.li`
     cursor: pointer;
   }
   ${media.tablet} {
-    padding: 1em 0em;
+    padding: 1.5em 1em;
+  }
+  ${media.mobile} {
+    padding: 1.5em 0.6em;
   }
 `;
 
@@ -81,6 +84,9 @@ const LeftSection = styled.div`
 
 const RightSection = styled.div`
   width: 8em;
+  ${media.mobile} {
+    width: 6em;
+  }
 `;
 
 const TopSection = styled.div`
@@ -108,6 +114,16 @@ const PointContainer = styled.div`
     font-weight: 700;
     color: #616568;
   }
+  ${media.mobile} {
+    width: 60px;
+    height: 60px;
+    h5 {
+      font-size: 0.9rem;
+    }
+    p {
+      font-size: 0.7rem;
+    }
+  }
 `;
 
 const ProcessLabel = styled.div`
@@ -133,7 +149,7 @@ const TagsWrapper = styled.div`
 const BottomSection = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 1em;
+  margin-top: 2em;
   span {
     color: #3e4042;
     font-size: 0.8rem;

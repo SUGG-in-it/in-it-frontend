@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import { media } from '@/styles/mediaQuery';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
@@ -34,7 +35,7 @@ const QuestionSection = ({ question }: { question: Question }) => {
   return (
     <QuestionSectionContainer>
       <QuestionSectionWrapper>
-        {question.point ? (
+        {/* {question.point ? (
           <PointContainer>
             <h5>{`${question.point}`}</h5>
             <p>{`포인트`}</p>
@@ -44,7 +45,7 @@ const QuestionSection = ({ question }: { question: Question }) => {
             <h5>{`0`}</h5>
             <p>{'포인트'}</p>
           </PointContainer>
-        )}
+        )} */}
         <SectionRow>
           <TitleContainer>
             <QLabel>Q.</QLabel>
@@ -82,6 +83,9 @@ const QuestionSectionWrapper = styled.div`
   max-width: 700px;
   width: 80vw;
   margin: 0 auto;
+  ${media.mobile} {
+    width: 100%;
+  }
 `;
 
 const PointContainer = styled.div`
@@ -127,6 +131,9 @@ const TitleContainer = styled.div`
   display: flex;
   align-items: center;
   width: 500px;
+  ${media.mobile} {
+    width: 70%;
+  }
 `;
 
 const Title = styled.div`

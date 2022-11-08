@@ -72,6 +72,8 @@ const TabContainer = styled.div`
   background-color: ${({ theme }) => theme.backgrondLightColor};
   ${media.mobile} {
     width: 90vw;
+    padding-top: 1em;
+    padding-bottom: 1em;
   }
 `;
 
@@ -94,7 +96,7 @@ const TabMenuItem = styled.ul`
     width: 100px;
   }
   ${media.mobile} {
-    margin: 0 8%;
+    margin: 0;
     font-size: 0.9rem;
     .menu {
       width: 70px;

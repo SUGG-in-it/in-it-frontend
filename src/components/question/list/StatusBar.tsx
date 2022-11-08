@@ -1,3 +1,4 @@
+import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -70,5 +71,11 @@ const Status = styled.li`
   margin: 0em 1.5em;
   font-size: 1.1rem;
   cursor: pointer;
+  ${media.tablet} {
+    font-size: 1rem;
+  }
+  ${media.mobile} {
+    font-size: 0.9rem;
+  }
 `;
 export default StatusBar;

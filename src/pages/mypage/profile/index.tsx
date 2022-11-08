@@ -134,6 +134,9 @@ const ProfileRow = styled.div`
   display: flex;
   justify-content: space-between;
   min-height: 4em;
+  ${media.mobile} {
+    flex-direction: column;
+  }
 `;
 
 export default withAuth(ProfileSection);

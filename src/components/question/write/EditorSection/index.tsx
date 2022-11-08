@@ -78,7 +78,7 @@ const QuestionEditor = () => {
   };
 
   return (
-    <>
+    <WriteContainer>
       <LabelInput label="제목">
         <CustomInput value={title.value} onChange={title.onChange} placeholder="제목을 입력해주세요." />
       </LabelInput>
@@ -115,7 +115,7 @@ const QuestionEditor = () => {
           {'등록'}
         </PostButton>
       </ButtonWrapper>
-    </>
+    </WriteContainer>
   );
 };
 
@@ -129,8 +129,13 @@ const EditorSection = () => {
   );
 };
 
+const WriteContainer = styled.div`
+  width: 100%;
+`;
+
 const ToastEditorWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   margin-bottom: 2em;
 `;
 
@@ -159,40 +164,8 @@ const CustomInput = styled(Input)`
   margin-bottom: 2em;
   ${media.mobile} {
     margin-bottom: 1em;
+    width: calc(100% - 1em);
   }
-`;
-
-const QuestionContainer = styled.div`
-  background-color: ${({ theme }) => theme.backgrondDarkColor};
-  padding-bottom: 6em;
-`;
-
-const RetryBox = styled.div`
-  max-width: 850px;
-  width: 80vw;
-  height: fit-content;
-  margin: 0 auto;
-  background-color: ${({ theme }) => theme.backgrondLightColor};
-  border: 1px solid ${({ theme }) => theme.greyLineColor};
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  display: flex;
-  padding: 3em;
-  ${media.tablet} {
-    width: 80vw;
-  }
-  ${media.mobile} {
-    padding: 1em;
-  }
-`;
-
-const RetryButton = styled(FiRefreshCcw)`
-  width: 30px;
-  height: 30px;
-  margin-top: 30px;
-  color: ${({ theme }) => theme.greyLineColor};
-  cursor: pointer;
 `;
 
 const TagLimit = styled.p`

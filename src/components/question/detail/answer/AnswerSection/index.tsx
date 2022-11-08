@@ -90,12 +90,18 @@ const AnswerListSectionWrapper = styled.div`
   width: 85vw;
   max-width: 700px;
   margin: 0 auto;
+  ${media.mobile} {
+    width: 90vw;
+  }
 `;
 
 const AnswerWriteSectionWrapper = styled.div`
   width: 85vw;
   max-width: 700px;
   margin: 3em auto;
+  ${media.mobile} {
+    width: 90vw;
+  }
 `;
 
 const ToastEditorWrapper = styled.div`
@@ -138,6 +144,7 @@ const Notice = styled.p`
   font-size: 0.9rem;
   color: ${({ theme }) => theme.textColor};
   margin-bottom: 1em;
+  margin-left: 1em;
 `;
 
 const EditorSectionWrapper = styled.div`

@@ -4,6 +4,7 @@ import { userState } from '@/store/users';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
+import { media } from '@/styles/mediaQuery';
 
 interface CommentProps {
   commentId: number;
@@ -21,31 +22,37 @@ const CommentItem = ({ commentId, nickname, updatedAt, content, userId }: Commen
   };
 
   return (
-    <AnswerItemWrapper>
-      <AnswerHeader>
+    <CommnetItemWrapper>
+      <CommentHeader>
         <NickName>{`작성자 ${nickname}`}</NickName>
         <Date>{dayjs(updatedAt).format('YYYY-MM-DD HH:mm:ss')}</Date>
-      </AnswerHeader>
+      </CommentHeader>
       <Content>{content}</Content>
       {user.id === userId && <SettingButton onClick={handleDeleteComment}>{'삭제'}</SettingButton>}
-    </AnswerItemWrapper>
+    </CommnetItemWrapper>
   );
 };
 
-const AnswerItemWrapper = styled.div`
+const CommnetItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
   padding: 1em;
   align-items: baseline;
   background-color: ${({ theme }) => theme.backgrondDarkColor};
   border-radius: 5px;
+  ${media.mobile} {
+    flex-direction: column;
+  }
 `;
 
-const AnswerHeader = styled.div`
+const CommentHeader = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 1em;
   width: 20%;
+  ${media.mobile} {
+    width: 100%;
+  }
 `;
 
 const NickName = styled.p`
@@ -66,6 +73,9 @@ const Content = styled.p`
   line-height: 1.5;
   margin-top: 1em;
   width: 70%;
+  ${media.mobile} {
+    margin-top: 0.5em;
+  }
 `;
 
 const SettingButton = styled(Button)`
@@ -75,6 +85,11 @@ const SettingButton = styled(Button)`
   font-size: 0.9rem;
   height: 30px;
   width: 10%;
+  ${media.mobile} {
+    width: 100%;
+    text-align: end;
+    margin: 0;
+  }
 `;
 
 export default CommentItem;
