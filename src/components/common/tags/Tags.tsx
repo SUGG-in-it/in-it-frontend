@@ -1,3 +1,4 @@
+import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -24,9 +25,13 @@ const TagWrapper = styled.li`
   padding: 0.3em;
   border-radius: 3px;
   width: fit-content;
-  margin: 0em 1em 1em 0em;
+  margin: 0.5em 1em 0em 0em;
   display: inline-block;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1rem;
+  ${media.mobile} {
+    font-size: 0.9rem;
+  }
   :hover {
     cursor: pointer;
   }

@@ -9,6 +9,7 @@ import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import QuestionSearchSection from '@/components/question/list/QuestionSearchSection';
 import QuestionListSkeleton from '@/components/question/list/QuestionListSection/index.skeleton';
 import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import { media } from '@/styles/mediaQuery';
 
 const Questions = ({ currentPage }: { currentPage: number }) => {
   const [status, setStatus] = useState('total');
@@ -61,6 +62,9 @@ const QuestionListContainer = styled.div`
   max-width: 700px;
   width: 80vw;
   margin: 0 auto;
+  ${media.mobile} {
+    width: 90vw;
+  }
 `;
 
 const QuestionListWrapper = styled.ul`

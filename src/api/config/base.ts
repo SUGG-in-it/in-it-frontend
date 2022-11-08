@@ -58,7 +58,7 @@ axios.interceptors.response.use(
         setTimeout(() => (window.location.href = '/login'), 1000);
       }
     } else if (config.url !== '/token/refresh-token') {
-      throw new CustomError(response.data?.status, response.data?.message, response.data?.code);
+      throw new CustomError(response?.data?.status, response?.data?.message, response?.data?.code);
     }
   }
 );
@@ -66,6 +66,7 @@ axios.interceptors.response.use(
 const request = async ({ url, method, body, params }: RequestType): Promise<ResponseType> => {
   const config: AxiosRequestConfig = {
     baseURL: process.env.NEXT_PUBLIC_API_PREFIX,
+    timeout: 3000,
     params,
   };
   const { data } =
