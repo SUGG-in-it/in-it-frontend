@@ -22,13 +22,15 @@ const BannerSection = () => {
 
   return (
     <BannerContainer>
-      <Image
-        src={BannerImg1}
-        width={200}
-        height={200}
-        placeholder="blur"
-        onClick={() => handleBannerClick(recent.questionId)}
-      />
+      <ImageWrapper>
+        <Image
+          src={BannerImg1}
+          width={200}
+          height={200}
+          placeholder="blur"
+          onClick={() => handleBannerClick(recent.questionId)}
+        />
+      </ImageWrapper>
       <Image
         src={BannerImg2}
         width={200}
@@ -66,11 +68,18 @@ const BannerContainer = styled.div`
   max-width: 850px;
   ${media.tablet} {
     width: 90vw;
+    margin: 0 auto;
   }
   img {
     border-radius: 10px;
     margin: 2em 1em;
     box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+  }
+`;
+
+const ImageWrapper = styled.div`
+  ${media.mobile} {
+    display: none;
   }
 `;
 

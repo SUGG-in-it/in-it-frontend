@@ -85,6 +85,7 @@ const QuestionListWrapper = styled.div`
     flex-direction: column;
     ul {
       width: 100%;
+      border-right: none;
     }
   }
 `;
@@ -94,11 +95,8 @@ const LeftSection = styled.ul`
   li {
     padding: 0.5em 1em 0.5em 0em;
     height: 100px;
-  }
-  ${media.tablet} {
-    border-right: none;
-    li {
-      padding: 1.5em 1em 1.5em 0em;
+    ${media.tablet} {
+      border-right: none;
       height: 80px;
     }
   }
@@ -108,10 +106,7 @@ const RightSection = styled.ul`
   li {
     padding: 0.5em 0em 0.5em 1em;
     height: 100px;
-  }
-  ${media.tablet} {
-    li {
-      padding: 1.5em 1em 1.5em 0em;
+    ${media.tablet} {
       height: 80px;
     }
   }
