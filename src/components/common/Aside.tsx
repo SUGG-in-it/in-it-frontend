@@ -1,7 +1,7 @@
 import { loginState, userState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { successToast } from '@/utils/toast';
 import Tags from '@/components/common/tags/Tags';

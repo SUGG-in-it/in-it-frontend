@@ -7,10 +7,18 @@ import { media } from '@/styles/mediaQuery';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdClose } from 'react-icons/io';
 import { useState } from 'react';
+import { loginState, userState } from '@/store/users';
+import { useRecoilState } from 'recoil';
+import { successToast } from '@/utils/toast';
+import { postQuestionId } from '@/api/questions';
+import LoginRequestDialog from '@/components/common/dialog/LoginRequestDialog';
 
 const Header = () => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLogin, setIsLogin] = useRecoilState(loginState);
+  const [user, setUserState] = useRecoilState(userState);
+  const [isShowLoginRequestModal, setIsShowLoginRequestModal] = useState(false);
 
   const handleLogoClick = () => {
     router.push('/');
@@ -18,6 +26,43 @@ const Header = () => {
 
   const handleClickMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleClickHome = () => {
+    handleClickMenu();
+    router.push('/');
+  };
+
+  const handleClickAnswer = () => {
+    handleClickMenu();
+    router.push('/question/list');
+  };
+
+  const handleClickQuestion = async () => {
+    handleClickMenu();
+    if (isLogin) {
+      const data = await postQuestionId();
+      if (data?.questionId) {
+        router.push({ pathname: '/question/write', query: { id: data?.questionId } });
+      }
+    } else {
+      setIsShowLoginRequestModal(true);
+    }
+  };
+
+  const handleClickMypage = () => {
+    handleClickMenu();
+    router.push({ pathname: '/mypage/profile', query: { nickname: user.nickname } });
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setUserState({
+      id: '',
+      nickname: '',
+    });
+    setIsLogin(false);
+    successToast('로그아웃이 완료되었습니다.');
   };
 
   return (
@@ -37,12 +82,12 @@ const Header = () => {
                 <CloseButton onClick={handleClickMenu} />
               </MenuHeader>
               <ul>
-                <li>홈</li>
-                <li>답변하기</li>
-                <li>질문하기</li>
-                <li>마이페이지</li>
+                <li onClick={handleClickHome}>홈</li>
+                <li onClick={handleClickAnswer}>답변하기</li>
+                <li onClick={handleClickQuestion}>질문하기</li>
+                <li onClick={handleClickMypage}>마이페이지</li>
                 <li>
-                  <LogoutButton>로그아웃</LogoutButton>
+                  <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
                 </li>
               </ul>
             </Menu>
@@ -50,6 +95,7 @@ const Header = () => {
         </RightSection>
       </HeaderWrapper>
       <GrayLine />
+      {isShowLoginRequestModal ? <LoginRequestDialog /> : null}
     </HeadeContainer>
   );
 };
