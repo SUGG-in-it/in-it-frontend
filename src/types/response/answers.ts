@@ -28,3 +28,7 @@ export interface MyAnswer {
 export interface AnswerPageResponseBody {
   count: number;
 }
+
+export interface AnswerId {
+  answerId: number;
+}

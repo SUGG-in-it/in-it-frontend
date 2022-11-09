@@ -48,3 +48,7 @@ export interface Question {
   userId: number;
   answerCount?: number;
 }
+
+export interface QuestionId {
+  questionId: number;
+}

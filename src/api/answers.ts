@@ -5,11 +5,16 @@ import {
   UploadAnswerRequestBody,
   UserAnswersRequestParams,
 } from '@/types/request/answers';
+import { AnswerId } from '@/types/response/answers';
 
-export const postAnswerId = async (questionId: number) =>
-  await POST('/answers', { questionId })
-    .then((res) => res)
-    .catch((e) => console.log(e));
+export const postAnswerId = async (questionId: number): Promise<AnswerId> => {
+  try {
+    const { data } = await POST('/answers', { questionId });
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export const uploadAnswer = async ({ answerId, content }: UploadAnswerRequestBody) =>
   await PUT(`/answers/${answerId}`, { content });
