@@ -81,7 +81,7 @@ const MenuHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1em 1.5em 2em;
+  margin: 0.5em 1.5em 2em;
 `;
 
 const CloseButton = styled(IoMdClose)`
@@ -118,13 +118,14 @@ const Menu = styled.div`
   width: 100vw;
   background-color: #f7f7f8;
   position: fixed;
-  transition: all 500ms;
+  transition: all 300ms;
   z-index: 1;
   top: 0;
   right: 0;
   box-sizing: border-box;
   li {
     font-weight: 600;
+    font-size: 0.9rem;
     padding: 1.3em 1.8em;
     border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
   }
