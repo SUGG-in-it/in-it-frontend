@@ -81,6 +81,9 @@ const QuestionListWrapper = styled.div`
   ul {
     width: 50%;
   }
+  p {
+    margin: 0;
+  }
   ${media.tablet} {
     flex-direction: column;
     ul {

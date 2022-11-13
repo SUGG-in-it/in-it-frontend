@@ -6,14 +6,10 @@ interface ContentViewerProps {
   length?: number;
 }
 
-const ContentWrapper = ({ content, length }: ContentViewerProps) => {
+const ContentWrapper = ({ content }: ContentViewerProps) => {
   return (
     <ViewerWrapper>
-      {length ? (
-        <Viewer initialValue={content.length > length ? content.slice(0, length) + ' …' : content} />
-      ) : (
-        <Viewer initialValue={content} />
-      )}
+      <Viewer initialValue={content} />
     </ViewerWrapper>
   );
 };
