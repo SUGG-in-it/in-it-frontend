@@ -65,6 +65,10 @@ const Header = () => {
     successToast('로그아웃이 완료되었습니다.');
   };
 
+  const handleLogin = () => {
+    router.push('/signin');
+  };
+
   return (
     <HeadeContainer>
       <HeaderWrapper>
@@ -86,9 +90,15 @@ const Header = () => {
                 <li onClick={handleClickAnswer}>답변하기</li>
                 <li onClick={handleClickQuestion}>질문하기</li>
                 <li onClick={handleClickMypage}>마이페이지</li>
-                <li>
-                  <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
-                </li>
+                {isLogin ? (
+                  <li>
+                    <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+                  </li>
+                ) : (
+                  <li>
+                    <LogoutButton onClick={handleLogin}>로그인</LogoutButton>
+                  </li>
+                )}
               </ul>
             </Menu>
           ) : null}
