@@ -2,13 +2,18 @@
 
 👩🏻‍💻 코드리뷰 사이트:in it() 프론트엔드 👩🏻‍💻
 
+## 📺  website
+[코드리뷰 사이트 : init()](https://cr-init.herokuapp.com/)  
+
+<img width="800" alt="스크린샷 2022-11-13 오후 10 41 10" src="https://user-images.githubusercontent.com/62633444/201524797-409c8b59-76d2-4e79-aa11-e997de06bb9e.png">
+
 ###  ✨
 
 - error boundary & suspense 사용
 - 미디어쿼리를 이용한 반응형 구현
 - react custom hook 사용
 - recoil, react query를 통한 상태관리
-- ... etc
+- ... etc 
 
 ## 🛠 tech stack
 ```Next.js``` ```React``` ```TypeScript```   
