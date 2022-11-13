@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import APIButton from '@/components/common/button/APIButton';
 
-const SignUpFirstStep = () => {
+const RegisterFirstStep = () => {
   const [isSentCode, setIsSentCode] = useState(false);
   const setSignUp = useSetRecoilState(signUpState);
 
@@ -175,4 +175,4 @@ const VerifyButton = styled(APIButton)`
   margin-top: 20px;
 `;
 
-export default SignUpFirstStep;
+export default RegisterFirstStep;

@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-const SignUpSecondStep = () => {
+const RegisterSecondStep = () => {
   const router = useRouter();
   const [signUp, setSignUp] = useRecoilState(signUpState);
 
@@ -173,4 +173,4 @@ const SignUpButton = styled(APIButton)`
   margin-top: 20px;
 `;
 
-export default SignUpSecondStep;
+export default RegisterSecondStep;
