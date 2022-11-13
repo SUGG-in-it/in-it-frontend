@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import APIButton from '@/components/common/button/APIButton';
 
-const LoginPage = () => {
+const SigninPage = () => {
   const router = useRouter();
   const setUserState = useSetRecoilState(userState);
 
@@ -132,4 +132,4 @@ const LoginButton = styled(APIButton)`
   margin-top: 20px;
 `;
 
-export default LoginPage;
+export default SigninPage;
