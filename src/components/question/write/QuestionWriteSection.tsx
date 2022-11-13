@@ -12,7 +12,7 @@ const QuestionWriteSection = () => {
 
 const EditorSectionWrapper = styled.div`
   width: 85vw;
-  max-width: 100%;
+  max-width: 800px;
   display: flex;
   margin: 0 auto;
   margin-top: 3em;
