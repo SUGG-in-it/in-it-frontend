@@ -19,7 +19,6 @@ const ContentWrapper = ({ content, length }: ContentViewerProps) => {
 };
 
 const ViewerWrapper = styled.div`
-  padding: 0.5em 0;
   color: #616568;
   font-size: 0.9rem;
   line-height: 1.25;
