@@ -38,7 +38,7 @@ const SigninPage = () => {
   });
 
   const moveToSignUp = () => {
-    router.push('/signup');
+    router.push('/register');
   };
 
   const moveToForgotPassword = () => {
