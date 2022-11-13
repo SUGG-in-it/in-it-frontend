@@ -1,13 +1,13 @@
 import AccountLayout from '@/components/layouts/AccountLayout';
-import SignUpFirstStep from '@/components/register/SignUpFirstStep';
-import SignUpSecondStep from '@/components/register/SignUpSecondStep';
+import RegisterFirstStep from '@/components/register/RegisterFirstStep';
+import RegisterSecondStep from '@/components/register/RegisterSecondStep';
 import { signUpState } from '@/store/users';
 import { useRecoilValue } from 'recoil';
 
-const SignUpPage = () => {
+const RegisterPage = () => {
   const signUp = useRecoilValue(signUpState);
 
-  return <AccountLayout>{signUp.step === 1 ? <SignUpFirstStep /> : <SignUpSecondStep />}</AccountLayout>;
+  return <AccountLayout>{signUp.step === 1 ? <RegisterFirstStep /> : <RegisterSecondStep />}</AccountLayout>;
 };
 
-export default SignUpPage;
+export default RegisterPage;
