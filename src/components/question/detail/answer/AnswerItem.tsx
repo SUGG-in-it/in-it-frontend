@@ -13,6 +13,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import APIButton from '@/components/common/button/APIButton';
 
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
+const ContentViewer = dynamic(() => import('@/components/question/detail/answer/ContentViewer'), { ssr: false });
 
 interface AnswerProps {
   answerId: number;
@@ -86,11 +87,7 @@ const AnswerItem = ({ answerId, nickname, date, content, userId, question, selec
           </EditorSectionWrapper>
         ) : (
           <>
-            <Content
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(content),
-              }}
-            />
+            <ContentViewer content={content} />
             <CommentSection answerId={answerId} />
           </>
         )}

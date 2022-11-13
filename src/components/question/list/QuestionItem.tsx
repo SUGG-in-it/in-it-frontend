@@ -35,7 +35,7 @@ const QuestionItem = ({ questionId, type, nickname, updateDate, title, content, 
           </TopSection>
           <ContentViewer content={content} length={100} />
           <TagsWrapper>
-            <Tags tagList={tagList.split(',')} />
+            <Tags tagList={tagList && tagList.split(',')} />
           </TagsWrapper>
           <BottomSection>
             <span>{`작성자  ${nickname}`}</span>
