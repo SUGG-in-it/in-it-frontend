@@ -47,7 +47,7 @@ const AnswerListSection = ({ question }: { question: Question }) => {
   const router = useRouter();
 
   const handleLoginButton = () => {
-    router.push('/login');
+    router.push('/signin');
   };
 
   return (

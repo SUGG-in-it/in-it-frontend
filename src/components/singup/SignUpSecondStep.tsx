@@ -30,7 +30,7 @@ const SignUpSecondStep = () => {
 
   const mutationJoin = useJoinMutation({
     onSuccess: () => {
-      router.push('/login');
+      router.push('/signin');
       setSignUp({
         step: 1,
         email: '',

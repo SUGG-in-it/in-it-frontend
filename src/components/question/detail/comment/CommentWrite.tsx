@@ -26,7 +26,7 @@ const CommentWrite = ({ answerId }: { answerId: number }) => {
   };
 
   const handleLoginButton = () => {
-    router.push('/login');
+    router.push('/signin');
   };
 
   return isLogin ? (

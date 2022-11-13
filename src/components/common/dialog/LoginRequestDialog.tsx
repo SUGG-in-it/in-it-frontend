@@ -13,7 +13,7 @@ function LoginRequestDialog() {
   }, []);
 
   const handleClickLogin = () => {
-    router.push('/login');
+    router.push('/signin');
     document.body.style.overflow = 'unset';
   };
 

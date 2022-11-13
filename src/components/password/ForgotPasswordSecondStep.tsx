@@ -26,7 +26,7 @@ const ForgotPasswordSecondStep = () => {
 
   const mutationResetPassword = useResetPasswordMutation({
     onSuccess: () => {
-      router.push('/login');
+      router.push('/signin');
     },
   });
 

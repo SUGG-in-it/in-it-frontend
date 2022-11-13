@@ -30,7 +30,7 @@ const MyInfo = () => {
   };
 
   const handleLoginClick = () => {
-    router.push('/login');
+    router.push('/signin');
   };
 
   return (
