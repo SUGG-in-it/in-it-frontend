@@ -8,6 +8,7 @@ import { GetServerSideProps } from 'next';
 import { Suspense } from 'react';
 import styled from 'styled-components';
 import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import withHead from '@/components/hoc/withHead';
 
 const QuestionDetail = ({ id }: { id: number }) => {
   const { data: question } = useQuestionQuery(id);
@@ -50,4 +51,4 @@ const QuestionWrapper = styled.div`
   padding-bottom: 3em;
 `;
 
-export default QuestionDetailPage;
+export default withHead(QuestionDetailPage,'init : 질문','');

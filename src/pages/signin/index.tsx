@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import APIButton from '@/components/common/button/APIButton';
+import withHead from '@/components/hoc/withHead';
 
 const SigninPage = () => {
   const router = useRouter();
@@ -132,4 +133,4 @@ const LoginButton = styled(APIButton)`
   margin-top: 20px;
 `;
 
-export default SigninPage;
+export default withHead(SigninPage,'init : 로그인','');

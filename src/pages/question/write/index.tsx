@@ -4,7 +4,7 @@ import LoginRequestModal from '@/components/common/dialog/LoginRequestDialog';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '@/store/users';
 import QuestionWriteSection from '@/components/question/write/QuestionWriteSection';
-import withAuth from '@/components/hoc/withAuth';
+import withHead from '@/components/hoc/withHead';
 
 const QuestionWritePage = () => {
   const isLogin = useRecoilValue(loginState);
@@ -20,4 +20,4 @@ const QuestionWritePage = () => {
   );
 };
 
-export default withAuth(QuestionWritePage);
+export default withHead(QuestionWritePage,'init : 질문 작성하기','');

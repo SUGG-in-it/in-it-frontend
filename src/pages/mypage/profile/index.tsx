@@ -10,6 +10,7 @@ import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBou
 import ProfileSkeleton from '@/components/mypage/profile/ProfileSection/index.skeleton';
 import APIButton from '@/components/common/button/APIButton';
 import withAuth from '@/components/hoc/withAuth';
+import withHead from '@/components/hoc/withHead';
 
 const Profile = ({ nickname }: { nickname: string }) => {
   const { data: profile } = useProfileQuery(nickname);
@@ -139,4 +140,4 @@ const ProfileRow = styled.div`
   }
 `;
 
-export default withAuth(ProfileSection);
+export default withHead(withAuth(ProfileSection),'init : 나의 프로필','');

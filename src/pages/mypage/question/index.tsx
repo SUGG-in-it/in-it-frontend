@@ -1,5 +1,6 @@
 import Pagination from '@/components/common/Pagination';
 import withAuth from '@/components/hoc/withAuth';
+import withHead from '@/components/hoc/withHead';
 import MypageLayout from '@/components/layouts/MypageLayout';
 import QuestionListSection from '@/components/mypage/question/QuestionListSection';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
@@ -32,4 +33,4 @@ const UserQuestionSection = styled.ul`
   padding-top: 10px;
 `;
 
-export default withAuth(MyQuestion);
+export default withHead(withAuth(MyQuestion),'init : 내가 작성한 질문 목록','');

@@ -6,6 +6,7 @@ import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useSearchQuestionPageQuery } from '@/hooks/queries/useQuestion';
+import withHead from '@/components/hoc/withHead';
 
 const QuestionListPage = () => {
   const router = useRouter();
@@ -56,4 +57,4 @@ const ContentSection = styled.div`
   }
 `;
 
-export default QuestionListPage;
+export default withHead(QuestionListPage,'init : 질문 목록','');

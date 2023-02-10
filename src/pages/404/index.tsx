@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PageNotFoundImg from '@/assets/images/404error.png';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import withHead from '@/components/hoc/withHead';
 
 const NotFoundPage = () => {
   const router = useRouter();
@@ -30,4 +31,4 @@ const NotFoundContainer = styled.div`
   justify-content: center;
 `;
 
-export default NotFoundPage;
+export default withHead(NotFoundPage,'init : 404 페이지','');
