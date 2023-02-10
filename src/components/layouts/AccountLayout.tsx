@@ -14,7 +14,7 @@ interface AccountLayoutProps {
 const AccountLayout = ({ children }: AccountLayoutProps) => {
   return (
     <Wrapper>
-      <Image src={appLogo} width={200} height={100} />
+      <Image src={appLogo} width={200} height={100} alt="앱 로고"/>
       {children}
     </Wrapper>
   );

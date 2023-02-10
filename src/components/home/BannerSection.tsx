@@ -28,6 +28,7 @@ const BannerSection = () => {
           width={200}
           height={200}
           placeholder="blur"
+          alt="인기 질문"
           onClick={() => handleBannerClick(recent.questionId)}
         />
       </ImageWrapper>
@@ -36,6 +37,7 @@ const BannerSection = () => {
         width={200}
         height={200}
         placeholder="blur"
+        alt="포인트가 가장 많은 질문"
         onClick={() => handleBannerClick(point.questionId)}
       />
       <Image
@@ -43,6 +45,7 @@ const BannerSection = () => {
         width={200}
         height={200}
         placeholder="blur"
+        alt="추천 질문"
         onClick={() => handleBannerClick(random.questionId)}
       />
       <Image
@@ -50,6 +53,7 @@ const BannerSection = () => {
         width={200}
         height={200}
         placeholder="blur"
+        alt="인기 질문"
         onClick={() => handleBannerClick(popular.questionId)}
       />
     </BannerContainer>

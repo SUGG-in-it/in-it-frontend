@@ -74,15 +74,15 @@ const Header = () => {
       <HeaderWrapper>
         <LeftSection>
           <LogoSection onClick={handleLogoClick}>
-            <Image src={appLogo} width={110} height={50} />
+            <Image src={appLogo} width={110} height={50} alt="앱 로고"/>
           </LogoSection>
         </LeftSection>
         <RightSection>
           <MenuIcon onClick={handleClickMenu} />
-          {isMenuOpen ? (
+          {isMenuOpen && (
             <Menu>
               <MenuHeader>
-                <Image src={appLogo} width={110} height={50} />
+                <Image src={appLogo} width={110} height={50} alt="앱 로고"/>
                 <CloseButton onClick={handleClickMenu} />
               </MenuHeader>
               <ul>
@@ -101,7 +101,7 @@ const Header = () => {
                 )}
               </ul>
             </Menu>
-          ) : null}
+          )}
         </RightSection>
       </HeaderWrapper>
       <GrayLine />

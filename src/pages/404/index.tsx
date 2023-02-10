@@ -14,7 +14,7 @@ const NotFoundPage = () => {
   return (
     <NotFoundContainer>
       <div>
-        <Image src={PageNotFoundImg} width={1000} height={550} />
+        <Image src={PageNotFoundImg} width={1000} height={550} alt=""/>
       </div>
       <Button onClick={goToMain}>{'메인화면으로 돌아가기'}</Button>
     </NotFoundContainer>
