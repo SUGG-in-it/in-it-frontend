@@ -100,7 +100,10 @@ const LogoutButton = styled.button`
   background-color: ${({ theme }) => theme.primaryColor};
   color: white;
   padding: 0.5em;
+  font-weight: bold;
   cursor: pointer;
+  width: 80px;
+  height: 40px;
 `;
 
 const ProfileButton = styled.button`
