@@ -27,7 +27,7 @@ const MypageLayout = ({ children }: MypageLayoutProps) => {
 };
 
 const MyPageWrapper = styled.div`
-  background-image: linear-gradient(to bottom, #004b91 25%, white 25%);
+  background-image: ${({ theme }) => `linear-gradient(to bottom, ${theme.primaryColor} 25%, white 25%)`};
   padding-bottom: 100px;
 `;
 

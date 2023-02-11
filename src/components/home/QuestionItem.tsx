@@ -57,7 +57,7 @@ const Ranking = styled.div`
   font-size: 1.4rem;
   margin-right: 1em;
   font-weight: bold;
-  color: ${({ isCompleted }) => (isCompleted ? '#adb5bd' : '#4d7cfe')};
+  color: ${({ isCompleted, theme}) => (isCompleted ? '#adb5bd' : theme.primaryColor)};
   ${media.tablet} {
     padding: 0.1em;
   }
