@@ -10,7 +10,7 @@ const QuestionWriteSection = () => {
   );
 };
 
-const EditorSectionWrapper = styled.div`
+const EditorSectionWrapper = styled.section`
   width: 85vw;
   max-width: 800px;
   display: flex;

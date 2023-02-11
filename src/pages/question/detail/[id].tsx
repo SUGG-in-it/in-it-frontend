@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const QuestionWrapper = styled.div`
+const QuestionWrapper = styled.main`
   width: 100vw;
   background-color: ${({ theme }) => theme.backgrondDarkColor};
   padding-bottom: 3em;

@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useQuestionQuery, useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
-import { FiRefreshCcw } from 'react-icons/fi';
 import AutoComplete from '@/components/common/AutoComplete';
 import TagsWithDeleteButton from '@/components/common/tagsWithDeleteButton';
 import APIButton from '@/components/common/button/APIButton';

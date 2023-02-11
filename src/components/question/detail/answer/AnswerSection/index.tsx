@@ -79,7 +79,7 @@ const AnswerListSection = ({ question }: { question: Question }) => {
   );
 };
 
-const AnswerListSectionWrapper = styled.div`
+const AnswerListSectionWrapper = styled.section`
   width: 85vw;
   max-width: 700px;
   margin: 0 auto;

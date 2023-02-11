@@ -43,7 +43,7 @@ const QuestionListPage = () => {
   );
 };
 
-const QuestionListContainer = styled.div`
+const QuestionListContainer = styled.section`
   padding-bottom: 5em;
 `;
 
@@ -57,4 +57,4 @@ const ContentSection = styled.div`
   }
 `;
 
-export default withHead(QuestionListPage,'init : 질문 목록','');
+export default withHead(QuestionListPage,'init : 질문 리스트','');

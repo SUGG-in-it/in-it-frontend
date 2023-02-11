@@ -67,7 +67,7 @@ const Nav = () => {
   );
 };
 
-const NavWrapper = styled.div`
+const NavWrapper = styled.nav`
   background-color: ${({ theme }) => theme.backgrondLightColor};
   ${media.tablet} {
     display: none;

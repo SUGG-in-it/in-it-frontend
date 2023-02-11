@@ -8,7 +8,7 @@ const Footer = () => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.footer`
   height: 50px;
   position: fixed;
   bottom: 0;

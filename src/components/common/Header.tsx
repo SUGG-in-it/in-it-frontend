@@ -110,7 +110,7 @@ const Header = () => {
   );
 };
 
-const HeadeContainer = styled.div`
+const HeadeContainer = styled.header`
   background-color: ${({ theme }) => theme.backgrondDarkColor};
 `;
 

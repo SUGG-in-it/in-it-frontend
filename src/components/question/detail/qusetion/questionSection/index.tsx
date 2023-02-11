@@ -74,7 +74,7 @@ const QuestionSection = ({ question }: { question: Question }) => {
   );
 };
 
-const QuestionSectionContainer = styled.div`
+const QuestionSectionContainer = styled.section`
   padding: 2em 1.2em;
   background-color: ${({ theme }) => theme.backgrondLightColor};
 `;

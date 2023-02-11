@@ -60,7 +60,7 @@ const BannerSection = () => {
   );
 };
 
-const BannerContainer = styled.div`
+const BannerContainer = styled.section`
   display: flex;
   justify-content: center;
   background-color: white;

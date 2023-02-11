@@ -77,7 +77,7 @@ const Aside = () => (
   </AsideContainer>
 );
 
-const AsideContainer = styled.div`
+const AsideContainer = styled.aside`
   display: flex;
   flex-direction: column;
   margin-left: 3vw;
@@ -117,7 +117,7 @@ const NickName = styled.p`
   font-weight: bold;
 `;
 
-const MypageWrapper = styled.div`
+const MypageWrapper = styled.section`
   height: fit-content;
   margin-top: 5em;
   padding: 1em 0.5em 1em 0.8em;
@@ -134,7 +134,7 @@ const MypageWrapper = styled.div`
   }
 `;
 
-const TagListWrapper = styled.ul`
+const TagListWrapper = styled.section`
   width: 250px;
   height: fit-content;
   padding: 1em 0.5em 1em 0.8em;

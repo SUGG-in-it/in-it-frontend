@@ -27,7 +27,7 @@ const CommentSection = ({ answerId }: { answerId: number }) => {
   );
 };
 
-const CommentContainer = styled.div`
+const CommentContainer = styled.section`
   display: flex;
   flex-direction: column;
 `;

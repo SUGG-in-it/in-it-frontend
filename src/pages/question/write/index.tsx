@@ -11,11 +11,11 @@ const QuestionWritePage = () => {
 
   return (
     <QuestionLayout>
-      <>
+      <main>
         <BannerSection />
         <QuestionWriteSection />
         {isLogin ? null : <LoginRequestModal />}
-      </>
+      </main>
     </QuestionLayout>
   );
 };

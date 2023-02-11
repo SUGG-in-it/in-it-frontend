@@ -15,7 +15,7 @@ const HomePage = () => {
   );
 };
 
-const MainContainer = styled.div`
+const MainContainer = styled.section`
   background-color: white;
 `;
 
