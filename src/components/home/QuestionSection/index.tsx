@@ -48,7 +48,7 @@ const QuestionSection = () => {
   );
 };
 
-const QuestionContainer = styled.div`
+const QuestionContainer = styled.section`
   background-color: white;
   padding-bottom: 6em;
 `;
@@ -76,7 +76,7 @@ const Label = styled.p`
   padding-bottom: 1em;
 `;
 
-const QuestionListWrapper = styled.div`
+const QuestionListWrapper = styled.article`
   display: flex;
   ul {
     width: 50%;

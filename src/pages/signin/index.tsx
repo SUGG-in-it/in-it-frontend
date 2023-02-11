@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import APIButton from '@/components/common/button/APIButton';
+import withHead from '@/components/hoc/withHead';
 
 const SigninPage = () => {
   const router = useRouter();
@@ -52,6 +53,7 @@ const SigninPage = () => {
           {...register('email', {
             required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
           })}
+          title={'email'}
           placeholder={'이메일'}
         />
         <p>{errors.email?.message}</p>
@@ -59,6 +61,7 @@ const SigninPage = () => {
           {...register('password', {
             required: VALIDATION_ERROR_MSG.EMPTY_PASSWORD,
           })}
+          title={'password'}
           type="password"
           placeholder={'비밀번호'}
         />
@@ -132,4 +135,4 @@ const LoginButton = styled(APIButton)`
   margin-top: 20px;
 `;
 
-export default SigninPage;
+export default withHead(SigninPage,'init : 로그인','');

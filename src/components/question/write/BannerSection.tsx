@@ -10,7 +10,7 @@ const BannerSection = () => {
   );
 };
 
-const BannerContainer = styled.ul`
+const BannerContainer = styled.section`
   background-color: ${({ theme }) => theme.pointColor};
   color: white;
   width: 58vw;

@@ -13,7 +13,7 @@ import Image from 'next/image';
 const ErrorFallback = () => {
   return (
     <ErrorContainer>
-      <Image src={ServerErrorImg} width={1100} height={550} />
+      <Image src={ServerErrorImg} width={1100} height={550} alt=""/>
       <p>에러가 지속되면 wldud060960@gmail.com로 문의해주세요. </p>
     </ErrorContainer>
   );

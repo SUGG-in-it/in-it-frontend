@@ -4,12 +4,19 @@ import styled from 'styled-components';
 import { UseInputReturn } from '@/hooks/useInput';
 import { media } from '@/styles/mediaQuery';
 
-const ProfileInput = ({ label, info }: { label: string; info: UseInputReturn }) => {
+interface ProfileInputProps {
+  label: string; 
+  info: UseInputReturn;
+  id: string;
+}
+
+const ProfileInput = ({ label, info, id }: ProfileInputProps) => {
   return (
     <Container>
-      <CustomLabelInput label={label}>
+      <CustomLabelInput label={label} htmlFor={id}>
         <CustomInput
           type="text"
+          id={id}
           value={info.value}
           onChange={info.onChange}
           placeholder={info.value ?? '정보를 입력해주세요 😛'}

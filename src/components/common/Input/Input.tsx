@@ -7,6 +7,8 @@ export interface InputProps {
   placeholder?: string;
   className?: string;
   readonly?: boolean;
+  title?: string;
+  id?: string;
 }
 
 const InputWrapper = styled.input`
@@ -27,8 +29,8 @@ const InputWrapper = styled.input`
   }
 `;
 
-const Input = ({ type, placeholder, className, value, onChange }: InputProps) => (
-  <InputWrapper {...{ type, placeholder, className, value, onChange }} />
+const Input = ({ type, placeholder, className, value, onChange, id, title }: InputProps) => (
+  <InputWrapper {...{ type, placeholder, className, value, onChange, id, title }} />
 );
 
 export default Input;

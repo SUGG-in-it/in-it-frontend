@@ -28,7 +28,8 @@ const SearchBar = ({ searchWord }: { searchWord: UseInputReturn }) => (
   <SearchContainer>
     {' '}
     <SearchInput
-      type="text"
+      type="search"
+      title="question search"
       value={searchWord.value}
       onChange={searchWord.onChange}
       placeholder={'질문을 검색해보세요!'}

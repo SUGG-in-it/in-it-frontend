@@ -43,9 +43,6 @@ function MyApp({ Component, pageProps }) {
             <GlobalStyle />
             <RootErrorBoundary>
               <CriticalErrorBoundary>
-                <Head>
-                  <title>코드리뷰 사이트 : init()</title>
-                </Head>
                 {typeof window === 'undefined' ? <></> : <Component {...pageProps} />}
                 <Toaster position="top-right" />
               </CriticalErrorBoundary>

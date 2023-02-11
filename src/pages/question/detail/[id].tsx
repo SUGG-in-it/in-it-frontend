@@ -8,6 +8,7 @@ import { GetServerSideProps } from 'next';
 import { Suspense } from 'react';
 import styled from 'styled-components';
 import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import withHead from '@/components/hoc/withHead';
 
 const QuestionDetail = ({ id }: { id: number }) => {
   const { data: question } = useQuestionQuery(id);
@@ -44,10 +45,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const QuestionWrapper = styled.div`
+const QuestionWrapper = styled.main`
   width: 100vw;
   background-color: ${({ theme }) => theme.backgrondDarkColor};
   padding-bottom: 3em;
 `;
 
-export default QuestionDetailPage;
+export default withHead(QuestionDetailPage,'init : 질문 상세보기','');

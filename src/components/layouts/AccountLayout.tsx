@@ -14,7 +14,7 @@ interface AccountLayoutProps {
 const AccountLayout = ({ children }: AccountLayoutProps) => {
   return (
     <Wrapper>
-      <Image src={appLogo} width={200} height={100} />
+      <Image src={appLogo} width={200} height={100} alt="앱 로고"/>
       {children}
     </Wrapper>
   );
@@ -22,7 +22,7 @@ const AccountLayout = ({ children }: AccountLayoutProps) => {
 
 export default AccountLayout;
 
-const Wrapper = styled.div`
+const Wrapper = styled.main`
   width: 100vw;
   height: 100vh;
   display: flex;

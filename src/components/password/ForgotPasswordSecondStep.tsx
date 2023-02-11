@@ -41,6 +41,7 @@ const ForgotPasswordSecondStep = () => {
               message: VALIDATION_ERROR_MSG.INVALID_PASSWORD,
             },
           })}
+          title={"password"}
           type="password"
           placeholder={'비밀번호'}
         />
@@ -50,6 +51,7 @@ const ForgotPasswordSecondStep = () => {
             required: VALIDATION_ERROR_MSG.EMPTY_PASSWORD,
             validate: (value) => value === getValues().password || VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD,
           })}
+          title={"password confirm"}
           type="password"
           placeholder={'비밀번호 확인'}
         />

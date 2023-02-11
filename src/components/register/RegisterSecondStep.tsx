@@ -62,6 +62,7 @@ const RegisterSecondStep = () => {
               message: VALIDATION_ERROR_MSG.INVALID_NICKNAME,
             },
           })}
+          title={'nickname'}
           placeholder={'닉네임'}
         />
         <p>{errors.nickname?.message}</p>
@@ -73,6 +74,7 @@ const RegisterSecondStep = () => {
               message: VALIDATION_ERROR_MSG.INVALID_PASSWORD,
             },
           })}
+          title={'password'}
           type="password"
           placeholder={'비밀번호'}
         />
@@ -82,6 +84,7 @@ const RegisterSecondStep = () => {
             required: VALIDATION_ERROR_MSG.EMPTY_CONFIRM_PASSWORD,
             validate: (value) => value === getValues().password || VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD,
           })}
+          title={'password confirm'}
           type="password"
           placeholder={'비밀번호 확인'}
         />
@@ -104,6 +107,7 @@ const RegisterSecondStep = () => {
           {...register('workPosition', {
             required: VALIDATION_ERROR_MSG.EMPTY_WORK_POSITION,
           })}
+          title={'work position'}
           placeholder={'직무'}
         />
         <p>{errors.workPosition?.message}</p>

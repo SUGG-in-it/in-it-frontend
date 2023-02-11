@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PageNotFoundImg from '@/assets/images/404error.png';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import withHead from '@/components/hoc/withHead';
 
 const NotFoundPage = () => {
   const router = useRouter();
@@ -13,7 +14,7 @@ const NotFoundPage = () => {
   return (
     <NotFoundContainer>
       <div>
-        <Image src={PageNotFoundImg} width={1000} height={550} />
+        <Image src={PageNotFoundImg} width={1000} height={550} alt=""/>
       </div>
       <Button onClick={goToMain}>{'메인화면으로 돌아가기'}</Button>
     </NotFoundContainer>
@@ -30,4 +31,4 @@ const NotFoundContainer = styled.div`
   justify-content: center;
 `;
 
-export default NotFoundPage;
+export default withHead(NotFoundPage,'init : 404 페이지','');

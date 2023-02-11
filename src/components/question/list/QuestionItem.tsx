@@ -132,7 +132,7 @@ const ProcessLabel = styled.div`
   padding: 0.5em;
   font-size: 0.8rem;
   margin-right: 1em;
-  background-color: ${({ type }) => (type === 'completed' ? '#adb5bd' : '#4d7cfe')};
+  background-color: ${({ type, theme }) => (type === 'completed' ? '#adb5bd' : theme.primaryColor)};
 `;
 
 const Title = styled.p`

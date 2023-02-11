@@ -27,7 +27,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   );
 };
 
-const ContentSection = styled.div`
+const ContentSection = styled.main`
   display: flex;
   flex-direction: row;
   justify-content: center;

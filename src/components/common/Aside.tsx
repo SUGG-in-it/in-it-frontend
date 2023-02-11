@@ -77,7 +77,7 @@ const Aside = () => (
   </AsideContainer>
 );
 
-const AsideContainer = styled.div`
+const AsideContainer = styled.aside`
   display: flex;
   flex-direction: column;
   margin-left: 3vw;
@@ -100,7 +100,10 @@ const LogoutButton = styled.button`
   background-color: ${({ theme }) => theme.primaryColor};
   color: white;
   padding: 0.5em;
+  font-weight: bold;
   cursor: pointer;
+  width: 80px;
+  height: 40px;
 `;
 
 const ProfileButton = styled.button`
@@ -117,7 +120,7 @@ const NickName = styled.p`
   font-weight: bold;
 `;
 
-const MypageWrapper = styled.div`
+const MypageWrapper = styled.section`
   height: fit-content;
   margin-top: 5em;
   padding: 1em 0.5em 1em 0.8em;
@@ -134,7 +137,7 @@ const MypageWrapper = styled.div`
   }
 `;
 
-const TagListWrapper = styled.ul`
+const TagListWrapper = styled.section`
   width: 250px;
   height: fit-content;
   padding: 1em 0.5em 1em 0.8em;

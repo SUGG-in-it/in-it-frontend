@@ -27,11 +27,11 @@ const MypageLayout = ({ children }: MypageLayoutProps) => {
 };
 
 const MyPageWrapper = styled.div`
-  background-image: linear-gradient(to bottom, #004b91 25%, white 25%);
+  background-image: ${({ theme }) => `linear-gradient(to bottom, ${theme.primaryColor} 25%, white 25%)`};
   padding-bottom: 100px;
 `;
 
-const MyPageContainer = styled.div`
+const MyPageContainer = styled.main`
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   width: 80vw;
   max-width: 1100px;
@@ -41,7 +41,7 @@ const MyPageContainer = styled.div`
   }
 `;
 
-const SectionPanel = styled.div`
+const SectionPanel = styled.section`
   background-color: ${({ theme }) => theme.backgrondLightColor};
   min-height: 50vh;
 `;

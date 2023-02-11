@@ -8,8 +8,9 @@ import { postQuestionId } from '@/api/questions';
 import LoginRequestDialog from '@/components/common/dialog/LoginRequestDialog';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '@/store/users';
+import Link from 'next/link';
 
-const TAB_MENU = [{ name: '홈' }, { name: '답변하기' }];
+const TAB_MENU = [{ name: '홈', link: '/' }, { name: '답변하기', link: '/question/list' }];
 
 const Nav = () => {
   const router = useRouter();
@@ -50,13 +51,14 @@ const Nav = () => {
       <NavContainer>
         <TabMenu>
           {TAB_MENU.map((menu, index) => (
-            <li
-              key={index}
-              className={currentTab === index ? 'clicked-menu' : 'menu'}
-              onClick={() => handleMenuClick(index)}
-            >
-              {menu.name}
-            </li>
+            <Menu key={index}>
+              <Link href={menu.link}>
+                <a className={currentTab === index ? 'clicked-menu' : 'menu'}
+                  onClick={() => handleMenuClick(index)}>
+                  {menu.name}
+                </a>
+              </Link>
+            </Menu>
           ))}
         </TabMenu>
         <AnswerButton onClick={handleQuestionClick}>{'질문하기'}</AnswerButton>
@@ -67,7 +69,7 @@ const Nav = () => {
   );
 };
 
-const NavWrapper = styled.div`
+const NavWrapper = styled.nav`
   background-color: ${({ theme }) => theme.backgrondLightColor};
   ${media.tablet} {
     display: none;
@@ -76,7 +78,7 @@ const NavWrapper = styled.div`
 
 const NavContainer = styled.div`
   display: flex;
-  height: 60px;
+  height: 50px;
   display: flex;
   max-width: 1100px;
   align-items: center;
@@ -93,27 +95,50 @@ const TabMenu = styled.ul`
   margin: 0 1em;
   border: none;
   background-color: ${({ theme }) => theme.backgrondLightColor};
-  color: #abb0b5;
+  color: #2b2b2c;
   font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
+  text-align: center;
+`;
+
+const Menu = styled.li`
+  position: relative;
+  margin-right: 40px;
+  & > a {
+    text-decoration-line: none;
+  }
   .menu {
-    color: #abb0b5;
-    width: 100px;
+    color: #2b2b2c;
+    width: 60px;
+    line-height: 50px;
+    vertical-align: top;
+    display: inline-block;
   }
   .clicked-menu {
-    color: ${({ theme }) => theme.textColor};
-    width: 100px;
+    color: ${({ theme }) => theme.primaryColor};
+    width: 60px;    
+    line-height: 50px;
+    vertical-align: top;
+    display: inline-block;
+    ::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      border-bottom: ${({ theme }) => `3px solid ${theme.primaryColor}`};
+    }
   }
   ${media.mobile} {
     .menu {
-      width: 60px;
+      width: 50px;
     }
     .clicked-menu {
-      width: 60px;
+      width: 50px;
     }
   }
-`;
+`
 
 const AnswerButton = styled(Button)`
   width: 120px;

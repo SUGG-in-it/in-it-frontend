@@ -9,13 +9,13 @@ const Tags = ({ tagList }: { tagList: string[] }) => {
   };
 
   return (
-    <div>
+    <ul>
       {tagList?.map((tag) => (
         <TagWrapper key={tag} onClick={() => onTagClick(tag)}>
           <span>{`# ${tag}`}</span>
         </TagWrapper>
       ))}
-    </div>
+    </ul>
   );
 };
 
