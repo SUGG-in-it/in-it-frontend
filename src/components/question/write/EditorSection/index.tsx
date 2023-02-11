@@ -78,8 +78,8 @@ const QuestionEditor = () => {
 
   return (
     <WriteContainer>
-      <LabelInput label="제목">
-        <CustomInput value={title.value} onChange={title.onChange} placeholder="제목을 입력해주세요." />
+      <LabelInput label="제목" htmlFor='title'>
+        <CustomInput id='title' value={title.value} onChange={title.onChange} placeholder="제목을 입력해주세요." />
       </LabelInput>
       <ToastEditorWrapper>
         <Editor
@@ -105,8 +105,8 @@ const QuestionEditor = () => {
       <TagLimit>최대 5개의 태그를 입력할 수 있습니다 !</TagLimit>
       <TagsWithDeleteButton tagList={tagList} setTagList={setTagList} />
       <AutoComplete searchTag={searchTag} handleTagList={handleTagList} />
-      <LabelInput label="내공">
-        <CustomInput value={point.value} onChange={point.onChange} type="number" placeholder="내공을 입력해주세요." />
+      <LabelInput label="내공" htmlFor='power'>
+        <CustomInput id='power' value={point.value} onChange={point.onChange} type="number" placeholder="내공을 입력해주세요." />
       </LabelInput>
       <ButtonWrapper>
         <CancelButton onClick={handleCancle}>{'취소'}</CancelButton>

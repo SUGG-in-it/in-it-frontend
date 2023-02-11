@@ -52,20 +52,20 @@ const Profile = ({ nickname }: { nickname: string }) => {
           <ProfileInfo>{profile.point}</ProfileInfo>
         </ProfileRow>
         <ProfileRow>
-          <ProfileInput label={'이메일'} info={email} />
-          <ProfileInput label={'닉네임'} info={nickName} />
+          <ProfileInput label={'이메일'} info={email} id={'email'}/>
+          <ProfileInput label={'닉네임'} info={nickName} id={'nickName'}/>
         </ProfileRow>
         <ProfileRow>
-          <ProfileInput label={'깃허브 계정'} info={githubAccount} />
-          <ProfileInput label={'자기소개'} info={introduction} />
+          <ProfileInput label={'깃허브 계정'} info={githubAccount} id={'githubAccount'}/>
+          <ProfileInput label={'자기소개'} info={introduction} id={'introduction'}/>
         </ProfileRow>
         <ProfileRow>
-          <ProfileInput label={'경력'} info={year} />
-          <ProfileInput label={'직무'} info={workPosition} />
+          <ProfileInput label={'경력'} info={year} id={'year'}/>
+          <ProfileInput label={'직무'} info={workPosition} id={'workPosition'}/>
         </ProfileRow>
         <ProfileRow>
-          <ProfileInput label={'이력'} info={career} />
-          <ProfileInput label={'소속'} info={company} />
+          <ProfileInput label={'이력'} info={career} id={'career'}/>
+          <ProfileInput label={'소속'} info={company} id={'company'}/>
         </ProfileRow>
       </ProfileCotainer>
       <ButtonWrapper>

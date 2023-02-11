@@ -63,6 +63,7 @@ const RegisterFirstStep = () => {
                 message: VALIDATION_ERROR_MSG.INVALID_EMAIL,
               },
             })}
+            title={'email'}
             placeholder={'이메일'}
           />
           <p>{errors.email?.message}</p>
@@ -81,6 +82,7 @@ const RegisterFirstStep = () => {
             {...register('code', {
               required: VALIDATION_ERROR_MSG.EMPTY_CODE,
             })}
+            title={'code'}
             placeholder={'인증번호'}
           />
           <p>{errors.code?.message}</p>

@@ -53,6 +53,7 @@ const SigninPage = () => {
           {...register('email', {
             required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
           })}
+          title={'email'}
           placeholder={'이메일'}
         />
         <p>{errors.email?.message}</p>
@@ -60,6 +61,7 @@ const SigninPage = () => {
           {...register('password', {
             required: VALIDATION_ERROR_MSG.EMPTY_PASSWORD,
           })}
+          title={'password'}
           type="password"
           placeholder={'비밀번호'}
         />

@@ -33,7 +33,8 @@ const AutoComplete = ({
     <SearchContainer>
       <FaHashtag />
       <SearchInput
-        type="text"
+        type="search"
+        title="tag search"
         value={searchTag.value}
         onChange={searchTag.onChange}
         placeholder={'태그를 입력해주세요!'}
