@@ -28,7 +28,7 @@ const QuestionItem = ({ order, questionId, title, content }: QuestionProps) => {
       </TopSection>
       <ContentContainer>
         <Arrow />
-        <ContentViewer content={content} length={30} />
+        <ContentViewer content={content} length={50} />
       </ContentContainer>
     </QuestionWrapper>
   );
@@ -38,7 +38,6 @@ const QuestionWrapper = styled.li`
   position: relative;
   margin-top: 14px;
   padding: 4px 4px 16px 18px;
-  border-bottom: 1px solid #f2f2f2;
   background: 0;
   font-size: 12px;
   line-height: 1.6;
@@ -51,9 +50,9 @@ const TopSection = styled.div`
   align-items: center;
 `;
 
-const Ranking = styled.div`
+const Ranking = styled.p`
   width: fit-content;
-  padding: 0.2em;
+  padding: 0.2em 0.5em;
   font-size: 1.4rem;
   margin-right: 1em;
   font-weight: bold;

@@ -25,8 +25,8 @@ const BannerSection = () => {
       <ImageWrapper>
         <Image
           src={BannerImg1}
-          width={200}
-          height={200}
+          width={180}
+          height={180}
           placeholder="blur"
           alt="인기 질문"
           onClick={() => handleBannerClick(recent.questionId)}
@@ -34,24 +34,24 @@ const BannerSection = () => {
       </ImageWrapper>
       <Image
         src={BannerImg2}
-        width={200}
-        height={200}
+        width={180}
+        height={180}
         placeholder="blur"
         alt="포인트가 가장 많은 질문"
         onClick={() => handleBannerClick(point.questionId)}
       />
       <Image
         src={BannerImg3}
-        width={200}
-        height={200}
+        width={180}
+        height={180}
         placeholder="blur"
         alt="추천 질문"
         onClick={() => handleBannerClick(random.questionId)}
       />
       <Image
         src={BannerImg4}
-        width={200}
-        height={200}
+        width={180}
+        height={180}
         placeholder="blur"
         alt="인기 질문"
         onClick={() => handleBannerClick(popular.questionId)}

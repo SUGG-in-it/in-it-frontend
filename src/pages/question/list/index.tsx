@@ -50,7 +50,6 @@ const QuestionListContainer = styled.section`
 const ContentSection = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-top: 50px;
   padding-bottom: 20px;
   ${media.tablet} {
     padding-top: 30px;

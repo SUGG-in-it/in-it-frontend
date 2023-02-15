@@ -19,9 +19,20 @@ const ContentWrapper = ({ content, length }: ContentViewerProps) => {
 };
 
 const ViewerWrapper = styled.div`
-  color: #616568;
-  font-size: 0.9rem;
-  line-height: 1.25;
+  p {
+    margin-bottom: 6px;
+    width: 100%;
+    font-weight: 500;
+    font-size: 0.75rem;
+    color: #616568;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    line-height: 150%;
+  }
 `;
 
 export default ContentWrapper;

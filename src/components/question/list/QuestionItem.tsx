@@ -83,6 +83,8 @@ const LeftSection = styled.div`
 `;
 
 const RightSection = styled.div`
+  display: flex;
+  justify-content: center;
   width: 8em;
   ${media.mobile} {
     width: 6em;
@@ -136,7 +138,7 @@ const ProcessLabel = styled.div`
 `;
 
 const Title = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   width: calc(100% - 100px);
   color: ${({ theme }) => theme.textColor};
@@ -149,7 +151,7 @@ const TagsWrapper = styled.div`
 const BottomSection = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 2em;
+  margin-top: 1em;
   span {
     color: #3e4042;
     font-size: 0.8rem;

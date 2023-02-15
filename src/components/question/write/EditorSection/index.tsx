@@ -105,8 +105,8 @@ const QuestionEditor = () => {
       <TagLimit>최대 5개의 태그를 입력할 수 있습니다 !</TagLimit>
       <TagsWithDeleteButton tagList={tagList} setTagList={setTagList} />
       <AutoComplete searchTag={searchTag} handleTagList={handleTagList} />
-      <LabelInput label="내공" htmlFor='power'>
-        <CustomInput id='power' value={point.value} onChange={point.onChange} type="number" placeholder="내공을 입력해주세요." />
+      <LabelInput label="포인트" htmlFor='point'>
+        <CustomInput id='point' value={point.value} onChange={point.onChange} type="number" placeholder="포인트를 입력해주세요." />
       </LabelInput>
       <ButtonWrapper>
         <CancelButton onClick={handleCancle}>{'취소'}</CancelButton>
