@@ -6,11 +6,8 @@
 [코드리뷰 사이트 : init()](https://cr-init.herokuapp.com/)  
 ###  ✨
 
-- error boundary & suspense 사용
-- 미디어쿼리를 이용한 반응형 구현
-- react custom hook 사용
-- recoil, react query를 통한 상태관리
-- ... etc 
+- [React Query와 함께 Concurrent UI Pattern 사용해보기](https://velog.io/@zzi99/Concurrent-UI-Pattern)
+- [웹 접근성 개선](https://velog.io/@zzi99/%EC%9B%B9-%EC%A0%91%EA%B7%BC%EC%84%B1-2-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%84%A0)
 
 ## 🛠 tech stack
 ```Next.js``` ```React``` ```TypeScript```   
