@@ -9,7 +9,6 @@ const TagListSkeleton = () => (
 );
 
 const TagListWrapper = styled.div`
-  width: 250px;
   height: fit-content;
   padding: 1em 0.5em 1em 0.8em;
   border: 1px solid ${({ theme }) => theme.greyLineColor};

@@ -25,9 +25,9 @@ const TagWrapper = styled.li`
   padding: 0.3em;
   border-radius: 3px;
   width: fit-content;
-  margin: 0.5em 1em 0em 0em;
+  margin: 0.7em 1.2em 0em 0em;
   display: inline-block;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
   ${media.mobile} {
     font-size: 0.9rem;

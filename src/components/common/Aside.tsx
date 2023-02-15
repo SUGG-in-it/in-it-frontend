@@ -9,6 +9,7 @@ import { usePopularTagsQuery } from '@/hooks/queries/useTags';
 import { Suspense } from 'react';
 import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
 import TagListSkeleton from '@/components/common/tagsWithDeleteButton/index.skeleton';
+import TopWriters from '@/components/common/TopWriters';
 
 const MyInfo = () => {
   const router = useRouter();
@@ -36,20 +37,16 @@ const MyInfo = () => {
   return (
     <MypageWrapper>
       {isLogin ? (
-        <>
-          <Header>
+          <MypageContainer>
             <NickName>{`안녕하세요! ${user.nickname} 님`}</NickName>
+            <ProfileButton onClick={() => handleProfileClick(user.nickname)}>{'프로필 바로가기 >'}</ProfileButton>
             <LogoutButton onClick={handleLogoutClick}>{'로그아웃'}</LogoutButton>
-          </Header>
-          <ProfileButton onClick={() => handleProfileClick(user.nickname)}>{'프로필 바로가기 >'}</ProfileButton>
-        </>
+          </MypageContainer>
       ) : (
-        <>
-          <Header>
+          <MypageContainer>
             <NickName>{'안녕하세요! 로그인해주세요 😉'}</NickName>
-          </Header>
-          <LogoutButton onClick={handleLoginClick}>{'로그인'}</LogoutButton>
-        </>
+            <LogoutButton onClick={handleLoginClick}>{'로그인'}</LogoutButton>
+          </MypageContainer>
       )}
     </MypageWrapper>
   );
@@ -72,12 +69,14 @@ const Aside = () => (
     <RetryErrorBoundary>
       <Suspense fallback={<TagListSkeleton />}>
         <TagList />
+        <TopWriters/>
       </Suspense>
     </RetryErrorBoundary>
   </AsideContainer>
 );
 
 const AsideContainer = styled.aside`
+  width: 200px;
   display: flex;
   flex-direction: column;
   margin-left: 3vw;
@@ -89,10 +88,10 @@ const AsideContainer = styled.aside`
   }
 `;
 
-const Header = styled.div`
+const MypageContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 const LogoutButton = styled.button`
@@ -102,7 +101,8 @@ const LogoutButton = styled.button`
   padding: 0.5em;
   font-weight: bold;
   cursor: pointer;
-  width: 80px;
+  margin-top: 2em;
+  width: 100%;
   height: 40px;
 `;
 
@@ -113,6 +113,7 @@ const ProfileButton = styled.button`
   text-decoration: underline;
   padding: 0;
   cursor: pointer;
+  margin-bottom: 2em;
 `;
 
 const NickName = styled.p`
@@ -138,7 +139,6 @@ const MypageWrapper = styled.section`
 `;
 
 const TagListWrapper = styled.section`
-  width: 250px;
   height: fit-content;
   padding: 1em 0.5em 1em 0.8em;
   border: 1px solid ${({ theme }) => theme.greyLineColor};
@@ -148,7 +148,8 @@ const TagListWrapper = styled.section`
   p {
     font-size: 0.9rem;
     margin-bottom: 1em;
-    color: ${({ theme }) => theme.textColor};
+    color:#212529;
+    font-weight: 700;
   }
   ${media.tablet} {
     display: none;
