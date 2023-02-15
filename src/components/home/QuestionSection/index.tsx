@@ -54,8 +54,8 @@ const QuestionContainer = styled.section`
 `;
 
 const QuestionBox = styled.div`
-  max-width: 850px;
-  width: 80vw;
+  max-width: 700px;
+  width: 70vw;
   height: fit-content;
   margin: 0 auto;
   background-color: ${({ theme }) => theme.backgrondLightColor};

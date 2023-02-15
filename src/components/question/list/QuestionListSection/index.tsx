@@ -60,7 +60,7 @@ const QuestionsSection = ({ currentPage }: { currentPage: number }) => {
 
 const QuestionListContainer = styled.div`
   max-width: 700px;
-  width: 80vw;
+  width: 70vw;
   margin: 0 auto;
   ${media.mobile} {
     width: 90vw;

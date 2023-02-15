@@ -56,7 +56,7 @@ const TopWritersWrapper = styled.section`
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   background-color: ${({ theme }) => theme.backgrondLightColor};
   border-radius: 4px;
-  margin-top: 1em;
+  margin-bottom: 2em;
   & > p {
     font-size: 0.9rem;
     margin-bottom: 1em;

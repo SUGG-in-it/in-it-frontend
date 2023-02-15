@@ -4,12 +4,7 @@ import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { successToast } from '@/utils/toast';
-import Tags from '@/components/common/tags/Tags';
-import { usePopularTagsQuery } from '@/hooks/queries/useTags';
-import { Suspense } from 'react';
-import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
-import TagListSkeleton from '@/components/common/tagsWithDeleteButton/index.skeleton';
-import TopWriters from '@/components/common/TopWriters';
+import WeeklyQuestion from '@/components/common/WeeklyQuestion';
 
 const MyInfo = () => {
   const router = useRouter();
@@ -52,31 +47,15 @@ const MyInfo = () => {
   );
 };
 
-const TagList = () => {
-  const { data: tags } = usePopularTagsQuery();
-
-  return (
-    <TagListWrapper>
-      <p>인기 태그</p>
-      <Tags tagList={tags.tags} />
-    </TagListWrapper>
-  );
-};
-
-const Aside = () => (
+const RightAside = () => (
   <AsideContainer>
     <MyInfo />
-    <RetryErrorBoundary>
-      <Suspense fallback={<TagListSkeleton />}>
-        <TagList />
-        <TopWriters/>
-      </Suspense>
-    </RetryErrorBoundary>
+    <WeeklyQuestion />
   </AsideContainer>
 );
 
-const AsideContainer = styled.aside`
-  width: 200px;
+const AsideContainer = styled.aside`  
+  width: 220px;
   display: flex;
   flex-direction: column;
   margin-left: 3vw;
@@ -123,7 +102,6 @@ const NickName = styled.p`
 
 const MypageWrapper = styled.section`
   height: fit-content;
-  margin-top: 5em;
   padding: 1em 0.5em 1em 0.8em;
   border: 1px solid ${({ theme }) => theme.greyLineColor};
   background-color: ${({ theme }) => theme.backgrondLightColor};
@@ -138,22 +116,5 @@ const MypageWrapper = styled.section`
   }
 `;
 
-const TagListWrapper = styled.section`
-  height: fit-content;
-  padding: 1em 0.5em 1em 0.8em;
-  border: 1px solid ${({ theme }) => theme.greyLineColor};
-  background-color: ${({ theme }) => theme.backgrondLightColor};
-  border-radius: 4px;
-  margin-top: 1em;
-  p {
-    font-size: 0.9rem;
-    margin-bottom: 1em;
-    color:#212529;
-    font-weight: 700;
-  }
-  ${media.tablet} {
-    display: none;
-  }
-`;
 
-export default Aside;
+export default RightAside;

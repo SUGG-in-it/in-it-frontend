@@ -65,11 +65,10 @@ const BannerContainer = styled.section`
   justify-content: center;
   background-color: white;
   cursor: pointer;
-  padding-top: 3em;
   justify-content: space-between;
   padding-bottom: 3em;
-  width: 80vw;
-  max-width: 850px;
+  width: 70vw;
+  max-width: 750px;
   ${media.tablet} {
     width: 90vw;
     margin: 0 auto;

@@ -1,4 +1,5 @@
-import Aside from '@/components/common/Aside';
+import RightAside from '@/components/common/RightAside';
+import LeftAside from '@/components/common/LeftAside';
 import Footer from '@/components/common/Footer';
 import Header from '@/components/common/Header';
 import Nav from '@/components/common/Nav';
@@ -19,8 +20,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <Header />
       <Nav />
       <ContentSection>
+        <LeftAside />
         {children}
-        <Aside />
+        <RightAside />
       </ContentSection>
       <Footer />
     </>
@@ -33,6 +35,7 @@ const ContentSection = styled.main`
   justify-content: center;
   background-color: white;
   min-height: 80vh;
+  padding-top: 4em;
 `;
 
 export default MainLayout;
