@@ -19,7 +19,7 @@ const ContentWrapper = ({ content, length }: ContentViewerProps) => {
 };
 
 const ViewerWrapper = styled.div`
-  p {
+  h1,p {
     margin-bottom: 6px;
     width: 100%;
     font-weight: 500;

@@ -34,7 +34,7 @@ const AsideContainer = styled.aside`
   width: 180px;
   display: flex;
   flex-direction: column;
-  margin-right: 3vw;
+  margin-right: 2vw;
   ${media.tablet} {
     display: none;
   }
@@ -53,7 +53,7 @@ const TagListWrapper = styled.section`
   p {
     font-size: 0.9rem;
     margin-bottom: 1em;
-    color:#212529;
+    color:#000;
     font-weight: 700;
   }
   ${media.tablet} {

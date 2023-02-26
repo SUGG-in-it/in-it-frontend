@@ -36,7 +36,7 @@ const QuestionItem = ({ order, questionId, title, content }: QuestionProps) => {
 
 const QuestionWrapper = styled.li`
   position: relative;
-  margin-top: 14px;
+  margin: 10px 0;
   padding: 4px 4px 16px 18px;
   background: 0;
   font-size: 12px;

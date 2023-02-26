@@ -16,7 +16,6 @@ const HomePage = () => {
 };
 
 const MainContainer = styled.section`
-  background-color: white;
 `;
 
 export default withHead(HomePage,'코드리뷰 사이트 : init()','');

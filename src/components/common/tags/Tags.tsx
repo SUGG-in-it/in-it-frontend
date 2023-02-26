@@ -28,7 +28,7 @@ const TagWrapper = styled.li`
   margin: 0.7em 1.2em 0em 0em;
   display: inline-block;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 0.9rem;
   ${media.mobile} {
     font-size: 0.9rem;
   }

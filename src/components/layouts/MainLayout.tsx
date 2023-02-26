@@ -33,7 +33,7 @@ const ContentSection = styled.main`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: white;
+  background-color: #f8f8f7;
   min-height: 80vh;
   padding-top: 4em;
 `;

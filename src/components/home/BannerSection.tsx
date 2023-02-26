@@ -63,7 +63,6 @@ const BannerSection = () => {
 const BannerContainer = styled.section`
   display: flex;
   justify-content: center;
-  background-color: white;
   cursor: pointer;
   justify-content: space-between;
   padding-bottom: 3em;

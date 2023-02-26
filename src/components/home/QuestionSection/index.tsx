@@ -13,8 +13,8 @@ const Questions = () => {
   const { data: questions } = useQuestionsQuery({ page: 0, size: PAGINATION_SIZE.MAIN_QUESTION, type: 'total' });
 
   useEffect(() => {
-    setLeftSectionQuestions(questions?.questions?.slice(0, 3));
-    setRightSectionQuestions(questions?.questions?.slice(3, 6));
+    setLeftSectionQuestions(questions?.questions?.slice(0, 5));
+    setRightSectionQuestions(questions?.questions?.slice(5, 10));
   }, [questions]);
 
   return (
@@ -29,7 +29,7 @@ const Questions = () => {
           </LeftSection>
           <RightSection>
             {rightSectionQuestions?.map((question, index) => (
-              <QuestionItem key={question.questionId} order={index + 4} {...question} />
+              <QuestionItem key={question.questionId} order={index + 6} {...question} />
             ))}
           </RightSection>
         </QuestionListWrapper>
@@ -49,7 +49,6 @@ const QuestionSection = () => {
 };
 
 const QuestionContainer = styled.section`
-  background-color: white;
   padding-bottom: 6em;
 `;
 
@@ -60,7 +59,8 @@ const QuestionBox = styled.div`
   margin: 0 auto;
   background-color: ${({ theme }) => theme.backgrondLightColor};
   border: 1px solid ${({ theme }) => theme.greyLineColor};
-  padding: 2em;
+  padding: 1em;
+  border-radius: 4px;
   ${media.tablet} {
     width: 80vw;
   }
@@ -97,7 +97,8 @@ const LeftSection = styled.ul`
   border-right: 1px solid ${({ theme }) => theme.greyLineColor};
   li {
     padding: 0.5em 1em 0.5em 0em;
-    height: 100px;
+    height: 80px;
+    border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
     ${media.tablet} {
       border-right: none;
       height: 80px;
@@ -108,7 +109,8 @@ const LeftSection = styled.ul`
 const RightSection = styled.ul`
   li {
     padding: 0.5em 0em 0.5em 1em;
-    height: 100px;
+    border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
+    height: 80px;
     ${media.tablet} {
       height: 80px;
     }

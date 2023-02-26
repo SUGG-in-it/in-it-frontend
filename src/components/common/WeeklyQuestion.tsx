@@ -60,7 +60,7 @@ const WeeklyQuestionWrapper = styled.section`
   & > p {
     font-size: 0.9rem;
     margin-bottom: 1em;
-    color:#212529;
+    color:#000;
     font-weight: 700;
   }
   ${media.tablet} {

@@ -58,7 +58,7 @@ const AsideContainer = styled.aside`
   width: 220px;
   display: flex;
   flex-direction: column;
-  margin-left: 3vw;
+  margin-left: 2vw;
   ${media.tablet} {
     display: none;
   }

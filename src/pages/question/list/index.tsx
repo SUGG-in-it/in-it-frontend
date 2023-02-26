@@ -44,7 +44,11 @@ const QuestionListPage = () => {
 };
 
 const QuestionListContainer = styled.section`
-  padding-bottom: 5em;
+  padding: 2em 1em;
+  border: 1px solid ${({ theme }) => theme.greyLineColor};
+  border-radius: 4px;
+  background: white;
+  margin-bottom: 2em;
 `;
 
 const ContentSection = styled.div`
