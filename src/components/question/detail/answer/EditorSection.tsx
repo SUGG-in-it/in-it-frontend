@@ -18,13 +18,13 @@ const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSe
   const editorRef = useRef(null);
   const mutationUploadAnswer = useUploadAnswerMutation({
     onSuccess: () => {
-      editorRef.current?.getInstance().setHTML('');
+      editorRef.current?.getInstance().setMarkdown('');
     },
   });
 
   const mutationEditAnswer = useUploadAnswerMutation({
     onSuccess: () => {
-      editorRef.current?.getInstance().setHTML('');
+      editorRef.current?.getInstance().setMarkdown('');
       onCancelEdit();
     },
   });
@@ -40,7 +40,7 @@ const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSe
       const answerId = data?.answerId;
       mutationUploadAnswer.mutate({
         answerId: Number(answerId),
-        content: editorRef.current?.getInstance().getHTML(),
+        content: editorRef.current?.getInstance().get(),
       });
     }
   };
@@ -58,7 +58,7 @@ const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSe
         ref={editorRef}
         placeholder="내용을 입력해주세요."
         previewStyle="vertical"
-        initialEditType="wysiwyg"
+        initialEditType="markdown"
         initialValue={'<p>' + content + '</p>'}
         height="350px"
         toolbarItems={[
@@ -69,6 +69,7 @@ const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSe
           ['table', 'image', 'link'],
           ['code', 'codeblock'],
         ]}
+        hideModeSwitch
         hooks={{
           addImageBlobHook,
         }}

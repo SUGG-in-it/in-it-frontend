@@ -43,7 +43,7 @@ const QuestionEditor = () => {
     } else {
       setTagList([]);
     }
-    editorRef.current?.getInstance().setHTML(question.content || '');
+    editorRef.current?.getInstance().setMarkdown(question.content || '');
   }, [question]);
 
   const addImageBlobHook = async (file, callback) => {
@@ -55,11 +55,11 @@ const QuestionEditor = () => {
   };
 
   const handleQuestionSubmit = async () => {
-    if (title.value && editorRef.current?.getInstance().getHTML()) {
+    if (title.value && editorRef.current?.getInstance().getMarkdown()) {
       mutationUploadQuestion.mutate({
         questionId: Number(questionId),
         title: title.value,
-        content: editorRef.current?.getInstance().getHTML(),
+        content: editorRef.current?.getInstance().getMarkdown(),
         tagList: tagList.join(','),
         point: Number(point.value),
       });
@@ -86,7 +86,7 @@ const QuestionEditor = () => {
           ref={editorRef}
           placeholder="내용을 입력해주세요."
           previewStyle="vertical"
-          initialEditType="wysiwyg"
+          initialEditType="markdown"
           initialValue={'<p></p>'}
           height="350px"
           toolbarItems={[
@@ -97,6 +97,7 @@ const QuestionEditor = () => {
             ['table', 'image', 'link'],
             ['code', 'codeblock'],
           ]}
+          hideModeSwitch
           hooks={{
             addImageBlobHook,
           }}
