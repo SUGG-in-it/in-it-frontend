@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { FiCornerDownRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
+import removeMarkdown from '@/utils/removeMarkdown';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
@@ -28,7 +29,7 @@ const QuestionItem = ({ order, questionId, title, content }: QuestionProps) => {
       </TopSection>
       <ContentContainer>
         <Arrow />
-        <ContentViewer content={content} length={50} />
+        <Content>{removeMarkdown(content)}</Content>
       </ContentContainer>
     </QuestionWrapper>
   );
@@ -71,6 +72,21 @@ const Arrow = styled(FiCornerDownRight)`
 const ContentContainer = styled.div`
   display: flex;
 `;
+
+const Content = styled.p`
+  margin-bottom: 6px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: #616568;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 150%;
+`
 
 const Title = styled.p`
   display: block;

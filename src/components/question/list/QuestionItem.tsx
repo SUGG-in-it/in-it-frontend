@@ -1,11 +1,9 @@
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import dynamic from 'next/dynamic';
 import Tags from '@/components/common/tags/Tags';
 import dayjs from 'dayjs';
-
-const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
+import removeMarkdown from '@/utils/removeMarkdown';
 
 interface QuestionProps {
   questionId: number;
@@ -33,7 +31,7 @@ const QuestionItem = ({ questionId, type, nickname, updateDate, title, content, 
             <ProcessLabel type={type}>{type === 'completed' ? '답변 완료' : '답변 진행중'}</ProcessLabel>
             <Title>{title}</Title>
           </TopSection>
-          <ContentViewer content={content} length={100} />
+          <Content>{removeMarkdown(content)}</Content>
           <TagsWrapper>
             <Tags tagList={tagList && tagList.split(',')} />
           </TagsWrapper>
@@ -81,6 +79,21 @@ const QuestionSection = styled.div`
 const LeftSection = styled.div`
   width: 100%;
 `;
+
+const Content = styled.p`
+  margin-bottom: 6px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: #616568;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: 160%;
+`
 
 const RightSection = styled.div`
   display: flex;
