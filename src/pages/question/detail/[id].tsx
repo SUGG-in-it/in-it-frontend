@@ -51,4 +51,4 @@ const QuestionWrapper = styled.main`
   padding-bottom: 3em;
 `;
 
-export default withHead(QuestionDetailPage,'init : 질문 상세보기','');
+export default withHead(QuestionDetailPage, 'init : 질문 상세보기', '');
