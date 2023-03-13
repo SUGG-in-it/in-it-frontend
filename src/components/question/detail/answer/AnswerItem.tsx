@@ -1,6 +1,5 @@
 import CommentSection from '@/components/question/detail/comment/CommentSection';
 import styled from 'styled-components';
-import DOMPurify from 'dompurify';
 import { useRecoilValue } from 'recoil';
 import { userState } from '@/store/users';
 import Button from '@/components/common/Button';
@@ -13,7 +12,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import APIButton from '@/components/common/Button/APIButton';
 
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
-const ContentViewer = dynamic(() => import('@/components/question/detail/answer/ContentViewer'), { ssr: false });
+const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
 interface AnswerProps {
   answerId: number;
