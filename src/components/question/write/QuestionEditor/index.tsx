@@ -13,7 +13,7 @@ import AutoComplete from '@/components/common/AutoComplete';
 import TagsWithDeleteButton from '@/components/common/TagsWithDeleteButton';
 import APIButton from '@/components/common/Button/APIButton';
 import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
-import EditorSkeleton from '@/components/question/write/EditorSection/index.skeleton';
+import EditorSkeleton from '@/components/question/write/QuestionEditor/index.skeleton';
 import { useUploadImageMutation } from '@/hooks/queries/useImage';
 
 const QuestionEditor = () => {

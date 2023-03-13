@@ -7,7 +7,7 @@ import GrayLine from '@/components/common/GreyLine';
 import { useRouter } from 'next/router';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import QuestionSearchSection from '@/components/question/list/QuestionSearchSection';
-import QuestionListSkeleton from '@/components/question/list/QuestionListSection/index.skeleton';
+import QuestionListSkeleton from '@/components/question/list/QuestionList/index.skeleton';
 import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
 import { media } from '@/styles/mediaQuery';
 

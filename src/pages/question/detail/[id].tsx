@@ -1,8 +1,8 @@
 import GrayLine from '@/components/common/GreyLine';
-import QuestionDetailSkeleton from '@/components/question/detail/qusetion/questionSection/index.skeleton';
+import QuestionDetailSkeleton from '@/components/question/detail/qusetion/QuestionDetail/index.skeleton';
 import QuestionLayout from '@/layouts/QuestionLayout';
-import AnswerSection from '@/components/question/detail/answer/AnswerSection';
-import QuestionSection from '@/components/question/detail/qusetion/questionSection';
+import AnswerSection from '@/components/question/detail/answer/AnswerList';
+import QuestionSection from '@/components/question/detail/qusetion/QuestionDetail';
 import { useQuestionQuery } from '@/hooks/queries/useQuestion';
 import { GetServerSideProps } from 'next';
 import { Suspense } from 'react';

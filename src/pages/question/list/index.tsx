@@ -1,6 +1,6 @@
 import Pagination from '@/components/common/Pagination';
 import MainLayout from '@/layouts/MainLayout';
-import QuestionsSection from '@/components/question/list/QuestionListSection';
+import QuestionsSection from '@/components/question/list/QuestionList';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';

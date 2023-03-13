@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useUserAnswersQuery } from '@/hooks/queries/useAnswer';
 import { MyAnswer } from '@/types/response/answers';
 import { FiCornerDownRight } from 'react-icons/fi';
-import AnswerListSkeleton from '@/components/mypage/answer/AnswerListSection/index.skeleton';
+import AnswerListSkeleton from '@/components/mypage/answer/AnswerList/index.skeleton';
 import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });

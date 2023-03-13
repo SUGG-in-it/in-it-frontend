@@ -11,7 +11,7 @@ import { media } from '@/styles/mediaQuery';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import APIButton from '@/components/common/Button/APIButton';
 
-const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
+const EditorSection = dynamic(() => import('@/components/question/detail/answer/AnswerWrite'), { ssr: false });
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
 interface AnswerProps {

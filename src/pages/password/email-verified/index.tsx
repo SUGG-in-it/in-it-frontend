@@ -1,19 +1,14 @@
-import { useSendMutation } from '@/hooks/queries/useAuth';
-import { useEmailCheckMutation } from '@/hooks/queries/useUser';
-import { media } from '@/styles/mediaQuery';
-import styled from 'styled-components';
-import { useForm } from 'react-hook-form';
-import { VALIDATION_ERROR_MSG } from '@/constants/validation';
-import APIButton from '@/components/common/Button/APIButton';
-import { useRouter } from 'next/router';
 import AccountLayout from '@/layouts/AccountLayout';
-import { useSetRecoilState } from 'recoil';
-import { emailState } from '@/store/users';
+import { VALIDATION_ERROR_MSG } from '@/constants/validation';
+import { useSendMutation, useVerifyMutation } from '@/hooks/queries/useAuth';
+import { media } from '@/styles/mediaQuery';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
+import APIButton from '@/components/common/Button/APIButton';
 
-const RegisterPage = () => {
+const EmailVerifiedPage = () => {
   const router = useRouter();
-  const setEmail = useSetRecoilState(emailState);
-
   const {
     register,
     handleSubmit,
@@ -26,58 +21,50 @@ const RegisterPage = () => {
     },
   });
 
-  const mutationCheckEmail = useEmailCheckMutation({
+  const mutationVerifyCode = useVerifyMutation({
     onSuccess: () => {
-      sendEmail();
+      router.push('/password/reset');
     },
   });
 
-  const mutationSendCode = useSendMutation({
-    onSuccess: () => {
-      setEmail({
-        register: getValues().email,
-        password: '',
-      });
-      router.push(`/register/email-verified`);
-    },
-  });
+  const mutationSendCode = useSendMutation();
 
   const sendEmail = () => {
     const email = getValues().email;
-    mutationSendCode.mutate({ email, type: 'join' });
+    mutationSendCode.mutate({ email, type: 'password' });
   };
 
   return (
     <AccountLayout>
-      <SignUpWrapper>
+      <ForgotPasswordWrapper>
         <SendEmailForm>
           <input
-            {...register('email', {
-              required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
-              pattern: {
-                value: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
-                message: VALIDATION_ERROR_MSG.INVALID_EMAIL,
-              },
+            {...register('code', {
+              required: VALIDATION_ERROR_MSG.EMPTY_CODE,
             })}
-            title={'email'}
-            placeholder={'이메일'}
+            title="code"
+            placeholder={'인증번호'}
           />
-          <p>{errors.email?.message}</p>
+          <p>{errors.code?.message}</p>
           <SendButton
             onClick={handleSubmit((data) => {
-              mutationCheckEmail.mutate(data.email);
+              mutationVerifyCode.mutate({ email: data.email, code: data.code });
             })}
-            isLoading={mutationCheckEmail.isLoading || mutationSendCode.isLoading}
+            isLoading={mutationVerifyCode.isLoading}
           >
-            인증번호 전송
+            확인
           </SendButton>
+          <ResendContainer>
+            <span>메일을 받지 못하셨습니까?</span>
+            <u onClick={sendEmail}>재전송 하기</u>
+          </ResendContainer>
         </SendEmailForm>
-      </SignUpWrapper>
+      </ForgotPasswordWrapper>
     </AccountLayout>
   );
 };
 
-const SignUpWrapper = styled.div`
+const ForgotPasswordWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,6 +72,23 @@ const SignUpWrapper = styled.div`
   ${media.mobile} {
     width: 300px;
     margin: 0 auto;
+  }
+`;
+
+const ResendContainer = styled.div`
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  span {
+    color: ${({ theme }) => theme.pointColor};
+    font-size: 0.9rem;
+  }
+  u {
+    color: ${({ theme }) => theme.pointColor};
+    font-size: 0.9rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -125,4 +129,4 @@ const SendButton = styled(APIButton)`
   margin-top: 20px;
 `;
 
-export default RegisterPage;
+export default EmailVerifiedPage;

@@ -11,12 +11,12 @@ import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { useRecoilValue } from 'recoil';
 import { loginState, userState } from '@/store/users';
 import { Answer } from '@/types/response/answers';
-import AnswerListSkeleton from '@/components/question/detail/answer/AnswerSection/index.skeleton';
+import AnswerListSkeleton from '@/components/question/detail/answer/AnswerList/index.skeleton';
 import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
 import Button from '@/components/common/Button';
 import { useRouter } from 'next/router';
 
-const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });
+const EditorSection = dynamic(() => import('@/components/question/detail/answer/AnswerWrite'), { ssr: false });
 
 const AnswerSection = ({ question }: { question: Question }) => {
   const [currentPage, setCurrentPage] = useState(1);

@@ -2,7 +2,7 @@ import Pagination from '@/components/common/Pagination';
 import withAuth from '@/components/hoc/withAuth';
 import withHead from '@/components/hoc/withHead';
 import MypageLayout from '@/layouts/MypageLayout';
-import QuestionListSection from '@/components/mypage/question/QuestionListSection';
+import QuestionListSection from '@/components/mypage/question/QuestionList';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { useUserQuestionPageQuery } from '@/hooks/queries/useQuestion';
 import { useState } from 'react';
