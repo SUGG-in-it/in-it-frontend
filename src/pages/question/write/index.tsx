@@ -1,6 +1,6 @@
 import BannerSection from '@/components/question/write/BannerSection';
 import QuestionLayout from '@/layouts/QuestionLayout';
-import LoginRequestModal from '@/components/common/dialog/LoginRequestDialog';
+import LoginRequestModal from '@/components/common/Dialog/LoginRequestDialog';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '@/store/users';
 import QuestionWriteSection from '@/components/question/write/QuestionWriteSection';

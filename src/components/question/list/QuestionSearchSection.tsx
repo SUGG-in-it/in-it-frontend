@@ -1,7 +1,7 @@
 import AutoComplete from '@/components/common/AutoComplete';
-import Button from '@/components/common/button/Button';
+import Button from '@/components/common/Button';
 import SearchBar from '@/components/common/SearchBar';
-import TagsWithDeleteButton from '@/components/common/tagsWithDeleteButton';
+import TagsWithDeleteButton from '@/components/common/TagsWithDeleteButton';
 import useInput from '@/hooks/useInput';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';

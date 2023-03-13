@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import { useResetPasswordMutation } from '@/hooks/queries/useUser';
-import APIButton from '@/components/common/button/APIButton';
+import APIButton from '@/components/common/Button/APIButton';
 
 const ForgotPasswordSecondStep = () => {
   const router = useRouter();
@@ -41,7 +41,7 @@ const ForgotPasswordSecondStep = () => {
               message: VALIDATION_ERROR_MSG.INVALID_PASSWORD,
             },
           })}
-          title={"password"}
+          title={'password'}
           type="password"
           placeholder={'비밀번호'}
         />
@@ -51,7 +51,7 @@ const ForgotPasswordSecondStep = () => {
             required: VALIDATION_ERROR_MSG.EMPTY_PASSWORD,
             validate: (value) => value === getValues().password || VALIDATION_ERROR_MSG.INCONSISTENCY_PASSWORD,
           })}
-          title={"password confirm"}
+          title={'password confirm'}
           type="password"
           placeholder={'비밀번호 확인'}
         />

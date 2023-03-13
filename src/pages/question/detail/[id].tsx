@@ -7,7 +7,7 @@ import { useQuestionQuery } from '@/hooks/queries/useQuestion';
 import { GetServerSideProps } from 'next';
 import { Suspense } from 'react';
 import styled from 'styled-components';
-import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
 import withHead from '@/components/hoc/withHead';
 
 const QuestionDetail = ({ id }: { id: number }) => {

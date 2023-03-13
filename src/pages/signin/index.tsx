@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import jwt from 'jsonwebtoken';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
-import APIButton from '@/components/common/button/APIButton';
+import APIButton from '@/components/common/Button/APIButton';
 import withHead from '@/components/hoc/withHead';
 
 const SigninPage = () => {

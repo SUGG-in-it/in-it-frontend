@@ -1,4 +1,4 @@
-import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
 import Pagination from '@/components/common/Pagination';
 import CommentItem from '@/components/question/detail/comment/CommentItem';
 import CommentListSkeleton from '@/components/question/detail/comment/CommentList/index.skeleton';

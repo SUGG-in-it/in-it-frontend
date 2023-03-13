@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import styled from 'styled-components';
 import { postAnswerId } from '@/api/answers';
 import { useUploadAnswerMutation } from '@/hooks/queries/useAnswer';
-import APIButton from '@/components/common/button/APIButton';
+import APIButton from '@/components/common/Button/APIButton';
 
 interface EditorSectionProps {
   questionId: number;

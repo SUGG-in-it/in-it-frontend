@@ -1,4 +1,4 @@
-import Button from '@/components/common/button/Button';
+import Button from '@/components/common/Button';
 import { Children, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';

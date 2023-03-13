@@ -1,4 +1,4 @@
-import Input from '@/components/common/Input/Input';
+import Input from '@/components/common/Input';
 import { UseInputReturn } from '@/hooks/useInput';
 import styled from 'styled-components';
 

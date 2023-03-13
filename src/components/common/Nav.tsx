@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 import GrayLine from '@/components/common/GreyLine';
-import Button from '@/components/common/button/Button';
+import Button from '@/components/common/Button';
 import { useLayoutEffect, useState } from 'react';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { postQuestionId } from '@/api/questions';
-import LoginRequestDialog from '@/components/common/dialog/LoginRequestDialog';
+import LoginRequestDialog from '@/components/common/Dialog/LoginRequestDialog';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '@/store/users';
 import Link from 'next/link';
 
-const TAB_MENU = [{ name: '홈', link: '/' }, { name: '답변하기', link: '/question/list' }];
+const TAB_MENU = [
+  { name: '홈', link: '/' },
+  { name: '답변하기', link: '/question/list' },
+];
 
 const Nav = () => {
   const router = useRouter();
@@ -53,8 +56,7 @@ const Nav = () => {
           {TAB_MENU.map((menu, index) => (
             <Menu key={index}>
               <Link href={menu.link}>
-                <a className={currentTab === index ? 'clicked-menu' : 'menu'}
-                  onClick={() => handleMenuClick(index)}>
+                <a className={currentTab === index ? 'clicked-menu' : 'menu'} onClick={() => handleMenuClick(index)}>
                   {menu.name}
                 </a>
               </Link>
@@ -117,7 +119,7 @@ const Menu = styled.li`
   }
   .clicked-menu {
     color: ${({ theme }) => theme.primaryColor};
-    width: 60px;    
+    width: 60px;
     line-height: 50px;
     vertical-align: top;
     display: inline-block;
@@ -138,7 +140,7 @@ const Menu = styled.li`
       width: 50px;
     }
   }
-`
+`;
 
 const AnswerButton = styled(Button)`
   width: 120px;

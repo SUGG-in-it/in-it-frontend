@@ -1,4 +1,4 @@
-import APIButton from '@/components/common/button/APIButton';
+import APIButton from '@/components/common/Button/APIButton';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import { useSendMutation, useVerifyMutation } from '@/hooks/queries/useAuth';
 import { forgotPasswordState } from '@/store/users';

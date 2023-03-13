@@ -12,8 +12,8 @@ import { useRecoilValue } from 'recoil';
 import { loginState, userState } from '@/store/users';
 import { Answer } from '@/types/response/answers';
 import AnswerListSkeleton from '@/components/question/detail/answer/AnswerSection/index.skeleton';
-import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
-import Button from '@/components/common/button/Button';
+import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
+import Button from '@/components/common/Button';
 import { useRouter } from 'next/router';
 
 const EditorSection = dynamic(() => import('@/components/question/detail/answer/EditorSection'), { ssr: false });

@@ -6,9 +6,9 @@ import { GetServerSideProps } from 'next';
 import { Suspense } from 'react';
 import styled from 'styled-components';
 import useInput from '@/hooks/useInput';
-import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
 import ProfileSkeleton from '@/components/mypage/profile/ProfileSection/index.skeleton';
-import APIButton from '@/components/common/button/APIButton';
+import APIButton from '@/components/common/Button/APIButton';
 import withAuth from '@/components/hoc/withAuth';
 import withHead from '@/components/hoc/withHead';
 

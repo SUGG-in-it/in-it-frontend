@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
+import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
 import QuestionListSkeleton from '@/components/mypage/question/QuestionListSection/index.skeleton';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });

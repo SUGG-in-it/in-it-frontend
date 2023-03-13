@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FaHashtag } from 'react-icons/fa';
-import Input from '@/components/common/Input/Input';
+import Input from '@/components/common/Input';
 import { UseInputReturn } from '@/hooks/useInput';
 import { useAllTagsQuery } from '@/hooks/queries/useTags';
 import { useEffect, useState } from 'react';

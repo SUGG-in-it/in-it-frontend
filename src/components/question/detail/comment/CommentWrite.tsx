@@ -1,4 +1,4 @@
-import Button from '@/components/common/button/Button';
+import Button from '@/components/common/Button';
 import { useUploadCommentMutation } from '@/hooks/queries/useComments';
 import { loginState } from '@/store/users';
 import { useRouter } from 'next/router';

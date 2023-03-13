@@ -2,10 +2,10 @@ import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
 import TopWriters from '@/components/common/TopWriters';
 import { Suspense } from 'react';
-import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
-import TagListSkeleton from '@/components/common/tagsWithDeleteButton/index.skeleton';
+import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
+import TagListSkeleton from '@/components/common/TagsWithDeleteButton/index.skeleton';
 import { usePopularTagsQuery } from '@/hooks/queries/useTags';
-import Tags from '@/components/common/tags/Tags';
+import Tags from '@/components/common/Tag';
 
 const TagList = () => {
   const { data: tags } = usePopularTagsQuery();
@@ -17,7 +17,6 @@ const TagList = () => {
     </TagListWrapper>
   );
 };
-
 
 const LeftAside = () => (
   <AsideContainer>
@@ -53,7 +52,7 @@ const TagListWrapper = styled.section`
   p {
     font-size: 0.9rem;
     margin-bottom: 1em;
-    color:#000;
+    color: #000;
     font-weight: 700;
   }
   ${media.tablet} {

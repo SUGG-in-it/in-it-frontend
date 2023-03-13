@@ -4,8 +4,8 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme } from '@/styles/theme';
 import { GlobalStyle } from '@/styles/globalStyle';
 import { Toaster } from 'react-hot-toast';
-import CriticalErrorBoundary from '@/components/common/errorrBoundary/CriticalErrorBoundary';
-import RootErrorBoundary from '@/components/common/errorrBoundary/RootErrorBoundary';
+import CriticalErrorBoundary from '@/components/common/ErrorBoundary/CriticalErrorBoundary';
+import RootErrorBoundary from '@/components/common/ErrorBoundary/RootErrorBoundary';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useEffect, useState } from 'react';
 import { CustomError } from '@/api/config/error';
@@ -36,8 +36,8 @@ function MyApp({ Component, pageProps }) {
 
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { worker } = require('../mocks/browser')
-    worker.start()
+    const { worker } = require('../mocks/browser');
+    worker.start();
   }
 
   return (
