@@ -1,5 +1,5 @@
 import Pagination from '@/components/common/Pagination';
-import MainLayout from '@/components/layouts/MainLayout';
+import MainLayout from '@/layouts/MainLayout';
 import QuestionsSection from '@/components/question/list/QuestionListSection';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { media } from '@/styles/mediaQuery';
@@ -60,4 +60,4 @@ const ContentSection = styled.div`
   }
 `;
 
-export default withHead(QuestionListPage,'init : 질문 리스트','');
+export default withHead(QuestionListPage, 'init : 질문 리스트', '');

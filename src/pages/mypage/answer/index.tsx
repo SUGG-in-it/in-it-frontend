@@ -1,7 +1,7 @@
 import Pagination from '@/components/common/Pagination';
 import withAuth from '@/components/hoc/withAuth';
 import withHead from '@/components/hoc/withHead';
-import MypageLayout from '@/components/layouts/MypageLayout';
+import MypageLayout from '@/layouts/MypageLayout';
 import AnswerListSection from '@/components/mypage/answer/AnswerListSection';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { useUserAnswerPageQuery } from '@/hooks/queries/useAnswer';
@@ -32,4 +32,4 @@ const UserAnswerSection = styled.ul`
   padding-top: 10px;
 `;
 
-export default withHead(withAuth(MyAnswer),'init : 내가 작성한 답변 목록','');
+export default withHead(withAuth(MyAnswer), 'init : 내가 작성한 답변 목록', '');

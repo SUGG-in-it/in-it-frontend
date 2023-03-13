@@ -1,5 +1,5 @@
 import BannerSection from '@/components/question/write/BannerSection';
-import QuestionLayout from '@/components/layouts/QuestionLayout';
+import QuestionLayout from '@/layouts/QuestionLayout';
 import LoginRequestModal from '@/components/common/dialog/LoginRequestDialog';
 import { useRecoilValue } from 'recoil';
 import { loginState } from '@/store/users';
@@ -20,4 +20,4 @@ const QuestionWritePage = () => {
   );
 };
 
-export default withHead(QuestionWritePage,'init : 질문 작성하기','');
+export default withHead(QuestionWritePage, 'init : 질문 작성하기', '');

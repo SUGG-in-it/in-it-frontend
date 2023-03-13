@@ -1,6 +1,6 @@
 import GrayLine from '@/components/common/GreyLine';
 import QuestionDetailSkeleton from '@/components/question/detail/qusetion/questionSection/index.skeleton';
-import QuestionLayout from '@/components/layouts/QuestionLayout';
+import QuestionLayout from '@/layouts/QuestionLayout';
 import AnswerSection from '@/components/question/detail/answer/AnswerSection';
 import QuestionSection from '@/components/question/detail/qusetion/questionSection';
 import { useQuestionQuery } from '@/hooks/queries/useQuestion';
