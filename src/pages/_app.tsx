@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }) {
 
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { worker } = require('../mocks/browser');
+    const { worker } = require('../__mocks__/browser');
     worker.start();
   }
 
