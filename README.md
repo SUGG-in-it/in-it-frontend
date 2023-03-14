@@ -35,6 +35,7 @@
 ```bash
 ├── public
 ├── src
+│   ├── __mocks__
 │   ├── apis
 │   ├── assets
 │   ├── components
