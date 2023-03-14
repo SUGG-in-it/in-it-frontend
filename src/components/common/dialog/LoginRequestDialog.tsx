@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { Dialog } from '@/components/common/dialog/Dialog';
+import { Dialog } from '@/components/common/Dialog';
 
 function LoginRequestDialog() {
   const router = useRouter();

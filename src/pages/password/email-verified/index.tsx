@@ -1,17 +1,14 @@
-import APIButton from '@/components/common/button/APIButton';
+import AccountLayout from '@/layouts/AccountLayout';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import { useSendMutation, useVerifyMutation } from '@/hooks/queries/useAuth';
-import { forgotPasswordState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import APIButton from '@/components/common/Button/APIButton';
 
-const ForgotPasswordFirstStep = () => {
-  const [isSentCode, setIsSentCode] = useState(false);
-  const setforgotPassword = useSetRecoilState(forgotPasswordState);
-
+const EmailVerifiedPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -26,18 +23,11 @@ const ForgotPasswordFirstStep = () => {
 
   const mutationVerifyCode = useVerifyMutation({
     onSuccess: () => {
-      setforgotPassword({
-        email: getValues().email,
-        step: 2,
-      });
+      router.push('/password/reset');
     },
   });
 
-  const mutationSendCode = useSendMutation({
-    onSuccess: () => {
-      setIsSentCode(true);
-    },
-  });
+  const mutationSendCode = useSendMutation();
 
   const sendEmail = () => {
     const email = getValues().email;
@@ -45,31 +35,8 @@ const ForgotPasswordFirstStep = () => {
   };
 
   return (
-    <ForgotPasswordWrapper>
-      {!isSentCode ? (
-        <SendEmailForm>
-          <input
-            {...register('email', {
-              required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
-              pattern: {
-                value: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
-                message: VALIDATION_ERROR_MSG.INVALID_EMAIL,
-              },
-            })}
-            title="email"
-            placeholder={'이메일'}
-          />
-          <p>{errors.email?.message}</p>
-          <SendButton
-            onClick={handleSubmit((data) => {
-              mutationSendCode.mutate({ email: data.email, type: 'password' });
-            })}
-            isLoading={mutationSendCode.isLoading}
-          >
-            인증번호 전송
-          </SendButton>
-        </SendEmailForm>
-      ) : (
+    <AccountLayout>
+      <ForgotPasswordWrapper>
         <SendEmailForm>
           <input
             {...register('code', {
@@ -92,8 +59,8 @@ const ForgotPasswordFirstStep = () => {
             <u onClick={sendEmail}>재전송 하기</u>
           </ResendContainer>
         </SendEmailForm>
-      )}
-    </ForgotPasswordWrapper>
+      </ForgotPasswordWrapper>
+    </AccountLayout>
   );
 };
 
@@ -162,4 +129,4 @@ const SendButton = styled(APIButton)`
   margin-top: 20px;
 `;
 
-export default ForgotPasswordFirstStep;
+export default EmailVerifiedPage;

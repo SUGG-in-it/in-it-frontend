@@ -4,8 +4,8 @@ import { media } from '@/styles/mediaQuery';
 import { Suspense, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
-import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
-import QuestionListSkeleton from '@/components/home/QuestionSection/index.skeleton';
+import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
+import QuestionListSkeleton from '@/components/home/ LatestQuestionList/index.skeleton';
 
 const Questions = () => {
   const [leftSectionQuestions, setLeftSectionQuestions] = useState([]);

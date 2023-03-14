@@ -1,4 +1,4 @@
-import PulseLoading from '@/components/common/loading/PulseLoading';
+import PulseLoading from '@/components/common/Loading';
 import styled from 'styled-components';
 
 export interface ButtonProps {

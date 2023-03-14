@@ -1,4 +1,4 @@
-import Button from '@/components/common/button/Button';
+import Button from '@/components/common/Button';
 import { useDeleteCommentMutation } from '@/hooks/queries/useComments';
 import { userState } from '@/store/users';
 import { useRecoilValue } from 'recoil';

@@ -1,4 +1,4 @@
-import AccountLayout from '@/components/layouts/AccountLayout';
+import AccountLayout from '@/layouts/AccountLayout';
 import { useLoginMutation } from '@/hooks/queries/useUser';
 import { loginState, userState } from '@/store/users';
 import { useRouter } from 'next/router';
@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import jwt from 'jsonwebtoken';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
-import APIButton from '@/components/common/button/APIButton';
+import APIButton from '@/components/common/Button/APIButton';
 import withHead from '@/components/hoc/withHead';
 
 const SigninPage = () => {
@@ -135,4 +135,4 @@ const LoginButton = styled(APIButton)`
   margin-top: 20px;
 `;
 
-export default withHead(SigninPage,'init : 로그인','');
+export default withHead(SigninPage, 'init : 로그인', '');

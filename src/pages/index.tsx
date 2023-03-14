@@ -1,7 +1,7 @@
-import MainLayout from '@/components/layouts/MainLayout';
-import QuestionSection from '@/components/home/QuestionSection';
+import MainLayout from '@/layouts/MainLayout';
+import QuestionSection from '@/components/home/ LatestQuestionList';
 import styled from 'styled-components';
-import BannerSection from '@/components/home/BannerSection';
+import BannerSection from '@/components/home/BannerList';
 import withHead from '@/components/hoc/withHead';
 
 const HomePage = () => {
@@ -15,7 +15,6 @@ const HomePage = () => {
   );
 };
 
-const MainContainer = styled.section`
-`;
+const MainContainer = styled.section``;
 
-export default withHead(HomePage,'코드리뷰 사이트 : init()','');
+export default withHead(HomePage, '코드리뷰 사이트 : init()', '');

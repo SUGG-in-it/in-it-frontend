@@ -1,11 +1,11 @@
-import Input from '@/components/common/Input/Input';
+import Input from '@/components/common/Input';
 import LabelInput from '@/components/common/Input/LabelInput';
 import styled from 'styled-components';
 import { UseInputReturn } from '@/hooks/useInput';
 import { media } from '@/styles/mediaQuery';
 
 interface ProfileInputProps {
-  label: string; 
+  label: string;
   info: UseInputReturn;
   id: string;
 }

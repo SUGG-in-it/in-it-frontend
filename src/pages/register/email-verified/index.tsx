@@ -1,18 +1,17 @@
 import { useSendMutation, useVerifyMutation } from '@/hooks/queries/useAuth';
-import { useEmailCheckMutation } from '@/hooks/queries/useUser';
-import { signUpState } from '@/store/users';
+import { emailState } from '@/store/users';
 import { media } from '@/styles/mediaQuery';
-import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
-import APIButton from '@/components/common/button/APIButton';
+import APIButton from '@/components/common/Button/APIButton';
+import { useRouter } from 'next/router';
+import AccountLayout from '@/layouts/AccountLayout';
 
-const RegisterFirstStep = () => {
-  const [isSentCode, setIsSentCode] = useState(false);
-  const setSignUp = useSetRecoilState(signUpState);
-
+const EmailVerifiedPage = () => {
+  const router = useRouter();
+  const email = useRecoilValue(emailState);
   const {
     register,
     handleSubmit,
@@ -25,58 +24,21 @@ const RegisterFirstStep = () => {
     },
   });
 
-  const mutationCheckEmail = useEmailCheckMutation({
-    onSuccess: () => {
-      sendEmail();
-    },
-  });
-
   const mutationVerifyCode = useVerifyMutation({
     onSuccess: () => {
-      setSignUp({
-        step: 2,
-        email: getValues().email,
-      });
+      router.push(`/register/info-form`);
     },
   });
 
-  const mutationSendCode = useSendMutation({
-    onSuccess: () => {
-      setIsSentCode(true);
-    },
-  });
+  const mutationSendCode = useSendMutation();
 
   const sendEmail = () => {
-    const email = getValues().email;
-    mutationSendCode.mutate({ email, type: 'join' });
+    mutationSendCode.mutate({ email: email.register, type: 'join' });
   };
 
   return (
-    <SignUpWrapper>
-      {!isSentCode ? (
-        <SendEmailForm>
-          <input
-            {...register('email', {
-              required: VALIDATION_ERROR_MSG.EMPTY_EMAIL,
-              pattern: {
-                value: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/,
-                message: VALIDATION_ERROR_MSG.INVALID_EMAIL,
-              },
-            })}
-            title={'email'}
-            placeholder={'이메일'}
-          />
-          <p>{errors.email?.message}</p>
-          <SendButton
-            onClick={handleSubmit((data) => {
-              mutationCheckEmail.mutate(data.email);
-            })}
-            isLoading={mutationCheckEmail.isLoading || mutationSendCode.isLoading}
-          >
-            인증번호 전송
-          </SendButton>
-        </SendEmailForm>
-      ) : (
+    <AccountLayout>
+      <SignUpWrapper>
         <SendEmailForm>
           <input
             {...register('code', {
@@ -88,7 +50,7 @@ const RegisterFirstStep = () => {
           <p>{errors.code?.message}</p>
           <VerifyButton
             onClick={handleSubmit((data) => {
-              mutationVerifyCode.mutate({ email: data.email, code: data.code });
+              mutationVerifyCode.mutate({ email: email.register, code: data.code });
             })}
             isLoading={mutationVerifyCode.isLoading}
           >
@@ -99,8 +61,8 @@ const RegisterFirstStep = () => {
             <u onClick={sendEmail}>재전송 하기</u>
           </ResendContainer>
         </SendEmailForm>
-      )}
-    </SignUpWrapper>
+      </SignUpWrapper>
+    </AccountLayout>
   );
 };
 
@@ -161,14 +123,6 @@ const SendEmailForm = styled.form`
   }
 `;
 
-const SendButton = styled(APIButton)`
-  margin-bottom: 2em;
-  border: none;
-  height: 50px;
-  border-radius: 3px;
-  margin-top: 20px;
-`;
-
 const VerifyButton = styled(APIButton)`
   margin-bottom: 2em;
   border: none;
@@ -177,4 +131,4 @@ const VerifyButton = styled(APIButton)`
   margin-top: 20px;
 `;
 
-export default RegisterFirstStep;
+export default EmailVerifiedPage;

@@ -1,4 +1,4 @@
-import LoginRequestDialog from '@/components/common/dialog/LoginRequestDialog';
+import LoginRequestDialog from '@/components/common/Dialog/LoginRequestDialog';
 
 const withAuth = (WrappedComponent) => {
   return (props) => {

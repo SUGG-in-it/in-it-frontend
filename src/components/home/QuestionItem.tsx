@@ -1,11 +1,8 @@
 import { media } from '@/styles/mediaQuery';
 import styled from 'styled-components';
-import dynamic from 'next/dynamic';
 import { FiCornerDownRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import removeMarkdown from '@/utils/removeMarkdown';
-
-const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
 interface QuestionProps {
   order: number;
@@ -57,7 +54,7 @@ const Ranking = styled.p`
   font-size: 1.4rem;
   margin-right: 1em;
   font-weight: bold;
-  color: ${({ isCompleted, theme}) => (isCompleted ? '#adb5bd' : theme.primaryColor)};
+  color: ${({ isCompleted, theme }) => (isCompleted ? '#adb5bd' : theme.primaryColor)};
   ${media.tablet} {
     padding: 0.1em;
   }
@@ -86,7 +83,7 @@ const Content = styled.p`
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   line-height: 150%;
-`
+`;
 
 const Title = styled.p`
   display: block;

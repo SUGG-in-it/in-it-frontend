@@ -1,7 +1,7 @@
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import Tags from '@/components/common/tags/Tags';
+import Tags from '@/components/common/Tag';
 import dayjs from 'dayjs';
 import removeMarkdown from '@/utils/removeMarkdown';
 
@@ -93,7 +93,7 @@ const Content = styled.p`
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   line-height: 160%;
-`
+`;
 
 const RightSection = styled.div`
   display: flex;

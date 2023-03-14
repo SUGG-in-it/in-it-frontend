@@ -1,5 +1,5 @@
-import Button from '@/components/common/button/Button';
-import Input from '@/components/common/Input/Input';
+import Button from '@/components/common/Button';
+import Input from '@/components/common/Input';
 import LabelInput from '@/components/common/Input/LabelInput';
 import useInput from '@/hooks/useInput';
 import { Editor } from '@toast-ui/react-editor';
@@ -10,10 +10,10 @@ import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useQuestionQuery, useUploadQuestionMutation } from '@/hooks/queries/useQuestion';
 import AutoComplete from '@/components/common/AutoComplete';
-import TagsWithDeleteButton from '@/components/common/tagsWithDeleteButton';
-import APIButton from '@/components/common/button/APIButton';
-import RetryErrorBoundary from '@/components/common/errorrBoundary/RetryErrorBoundary';
-import EditorSkeleton from '@/components/question/write/EditorSection/index.skeleton';
+import TagsWithDeleteButton from '@/components/common/TagsWithDeleteButton';
+import APIButton from '@/components/common/Button/APIButton';
+import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
+import EditorSkeleton from '@/components/question/write/QuestionEditor/index.skeleton';
 import { useUploadImageMutation } from '@/hooks/queries/useImage';
 
 const QuestionEditor = () => {
@@ -78,8 +78,8 @@ const QuestionEditor = () => {
 
   return (
     <WriteContainer>
-      <LabelInput label="제목" htmlFor='title'>
-        <CustomInput id='title' value={title.value} onChange={title.onChange} placeholder="제목을 입력해주세요." />
+      <LabelInput label="제목" htmlFor="title">
+        <CustomInput id="title" value={title.value} onChange={title.onChange} placeholder="제목을 입력해주세요." />
       </LabelInput>
       <ToastEditorWrapper>
         <Editor
@@ -106,8 +106,14 @@ const QuestionEditor = () => {
       <TagLimit>최대 5개의 태그를 입력할 수 있습니다 !</TagLimit>
       <TagsWithDeleteButton tagList={tagList} setTagList={setTagList} />
       <AutoComplete searchTag={searchTag} handleTagList={handleTagList} />
-      <LabelInput label="포인트" htmlFor='point'>
-        <CustomInput id='point' value={point.value} onChange={point.onChange} type="number" placeholder="포인트를 입력해주세요." />
+      <LabelInput label="포인트" htmlFor="point">
+        <CustomInput
+          id="point"
+          value={point.value}
+          onChange={point.onChange}
+          type="number"
+          placeholder="포인트를 입력해주세요."
+        />
       </LabelInput>
       <ButtonWrapper>
         <CancelButton onClick={handleCancle}>{'취소'}</CancelButton>
