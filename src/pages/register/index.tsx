@@ -8,7 +8,7 @@ import APIButton from '@/components/common/Button/APIButton';
 import { useRouter } from 'next/router';
 import AccountLayout from '@/layouts/AccountLayout';
 import { useSetRecoilState } from 'recoil';
-import { emailState } from '@/store/users';
+import { emailState } from '@/store/atoms/users';
 
 const RegisterPage = () => {
   const router = useRouter();

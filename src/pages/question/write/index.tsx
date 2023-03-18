@@ -2,7 +2,7 @@ import BannerSection from '@/components/question/write/QuestionWirteHeader';
 import QuestionLayout from '@/layouts/QuestionLayout';
 import LoginRequestModal from '@/components/common/Dialog/LoginRequestDialog';
 import { useRecoilValue } from 'recoil';
-import { loginState } from '@/store/users';
+import { loginState } from '@/store/atoms/users';
 import withHead from '@/components/hoc/withHead';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';

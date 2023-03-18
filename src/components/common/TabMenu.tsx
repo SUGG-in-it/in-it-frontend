@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
-import { userState } from '@/store/users';
+import { userState } from '@/store/atoms/users';
 
 const TAB_MENU = [{ name: '프로필' }, { name: '나의 질문' }, { name: '나의 답변' }];
 

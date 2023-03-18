@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { postQuestionId } from '@/api/questions';
 import LoginRequestDialog from '@/components/common/Dialog/LoginRequestDialog';
 import { useRecoilValue } from 'recoil';
-import { loginState } from '@/store/users';
+import { loginState } from '@/store/atoms/users';
 import Link from 'next/link';
 
 const TAB_MENU = [

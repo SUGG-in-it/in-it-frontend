@@ -1,7 +1,7 @@
 import CommentSection from '@/components/question/detail/comment/CommentSection';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { userState } from '@/store/users';
+import { userState } from '@/store/atoms/users';
 import Button from '@/components/common/Button';
 import { Question } from '@/types/response/questions';
 import { useDeleteAnswerMutation, useSelectAnswerMutation } from '@/hooks/queries/useAnswer';

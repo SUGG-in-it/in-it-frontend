@@ -1,6 +1,6 @@
 import Button from '@/components/common/Button';
 import { useDeleteCommentMutation } from '@/hooks/queries/useComments';
-import { userState } from '@/store/users';
+import { userState } from '@/store/atoms/users';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import dayjs from 'dayjs';

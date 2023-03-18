@@ -1,6 +1,6 @@
 import AccountLayout from '@/layouts/AccountLayout';
 import { useLoginMutation } from '@/hooks/queries/useUser';
-import { loginState, userState } from '@/store/users';
+import { loginState, userState } from '@/store/atoms/users';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';

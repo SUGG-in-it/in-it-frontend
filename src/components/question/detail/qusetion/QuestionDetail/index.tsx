@@ -2,7 +2,7 @@ import Button from '@/components/common/Button';
 import GrayLine from '@/components/common/GreyLine';
 import Tags from '@/components/common/Tag';
 import { useDeleteQuestionMutation } from '@/hooks/queries/useQuestion';
-import { userState } from '@/store/users';
+import { userState } from '@/store/atoms/users';
 import { QLabel } from '@/styles/commonStyles';
 import { Question } from '@/types/response/questions';
 import dynamic from 'next/dynamic';
