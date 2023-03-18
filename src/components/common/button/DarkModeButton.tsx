@@ -1,4 +1,4 @@
-import { darkModeState } from '@/store/theme';
+import { darkModeState } from '@/store/atoms/theme';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { BsFillMoonStarsFill } from 'react-icons/bs';

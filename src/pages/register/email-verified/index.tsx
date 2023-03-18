@@ -1,5 +1,5 @@
 import { useSendMutation, useVerifyMutation } from '@/hooks/queries/useAuth';
-import { emailState } from '@/store/users';
+import { emailState } from '@/store/atoms/users';
 import { media } from '@/styles/mediaQuery';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';

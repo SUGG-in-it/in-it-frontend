@@ -9,7 +9,7 @@ import dynamic from 'next/dynamic';
 import { Question } from '@/types/response/questions';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { useRecoilValue } from 'recoil';
-import { loginState, userState } from '@/store/users';
+import { loginState, userState } from '@/store/atoms/users';
 import { Answer } from '@/types/response/answers';
 import AnswerListSkeleton from '@/components/question/detail/answer/AnswerList/index.skeleton';
 import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';

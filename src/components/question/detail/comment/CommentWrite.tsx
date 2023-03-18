@@ -1,6 +1,6 @@
 import Button from '@/components/common/Button';
 import { useUploadCommentMutation } from '@/hooks/queries/useComments';
-import { loginState } from '@/store/users';
+import { loginState } from '@/store/atoms/users';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';

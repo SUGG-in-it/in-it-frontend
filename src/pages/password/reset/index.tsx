@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import { useResetPasswordMutation } from '@/hooks/queries/useUser';
 import APIButton from '@/components/common/Button/APIButton';
-import { emailState } from '@/store/users';
+import { emailState } from '@/store/atoms/users';
 import AccountLayout from '@/layouts/AccountLayout';
 
 const PasswordResetPage = () => {

@@ -1,4 +1,4 @@
-import { loginState, userState } from '@/store/users';
+import { loginState, userState } from '@/store/atoms/users';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
@@ -32,16 +32,16 @@ const MyInfo = () => {
   return (
     <MypageWrapper>
       {isLogin ? (
-          <MypageContainer>
-            <NickName>{`안녕하세요! ${user.nickname} 님`}</NickName>
-            <ProfileButton onClick={() => handleProfileClick(user.nickname)}>{'프로필 바로가기 >'}</ProfileButton>
-            <LogoutButton onClick={handleLogoutClick}>{'로그아웃'}</LogoutButton>
-          </MypageContainer>
+        <MypageContainer>
+          <NickName>{`안녕하세요! ${user.nickname} 님`}</NickName>
+          <ProfileButton onClick={() => handleProfileClick(user.nickname)}>{'프로필 바로가기 >'}</ProfileButton>
+          <LogoutButton onClick={handleLogoutClick}>{'로그아웃'}</LogoutButton>
+        </MypageContainer>
       ) : (
-          <MypageContainer>
-            <NickName>{'안녕하세요! 로그인해주세요 😉'}</NickName>
-            <LogoutButton onClick={handleLoginClick}>{'로그인'}</LogoutButton>
-          </MypageContainer>
+        <MypageContainer>
+          <NickName>{'안녕하세요! 로그인해주세요 😉'}</NickName>
+          <LogoutButton onClick={handleLoginClick}>{'로그인'}</LogoutButton>
+        </MypageContainer>
       )}
     </MypageWrapper>
   );
@@ -54,7 +54,7 @@ const RightAside = () => (
   </AsideContainer>
 );
 
-const AsideContainer = styled.aside`  
+const AsideContainer = styled.aside`
   width: 220px;
   display: flex;
   flex-direction: column;
@@ -115,6 +115,5 @@ const MypageWrapper = styled.section`
     display: none;
   }
 `;
-
 
 export default RightAside;

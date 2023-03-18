@@ -7,7 +7,7 @@ import { media } from '@/styles/mediaQuery';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdClose } from 'react-icons/io';
 import { useState } from 'react';
-import { loginState, userState } from '@/store/users';
+import { loginState, userState } from '@/store/atoms/users';
 import { useRecoilState } from 'recoil';
 import { successToast } from '@/utils/toast';
 import { postQuestionId } from '@/api/questions';

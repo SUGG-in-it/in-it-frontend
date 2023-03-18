@@ -2,7 +2,7 @@ import APIButton from '@/components/common/Button/APIButton';
 import AccountLayout from '@/layouts/AccountLayout';
 import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import { useSendMutation } from '@/hooks/queries/useAuth';
-import { emailState } from '@/store/users';
+import { emailState } from '@/store/atoms/users';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
