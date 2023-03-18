@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { FiRotateCcw } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 
-const QuestionSearchSection = () => {
+const QuestionSearchBar = () => {
   const searchWord = useInput('');
   const searchTag = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
@@ -78,6 +78,7 @@ const SerachContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2em;
+  width: 100%;
 `;
 
 const SearchInput = styled.div`
@@ -119,4 +120,4 @@ const InitButton = styled(FiRotateCcw)`
   height: 15px;
 `;
 
-export default QuestionSearchSection;
+export default QuestionSearchBar;
