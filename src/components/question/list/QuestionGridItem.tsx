@@ -16,7 +16,16 @@ interface QuestionProps {
   point: number;
 }
 
-const QuestionItem = ({ questionId, type, nickname, updateDate, title, content, tagList, point }: QuestionProps) => {
+const QuestionGridItem = ({
+  questionId,
+  type,
+  nickname,
+  updateDate,
+  title,
+  content,
+  tagList,
+  point,
+}: QuestionProps) => {
   const router = useRouter();
 
   const handleQuestionClick = () => {
@@ -172,4 +181,4 @@ const BottomSection = styled.div`
   }
 `;
 
-export default QuestionItem;
+export default QuestionGridItem;

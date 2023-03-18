@@ -1,6 +1,6 @@
 import Pagination from '@/components/common/Pagination';
 import MainLayout from '@/layouts/MainLayout';
-import QuestionsSection from '@/components/question/list/QuestionList';
+import QuestionList from '@/components/question/list/QuestionList';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
 import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
@@ -34,9 +34,9 @@ const QuestionListPage = () => {
   return (
     <MainLayout>
       <QuestionListContainer>
-        <ContentSection>
-          <QuestionsSection currentPage={currentPage} />
-        </ContentSection>
+        <QuestionListWrapper>
+          <QuestionList currentPage={currentPage} />
+        </QuestionListWrapper>
         <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />
       </QuestionListContainer>
     </MainLayout>
@@ -51,7 +51,7 @@ const QuestionListContainer = styled.section`
   margin-bottom: 2em;
 `;
 
-const ContentSection = styled.div`
+const QuestionListWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding-bottom: 20px;

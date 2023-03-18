@@ -2,14 +2,15 @@ import { useSearchQuestionQuery } from '@/hooks/queries/useQuestion';
 import { Suspense, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import StatusBar from '@/components/question/list/StatusBar';
-import QuestionItem from '@/components/question/list/QuestionItem';
+import QuestionItem from '@/components/question/list/QuestionListItem';
 import GrayLine from '@/components/common/GreyLine';
 import { useRouter } from 'next/router';
 import { PAGINATION_SIZE } from '@/constants/paginationSize';
-import QuestionSearchSection from '@/components/question/list/QuestionSearchSection';
+import QuestionSearchBar from '@/components/question/list/QuestionSearchBar';
 import QuestionListSkeleton from '@/components/question/list/QuestionList/index.skeleton';
 import RetryErrorBoundary from '@/components/common/ErrorBoundary/RetryErrorBoundary';
 import { media } from '@/styles/mediaQuery';
+import QuestionOption from '@/components/question/list/QuestionOption';
 
 const Questions = ({ currentPage }: { currentPage: number }) => {
   const [status, setStatus] = useState('total');
@@ -44,11 +45,14 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
   );
 };
 
-const QuestionsSection = ({ currentPage }: { currentPage: number }) => {
+const QuestionList = ({ currentPage }: { currentPage: number }) => {
   return (
     <QuestionListContainer>
       <StatusBar />
-      <QuestionSearchSection />
+      <QuestionListHeader>
+        <QuestionSearchBar />
+        <QuestionOption />
+      </QuestionListHeader>
       <RetryErrorBoundary>
         <Suspense fallback={<QuestionListSkeleton />}>
           <Questions currentPage={currentPage} />
@@ -67,8 +71,13 @@ const QuestionListContainer = styled.div`
   }
 `;
 
+const QuestionListHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const QuestionListWrapper = styled.ul`
   padding-top: 50px;
 `;
 
-export default QuestionsSection;
+export default QuestionList;
