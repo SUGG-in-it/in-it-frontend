@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import { BsGrid, BsListUl } from 'react-icons/bs';
+import useQuestionListType from '@/hooks/useQuestionListType';
 
 const QuestionOption = () => {
+  const { questionListType, setGridType, setListType } = useQuestionListType();
+
   return (
     <FilterContainer>
       <ListViewContainer>
-        <ViewButtonWrapper>
-          <GridViewButton />
+        <ViewButtonWrapper clicked={questionListType === 'grid'}>
+          <GridViewButton onClick={setGridType} />
         </ViewButtonWrapper>
-        <ViewButtonWrapper>
-          <ListViewButton />
+        <ViewButtonWrapper clicked={questionListType === 'list'}>
+          <ListViewButton onClick={setListType} />
         </ViewButtonWrapper>
       </ListViewContainer>
       <OrderListContainer>
@@ -42,13 +45,18 @@ const Order = styled.li`
   margin-right: 2em;
 `;
 
-const ViewButtonWrapper = styled.div`
+const ViewButtonWrapper = styled.div<{ clicked: boolean }>`
   border: 1px solid #ddd;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${({ clicked }) => (clicked ? '#ddd' : '#fff')};
+  :hover {
+    cursor: pointer;
+    background-color: #eee;
+  }
 `;
 
 const GridViewButton = styled(BsGrid)`
