@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Tags from '@/components/common/Tag';
 import dayjs from 'dayjs';
 import removeMarkdown from '@/utils/removeMarkdown';
+import GrayLine from '@/components/common/GreyLine';
 
 interface QuestionProps {
   questionId: number;
@@ -31,6 +32,7 @@ const QuestionListItem = ({
   const handleQuestionClick = () => {
     router.push(`/question/detail/${questionId}`);
   };
+  console.log('questionId', questionId);
 
   return (
     <QuestionWrapper onClick={handleQuestionClick}>
@@ -47,7 +49,7 @@ const QuestionListItem = ({
           <BottomSection>
             <span>{`작성자  ${nickname}`}</span>
             <span> · </span>
-            <span>{dayjs(updateDate).format('YYYY-MM-DD HH:mm:ss')}</span>
+            <span>{dayjs(updateDate).format('YYYY.MM.DD')}</span>
           </BottomSection>
         </LeftSection>
         <RightSection>
@@ -64,12 +66,12 @@ const QuestionListItem = ({
           )}
         </RightSection>
       </QuestionSection>
+      <GrayLine />
     </QuestionWrapper>
   );
 };
 
 const QuestionWrapper = styled.li`
-  padding: 2em 1.2em;
   &:hover {
     cursor: pointer;
   }
@@ -83,6 +85,7 @@ const QuestionWrapper = styled.li`
 
 const QuestionSection = styled.div`
   display: flex;
+  padding: 2em 1.2em;
 `;
 
 const LeftSection = styled.div`

@@ -8,11 +8,11 @@ const QuestionOption = () => {
   return (
     <FilterContainer>
       <ListViewContainer>
-        <ViewButtonWrapper clicked={questionListType === 'grid'}>
-          <GridViewButton onClick={setGridType} />
+        <ViewButtonWrapper clicked={questionListType === 'list'} onClick={setListType}>
+          <ListViewButton />
         </ViewButtonWrapper>
-        <ViewButtonWrapper clicked={questionListType === 'list'}>
-          <ListViewButton onClick={setListType} />
+        <ViewButtonWrapper clicked={questionListType === 'grid'} onClick={setGridType}>
+          <GridViewButton />
         </ViewButtonWrapper>
       </ListViewContainer>
       <OrderListContainer>

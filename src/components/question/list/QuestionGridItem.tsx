@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Tags from '@/components/common/Tag';
 import dayjs from 'dayjs';
 import removeMarkdown from '@/utils/removeMarkdown';
+import GrayLine from '@/components/common/GreyLine';
+import { VscActivateBreakpoints } from 'react-icons/vsc';
 
 interface QuestionProps {
   questionId: number;
@@ -38,38 +40,35 @@ const QuestionGridItem = ({
         <LeftSection>
           <TopSection>
             <ProcessLabel type={type}>{type === 'completed' ? '답변 완료' : '답변 진행중'}</ProcessLabel>
-            <Title>{title}</Title>
+            {point ? (
+              <PointContainer>
+                <p>{`${point} p`}</p>
+                <VscActivateBreakpoints />
+              </PointContainer>
+            ) : (
+              <PointContainer>
+                <p>{`0 p`}</p>
+                <VscActivateBreakpoints />
+              </PointContainer>
+            )}
           </TopSection>
+          <Title>{title}</Title>
           <Content>{removeMarkdown(content)}</Content>
           <TagsWrapper>
             <Tags tagList={tagList && tagList.split(',')} />
           </TagsWrapper>
           <BottomSection>
             <span>{`작성자  ${nickname}`}</span>
-            <span> · </span>
-            <span>{dayjs(updateDate).format('YYYY-MM-DD HH:mm:ss')}</span>
+            <span>{dayjs(updateDate).format('YYYY년 MM월 DD일')}</span>
           </BottomSection>
         </LeftSection>
-        <RightSection>
-          {point ? (
-            <PointContainer>
-              <h5>{`${point}`}</h5>
-              <p>{`포인트`}</p>
-            </PointContainer>
-          ) : (
-            <PointContainer>
-              <h5>{`0`}</h5>
-              <p>{'포인트'}</p>
-            </PointContainer>
-          )}
-        </RightSection>
       </QuestionSection>
+      <GrayLine />
     </QuestionWrapper>
   );
 };
 
 const QuestionWrapper = styled.li`
-  padding: 2em 1.2em;
   &:hover {
     cursor: pointer;
   }
@@ -83,6 +82,7 @@ const QuestionWrapper = styled.li`
 
 const QuestionSection = styled.div`
   display: flex;
+  padding: 2em 1.2em;
 `;
 
 const LeftSection = styled.div`
@@ -90,7 +90,7 @@ const LeftSection = styled.div`
 `;
 
 const Content = styled.p`
-  margin-bottom: 6px;
+  margin-bottom: 1em;
   width: 100%;
   font-weight: 500;
   font-size: 0.8rem;
@@ -104,48 +104,26 @@ const Content = styled.p`
   line-height: 160%;
 `;
 
-const RightSection = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 8em;
-  ${media.mobile} {
-    width: 6em;
-  }
-`;
-
 const TopSection = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
+  justify-content: space-between;
 `;
 
 const PointContainer = styled.div`
-  width: 80px;
-  height: 80px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 40px;
-  border: 1px solid #dee2e6;
-  h5 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.3rem;
-  }
+  align-items: baseline;
   p {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #616568;
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    margin-right: 0.3rem;
   }
   ${media.mobile} {
     width: 60px;
     height: 60px;
     h5 {
       font-size: 0.9rem;
-    }
-    p {
-      font-size: 0.7rem;
     }
   }
 `;
@@ -162,6 +140,8 @@ const ProcessLabel = styled.div`
 const Title = styled.p`
   font-size: 1rem;
   font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
   width: calc(100% - 100px);
   color: ${({ theme }) => theme.textColor};
 `;
@@ -173,6 +153,7 @@ const TagsWrapper = styled.div`
 const BottomSection = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-top: 1em;
   span {
     color: #3e4042;
