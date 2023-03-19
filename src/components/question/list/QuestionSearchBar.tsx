@@ -13,7 +13,6 @@ const QuestionSearchBar = () => {
   const searchTag = useInput('');
   const [tagList, setTagList] = useState<string[]>([]);
   const router = useRouter();
-  let type = router.query.status as 'doing' | 'completed' | 'total';
   const query = router.query.query as string;
   const tag = router.query.tag as string;
 
@@ -26,7 +25,13 @@ const QuestionSearchBar = () => {
   }, [tag, query]);
 
   useEffect(() => {
-    handleSearch();
+    if (tagList.length) {
+      const tag = tagList.join(',');
+      router.push({
+        pathname: router.pathname,
+        query: { ...router.query, tag },
+      });
+    }
   }, [tagList]);
 
   const handleTagList = (tag: string) => {
@@ -36,24 +41,22 @@ const QuestionSearchBar = () => {
   };
 
   const handleSearch = () => {
-    if (!type) type = 'total';
     const query = searchWord.value;
-    const tag = tagList.join(',');
-    if (tag && query) {
-      return router.push({ pathname: '/question/list', query: { status: type, tag, query, page: 1 } });
-    }
-    if (tag) {
-      return router.push({ pathname: '/question/list', query: { status: type, tag, page: 1 } });
-    }
-    if (query) {
-      return router.push({ pathname: '/question/list', query: { status: type, query, page: 1 } });
-    }
-    return router.push({ pathname: '/question/list', query: { status: type, page: 1 } });
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, query },
+    });
   };
 
   const handleInit = () => {
     setTagList([]);
     searchWord.setValue('');
+    delete router.query['query'];
+    delete router.query['tag'];
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query },
+    });
   };
 
   return (

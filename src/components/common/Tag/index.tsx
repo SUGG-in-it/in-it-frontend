@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Tags = ({ tagList }: { tagList: string[] }) => {
   const router = useRouter();
   const onTagClick = (tag: string) => {
-    router.push({ pathname: '/question/list', query: { status: 'total', tag, page: 1 } });
+    router.push({ pathname: '/question/list', query: { type: 'total', tag, page: 1 } });
   };
 
   return (

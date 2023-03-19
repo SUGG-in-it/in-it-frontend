@@ -75,9 +75,6 @@ const QuestionWrapper = styled.li`
   &:hover {
     cursor: pointer;
   }
-  ${media.tablet} {
-    padding: 1.5em 1em;
-  }
   ${media.mobile} {
     padding: 1.5em 0.6em;
   }

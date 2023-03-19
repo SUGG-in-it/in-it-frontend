@@ -63,17 +63,37 @@ const QuestionGridItem = ({
           </BottomSection>
         </LeftSection>
       </QuestionSection>
-      <GrayLine />
     </QuestionWrapper>
   );
 };
 
 const QuestionWrapper = styled.li`
+  :nth-child(4n + 1) {
+    border-left: 1px solid ${({ theme }) => theme.greyLineColor};
+    border-right: 1px solid ${({ theme }) => theme.greyLineColor};
+    border-top: 1px solid ${({ theme }) => theme.greyLineColor};
+  }
+  :nth-child(4n + 2) {
+    border-right: 1px solid ${({ theme }) => theme.greyLineColor};
+    border-top: 1px solid ${({ theme }) => theme.greyLineColor};
+  }
+  :nth-child(4n + 3) {
+    border-left: 1px solid ${({ theme }) => theme.greyLineColor};
+    border-right: 1px solid ${({ theme }) => theme.greyLineColor};
+    border-top: 1px solid ${({ theme }) => theme.greyLineColor};
+  }
+  :nth-child(4n + 0) {
+    border-right: 1px solid ${({ theme }) => theme.greyLineColor};
+    border-top: 1px solid ${({ theme }) => theme.greyLineColor};
+  }
+  :nth-last-child(2) {
+    border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
+  }
+  :nth-last-child(1) {
+    border-bottom: 1px solid ${({ theme }) => theme.greyLineColor};
+  }
   &:hover {
     cursor: pointer;
-  }
-  ${media.tablet} {
-    padding: 1.5em 1em;
   }
   ${media.mobile} {
     padding: 1.5em 0.6em;
