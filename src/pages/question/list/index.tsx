@@ -10,7 +10,7 @@ import withHead from '@/components/hoc/withHead';
 
 const QuestionListPage = () => {
   const router = useRouter();
-  let type = router.query.status as 'doing' | 'completed' | 'total';
+  const type = router.query.type as 'doing' | 'completed' | 'total';
   const tag = router.query.tag as string;
   const query = router.query.query as string;
   const currentPage = Number(router.query.page) || 1;
@@ -18,17 +18,10 @@ const QuestionListPage = () => {
   const { data: page } = useSearchQuestionPageQuery({ size: PAGINATION_SIZE.QUESTION_LIST, type, query, tag });
 
   const handlePageClick = (number: number) => {
-    if (!type) type = 'total';
-    if (tag && query) {
-      return router.push({ pathname: '/question/list', query: { status: type, tag, query, page: number + 1 } });
-    }
-    if (tag) {
-      return router.push({ pathname: '/question/list', query: { status: type, tag, page: number + 1 } });
-    }
-    if (query) {
-      return router.push({ pathname: '/question/list', query: { status: type, query, page: number + 1 } });
-    }
-    return router.push({ pathname: '/question/list', query: { status: type, page: number + 1 } });
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, page: number + 1 },
+    });
   };
 
   return (

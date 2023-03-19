@@ -31,7 +31,8 @@ const TagsContainer = styled.ul`
 const TagWrapper = styled.li`
   background-color: rgba(77, 124, 254, 0.15);
   color: #3e4042;
-  padding: 0.5em;
+  padding: 0.2em;
+  font-size: 0.8rem;
   border-radius: 5px;
   width: fit-content;
   margin: 0em 1em 1em 0em;
