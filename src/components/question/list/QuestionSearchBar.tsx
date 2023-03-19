@@ -31,6 +31,12 @@ const QuestionSearchBar = () => {
         pathname: router.pathname,
         query: { ...router.query, tag },
       });
+    } else {
+      delete router.query['tag'];
+      router.push({
+        pathname: router.pathname,
+        query: { ...router.query },
+      });
     }
   }, [tagList]);
 

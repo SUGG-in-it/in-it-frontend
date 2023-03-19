@@ -9,6 +9,7 @@ import Tags from '@/components/common/Tag';
 
 const TagList = () => {
   const { data: tags } = usePopularTagsQuery();
+  console.log(tags);
 
   return (
     <TagListWrapper>
