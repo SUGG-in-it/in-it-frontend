@@ -31,13 +31,14 @@ const Questions = ({ currentPage }: { currentPage: number }) => {
   const questionListType = useRecoilValue(questionListTypeState);
   return (
     <QuestionListWrapper className={questionListType}>
-      {questions.searchQuestionList.map((question) =>
-        questionListType === 'grid' ? (
-          <QuestionGridItem key={question.questionId} {...question} />
-        ) : (
-          <QuestionListItem key={question.questionId} {...question} />
-        )
-      )}
+      {questions &&
+        questions.searchQuestionList.map((question) =>
+          questionListType === 'grid' ? (
+            <QuestionGridItem key={question.questionId} {...question} />
+          ) : (
+            <QuestionListItem key={question.questionId} {...question} />
+          )
+        )}
     </QuestionListWrapper>
   );
 };

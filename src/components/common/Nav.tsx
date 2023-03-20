@@ -37,7 +37,7 @@ const Nav = () => {
     }
   };
 
-  const handleMenuClick = (index) => {
+  const handleMenuClick = (index: number) => {
     setCurrentTab(index);
     switch (index) {
       case 0:

@@ -10,6 +10,11 @@ import { VALIDATION_ERROR_MSG } from '@/constants/validation';
 import APIButton from '@/components/common/Button/APIButton';
 import withHead from '@/components/hoc/withHead';
 
+interface JwtPayload {
+  user_id: string;
+  nickname: string;
+}
+
 const SigninPage = () => {
   const router = useRouter();
   const setUserState = useSetRecoilState(userState);
@@ -30,11 +35,15 @@ const SigninPage = () => {
     onSuccess: () => {
       router.push('/');
       setIsLogin(true);
-      const user = jwt.decode(localStorage.getItem('accessToken'));
-      setUserState({
-        id: user.user_id,
-        nickname: user.nickname,
-      });
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
+        const user = jwt.decode(accessToken) as JwtPayload;
+        if (user)
+          setUserState({
+            id: Number(user?.user_id),
+            nickname: user?.nickname,
+          });
+      }
     },
   });
 

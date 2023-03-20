@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Tags from '@/components/common/Tag';
 import dayjs from 'dayjs';
 import removeMarkdown from '@/utils/removeMarkdown';
-import GrayLine from '@/components/common/GreyLine';
 import { VscActivateBreakpoints } from 'react-icons/vsc';
 
 interface QuestionProps {
@@ -55,7 +54,7 @@ const QuestionGridItem = ({
           <Title>{title}</Title>
           <Content>{removeMarkdown(content)}</Content>
           <TagsWrapper>
-            <Tags tagList={tagList && tagList.split(',')} />
+            <Tags tagList={tagList.split(',')} />
           </TagsWrapper>
           <BottomSection>
             <span>{`작성자  ${nickname}`}</span>
@@ -148,7 +147,7 @@ const PointContainer = styled.div`
   }
 `;
 
-const ProcessLabel = styled.div`
+const ProcessLabel = styled.div<{ type: string }>`
   color: white;
   width: fit-content;
   padding: 0.5em;

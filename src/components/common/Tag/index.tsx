@@ -2,7 +2,7 @@ import { media } from '@/styles/mediaQuery';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-const Tags = ({ tagList }: { tagList: string[] }) => {
+const Tags = ({ tagList = [] }: { tagList: string[] }) => {
   const router = useRouter();
   const onTagClick = (tag: string) => {
     router.push({ pathname: '/question/list', query: { type: 'total', tag, page: 1 } });

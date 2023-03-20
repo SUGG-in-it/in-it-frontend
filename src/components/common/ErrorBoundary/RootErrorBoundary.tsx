@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary';
 import { CustomError } from '@/api/config/error';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
 
@@ -7,7 +7,7 @@ import { useQueryErrorResetBoundary } from '@tanstack/react-query';
  * RootErrorBoundary ->  Runtime Error 등 일반적인 에러를 처리하기 위한 ErrorBoundar
  * -----------------------------------------------------------------------------------------------*/
 
-function ErrorFallback({ error, resetErrorBoundary }) {
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
     <div role="alert">
       <p>Something went wrong:</p>

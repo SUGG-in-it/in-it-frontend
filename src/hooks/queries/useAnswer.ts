@@ -11,7 +11,7 @@ import { CustomError } from '@/api/config/error';
 import { KEYS } from '@/constants/reactQuery';
 import { MutationCallbacks } from '@/types/MuationCallbacks';
 import { AnswerPageRequestParams, AnswersRequestParams, UserAnswersRequestParams } from '@/types/request/answers';
-import { AnswersResponseBody, MyAnswersResponseBody, AnswerPageResponseBody } from '@/types/response/answers';
+import { MyAnswersResponseBody, AnswerPageResponseBody } from '@/types/response/answers';
 import { errorToast, successToast } from '@/utils/toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 

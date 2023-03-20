@@ -17,7 +17,10 @@ interface ResponseType {
 axios.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+    if (accessToken) {
+      config.headers = config.headers ?? {};
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
 
     const contentType = config.url === '/image/upload' ? 'multipart/form-data' : 'application/json';
 

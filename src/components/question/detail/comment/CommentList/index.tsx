@@ -25,7 +25,7 @@ const Comments = ({ answerId }: { answerId: number }) => {
       {comments?.comments?.map((comment) => (
         <CommentItem key={comment.commentId} {...comment} />
       ))}
-      <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />
+      {page?.count && <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />}
     </>
   );
 };

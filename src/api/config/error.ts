@@ -7,8 +7,8 @@ export class CustomError extends Error {
 
   constructor(statusCode: HttpStatusCode, message?: string, code?: string) {
     super();
-    this.message = message;
-    this.statusCode = statusCode;
-    this.code = code;
+    this.message = message || '';
+    this.statusCode = statusCode || 200;
+    this.code = code || '';
   }
 }

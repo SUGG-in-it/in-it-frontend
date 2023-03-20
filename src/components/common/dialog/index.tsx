@@ -19,10 +19,10 @@ const getDialogTitle = (children: ReactNode) => {
 
 interface DialogLabelButtonProps {
   children?: ReactNode;
-  onClick?: (e: MouseEvent) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-const DialogLabelButton = ({ children, onClick }: DialogLabelButtonProps) => {
+const DialogLabelButton = ({ children, onClick = () => {} }: DialogLabelButtonProps) => {
   return (
     <Button className="dialog-label-button" onClick={onClick}>
       {children}

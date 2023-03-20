@@ -16,7 +16,7 @@ const BannerSection = () => {
   const { data: popular } = useMainContentQuery('popular');
 
   const handleBannerClick = (id: number) => {
-    if (!id) return;
+    if (id === -1) return;
     router.push(`question/detail/${id}`);
   };
 
@@ -29,7 +29,7 @@ const BannerSection = () => {
           height={180}
           placeholder="blur"
           alt="인기 질문"
-          onClick={() => handleBannerClick(recent.questionId)}
+          onClick={() => handleBannerClick(recent?.questionId || -1)}
         />
       </ImageWrapper>
       <Image
@@ -38,7 +38,7 @@ const BannerSection = () => {
         height={180}
         placeholder="blur"
         alt="포인트가 가장 많은 질문"
-        onClick={() => handleBannerClick(point.questionId)}
+        onClick={() => handleBannerClick(point?.questionId || -1)}
       />
       <Image
         src={BannerImg3}
@@ -46,7 +46,7 @@ const BannerSection = () => {
         height={180}
         placeholder="blur"
         alt="추천 질문"
-        onClick={() => handleBannerClick(random.questionId)}
+        onClick={() => handleBannerClick(random?.questionId || -1)}
       />
       <Image
         src={BannerImg4}
@@ -54,7 +54,7 @@ const BannerSection = () => {
         height={180}
         placeholder="blur"
         alt="인기 질문"
-        onClick={() => handleBannerClick(popular.questionId)}
+        onClick={() => handleBannerClick(popular?.questionId || -1)}
       />
     </BannerContainer>
   );

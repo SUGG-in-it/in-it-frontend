@@ -36,6 +36,7 @@ const QuestionEditor = () => {
   const mutationUploadImage = useUploadImageMutation({});
 
   useEffect(() => {
+    if (!question) return;
     title.setValue(question.title || '');
     point.setValue(String(question.point || 0));
     if (question.tagList && question.tagList.length) {
@@ -46,7 +47,7 @@ const QuestionEditor = () => {
     editorRef.current?.getInstance().setMarkdown(question.content || '');
   }, [question]);
 
-  const addImageBlobHook = async (file, callback) => {
+  const addImageBlobHook = async (file: File, callback: any) => {
     mutationUploadImage.mutate(file, {
       onSuccess: (data) => {
         callback(data.data.url, '이미지');
@@ -79,7 +80,13 @@ const QuestionEditor = () => {
   return (
     <WriteContainer>
       <LabelInput label="제목" htmlFor="title">
-        <CustomInput id="title" value={title.value} onChange={title.onChange} placeholder="제목을 입력해주세요." />
+        <CustomInput
+          id="title"
+          value={title.value}
+          onChange={title.onChange}
+          placeholder="제목을 입력해주세요."
+          type="text"
+        />
       </LabelInput>
       <ToastEditorWrapper>
         <Editor

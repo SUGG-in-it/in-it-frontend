@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import { IoIosArrowBack } from 'react-icons/io';
 import { IoIosArrowForward } from 'react-icons/io';
 
-function Pagination({ totalPage, currentPage, onPageClick }) {
+interface PaginationProps {
+  totalPage: number;
+  currentPage: number;
+  onPageClick: (page: number) => void;
+}
+
+function Pagination({ totalPage = 0, currentPage, onPageClick }: PaginationProps) {
   const pages = Array.from({ length: totalPage }, (v, i) => i);
 
-  if (!totalPage) return <></>;
+  if (totalPage == 0) return <></>;
 
   return (
     <PaginationContainer>
@@ -34,7 +40,7 @@ const PaginationContainer = styled.div`
   }
 `;
 
-const ButtonBackWrapper = styled.div`
+const ButtonBackWrapper = styled.div<{ isShowButton: boolean }>`
   visibility: ${({ isShowButton }) => (isShowButton ? 'visible' : 'hidden')};
   :hover {
     color: #111;
@@ -42,7 +48,7 @@ const ButtonBackWrapper = styled.div`
   }
 `;
 
-const ButtonForwardWrapper = styled.div`
+const ButtonForwardWrapper = styled.div<{ isShowButton: boolean }>`
   visibility: ${({ isShowButton }) => (isShowButton ? 'visible' : 'hidden')};
   :hover {
     color: #111;
@@ -50,7 +56,7 @@ const ButtonForwardWrapper = styled.div`
   }
 `;
 
-const Page = styled.div`
+const Page = styled.div<{ isActive: boolean }>`
   cursor: pointer;
   width: 30px;
   height: 30px;

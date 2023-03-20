@@ -3,7 +3,7 @@ import AnswerHeader from '@/components/question/detail/answer/AnswerHeader';
 import AnswerItem from '@/components/question/detail/answer/AnswerItem';
 import { useAnswerPageQuery, useAnswersQuery } from '@/hooks/queries/useAnswer';
 import { media } from '@/styles/mediaQuery';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useState } from 'react';
 import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { Question } from '@/types/response/questions';
@@ -33,10 +33,14 @@ const AnswerSection = ({ question }: { question: Question }) => {
     setCurrentPage(number + 1);
   };
 
+  if (answers.length === 0 || page?.count) return <></>;
+
   return (
     <AnswerListSectionWrapper>
-      {answers && answers.map((answer: Answer) => <AnswerItem key={answer.answerId} question={question} {...answer} />)}
-      <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />
+      {answers.map((answer: Answer) => (
+        <AnswerItem key={answer.answerId} question={question} {...answer} />
+      ))}
+      {page?.count && <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />}
     </AnswerListSectionWrapper>
   );
 };
@@ -52,7 +56,7 @@ const AnswerListSection = ({ question }: { question: Question }) => {
 
   return (
     <>
-      <AnswerHeader answerCount={question.answerCount} />
+      <AnswerHeader answerCount={question.answerCount || 0} />
       <RetryErrorBoundary>
         <Suspense fallback={<AnswerListSkeleton />}>
           <AnswerSection question={question} />
