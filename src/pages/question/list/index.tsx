@@ -30,7 +30,7 @@ const QuestionListPage = () => {
         <QuestionListWrapper>
           <QuestionList currentPage={currentPage} />
         </QuestionListWrapper>
-        <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />
+        {page?.count && <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />}
       </QuestionListContainer>
     </MainLayout>
   );

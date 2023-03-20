@@ -5,9 +5,8 @@ import {
   UploadAnswerRequestBody,
   UserAnswersRequestParams,
 } from '@/types/request/answers';
-import { AnswerId } from '@/types/response/answers';
 
-export const postAnswerId = async (questionId: number): Promise<AnswerId> => {
+export const postAnswerId = async (questionId: number) => {
   try {
     const { data } = await POST('/answers', { questionId });
     return data;

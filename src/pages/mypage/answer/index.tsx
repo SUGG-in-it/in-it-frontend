@@ -22,7 +22,7 @@ const MyAnswer = () => {
         <UserAnswerSection>
           <AnswerListSection currentPage={currentPage} />
         </UserAnswerSection>
-        <Pagination totalPage={page?.count} currentPage={currentPage} onPageClick={handlePageClick} />
+        {page?.count && <Pagination totalPage={page.count} currentPage={currentPage} onPageClick={handlePageClick} />}
       </>
     </MypageLayout>
   );

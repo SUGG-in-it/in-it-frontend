@@ -21,7 +21,7 @@ export const userState = atom({
   key: KEYS.USER,
   default: {
     nickname: '',
-    id: '',
+    id: 0,
   },
   effects: [localStorageEffect(KEYS.USER)],
 });

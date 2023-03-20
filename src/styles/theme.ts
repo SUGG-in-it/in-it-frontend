@@ -1,4 +1,6 @@
-export const lightTheme = {
+import { DefaultTheme } from 'styled-components';
+
+export const theme: DefaultTheme = {
   backgrondLightColor: '#fff',
   backgrondDarkColor: '#f8f8f7',
   pointColor: '#004b91',
@@ -10,23 +12,3 @@ export const lightTheme = {
   darkModeButtonColor: '#1a237e',
   loginFormColor: '#4d7cfe',
 };
-
-export const darkTheme = {
-  backgrondLightColor: '#2c2d30',
-  backgrondDarkColor: '#202020',
-  pointColor: '#4d7cfe',
-  primaryColor: '#4d7cfe',
-  primary2Color: '#004b91',
-  grayColor: '#d9d9d9',
-  greyLineColor: '#3a3b3d',
-  textColor: '#fff',
-  darkModeButtonColor: '#3a3b3d',
-  loginFormColor: '#4d7cfe',
-};
-
-export const theme = {
-  lightTheme,
-  darkTheme,
-};
-
-export default theme;

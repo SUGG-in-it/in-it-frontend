@@ -13,6 +13,8 @@ import withHead from '@/components/hoc/withHead';
 const QuestionDetail = ({ id }: { id: number }) => {
   const { data: question } = useQuestionQuery(id);
 
+  if (!question) return <></>;
+
   return (
     <QuestionWrapper>
       <QuestionSection question={question} />

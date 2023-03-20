@@ -9,12 +9,11 @@ import Tags from '@/components/common/Tag';
 
 const TagList = () => {
   const { data: tags } = usePopularTagsQuery();
-  console.log(tags);
 
   return (
     <TagListWrapper>
       <p>인기 태그</p>
-      <Tags tagList={tags.tags} />
+      {tags && <Tags tagList={tags.tags} />}
     </TagListWrapper>
   );
 };

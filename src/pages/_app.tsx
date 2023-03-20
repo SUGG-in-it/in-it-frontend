@@ -1,7 +1,6 @@
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
 import { ThemeProvider } from 'styled-components';
-import { lightTheme } from '@/styles/theme';
 import { GlobalStyle } from '@/styles/globalStyle';
 import { Toaster } from 'react-hot-toast';
 import CriticalErrorBoundary from '@/components/common/ErrorBoundary/CriticalErrorBoundary';
@@ -9,8 +8,10 @@ import RootErrorBoundary from '@/components/common/ErrorBoundary/RootErrorBounda
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useEffect, useState } from 'react';
 import { CustomError } from '@/api/config/error';
+import { theme } from '@/styles/theme';
+import { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   const [showChild, setShowChild] = useState(false);
 
   useEffect(() => {
@@ -36,15 +37,15 @@ function MyApp({ Component, pageProps }) {
 
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    /* const { worker } = require('../__mocks__/browser');
-    worker.start(); */
+    const { worker } = require('../__mocks__/browser');
+    worker.start();
   }
 
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
-          <ThemeProvider theme={lightTheme}>
+          <ThemeProvider theme={theme}>
             <GlobalStyle />
             <RootErrorBoundary>
               <CriticalErrorBoundary>

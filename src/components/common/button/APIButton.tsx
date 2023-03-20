@@ -2,7 +2,7 @@ import PulseLoading from '@/components/common/Loading';
 import styled from 'styled-components';
 
 export interface ButtonProps {
-  onClick: (e: MouseEvent) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   children: React.ReactNode;
   className?: string;
   isLoading: boolean;

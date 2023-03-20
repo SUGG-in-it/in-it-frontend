@@ -21,7 +21,7 @@ const CommentWrite = ({ answerId }: { answerId: number }) => {
     muatationUploadComment.mutate({ content, answerId });
   };
 
-  const handleCommentChange = (e) => {
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   };
 

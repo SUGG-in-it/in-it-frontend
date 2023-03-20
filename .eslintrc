@@ -13,7 +13,8 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "react/prop-types": "off",
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "@typescript-eslint/no-empty-function": "off"
   },
   "parserOptions": {
     "ecmaVersion": 12,

@@ -44,7 +44,7 @@ const QuestionListItem = ({
           </TopSection>
           <Content>{removeMarkdown(content)}</Content>
           <TagsWrapper>
-            <Tags tagList={tagList && tagList.split(',')} />
+            <Tags tagList={tagList.split(',')} />
           </TagsWrapper>
           <BottomSection>
             <span>{`작성자  ${nickname}`}</span>
@@ -150,7 +150,7 @@ const PointContainer = styled.div`
   }
 `;
 
-const ProcessLabel = styled.div`
+const ProcessLabel = styled.div<{ type: string }>`
   color: white;
   width: fit-content;
   padding: 0.5em;

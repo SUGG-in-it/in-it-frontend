@@ -14,7 +14,7 @@ interface EditorSectionProps {
   onCancelEdit?: () => void;
 }
 
-const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSectionProps) => {
+const EditorSection = ({ questionId, answerId, content, onCancelEdit = () => {} }: EditorSectionProps) => {
   const editorRef = useRef(null);
   const mutationUploadAnswer = useUploadAnswerMutation({
     onSuccess: () => {
@@ -29,23 +29,23 @@ const EditorSection = ({ questionId, answerId, content, onCancelEdit }: EditorSe
     },
   });
 
-  const addImageBlobHook = async (file, callback) => {
+  const addImageBlobHook = async (file: File, callback: any) => {
     const { data } = await uploadImage(file);
     callback(data.url, '이미지');
   };
 
   const handleAnswerSubmit = async () => {
     const data = await postAnswerId(questionId);
-    if (data?.answerId) {
-      const answerId = data?.answerId;
-      mutationUploadAnswer.mutate({
-        answerId: Number(answerId),
-        content: editorRef.current?.getInstance().get(),
-      });
-    }
+    if (!data?.answerId) return;
+    const answerId = data?.answerId;
+    mutationUploadAnswer.mutate({
+      answerId: Number(answerId),
+      content: editorRef.current?.getInstance().get(),
+    });
   };
 
   const handleAnswerEdit = async () => {
+    if (!answerId) return;
     mutationEditAnswer.mutate({
       answerId: answerId,
       content: editorRef.current?.getInstance().getHTML(),

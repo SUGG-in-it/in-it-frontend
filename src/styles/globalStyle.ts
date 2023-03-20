@@ -1,4 +1,3 @@
-import { media } from '@/styles/mediaQuery';
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
