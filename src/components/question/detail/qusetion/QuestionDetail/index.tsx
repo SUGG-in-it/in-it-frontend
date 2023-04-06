@@ -11,6 +11,8 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import { media } from '@/styles/mediaQuery';
+import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
+import { useLikeQuestionMutation, useUnLikeQuestionMutation } from '@/hooks/queries/useLike';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
 
@@ -24,12 +26,23 @@ const QuestionSection = ({ question }: { question: Question }) => {
     },
   });
 
+  const mutationLikeQuestion = useLikeQuestionMutation();
+  const mutationUnLikeQuestion = useUnLikeQuestionMutation();
+
   const handleEditQuestion = () => {
     router.push({ pathname: '/question/write', query: { id: question.questionId } });
   };
 
   const handleDeleteQuestion = () => {
     mutationDeleteQuestion.mutate(question.questionId);
+  };
+
+  const handleHeartClick = () => {
+    if (question.isLike) {
+      mutationUnLikeQuestion.mutate(question.questionId);
+    } else {
+      mutationLikeQuestion.mutate(question.questionId);
+    }
   };
 
   return (
@@ -68,7 +81,13 @@ const QuestionSection = ({ question }: { question: Question }) => {
         <SectionRow>
           <ContentViewer content={question.content} />
         </SectionRow>
-        <Tags tagList={question?.tagList?.split(',')} />
+        <SectionRow>
+          <Tags tagList={question?.tagList?.split(',')} />
+          <HeartContainer onClick={handleHeartClick}>
+            {question.isLike ? <FilledHeart /> : <NonFilledHeart />}
+            <p>{question.likeCount}</p>
+          </HeartContainer>
+        </SectionRow>
       </QuestionSectionWrapper>
     </QuestionSectionContainer>
   );
@@ -77,6 +96,40 @@ const QuestionSection = ({ question }: { question: Question }) => {
 const QuestionSectionContainer = styled.section`
   padding: 2em 1.2em;
   background-color: ${({ theme }) => theme.backgrondLightColor};
+`;
+
+const HeartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.3em 0.5em;
+  border-radius: 0.7em;
+  border: 1.5px solid #e9ecef;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 10px 15px -5px rgba(0, 0, 0, 0.05), 0 7px 7px -5px rgba(0, 0, 0, 0.04);
+  :hover {
+    cursor: pointer;
+  }
+  :active {
+    cursor: pointer;
+    box-shadow: none;
+    background-color: #efefef;
+  }
+  & > p {
+    font-weight: 600;
+    color: #adb5bd;
+  }
+`;
+
+const NonFilledHeart = styled(AiOutlineHeart)`
+  width: 30px;
+  height: 30px;
+  color: #adb5bd;
+`;
+
+const FilledHeart = styled(AiTwotoneHeart)`
+  width: 30px;
+  height: 30px;
+  color: rgba(77, 124, 254, 0.4);
 `;
 
 const QuestionSectionWrapper = styled.div`
