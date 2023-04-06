@@ -66,5 +66,5 @@
 - [MSW로 FE 개발 생산성 높이기](https://velog.io/@zzi99/MSWMock-Service-Worker-%EC%A0%81%EC%9A%A9%EA%B8%B0)
 - [React Query와 함께 Concurrent UI Pattern 사용해보기](https://velog.io/@zzi99/Concurrent-UI-Pattern)
 - [웹 접근성 개선](https://velog.io/@zzi99/%EC%9B%B9-%EC%A0%91%EA%B7%BC%EC%84%B1-2-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%84%A0)
-
+- [좋아요 기능 구현하기 (with Optimistic Update)](https://velog.io/@zzi99/%EC%A2%8B%EC%95%84%EC%9A%94-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-with-Optimistic-Update)
 <br/>
