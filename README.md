@@ -3,13 +3,13 @@
 
 
 
-### 코드 리뷰 사이트 : in it()
+## 🖥️ 코드 리뷰 사이트 : in it()
 
-<img src= 'https://user-images.githubusercontent.com/62633444/224486932-ac1b2457-3ffa-472d-8fcd-c32c02149aa0.png' width=500/>
+<img src= 'https://user-images.githubusercontent.com/62633444/224486932-ac1b2457-3ffa-472d-8fcd-c32c02149aa0.png' width=300/>
 
-**코드리뷰를 요청하고, 클린코드, 리팩터링, 아키텍쳐등 코드에 관해 피드백을 받을 수 있는 웹 사이트 입니다.  
+코드리뷰를 요청하고, 클린코드, 리팩터링, 아키텍쳐등 코드에 관해 피드백을 받을 수 있는 웹 사이트 입니다.  
 개발을 하면서 코드리뷰를 더 많은 사람들 에게 받고 싶다는 생각이 들어서 찾아보았지만,  
-코드리뷰 해주는 사이트가 없다는 사실을 알고 직접 개발하였습니다.**
+코드리뷰 해주는 사이트가 없다는 사실을 알고 직접 개발하였습니다.
 
 <br/>
 
@@ -30,7 +30,13 @@
 
 <br/>
 
-## Directory structure
+## 📝 Project Architecture
+<img src= 'https://user-images.githubusercontent.com/62633444/230416255-4ba10b0f-1968-46cb-aebf-c64bf07bc479.png' width=800/>
+
+<br/>
+
+## 🗂️ Directory structure
+
 
 ```bash
 ├── public
@@ -55,7 +61,7 @@
 ```
 <br/>
 
-## 프로젝트를 하면서 고민한 흔적✨
+## ✨ 프로젝트를 하면서 고민한 흔적
 
 - [MSW로 FE 개발 생산성 높이기](https://velog.io/@zzi99/MSWMock-Service-Worker-%EC%A0%81%EC%9A%A9%EA%B8%B0)
 - [React Query와 함께 Concurrent UI Pattern 사용해보기](https://velog.io/@zzi99/Concurrent-UI-Pattern)
