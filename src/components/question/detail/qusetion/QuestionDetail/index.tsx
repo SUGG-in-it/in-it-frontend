@@ -11,7 +11,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 import { media } from '@/styles/mediaQuery';
-import { AiOutlineHeart, AiTwotoneHeart } from 'react-icons/ai';
+import { AiTwotoneHeart } from 'react-icons/ai';
 import { useLikeQuestionMutation, useUnLikeQuestionMutation } from '@/hooks/queries/useLike';
 
 const ContentViewer = dynamic(() => import('@/components/common/ContentViewer'), { ssr: false });
@@ -120,7 +120,7 @@ const HeartContainer = styled.div`
   }
 `;
 
-const NonFilledHeart = styled(AiOutlineHeart)`
+const NonFilledHeart = styled(AiTwotoneHeart)`
   width: 30px;
   height: 30px;
   color: #adb5bd;
