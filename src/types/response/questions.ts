@@ -23,6 +23,8 @@ export interface QuestionResponseBody {
   type: string;
   tagList: string;
   userId: number;
+  likeCount: number;
+  isLike: boolean;
 }
 
 export interface MainContentResponseBody {
@@ -47,6 +49,8 @@ export interface Question {
   tagList: string;
   userId: number;
   answerCount?: number;
+  likeCount: number;
+  isLike: boolean;
 }
 
 export interface QuestionId {
