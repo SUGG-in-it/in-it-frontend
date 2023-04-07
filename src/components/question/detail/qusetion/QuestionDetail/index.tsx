@@ -39,9 +39,9 @@ const QuestionSection = ({ question }: { question: Question }) => {
 
   const handleHeartClick = () => {
     if (question.isLike) {
-      mutationUnLikeQuestion.mutate(question.questionId);
+      mutationUnLikeQuestion.mutate(String(question.questionId));
     } else {
-      mutationLikeQuestion.mutate(question.questionId);
+      mutationLikeQuestion.mutate(String(question.questionId));
     }
   };
 
@@ -117,6 +117,7 @@ const HeartContainer = styled.div`
   & > p {
     font-weight: 600;
     color: #adb5bd;
+    margin-top: 0.5em;
   }
 `;
 
