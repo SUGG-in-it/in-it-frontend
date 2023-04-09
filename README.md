@@ -8,8 +8,12 @@
 <img src= 'https://user-images.githubusercontent.com/62633444/224486932-ac1b2457-3ffa-472d-8fcd-c32c02149aa0.png' width=300/>
 
 코드리뷰를 요청하고, 클린코드, 리팩터링, 아키텍쳐등 코드에 관해 피드백을 받을 수 있는 웹 사이트 입니다.  
-개발을 하면서 코드리뷰를 더 많은 사람들 에게 받고 싶다는 생각이 들어서 찾아보았지만,  
-코드리뷰 해주는 사이트가 없다는 사실을 알고 직접 개발하였습니다.
+
+
+<img width="1413" alt="스크린샷 2023-04-09 오후 10 32 11" src="https://user-images.githubusercontent.com/62633444/230776256-39104ce7-d1d0-432d-a204-ad19b9886d6c.png">
+<img width="1413" alt="스크린샷 2023-04-09 오후 10 40 06" src="https://user-images.githubusercontent.com/62633444/230776248-adbbe3be-c7c0-4b83-af41-76b99f28cf49.png">
+<img width="1413" alt="스크린샷 2023-04-09 오후 10 33 13" src="https://user-images.githubusercontent.com/62633444/230776250-a63c1de9-340a-4d2f-9129-326111028497.png">
+<img width="1413" alt="스크린샷 2023-04-09 오후 10 41 05" src="https://user-images.githubusercontent.com/62633444/230776251-ba34d380-8afc-4e0a-a1ee-ecfe60e94942.png">
 
 <br/>
 
